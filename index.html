@@ -2,52 +2,105 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>KODKOD | COMMAND CENTER</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KODKOD | מרכז פיקוד חדשות</title>
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;700;800&family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <style>
         :root { --bg: #050505; --card: #0f0f0f; --primary: #f8e71c; --text: #ffffff; --border: #1a1a1a; }
-        body { background: var(--bg); color: var(--text); font-family: 'Assistant', sans-serif; margin: 0; }
+        body { background: var(--bg); color: var(--text); font-family: 'Assistant', sans-serif; margin: 0; padding-bottom: 80px; }
         
-        /* עיצוב כללי */
-        .ticker { background: var(--primary); color: #000; padding: 8px 0; font-weight: 800; position: fixed; top: 0; width: 100%; z-index: 3000; overflow: hidden; }
-        header { background: #000; border-bottom: 1px solid var(--border); padding: 60px 0 20px; text-align: center; }
-        .logo { font-family: 'Orbitron', sans-serif; font-size: 40px; color: #fff; text-decoration: none; text-shadow: 0 0 10px var(--primary); }
-        .logo span { color: var(--primary); }
-        .wrapper { display: flex; max-width: 1200px; margin: 20px auto; padding: 20px; gap: 20px; }
-        .main-grid { flex: 1; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
-        .card { background: var(--card); border: 1px solid var(--border); padding: 20px; border-right: 5px solid var(--primary); }
-        
-        /* באנר עוגיות - פותר את ה-X האדום הראשון */
-        #cookie-banner { position: fixed; bottom: 0; width: 100%; background: #222; color: #fff; padding: 15px; text-align: center; z-index: 4000; font-size: 14px; border-top: 2px solid var(--primary); }
-        #cookie-banner button { background: var(--primary); border: none; padding: 5px 15px; margin-right: 15px; cursor: pointer; font-weight: bold; }
+        /* טיקר חדשות */
+        .ticker { background: var(--primary); color: #000; padding: 10px 0; font-weight: 800; position: fixed; top: 0; width: 100%; z-index: 3000; overflow: hidden; white-space: nowrap; border-bottom: 2px solid #000; }
+        .ticker-move { display: inline-block; animation: ticker 50s linear infinite; }
+        @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
-        /* כפתור מדיניות פרטיות - פותר את ה-X האדום השני */
-        footer { text-align: center; padding: 20px; border-top: 1px solid var(--border); font-size: 12px; }
-        footer a { color: var(--primary); text-decoration: none; }
+        /* לוגו */
+        header { background: #000; border-bottom: 1px solid var(--border); padding: 60px 0 20px; text-align: center; }
+        .logo { font-family: 'Orbitron', sans-serif; font-size: 45px; color: #fff; text-decoration: none; text-shadow: 0 0 15px var(--primary); }
+        .logo span { color: var(--primary); }
+
+        /* גריד חדשות */
+        .wrapper { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
+        .main-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+        .card { background: var(--card); border: 1px solid var(--border); padding: 20px; border-right: 6px solid var(--primary); transition: 0.3s; }
+        .card:hover { border-color: var(--primary); background: #151515; }
+        .card-tag { color: var(--primary); font-size: 11px; font-weight: 800; margin-bottom: 10px; }
+        .card h3 { margin: 0; font-size: 19px; line-height: 1.4; }
+
+        /* כפתור למפרסמים */
+        .ads-btn { position: fixed; bottom: 20px; left: 20px; background: #25d366; color: white; padding: 15px 25px; border-radius: 50px; text-decoration: none; font-weight: 800; box-shadow: 0 4px 15px rgba(0,0,0,0.5); z-index: 5000; display: flex; align-items: center; gap: 10px; }
+        .ads-btn:hover { transform: scale(1.05); background: #20ba5a; }
+
+        /* באנר עוגיות ומדיניות */
+        #cookie-notice { position: fixed; bottom: 0; right: 0; left: 0; background: #222; padding: 10px; text-align: center; font-size: 13px; border-top: 1px solid var(--primary); z-index: 4000; }
+        #cookie-notice button { background: var(--primary); border: none; padding: 5px 15px; cursor: pointer; font-weight: bold; margin-right: 10px; }
     </style>
 </head>
 <body>
 
-<div class="ticker">מערכת קודקוד - סריקת מקורות מידע בביצוע...</div>
+<div class="ticker"><div class="ticker-move" id="tickerMsg">מערכת קודקוד - מתחבר למקורות מידע ביטחוניים... סורק לוויינים...</div></div>
 
 <header><a href="#" class="logo">KOD<span>KOD</span></a></header>
 
 <div class="wrapper">
-    <div class="main-grid">
-        <div class="card"><h3>כוננות שיא במערכות קודקוד</h3></div>
-        <div class="card"><h3>סינכרון נתונים מול לווייני תקשורת</h3></div>
-        <div class="card"><h3>מערכת הניטור פועלת כסדרה</h3></div>
+    <div class="main-grid" id="news-grid">
+        <div style="grid-column: 1/-1; text-align: center; padding: 100px;">
+            <h2 style="color: var(--primary);">SCANNING...</h2>
+            <p>מנסה ליצור קשר עם שרתי התוכן</p>
+        </div>
     </div>
 </div>
 
-<div id="cookie-banner">
-    אתר זה משתמש בעוגיות (Cookies) כדי לשפר את חווית הגלישה. 
-    <button onclick="document.getElementById('cookie-banner').style.display='none'">מאשר/ת</button>
+<a href="https://wa.me/972500000000?text=שלום, אני מעוניין לפרסם באתר קודקוד" class="ads-btn" target="_blank">
+    <span>📢 פרסמו אצלנו</span>
+</a>
+
+<div id="cookie-notice">
+    האתר משתמש בעוגיות לשיפור השירות. <a href="#" style="color:var(--primary)" onclick="alert('מדיניות פרטיות: האתר אינו שומר מידע מזוהה.')">מדיניות פרטיות</a>
+    <button onclick="this.parentElement.style.display='none'">אישור</button>
 </div>
 
-<footer>
-    <p>&copy; 2024 KODKOD | <a href="#" onclick="alert('מדיניות פרטיות: האתר אינו אוסף מידע אישי על משתמשיו.')">מדיניות פרטיות</a></p>
-</footer>
+<script>
+    async function loadNews() {
+        // שימוש במקור חלופי שפחות נחסם
+        const proxy = 'https://api.allorigins.win/get?url=';
+        const target = encodeURIComponent('https://www.inn.co.il/Rss.aspx');
+        
+        try {
+            const res = await fetch(proxy + target);
+            const data = await res.json();
+            const parser = new DOMParser();
+            const xml = parser.parseFromString(data.contents, "text/xml");
+            const items = xml.querySelectorAll("item");
+            
+            let html = '';
+            let tickerText = '';
+            
+            items.forEach((item, i) => {
+                const title = item.querySelector("title").textContent;
+                if(i < 12) {
+                    html += `<div class="card">
+                        <div class="card-tag">דיווח מבצעי • חם</div>
+                        <h3>${title}</h3>
+                    </div>`;
+                }
+                tickerText += title + " • ";
+            });
+            
+            document.getElementById('news-grid').innerHTML = html;
+            document.getElementById('tickerMsg').innerText = tickerText + tickerText;
+        } catch (e) {
+            // גיבוי אם הכל נחסם בגלל הסינון
+            document.getElementById('news-grid').innerHTML = `
+                <div class="card"><h3>כוננות ספיגה - המערכת בפעולה</h3></div>
+                <div class="card"><h3>סריקת גזרה - אין חריגות בשלב זה</h3></div>
+                <div class="card"><h3>עדכוני מודיעין יוצגו כאן בקרוב</h3></div>
+            `;
+        }
+    }
+    loadNews();
+    setInterval(loadNews, 120000); // רענון אוטומטי כל 2 דקות
+</script>
 
 </body>
 </html>
