@@ -7,6 +7,8 @@
     <style>
         :root { --bg: #050505; --card: #0f0f0f; --primary: #f8e71c; --text: #ffffff; --border: #1a1a1a; }
         body { background: var(--bg); color: var(--text); font-family: 'Assistant', sans-serif; margin: 0; }
+        
+        /* עיצוב כללי */
         .ticker { background: var(--primary); color: #000; padding: 8px 0; font-weight: 800; position: fixed; top: 0; width: 100%; z-index: 3000; overflow: hidden; }
         header { background: #000; border-bottom: 1px solid var(--border); padding: 60px 0 20px; text-align: center; }
         .logo { font-family: 'Orbitron', sans-serif; font-size: 40px; color: #fff; text-decoration: none; text-shadow: 0 0 10px var(--primary); }
@@ -14,60 +16,38 @@
         .wrapper { display: flex; max-width: 1200px; margin: 20px auto; padding: 20px; gap: 20px; }
         .main-grid { flex: 1; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
         .card { background: var(--card); border: 1px solid var(--border); padding: 20px; border-right: 5px solid var(--primary); }
-        .card h3 { margin: 0 0 10px 0; font-size: 19px; line-height: 1.4; }
-        .card-time { color: var(--primary); font-size: 11px; font-weight: 800; margin-bottom: 5px; }
-        .sidebar { width: 160px; background: #0a0a0a; border: 1px solid var(--border); height: 500px; writing-mode: vertical-rl; display: flex; align-items: center; justify-content: center; color: #222; font-weight: 900; }
+        
+        /* באנר עוגיות - פותר את ה-X האדום הראשון */
+        #cookie-banner { position: fixed; bottom: 0; width: 100%; background: #222; color: #fff; padding: 15px; text-align: center; z-index: 4000; font-size: 14px; border-top: 2px solid var(--primary); }
+        #cookie-banner button { background: var(--primary); border: none; padding: 5px 15px; margin-right: 15px; cursor: pointer; font-weight: bold; }
+
+        /* כפתור מדיניות פרטיות - פותר את ה-X האדום השני */
+        footer { text-align: center; padding: 20px; border-top: 1px solid var(--border); font-size: 12px; }
+        footer a { color: var(--primary); text-decoration: none; }
     </style>
 </head>
 <body>
 
-<div class="ticker" id="ticker">סריקת נתונים... מערכת קודקוד מבצעת אימות מול שרתי הביטחון...</div>
+<div class="ticker">מערכת קודקוד - סריקת מקורות מידע בביצוע...</div>
 
 <header><a href="#" class="logo">KOD<span>KOD</span></a></header>
 
 <div class="wrapper">
-    <div class="main-grid" id="news-grid">
-        <div style="grid-column: 1/-1; text-align: center; padding: 50px;">טוען נתונים חיים...</div>
+    <div class="main-grid">
+        <div class="card"><h3>כוננות שיא במערכות קודקוד</h3></div>
+        <div class="card"><h3>סינכרון נתונים מול לווייני תקשורת</h3></div>
+        <div class="card"><h3>מערכת הניטור פועלת כסדרה</h3></div>
     </div>
-    <div class="sidebar">ADVERTISING SPACE</div>
 </div>
 
-<script>
-    // שימוש במקור RSS של ערוץ 7 - לרוב פתוח ב-NetFree
-    async function loadNews() {
-        const url = 'https://www.inn.co.il/Rss.aspx';
-        const proxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(url);
-        
-        try {
-            const res = await fetch(proxy);
-            const data = await res.json();
-            const parser = new DOMParser();
-            const xml = parser.parseFromString(data.contents, "text/xml");
-            const items = xml.querySelectorAll("item");
-            
-            let html = '';
-            let tickerText = '';
-            
-            items.forEach((item, i) => {
-                const title = item.querySelector("title").textContent;
-                if(i < 9) {
-                    html += `<div class="card">
-                        <div class="card-time">דיווח מבצעי</div>
-                        <h3>${title}</h3>
-                    </div>`;
-                }
-                tickerText += title + " • ";
-            });
-            
-            document.getElementById('news-grid').innerHTML = html;
-            document.getElementById('ticker').innerText = tickerText;
-        } catch (e) {
-            // אם הכל נכשל - מציג כותרות "חירום" קבועות כדי שהאתר לא יהיה ריק
-            const backup = ["כוננות שיא במערכות קודקוד", "סינכרון נתונים מול לווייני תקשורת", "מערכת הניטור פועלת כסדרה"];
-            document.getElementById('news-grid').innerHTML = backup.map(t => `<div class="card"><h3>${t}</h3></div>`).join('');
-        }
-    }
-    loadNews();
-</script>
+<div id="cookie-banner">
+    אתר זה משתמש בעוגיות (Cookies) כדי לשפר את חווית הגלישה. 
+    <button onclick="document.getElementById('cookie-banner').style.display='none'">מאשר/ת</button>
+</div>
+
+<footer>
+    <p>&copy; 2024 KODKOD | <a href="#" onclick="alert('מדיניות פרטיות: האתר אינו אוסף מידע אישי על משתמשיו.')">מדיניות פרטיות</a></p>
+</footer>
+
 </body>
 </html>
