@@ -4,151 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KODKOD | COMMAND CENTER</title>
-    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;400;700;800&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;700;800&family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg: #050505; --card: #0f0f0f; --primary: #f8e71c; 
-            --text: #ffffff; --dim: #777777; --border: #1a1a1a;
-        }
-        body { background: var(--bg); color: var(--text); font-family: 'Assistant', sans-serif; margin: 0; overflow-x: hidden; }
-        .ticker { background: var(--primary); color: #000; padding: 4px 0; font-weight: 800; font-size: 13px; overflow: hidden; white-space: nowrap; position: fixed; top: 0; width: 100%; z-index: 3000; }
-        .ticker-move { display: inline-block; animation: ticker 45s linear infinite; }
+        :root { --bg: #050505; --card: #0f0f0f; --primary: #f8e71c; --text: #ffffff; --border: #1a1a1a; }
+        body { background: var(--bg); color: var(--text); font-family: 'Assistant', sans-serif; margin: 0; }
+        .ticker { background: var(--primary); color: #000; padding: 5px 0; font-weight: 800; position: fixed; top: 0; width: 100%; z-index: 3000; overflow: hidden; white-space: nowrap; }
+        .ticker-move { display: inline-block; animation: ticker 50s linear infinite; }
         @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
-        header { background: rgba(5,5,5,0.98); backdrop-filter: blur(15px); border-bottom: 1px solid var(--border); position: sticky; top: 25px; z-index: 2000; height: 100px; transition: 0.5s; display: flex; align-items: center; }
-        header.scrolled { height: 60px; border-bottom: 2px solid var(--primary); }
-        .nav-container { width: 100%; max-width: 1300px; margin: 0 auto; display: flex; align-items: center; padding: 0 20px; position: relative; }
-        .logo { font-family: 'Orbitron', sans-serif; font-size: 35px; color: #fff; text-decoration: none; position: absolute; left: 50%; transform: translateX(-50%); transition: 0.5s; }
+        header { background: rgba(5,5,5,0.95); border-bottom: 1px solid var(--border); position: sticky; top: 25px; z-index: 2000; padding: 20px 0; display: flex; align-items: center; justify-content: center; }
+        .logo { font-family: 'Orbitron', sans-serif; font-size: 30px; color: #fff; text-decoration: none; }
         .logo span { color: var(--primary); }
-        header.scrolled .logo { left: 20px; transform: translateX(0); font-size: 24px; }
-        .nav { display: flex; gap: 25px; opacity: 0; transition: 0.4s; pointer-events: none; margin-right: auto; }
-        header.scrolled .nav { opacity: 1; pointer-events: auto; margin-right: 180px; }
-        .nav a { text-decoration: none; color: var(--dim); font-weight: 800; cursor: pointer; }
-        .nav a:hover { color: var(--primary); }
-        .search-area { display: flex; align-items: center; gap: 15px; margin-left: 20px; z-index: 10; }
-        .search-box { background: #111; border: 1px solid var(--border); color: #fff; padding: 6px 12px; font-family: 'Assistant'; outline: none; width: 150px; }
-        #radar-line { position: fixed; top: 0; left: 0; width: 100%; height: 3px; background: var(--primary); box-shadow: 0 0 15px var(--primary); z-index: 4000; display: none; }
-        .scanning { display: block !important; animation: scan 1.2s linear forwards; }
-        @keyframes scan { 0% { top: 0; } 100% { top: 100vh; } }
-        .wrapper { display: flex; max-width: 1400px; margin: 40px auto; padding: 0 20px; gap: 30px; }
+        .wrapper { display: flex; max-width: 1400px; margin: 40px auto; padding: 0 20px; gap: 20px; }
         .main-content { flex: 1; }
-        .side-left { width: 160px; flex-shrink: 0; }
-        .ad-box { background: var(--card); border: 1px solid var(--border); height: 600px; position: sticky; top: 150px; display: flex; align-items: center; justify-content: center; color: #222; font-weight: bold; writing-mode: vertical-rl; }
-        .hero { position: relative; height: 500px; border: 1px solid var(--border); overflow: hidden; cursor: pointer; background: #000; margin-bottom: 40px; }
-        .hero-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; transition: 1s; }
-        .hero-overlay { position: absolute; bottom: 0; width: 100%; padding: 50px 40px; background: linear-gradient(transparent, rgba(0,0,0,0.95)); }
-        .hero h1 { font-size: 48px; margin: 0; font-weight: 800; line-height: 1.1; }
         .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .card { background: var(--card); border: 1px solid var(--border); cursor: pointer; }
-        .card img { width: 100%; height: 200px; object-fit: cover; }
-        .card-body { padding: 20px; }
-        .status-bar { background: #000; border-bottom: 1px solid var(--border); padding: 8px 0; display: flex; justify-content: center; gap: 40px; font-size: 12px; font-weight: bold; color: var(--dim); }
-        .status-item span { color: var(--primary); margin-left: 5px; }
+        .card { background: var(--card); border: 1px solid var(--border); cursor: pointer; transition: 0.3s; }
+        .card:hover { border-color: var(--primary); }
+        .card img { width: 100%; height: 180px; object-fit: cover; opacity: 0.8; }
+        .card-body { padding: 15px; }
+        .ad-side { width: 160px; background: #111; border: 1px solid var(--border); height: 600px; display: flex; align-items: center; justify-content: center; color: #333; font-weight: bold; writing-mode: vertical-rl; }
     </style>
 </head>
 <body>
-<div id="radar-line"></div>
-<div class="ticker"><div class="ticker-move" id="tickerMsg">טוען נתונים חיים... | קודקוד 2026: המערכת המבצעית הגדולה בישראל</div></div>
-<header id="mainHeader">
-    <div class="nav-container">
-        <div class="search-area"><input type="text" class="search-box" placeholder="סריקה באנטר..." onkeypress="if(event.key==='Enter') executeSearch(this.value)"></div>
-        <a href="#" class="logo">KOD<span>KOD</span></a>
-        <nav class="nav">
-            <a onclick="updateUI(db.filter(n=>n.cat==='ביטחון'))">ביטחון</a>
-            <a onclick="updateUI(db.filter(n=>n.cat==='כלכלה'))">כלכלה</a>
-            <a onclick="updateUI(db.filter(n=>n.cat==='סייבר'))">סייבר</a>
-            <a onclick="updateUI(db.filter(n=>n.cat==='עולם'))">עולם</a>
-        </nav>
-    </div>
-</header>
-<div class="status-bar">
-    <div class="status-item">מתח זירה: <span id="stStress">14%</span></div>
-    <div class="status-item">סטטוס: <span>פעיל</span></div>
-    <div id="liveClock" style="color:var(--primary); font-family:'Orbitron'"></div>
-</div>
+<div class="ticker"><div class="ticker-move" id="tickerMsg">טוען עדכונים בטחוניים בזמן אמת...</div></div>
+<header><a href="#" class="logo">KOD<span>KOD</span></a></header>
 <div class="wrapper">
     <main class="main-content">
-        <div id="home">
-            <div class="hero" onclick="openHero()"><img id="hImg" src="" class="hero-img"><div class="hero-overlay"><h1 id="hTitle">טוען נתונים...</h1></div></div>
-            <div class="grid" id="mainGrid"></div>
-        </div>
-        <div id="article" style="display:none"><span style="color:var(--primary); cursor:pointer; font-weight:bold" onclick="showHome()">➔ חזרה</span><div id="artView"></div></div>
+        <div class="grid" id="mainGrid"></div>
     </main>
-    <aside class="side-left"><div class="ad-box">AD SPACE | KODKOD</div></aside>
+    <aside class="ad-side">AD SPACE | KODKOD</aside>
 </div>
 <script>
-    let db = [];
-    function init() {
-        // דאטה גיבוי למקרה שהשאיבה מתעכבת
-        for(let i=0; i<20; i++) {
-            db.push({ id: i, title: `דיווח מבצעי ${i+1}: סריקה בביצוע...`, content: `מערכת קודקוד סורקת מקורות מידע.`, cat: 'כללי', img: `https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=${i}` });
-        }
-        updateUI();
-        fetchRSS();
-    }
-
-    async function fetchRSS() {
+    async function fetchNews() {
         const proxy = "https://api.allorigins.win/get?url=";
         const target = encodeURIComponent('https://www.ynet.co.il/Integration/StoryRss2.xml');
         try {
-            let r = await fetch(proxy + target);
-            let json = await r.json();
-            let parser = new DOMParser();
-            let xml = parser.parseFromString(json.contents, "text/xml");
-            let items = xml.querySelectorAll("item");
-            let newDb = [];
-            items.forEach((item, idx) => {
-                newDb.push({
-                    id: Date.now() + idx,
-                    title: item.querySelector("title").textContent,
-                    content: item.querySelector("description").textContent.replace(/<[^>]*>?/gm, ''),
-                    cat: 'חדשות חמות',
-                    img: 'https://images.unsplash.com/photo-1504711432819-06bb741f279a?w=800',
-                    status: 'מבצעי'
-                });
-            });
-            if(newDb.length > 0) { db = newDb; updateUI(); }
-        } catch(e) { console.log("RSS Error", e); }
+            const response = await fetch(proxy + target);
+            const data = await response.json();
+            const parser = new DOMParser();
+            const xml = parser.parseFromString(data.contents, "text/xml");
+            const items = xml.querySelectorAll("item");
+            
+            const newsHtml = Array.from(items).slice(0, 12).map(item => `
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1585007600263-ad1f301f2c27?w=500">
+                    <div class="card-body">
+                        <div style="color:var(--primary); font-size:12px; font-weight:800;">מבזק חם</div>
+                        <h3 style="margin:10px 0; font-size:18px;">${item.querySelector("title").textContent}</h3>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('mainGrid').innerHTML = newsHtml;
+            document.getElementById('tickerMsg').innerText = Array.from(items).slice(0, 5).map(i => i.querySelector("title").textContent).join('  •  ');
+        } catch(e) { console.error("Error fetching news", e); }
     }
-
-    function executeSearch(val) {
-        const radar = document.getElementById('radar-line');
-        radar.classList.add('scanning');
-        setTimeout(() => {
-            const results = db.filter(n => n.title.includes(val) || n.cat.includes(val));
-            updateUI(results);
-            radar.classList.remove('scanning');
-        }, 1200);
-    }
-
-    function updateUI(data = db) {
-        if(data.length === 0) return;
-        document.getElementById('hImg').src = data[0].img;
-        document.getElementById('hTitle').innerText = data[0].title;
-        document.getElementById('mainGrid').innerHTML = data.slice(1, 19).map(n => `
-            <div class="card" onclick="openArt(${n.id})"><img src="${n.img}"><div class="card-body"><div style="color:var(--primary); font-size:11px; font-weight:800;">${n.cat}</div><h3 style="margin:5px 0; font-size:18px;">${n.title}</h3></div></div>
-        `).join('');
-        document.getElementById('tickerMsg').innerText = data.slice(0, 10).map(n => ` • ${n.title}`).join('');
-    }
-
-    function openArt(id) {
-        const n = db.find(x => x.id == id);
-        document.getElementById('home').style.display = 'none';
-        document.getElementById('article').style.display = 'block';
-        window.scrollTo(0,0);
-        document.getElementById('artView').innerHTML = `<h1>${n.title}</h1><img src="${n.img}" style="width:100%; border-bottom:4px solid var(--primary); margin:20px 0;"><p style="font-size:22px; line-height:1.7;">${n.content}</p>`;
-    }
-    function showHome() { document.getElementById('article').style.display = 'none'; document.getElementById('home').style.display = 'block'; }
-    function openHero() { openArt(db[0].id); }
-    window.onscroll = () => {
-        const h = document.getElementById('mainHeader');
-        if (window.pageYOffset > 50) h.classList.add('scrolled');
-        else h.classList.remove('scrolled');
-    };
-    init();
-    setInterval(() => {
-        document.getElementById('liveClock').innerText = new Date().toLocaleTimeString('he-IL');
-        document.getElementById('stStress').innerText = Math.floor(Math.random()*20 + 10) + "%";
-    }, 1000);
+    fetchNews();
 </script>
 </body>
 </html>
