@@ -3,79 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KODKOD | מרכז פיקוד</title>
+    <title>KODKOD | COMMAND CENTER</title>
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;700;800&family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <style>
         :root { --bg: #050505; --card: #0f0f0f; --primary: #f8e71c; --text: #ffffff; --border: #1a1a1a; }
         body { background: var(--bg); color: var(--text); font-family: 'Assistant', sans-serif; margin: 0; padding-bottom: 50px; }
         
-        /* טיקר חדשות */
         .ticker { background: var(--primary); color: #000; padding: 10px 0; font-weight: 800; position: fixed; top: 0; width: 100%; z-index: 3000; overflow: hidden; white-space: nowrap; border-bottom: 2px solid #000; }
         .ticker-move { display: inline-block; animation: ticker 50s linear infinite; }
         @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
-        /* לוגו */
         header { background: #000; border-bottom: 1px solid var(--border); padding: 60px 0 20px; text-align: center; }
         .logo { font-family: 'Orbitron', sans-serif; font-size: 45px; color: #fff; text-decoration: none; text-shadow: 0 0 15px var(--primary); }
         .logo span { color: var(--primary); }
 
-        /* גריד חדשות */
         .wrapper { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
         .main-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
         .card { background: var(--card); border: 1px solid var(--border); padding: 20px; border-right: 6px solid var(--primary); }
         .card h3 { margin: 0; font-size: 19px; line-height: 1.4; }
 
         /* טופס צור קשר מעוצב */
-        .contact-section { background: #111; border: 1px solid var(--border); padding: 40px; margin-top: 50px; border-radius: 8px; max-width: 600px; margin-left: auto; margin-right: auto; }
-        .contact-section h2 { color: var(--primary); font-family: 'Orbitron'; margin-top: 0; }
+        .contact-section { background: #111; border: 1px solid var(--border); padding: 40px; margin-top: 50px; border-radius: 8px; max-width: 600px; margin-left: auto; margin-right: auto; box-shadow: 0 0 20px rgba(248, 231, 28, 0.05); }
+        .contact-section h2 { color: var(--primary); font-family: 'Orbitron'; margin-top: 0; text-align: center; }
         .form-group { margin-bottom: 15px; }
-        input, textarea { width: 100%; padding: 12px; background: #000; border: 1px solid var(--border); color: #fff; border-radius: 4px; box-sizing: border-box; }
+        input, textarea { width: 100%; padding: 12px; background: #000; border: 1px solid var(--border); color: #fff; border-radius: 4px; box-sizing: border-box; font-family: 'Assistant'; }
         input:focus, textarea:focus { border-color: var(--primary); outline: none; }
-        .submit-btn { background: var(--primary); color: #000; border: none; padding: 12px 30px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; }
+        .submit-btn { background: var(--primary); color: #000; border: none; padding: 15px; font-weight: 800; cursor: pointer; width: 100%; text-transform: uppercase; font-size: 16px; transition: 0.3s; }
+        .submit-btn:hover { background: #fff; }
 
         /* מודאל מדיניות פרטיות */
-        .modal { display: none; position: fixed; z-index: 9000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); overflow: auto; }
-        .modal-content { background: #111; margin: 5% auto; padding: 30px; border: 1px solid var(--primary); width: 80%; max-width: 800px; line-height: 1.6; }
+        .modal { display: none; position: fixed; z-index: 9000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); overflow: auto; }
+        .modal-content { background: #111; margin: 5% auto; padding: 30px; border: 1px solid var(--primary); width: 85%; max-width: 800px; line-height: 1.8; color: #ccc; }
         .close { color: var(--primary); float: left; font-size: 28px; font-weight: bold; cursor: pointer; }
 
-        footer { text-align: center; padding: 40px; border-top: 1px solid var(--border); font-size: 13px; color: #555; }
-        footer a { color: var(--primary); text-decoration: none; cursor: pointer; }
+        footer { text-align: center; padding: 40px; border-top: 1px solid var(--border); font-size: 13px; color: #555; margin-top: 50px; }
+        footer a { color: var(--primary); text-decoration: none; cursor: pointer; font-weight: bold; }
     </style>
 </head>
 <body>
 
-<div class="ticker"><div class="ticker-move" id="tickerMsg">סריקת נתונים בביצוע... מערכת קודקוד מאמתת מקורות...</div></div>
+<div class="ticker"><div class="ticker-move" id="tickerMsg">מערכת קודקוד בסריקת גזרה... ממתין לסינכרון נתונים...</div></div>
 
 <header><a href="#" class="logo">KOD<span>KOD</span></a></header>
 
 <div class="wrapper">
     <div class="main-grid" id="news-grid">
-        <div style="grid-column: 1/-1; text-align: center; padding: 50px;">טוען עדכונים...</div>
+        <div style="grid-column: 1/-1; text-align: center; padding: 50px;">טוען עדכוני מודיעין...</div>
     </div>
 
     <div class="contact-section" id="contact">
-        <h2>יצירת קשר למפרסמים</h2>
-        <form action="הכנס_כאן_את_הקישור_מ_FORMSPREE" method="POST">
-            <div class="form-group"><input type="text" name="name" placeholder="שם מלא / שם חברה" required></div>
-            <div class="form-group"><input type="email" name="email" placeholder="אימייל לחזרה" required></div>
-            <div class="form-group"><textarea name="message" rows="5" placeholder="פרטי ההצעה לפרסום" required></textarea></div>
-            <button type="submit" class="submit-btn">שלח הצעה למערכת</button>
+        <h2>ליצירת קשר ופרסום</h2>
+        <form action="https://formspree.io/f/xeelpjwg" method="POST">
+            <div class="form-group"><input type="text" name="שם" placeholder="שם מלא / חברה" required></div>
+            <div class="form-group"><input type="email" name="אימייל" placeholder="כתובת אימייל למענה" required></div>
+            <div class="form-group"><textarea name="הודעה" rows="5" placeholder="פרט כאן את הצעת הפרסום או השאלה שלך" required></textarea></div>
+            <button type="submit" class="submit-btn">שלח דיווח למערכת</button>
         </form>
     </div>
 </div>
 
 <footer>
-    <p>© 2024 KODKOD | <a onclick="document.getElementById('privacyModal').style.display='block'">מדיניות פרטיות</a></p>
+    <p>© 2026 KODKOD | <a onclick="document.getElementById('privacyModal').style.display='block'">מדיניות פרטיות</a></p>
 </footer>
 
 <div id="privacyModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="document.getElementById('privacyModal').style.display='none'">&times;</span>
-        <h2 style="color:var(--primary)">מדיניות פרטיות - קודקוד</h2>
-        <p>1. <b>איסוף מידע:</b> האתר אינו אוסף מידע אישי על גולשיו באופן אוטומטי, למעט מידע שנשלח מרצון בטופס יצירת הקשר.</p>
-        <p>2. <b>עוגיות:</b> האתר עשוי להשתמש בעוגיות (Cookies) לצורך שיפור חווית המשתמש וסטטיסטיקה פנימית.</p>
-        <p>3. <b>צד ג':</b> המידע הנמסר בטופס לא יועבר לגורמים חיצוניים ללא הסכמת המשתמש.</p>
-        <p>4. <b>אבטחה:</b> אנו נוקטים באמצעים המקובלים לאבטחת המידע באתר.</p>
+        <h2 style="color:var(--primary); font-family:'Orbitron'">PRIVACY POLICY / מדיניות פרטיות</h2>
+        <p><b>1. מבוא:</b> ברוכים הבאים לאתר קודקוד. פרטיות המשתמשים שלנו חשובה לנו מאוד.</p>
+        <p><b>2. איסוף נתונים:</b> המידע היחיד שנאסף באתר הוא המידע שאתם מזינים מרצונכם החופשי בטופס יצירת הקשר (שם, אימייל ותוכן ההודעה).</p>
+        <p><b>3. שימוש במידע:</b> המידע משמש אך ורק לצורך חזרה אליכם בנוגע לפנייתכם ולא יועבר לצד שלישי ללא הסכמה.</p>
+        <p><b>4. עוגיות (Cookies):</b> האתר עשוי להשתמש בעוגיות טכניות לצורך תפעול תקין של ממשק המשתמש.</p>
+        <p><b>5. אבטחה:</b> אנו משתמשים בשירותים מאובטחים (GitHub, Formspree) כדי להגן על המידע שלכם.</p>
     </div>
 </div>
 
@@ -92,16 +91,17 @@
             let html = ''; let tickerText = '';
             items.forEach((item, i) => {
                 const title = item.querySelector("title").textContent;
-                if(i < 9) html += `<div class="card"><h3>${title}</h3></div>`;
+                if(i < 9) html += `<div class="card"><div style="color:var(--primary); font-size:11px; font-weight:800; margin-bottom:8px;">דיווח מבצעי</div><h3>${title}</h3></div>`;
                 tickerText += title + " • ";
             });
             document.getElementById('news-grid').innerHTML = html;
             document.getElementById('tickerMsg').innerText = tickerText;
         } catch (e) {
-            document.getElementById('news-grid').innerHTML = '<div class="card"><h3>מערכת קודקוד בכוננות - העדכונים יופיעו כאן בקרוב</h3></div>';
+            document.getElementById('news-grid').innerHTML = '<div class="card"><h3>מערכת קודקוד בכוננות ספיגה - העדכונים יופיעו כאן בקרוב</h3></div>';
         }
     }
     loadNews();
+    setInterval(loadNews, 120000);
 </script>
 
 </body>
