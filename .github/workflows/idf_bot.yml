@@ -7,6 +7,9 @@ on:
 jobs:
   run-bot:
     runs-on: ubuntu-latest
+    # השורות הבאות נותנות לבוט רשות לכתוב קבצים לתיקייה
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -24,8 +27,8 @@ jobs:
 
       - name: Push
         run: |
-          git config --global user.name "bot"
-          git config --global user.email "bot@bot.com"
+          git config --global user.name "News-Bot"
+          git config --global user.email "bot@kodkodnews.co.il"
           git add content/news/
-          git commit -m "update" || exit 0
+          git commit -m "חדשות חדשות" || exit 0
           git push
