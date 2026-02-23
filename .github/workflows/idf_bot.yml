@@ -1,45 +1,33 @@
-import feedparser
-import os
-import sys
-from datetime import datetime
+name: News Scraper Bot
+on:
+  schedule:
+    - cron: '*/15 * * * *' # רץ כל 15 דקות
+  workflow_dispatch: # מאפשר הפעלה ידנית
 
-def scrape_news():
-    try:
-        # 1. יצירת התיקייה
-        path = 'content/news'
-        if not os.path.exists(path):
-            os.makedirs(path)
-            print(f"Created directory: {path}")
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
-        # 2. קובץ בדיקה (חייב להיווצר!)
-        test_file = os.path.join(path, 'test-status.md')
-        with open(test_file, 'w', encoding='utf-8') as f:
-            f.write(f"---\ntitle: \"בדיקת מערכת\"\n---\nהבוט רץ לאחרונה ב: {datetime.now()}")
-        print("Created test-status.md")
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
 
-        # 3. מקורות RSS
-        sources = {
-            "ynet": "https://www.ynet.co.il/Integration/StoryRss1854.xml",
-            "idf": "https://www.idf.il/RSS/hebrew/"
-        }
+      - name: Install Dependencies
+        run: |
+          pip install feedparser
 
-        for name, url in sources.items():
-            print(f"Checking source: {name}")
-            feed = feedparser.parse(url)
-            
-            for entry in feed.entries[:5]:
-                # יצירת שם קובץ בטוח
-                safe_title = "".join(c for c in entry.title if c.isalnum() or c == ' ')[:30]
-                filename = f"{datetime.now().strftime('%Y%m%d%H%M')}-{name}.md"
-                filepath = os.path.join(path, filename)
-                
-                with open(filepath, 'w', encoding='utf-8') as f:
-                    f.write(f"---\ntitle: \"{entry.title}\"\nlink: \"{entry.link}\"\n---\n\n{entry.get('summary', '')}")
-                print(f"Saved: {filename}")
+      - name: Execute Scraper
+        run: |
+          python idf_scraper.py
 
-    except Exception as e:
-        print(f"Error occurred: {e}")
-        sys.exit(1)
-
-if __name__ == "__main__":
-    scrape_news()
+      - name: Save and Push Changes
+        run: |
+          git config --global user.name "News-Bot"
+          git config --global user.email "bot@kodkodnews.co.il"
+          git add content/news/
+          git commit -m "עדכון חדשות אוטומטי" || echo "No changes to commit"
+          git push
