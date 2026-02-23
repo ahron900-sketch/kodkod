@@ -154,18 +154,12 @@
     <div id="news-container" style="max-width: 1200px; margin: 20px auto; padding: 0 15px;"></div>
 
 <script>
-   let db = [];
+   <script>
+    let db = [];
 
     async function init() {
-        // טעינת המבזקים מהבוט ב-GitHub
         await loadGitHubNews();
         
-        // גיבוי: אם הבוט עוד לא יצר קבצים, נמשוך RSS חיצוני
-        if (db.length === 0) {
-            await fetchRSS();
-        }
-
-        // שעון חי ומתח זירה
         setInterval(() => {
             document.getElementById('liveClock').innerText = new Date().toLocaleTimeString('he-IL');
             document.getElementById('stStress').innerText = Math.floor(Math.random() * 20 + 10) + "%";
@@ -198,6 +192,11 @@
                 
                 const titleMatch = rawText.match(/title: "(.*)"/) || rawText.match(/title: (.*)/);
                 const title = titleMatch ? titleMatch[1].replace(/"/g, '') : "מבזק קודקוד";
+                
+                // שליפת התמונה האמיתית מהבוט
+                const imgMatch = rawText.match(/image: "(.*)"/);
+                const imgUrl = (imgMatch && imgMatch[1] && imgMatch[1] !== "None") ? imgMatch[1] : "https://images.unsplash.com/photo-1585007600263-ad1f301f2c27?w=800";
+
                 const body = rawText.split('---').pop().trim();
                 const sourceMatch = rawText.match(/source: "(.*)"/);
                 const source = sourceMatch ? sourceMatch[1] : "מערכת קודקוד";
@@ -207,7 +206,7 @@
                     title: title,
                     content: body,
                     cat: source,
-                    img: "https://images.unsplash.com/photo-1585007600263-ad1f301f2c27?w=800"
+                    img: imgUrl
                 });
             }
 
@@ -215,31 +214,7 @@
                 db = fetchedNews;
                 updateUI();
             }
-        } catch (e) {
-            console.error("GitHub Error:", e);
-        }
-    }
-
-    async function fetchRSS() {
-        const proxy = "https://api.allorigins.win/get?url=";
-        const target = encodeURIComponent('https://www.inn.co.il/Rss.aspx');
-        try {
-            let r = await fetch(proxy + target);
-            let json = await r.json();
-            let parser = new DOMParser();
-            let xml = parser.parseFromString(json.contents, "text/xml");
-            let items = xml.querySelectorAll("item");
-            items.forEach((item, idx) => {
-                db.push({
-                    id: Date.now() + idx,
-                    title: item.querySelector("title").textContent,
-                    content: item.querySelector("description")?.textContent.replace(/<[^>]*>?/gm, '') || "",
-                    cat: 'מבזק חוץ',
-                    img: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800',
-                });
-            });
-            updateUI();
-        } catch(e) { }
+        } catch (e) { console.error("GitHub Error:", e); }
     }
 
     function updateUI(data = db) {
@@ -248,7 +223,7 @@
         document.getElementById('hTitle').innerText = data[0].title;
         document.getElementById('mainGrid').innerHTML = data.slice(1).map(n => `
             <div class="card" onclick="openArt('${n.id}')">
-                <img src="${n.img}">
+                <img src="${n.img}" onerror="this.src='https://images.unsplash.com/photo-1585007600263-ad1f301f2c27?w=800'">
                 <div class="card-body">
                     <div style="color:var(--primary); font-size:11px; font-weight:800; text-transform:uppercase;">${n.cat}</div>
                     <h3 style="margin:5px 0; font-size:18px;">${n.title}</h3>
@@ -276,6 +251,7 @@
     function openHero() { if(db.length > 0) openArt(db[0].id); }
     
     init();
+</script>
 </script>
 </body>
 </html>
