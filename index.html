@@ -154,59 +154,100 @@
     <div id="news-container" style="max-width: 1200px; margin: 20px auto; padding: 0 15px;"></div>
 
 <script>
-    let db = [];
-    function init() {
-        // דאטה ראשוני
-        for(let i=0; i<12; i++) {
-            db.push({ id: i, title: `סריקת גזרה ${i+1}: המערכת בכוננות`, content: `ממתין לעדכוני מודיעין מהשטח.`, cat: 'ביטחון', img: `https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=${i}` });
+   let db = [];
+
+    async function init() {
+        // טעינת המבזקים מהבוט ב-GitHub
+        await loadGitHubNews();
+        
+        // גיבוי: אם הבוט עוד לא יצר קבצים, נמשוך RSS חיצוני
+        if (db.length === 0) {
+            await fetchRSS();
         }
-        updateUI();
-        fetchRSS();
-        if(!localStorage.getItem('cookieSeen')) {
+
+        // שעון חי ומתח זירה
+        setInterval(() => {
+            document.getElementById('liveClock').innerText = new Date().toLocaleTimeString('he-IL');
+            document.getElementById('stStress').innerText = Math.floor(Math.random() * 20 + 10) + "%";
+        }, 1000);
+
+        if (!localStorage.getItem('cookieSeen')) {
             document.getElementById('cookie-notice').style.display = 'block';
             localStorage.setItem('cookieSeen', 'true');
         }
     }
 
+    async function loadGitHubNews() {
+        const repoOwner = "ahron900-sketch"; 
+        const repoName = "kodkod";
+        const path = "content/news";
+        
+        try {
+            const response = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}`);
+            const files = await response.json();
+            if (!Array.isArray(files)) return;
+
+            let fetchedNews = [];
+            const recentFiles = files.reverse().slice(0, 15);
+
+            for (const file of recentFiles) {
+                if (file.name === ".keep" || file.name === "bot-status.md") continue;
+
+                const contentRes = await fetch(file.download_url);
+                const rawText = await contentRes.text();
+                
+                const titleMatch = rawText.match(/title: "(.*)"/) || rawText.match(/title: (.*)/);
+                const title = titleMatch ? titleMatch[1].replace(/"/g, '') : "מבזק קודקוד";
+                const body = rawText.split('---').pop().trim();
+                const sourceMatch = rawText.match(/source: "(.*)"/);
+                const source = sourceMatch ? sourceMatch[1] : "מערכת קודקוד";
+
+                fetchedNews.push({
+                    id: file.sha,
+                    title: title,
+                    content: body,
+                    cat: source,
+                    img: "https://images.unsplash.com/photo-1585007600263-ad1f301f2c27?w=800"
+                });
+            }
+
+            if (fetchedNews.length > 0) {
+                db = fetchedNews;
+                updateUI();
+            }
+        } catch (e) {
+            console.error("GitHub Error:", e);
+        }
+    }
+
     async function fetchRSS() {
         const proxy = "https://api.allorigins.win/get?url=";
-        const target = encodeURIComponent('https://www.inn.co.il/Rss.aspx'); // מקור יציב יותר
+        const target = encodeURIComponent('https://www.inn.co.il/Rss.aspx');
         try {
             let r = await fetch(proxy + target);
             let json = await r.json();
             let parser = new DOMParser();
             let xml = parser.parseFromString(json.contents, "text/xml");
             let items = xml.querySelectorAll("item");
-            let newDb = [];
             items.forEach((item, idx) => {
-                newDb.push({
+                db.push({
                     id: Date.now() + idx,
                     title: item.querySelector("title").textContent,
-                    content: item.querySelector("description")?.textContent.replace(/<[^>]*>?/gm, '') || "אין תיאור זמין.",
-                    cat: 'דיווח מבצעי',
-                    img: 'https://images.unsplash.com/photo-1585007600263-ad1f301f2c27?w=800',
+                    content: item.querySelector("description")?.textContent.replace(/<[^>]*>?/gm, '') || "",
+                    cat: 'מבזק חוץ',
+                    img: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800',
                 });
             });
-            if(newDb.length > 0) { db = newDb; updateUI(); }
-        } catch(e) { console.log("RSS Error", e); }
-    }
-
-    function executeSearch(val) {
-        const radar = document.getElementById('radar-line');
-        radar.classList.add('scanning');
-        setTimeout(() => {
-            const results = db.filter(n => n.title.includes(val));
-            updateUI(results);
-            radar.classList.remove('scanning');
-        }, 1200);
+            updateUI();
+        } catch(e) { }
     }
 
     function updateUI(data = db) {
-        if(data.length === 0) return;
+        if (data.length === 0) return;
         document.getElementById('hImg').src = data[0].img;
         document.getElementById('hTitle').innerText = data[0].title;
-        document.getElementById('mainGrid').innerHTML = data.slice(1, 13).map(n => `
-            <div class="card" onclick="openArt(${n.id})">
+        document.getElementById('mainGrid').innerHTML = data.slice(1).map(n => `
+            <div class="card" onclick="openArt('${n.id}')">
                 <img src="${n.img}">
                 <div class="card-body">
                     <div style="color:var(--primary); font-size:11px; font-weight:800; text-transform:uppercase;">${n.cat}</div>
@@ -219,56 +260,22 @@
 
     function openArt(id) {
         const n = db.find(x => x.id == id);
+        if(!n) return;
         document.getElementById('home').style.display = 'none';
         document.getElementById('article').style.display = 'block';
         window.scrollTo(0,0);
         document.getElementById('artView').innerHTML = `
             <h1 style="font-size:40px; margin-top:30px;">${n.title}</h1>
+            <div style="color:var(--primary); font-weight:bold; margin-bottom:10px;">מקור: ${n.cat}</div>
             <img src="${n.img}" style="width:100%; border-radius:15px; border-bottom:4px solid var(--primary); margin:20px 0;">
-            <p style="font-size:22px; line-height:1.7; color:#ccc;">${n.content}</p>
+            <p style="font-size:22px; line-height:1.7; color:#ccc; white-space: pre-wrap;">${n.content}</p>
         `;
     }
 
     function showHome() { document.getElementById('article').style.display = 'none'; document.getElementById('home').style.display = 'block'; }
-    function openHero() { openArt(db[0].id); }
+    function openHero() { if(db.length > 0) openArt(db[0].id); }
     
-    window.onscroll = () => {
-        const h = document.getElementById('mainHeader');
-        if (window.pageYOffset > 50) h.classList.add('scrolled');
-        else h.classList.remove('scrolled');
-    };
-    async function loadDecapNews() {
-    const container = document.getElementById('news-container');
-    if (!container) return;
-    try {
-        const response = await fetch('https://api.github.com/repos/ahron900-sketch/kodkod/contents/content/news');
-        const files = await response.json();
-        if (!Array.isArray(files)) return;
-
-        for (const file of files.reverse()) {
-            const contentRes = await fetch(file.download_url);
-            const rawText = await contentRes.text();
-            
-            const title = rawText.match(/title: (.*)/)?.[1] || "מבזק";
-            const body = rawText.split('---').pop().trim();
-
-            const post = document.createElement('div');
-            // העיצוב הזה מתבסס על הצבעים שראיתי בקוד שלך (--primary)
-            post.style.cssText = "background: var(--card); padding: 20px; margin-bottom: 15px; border-right: 4px solid var(--primary); border-radius: 8px; color: var(--text);";
-            post.innerHTML = `<h3 style="margin:0 0 10px 0; color:var(--primary);">${title}</h3><div style="font-size:18px; line-height:1.5;">${body}</div>`;
-            container.appendChild(post);
-        }
-    } catch (e) { console.error("Error loading CMS news:", e); }
-}
-
-// קריאה לפונקציה בתוך ה-init הקיים שלך
-loadDecapNews();
-
     init();
-    setInterval(() => {
-        document.getElementById('liveClock').innerText = new Date().toLocaleTimeString('he-IL');
-        document.getElementById('stStress').innerText = Math.floor(Math.random()*20 + 10) + "%";
-    }, 1000);
 </script>
 </body>
 </html>
