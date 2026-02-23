@@ -1,33 +1,31 @@
 name: News Scraper Bot
 on:
+  workflow_dispatch:
   schedule:
-    - cron: '*/15 * * * *' # רץ כל 15 דקות
-  workflow_dispatch: # מאפשר הפעלה ידנית
+    - cron: '*/15 * * * *'
 
 jobs:
   run-bot:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
 
-      - name: Install Dependencies
-        run: |
-          pip install feedparser
+      - name: Deps
+        run: pip install feedparser
 
-      - name: Execute Scraper
-        run: |
-          python idf_scraper.py
+      - name: Scrape
+        run: python idf_scraper.py
 
-      - name: Save and Push Changes
+      - name: Push
         run: |
-          git config --global user.name "News-Bot"
-          git config --global user.email "bot@kodkodnews.co.il"
+          git config --global user.name "bot"
+          git config --global user.email "bot@bot.com"
           git add content/news/
-          git commit -m "עדכון חדשות אוטומטי" || echo "No changes to commit"
+          git commit -m "update" || exit 0
           git push
