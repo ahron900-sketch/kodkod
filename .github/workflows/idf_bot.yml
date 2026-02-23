@@ -7,28 +7,28 @@ on:
 jobs:
   run-bot:
     runs-on: ubuntu-latest
-    # השורות הבאות נותנות לבוט רשות לכתוב קבצים לתיקייה
     permissions:
       contents: write
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Python
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
 
-      - name: Deps
+      - name: Install Dependencies
         run: pip install feedparser
 
-      - name: Scrape
+      - name: Execute Scraper
         run: python idf_scraper.py
 
-      - name: Push
+      - name: Save and Push Changes
         run: |
           git config --global user.name "News-Bot"
           git config --global user.email "bot@kodkodnews.co.il"
-          git add content/news/
-          git commit -m "חדשות חדשות" || exit 0
-          git push
+          mkdir -p content/news
+          git add .
+          git commit -m "עדכון חדשות אוטומטי: $(date)" || exit 0
+          git push origin main
