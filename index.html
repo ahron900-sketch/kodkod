@@ -150,6 +150,7 @@
 <div id="cookie-notice">
     אתר זה משתמש בעוגיות. <button onclick="this.parentElement.style.display='none'">אישור</button>
 </div>
+    <div id="news-container" style="max-width: 1200px; margin: 20px auto; padding: 0 15px;"></div>
 
 <script>
     let db = [];
@@ -235,6 +236,32 @@
         if (window.pageYOffset > 50) h.classList.add('scrolled');
         else h.classList.remove('scrolled');
     };
+    async function loadDecapNews() {
+    const container = document.getElementById('news-container');
+    if (!container) return;
+    try {
+        const response = await fetch('https://api.github.com/repos/ahron900-sketch/kodkod/contents/content/news');
+        const files = await response.json();
+        if (!Array.isArray(files)) return;
+
+        for (const file of files.reverse()) {
+            const contentRes = await fetch(file.download_url);
+            const rawText = await contentRes.text();
+            
+            const title = rawText.match(/title: (.*)/)?.[1] || "מבזק";
+            const body = rawText.split('---').pop().trim();
+
+            const post = document.createElement('div');
+            // העיצוב הזה מתבסס על הצבעים שראיתי בקוד שלך (--primary)
+            post.style.cssText = "background: var(--card); padding: 20px; margin-bottom: 15px; border-right: 4px solid var(--primary); border-radius: 8px; color: var(--text);";
+            post.innerHTML = `<h3 style="margin:0 0 10px 0; color:var(--primary);">${title}</h3><div style="font-size:18px; line-height:1.5;">${body}</div>`;
+            container.appendChild(post);
+        }
+    } catch (e) { console.error("Error loading CMS news:", e); }
+}
+
+// קריאה לפונקציה בתוך ה-init הקיים שלך
+loadDecapNews();
 
     init();
     setInterval(() => {
