@@ -92,12 +92,12 @@
 
 <header id="mainHeader">
     <div class="nav-container">
-        <div class="search-area"><input type="text" class="search-box" placeholder="סריקה באנטר..." onkeypress="if(event.key==='Enter') executeSearch(this.value)"></div>
+        <div class="search-area"><input type="text" class="search-box" placeholder="חיפוש חכם..." onkeypress="if(event.key==='Enter') executeSearch(this.value)"></div>
         <a href="#" class="logo">KOD<span>KOD</span></a>
         <nav class="nav">
             <a onclick="updateUI(db.filter(n=>n.cat.includes('ביטחון')))">ביטחון</a>
             <a onclick="updateUI(db.filter(n=>n.cat.includes('כלכלה')))">כלכלה</a>
-            <a onclick="updateUI(db.filter(n=>n.cat.includes('סייבר')))">פוליטיקה</a>
+            <a onclick="updateUI(db.filter(n=>n.cat.includes('פוליטיקה')))">פוליטיקה</a>
             <a onclick="updateUI(db.filter(n=>n.cat.includes('עולם')))">עולם</a>
         </nav>
     </div>
