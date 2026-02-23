@@ -79,11 +79,11 @@
 </head>
 <body>
 
-<div class="ticker"><div class="ticker-move" id="tickerMsg">סריקה בביצוע... מערכת קודקוד מאמתת נתונים מול שרתי הביטחון...</div></div>
+<div class="ticker"><div class="ticker-move" id="tickerMsg">מערכת קודקוד מאמתת נתונים...</div></div>
 
 <header id="mainHeader">
     <div class="nav-container">
-        <div class="search-area"><input type="text" class="search-box" placeholder="חיפוש חכם..." onkeypress="if(event.key==='Enter') executeSearch(this.value)"></div>
+        <div class="search-area"><input type="text" id="searchInput" class="search-box" placeholder="חיפוש חכם..." onkeypress="if(event.key==='Enter') executeSearch(this.value)"></div>
         <a class="logo" onclick="showHome()">KOD<span>KOD</span></a>
         <nav class="nav">
             <a onclick="filterByCat('ביטחון')">ביטחון</a>
@@ -103,7 +103,7 @@
 <div class="wrapper">
     <main class="main-content">
         <div id="home">
-            <div class="hero" onclick="openHero()"><img id="hImg" src="" class="hero-img"><div class="hero-overlay"><h1 id="hTitle">ממתין לסינכרון...</h1></div></div>
+            <div class="hero" onclick="openHero()"><img id="hImg" src="" class="hero-img"><div class="hero-overlay"><h1 id="hTitle">סנכרון מבזקים...</h1></div></div>
             <div class="grid" id="mainGrid"></div>
             
             <div class="contact-section" id="contact">
@@ -133,14 +133,12 @@
     <div class="modal-content">
         <span class="close" onclick="document.getElementById('privacyModal').style.display='none'">&times;</span>
         <h2 style="color:var(--primary); font-family:'Orbitron'">מדיניות פרטיות</h2>
-        <p>1. האתר אינו אוסף מידע אישי ללא הסכמה.</p>
-        <p>2. אנו משתמשים בעוגיות לשיפור חווית המשתמש.</p>
-        <p>3. המידע לא יועבר לצד ג'.</p>
+        <p>האתר אינו אוסף מידע אישי ללא הסכמה. המידע בטופס משמש לחזרה לפנייה בלבד.</p>
     </div>
 </div>
 
 <div id="cookie-notice">
-    אתר זה משתמש בעוגיות. <button onclick="this.parentElement.style.display='none'">אישור</button>
+    אתר זה משתמש בעוגיות. <button onclick="acceptCookies()">אישור</button>
 </div>
 
 <script>
@@ -148,26 +146,26 @@
 
     window.addEventListener('scroll', () => {
         const header = document.getElementById('mainHeader');
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
+        if (window.scrollY > 50) header.classList.add('scrolled');
+        else header.classList.remove('scrolled');
     });
 
     async function init() {
         await loadGitHubNews();
         setInterval(() => {
             const clock = document.getElementById('liveClock');
-            const stress = document.getElementById('stStress');
             if(clock) clock.innerText = new Date().toLocaleTimeString('he-IL');
+            const stress = document.getElementById('stStress');
             if(stress) stress.innerText = Math.floor(Math.random() * 20 + 10) + "%";
         }, 1000);
         if (!localStorage.getItem('cookieSeen')) {
-            const notice = document.getElementById('cookie-notice');
-            if(notice) notice.style.display = 'block';
-            localStorage.setItem('cookieSeen', 'true');
+            document.getElementById('cookie-notice').style.display = 'block';
         }
+    }
+
+    function acceptCookies() {
+        document.getElementById('cookie-notice').style.display = 'none';
+        localStorage.setItem('cookieSeen', 'true');
     }
 
     async function loadGitHubNews() {
@@ -190,9 +188,9 @@
                 const body = parts.length >= 3 ? parts.slice(2).join('---').trim() : "טוען תוכן...";
                 fetchedNews.push({
                     id: file.sha,
-                    title: titleMatch ? titleMatch[1].replace(/"/g, '') : "מבזק קודקוד",
+                    title: titleMatch ? titleMatch[1].replace(/"/g, '') : "מבזק",
                     content: body,
-                    cat: sourceMatch ? sourceMatch[1] : "מערכת קודקוד",
+                    cat: sourceMatch ? sourceMatch[1] : "קודקוד",
                     img: (imgMatch && imgMatch[1] && imgMatch[1] !== "None") ? imgMatch[1] : "https://images.unsplash.com/photo-1585007600263-ad1f301f2c27?w=800"
                 });
             }
@@ -200,7 +198,7 @@
                 db = fetchedNews;
                 updateUI();
             }
-        } catch (e) { console.error("GitHub Error:", e); }
+        } catch (e) { console.error(e); }
     }
 
     function updateUI(data = db) {
@@ -210,23 +208,20 @@
         document.getElementById('mainGrid').innerHTML = data.slice(1).map(n => `
             <div class="card" onclick="openArt('${n.id}')">
                 <img src="${n.img}" onerror="this.src='https://images.unsplash.com/photo-1585007600263-ad1f301f2c27?w=800'">
-                <div class="card-body">
-                    <div style="color:var(--primary); font-size:11px; font-weight:800;">${n.cat}</div>
-                    <h3 style="margin:5px 0; font-size:18px; color:#fff;">${n.title}</h3>
-                </div>
+                <div class="card-body"><h3 style="color:#fff;">${n.title}</h3></div>
             </div>
         `).join('');
         document.getElementById('tickerMsg').innerText = data.slice(0, 10).map(n => ` • ${n.title}`).join('');
     }
 
-    function filterByCat(catName) {
-        const filtered = db.filter(n => n.cat.includes(catName));
-        updateUI(filtered.length > 0 ? filtered : db);
-    }
-
     function executeSearch(val) {
         const filtered = db.filter(n => n.title.includes(val) || n.content.includes(val));
         updateUI(filtered);
+    }
+
+    function filterByCat(cat) {
+        const filtered = db.filter(n => n.cat.includes(cat) || n.content.includes(cat));
+        updateUI(filtered.length > 0 ? filtered : db);
     }
 
     function openArt(id) {
@@ -236,9 +231,8 @@
         document.getElementById('article').style.display = 'block';
         window.scrollTo(0,0);
         document.getElementById('artView').innerHTML = `
-            <h1 style="font-size:40px; margin-top:30px; line-height:1.2;">${n.title}</h1>
-            <div style="color:var(--primary); font-weight:bold;">מקור: ${n.cat}</div>
-            <img src="${n.img}" style="width:100%; border-radius:15px; border-bottom:4px solid var(--primary); margin:20px 0;">
+            <h1 style="font-size:40px; margin:20px 0;">${n.title}</h1>
+            <img src="${n.img}" style="width:100%; border-radius:15px; margin-bottom:20px;">
             <div style="font-size:22px; line-height:1.7; color:#ccc; white-space: pre-wrap;">${n.content}</div>
         `;
     }
@@ -246,7 +240,6 @@
     function showHome() { 
         document.getElementById('article').style.display = 'none'; 
         document.getElementById('home').style.display = 'block'; 
-        updateUI(db);
     }
     
     function openHero() { if(db.length > 0) openArt(db[0].id); }
