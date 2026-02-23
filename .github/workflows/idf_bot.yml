@@ -1,43 +1,45 @@
 import feedparser
 import os
+import sys
 from datetime import datetime
 
 def scrape_news():
-    # יצירת התיקייה
-    os.makedirs('content/news', exist_ok=True)
-    
-    # --- שורת בדיקה: יצירת קובץ ניסיון כדי לוודא שהכל עובד ---
-    with open('content/news/test-file.md', 'w', encoding='utf-8') as f:
-        f.write('---\ntitle: "קובץ בדיקה"\n---\nהבוט עובד ומחכה לחדשות!')
-    
-    # רשימת מקורות
-    SOURCES = {
-        "דובר צהל": "https://www.idf.il/RSS/hebrew/",
-        "ynet": "https://www.ynet.co.il/Integration/StoryRss1854.xml"
-    }
-    
-    for source_name, url in SOURCES.items():
-        print(f"סורק את: {source_name}...")
-        feed = feedparser.parse(url)
-        
-        for entry in feed.entries[:10]:
-            clean_title = "".join(x for x in entry.title if x.isalnum() or x in " -")[:50]
-            filename = f"content/news/{datetime.now().strftime('%Y%m%d%H%M')}-{clean_title}.md"
+    try:
+        # 1. יצירת התיקייה
+        path = 'content/news'
+        if not os.path.exists(path):
+            os.makedirs(path)
+            print(f"Created directory: {path}")
+
+        # 2. קובץ בדיקה (חייב להיווצר!)
+        test_file = os.path.join(path, 'test-status.md')
+        with open(test_file, 'w', encoding='utf-8') as f:
+            f.write(f"---\ntitle: \"בדיקת מערכת\"\n---\nהבוט רץ לאחרונה ב: {datetime.now()}")
+        print("Created test-status.md")
+
+        # 3. מקורות RSS
+        sources = {
+            "ynet": "https://www.ynet.co.il/Integration/StoryRss1854.xml",
+            "idf": "https://www.idf.il/RSS/hebrew/"
+        }
+
+        for name, url in sources.items():
+            print(f"Checking source: {name}")
+            feed = feedparser.parse(url)
             
-            content = f"""---
-title: "{entry.title}"
-date: {datetime.now().isoformat()}
-source: "{source_name}"
-link: "{entry.link}"
----
+            for entry in feed.entries[:5]:
+                # יצירת שם קובץ בטוח
+                safe_title = "".join(c for c in entry.title if c.isalnum() or c == ' ')[:30]
+                filename = f"{datetime.now().strftime('%Y%m%d%H%M')}-{name}.md"
+                filepath = os.path.join(path, filename)
+                
+                with open(filepath, 'w', encoding='utf-8') as f:
+                    f.write(f"---\ntitle: \"{entry.title}\"\nlink: \"{entry.link}\"\n---\n\n{entry.get('summary', '')}")
+                print(f"Saved: {filename}")
 
-{entry.get('description', entry.get('summary', ''))}
-
-[לכתבה המלאה ב-{source_name}]({entry.link})
-"""
-            with open(filename, 'w', encoding='utf-8') as f:
-                f.write(content)
-                print(f"נשמר: {filename}")
+    except Exception as e:
+        print(f"Error occurred: {e}")
+        sys.exit(1)
 
 if __name__ == "__main__":
     scrape_news()
