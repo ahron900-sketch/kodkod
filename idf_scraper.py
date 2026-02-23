@@ -1,52 +1,49 @@
 import feedparser
 import os
-import time
 from datetime import datetime
-import re
 
-# הגדרות נתיבים - ודא שהתיקייה הזו קיימת ב-GitHub שלך
-NEWS_DIR = "content/news"
-
-# יצירת התיקייה אם היא לא קיימת
-if not os.path.exists(NEWS_DIR):
-    os.makedirs(NEWS_DIR)
-
-def create_news_file(title, content, image_url, video_url):
-    # יצירת שם קובץ ייחודי לפי זמן (מונע כפילויות)
-    timestamp = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
-    filename = f"{NEWS_DIR}/{timestamp}.md"
+def scrape_news():
+    # יצירת נתיב התיקייה
+    path = 'content/news'
+    os.makedirs(path, exist_ok=True)
     
-    # בניית גוף המבזק - כולל נגן וידאו במידה וקיים קישור
-    full_content = content
-    if video_url:
-        full_content += f'\n\n<video width="100%" controls poster="{image_url}"><source src="{video_url}" type="video/mp4">הדפדפן שלך לא תומך בנגן וידאו.</video>'
-    
-    # כתיבת הקובץ בפורמט Markdown שמתאים ל-Netlify CMS שלך
-    with open(filename, "w", encoding="utf-8") as f:
-        f.write("---\n")
-        f.write(f'title: "{title}"\n')
-        f.write(f'date: "{datetime.now().isoformat()}"\n')
-        f.write(f'category: "ביטחון"\n') # משייך אוטומטית לקטגוריה שביקשת
-        f.write(f'image: "{image_url}"\n')
-        f.write("---\n\n")
-        f.write(full_content)
+    # קובץ בדיקה כדי לוודא שהבוט כותב לתיקייה
+    with open(os.path.join(path, 'bot-status.md'), 'w', encoding='utf-8') as f:
+        f.write(f"---\ntitle: \"סטטוס בוט\"\n---\nעודכן לאחרונה: {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}")
 
-# משיכת נתונים מערוץ ה-RSS הרשמי של דובר צה"ל
-feed = feedparser.parse("https://www.idf.il/RSS")
-
-for entry in feed.entries[:5]: # לוקח את 5 המבזקים האחרונים
-    title = entry.title
-    content = entry.summary
+    # מקורות ה-RSS
+    sources = {
+        "ynet": "https://www.ynet.co.il/Integration/StoryRss1854.xml",
+        "דובר צהל": "https://www.idf.il/RSS/hebrew/"
+    }
     
-    # חיפוש תמונה או וידאו בתוך הקישורים המצורפים למבזק
-    image_url = ""
-    video_url = ""
-    
-    if 'links' in entry:
-        for link in entry.links:
-            if 'image' in link.get('type', ''):
-                image_url = link.get('href', '')
-            if 'video' in link.get('type', ''):
-                video_url = link.get('href', '')
+    for name, url in sources.items():
+        print(f"סורק את {name}...")
+        try:
+            feed = feedparser.parse(url)
+            for entry in feed.entries[:10]:
+                # יצירת שם קובץ ייחודי ובטוח
+                timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
+                clean_title = "".join(x for x in entry.title if x.isalnum() or x == ' ')[:30]
+                filename = f"{timestamp}-{name.replace(' ', '_')}.md"
+                filepath = os.path.join(path, filename)
+                
+                content = f"""---
+title: "{entry.title}"
+date: "{datetime.now().isoformat()}"
+source: "{name}"
+link: "{entry.link}"
+---
 
-    create_news_file(title, content, image_url, video_url)
+{entry.get('summary', 'לחצו על הקישור לקריאת הידיעה המלאה.')}
+
+[לכתבה המלאה ב-{name}]({entry.link})
+"""
+                with open(filepath, 'w', encoding='utf-8') as f:
+                    f.write(content)
+                print(f"נשמר בהצלחה: {filename}")
+        except Exception as e:
+            print(f"שגיאה בסריקת {name}: {e}")
+
+if __name__ == "__main__":
+    scrape_news()
