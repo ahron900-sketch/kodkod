@@ -2,14 +2,14 @@
 <html lang="he" dir="rtl">
 <head>
     <title>קודקוד - חדשות ומבזקים בזמן אמת</title>
-<meta name="description" content="אתר החדשות קודקוד מביא לכם את כל העדכונים, המבזקים והחדשות מהשטח בזמן אמת.">
-<meta name="keywords" content="קודקוד, חדשות, מבזקים, עדכוני טרור, צבא, ביטחון, ישראל">
-<meta name="author" content="קודקוד חדשות">
+    <meta name="description" content="אתר החדשות קודקוד מביא לכם את כל העדכונים, המבזקים והחדשות מהשטח בזמן אמת.">
+    <meta name="keywords" content="קודקוד, חדשות, מבזקים, עדכוני טרור, צבא, ביטחון, ישראל">
+    <meta name="author" content="קודקוד חדשות">
 
-<meta property="og:title" content="קודקוד - חדשות בזמן אמת">
-<meta property="og:description" content="כל העדכונים החמים במקום אחד.">
-<meta property="og:url" content="https://kodkodnews.co.il">
-<meta property="og:type" content="website">
+    <meta property="og:title" content="קודקוד - חדשות בזמן אמת">
+    <meta property="og:description" content="כל העדכונים החמים במקום אחד.">
+    <meta property="og:url" content="https://kodkodnews.co.il">
+    <meta property="og:type" content="website">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;400;700;800&family=Orbitron:wght@700&display=swap" rel="stylesheet">
@@ -30,34 +30,31 @@
         header { background: rgba(5,5,5,0.98); backdrop-filter: blur(15px); border-bottom: 1px solid var(--border); position: sticky; top: 25px; z-index: 2000; height: 100px; transition: 0.5s; display: flex; align-items: center; }
         header.scrolled { height: 60px; border-bottom: 2px solid var(--primary); }
         .nav-container { width: 100%; max-width: 1300px; margin: 0 auto; display: flex; align-items: center; padding: 0 20px; position: relative; }
-        .logo { font-family: 'Orbitron', sans-serif; font-size: 35px; color: #fff; text-decoration: none; position: absolute; left: 50%; transform: translateX(-50%); transition: 0.5s; }
+        .logo { font-family: 'Orbitron', sans-serif; font-size: 35px; color: #fff; text-decoration: none; position: absolute; left: 50%; transform: translateX(-50%); transition: 0.5s; z-index: 10; }
         .logo span { color: var(--primary); }
         header.scrolled .logo { left: 20px; transform: translateX(0); font-size: 24px; }
+        
         .nav { display: flex; gap: 25px; opacity: 0; transition: 0.4s; pointer-events: none; margin-right: auto; }
         header.scrolled .nav { opacity: 1; pointer-events: auto; margin-right: 180px; }
-        .nav a { text-decoration: none; color: var(--dim); font-weight: 800; cursor: pointer; }
+        .nav a { text-decoration: none; color: var(--dim); font-weight: 800; cursor: pointer; font-size: 14px; }
         .nav a:hover { color: var(--primary); }
         
         .search-area { display: flex; align-items: center; gap: 15px; margin-left: 20px; z-index: 10; }
-        .search-box { background: #111; border: 1px solid var(--border); color: #fff; padding: 6px 12px; font-family: 'Assistant'; outline: none; width: 150px; }
-        
-        #radar-line { position: fixed; top: 0; left: 0; width: 100%; height: 3px; background: var(--primary); box-shadow: 0 0 15px var(--primary); z-index: 4000; display: none; }
-        .scanning { display: block !important; animation: scan 1.2s linear forwards; }
-        @keyframes scan { 0% { top: 0; } 100% { top: 100vh; } }
+        .search-box { background: #111; border: 1px solid var(--border); color: #fff; padding: 6px 12px; font-family: 'Assistant'; outline: none; width: 150px; border-radius: 4px; }
         
         /* תוכן מרכזי */
         .wrapper { display: flex; max-width: 1400px; margin: 40px auto; padding: 0 20px; gap: 30px; }
         .main-content { flex: 1; }
         .side-left { width: 160px; flex-shrink: 0; }
-        .ad-box { background: var(--card); border: 1px solid var(--border); height: 600px; position: sticky; top: 150px; display: flex; align-items: center; justify-content: center; color: #222; font-weight: bold; writing-mode: vertical-rl; }
+        .ad-box { background: var(--card); border: 1px solid var(--border); height: 600px; position: sticky; top: 150px; display: flex; align-items: center; justify-content: center; color: #222; font-weight: bold; writing-mode: vertical-rl; border-radius: 8px; }
         
         .hero { position: relative; height: 500px; border: 1px solid var(--border); overflow: hidden; cursor: pointer; background: #000; margin-bottom: 40px; border-radius: 15px; }
         .hero-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; transition: 1s; }
         .hero:hover .hero-img { transform: scale(1.05); opacity: 0.8; }
-        .hero-overlay { position: absolute; bottom: 0; width: 100%; padding: 50px 40px; background: linear-gradient(transparent, rgba(0,0,0,0.95)); }
-        .hero h1 { font-size: 48px; margin: 0; font-weight: 800; line-height: 1.1; }
+        .hero-overlay { position: absolute; bottom: 0; width: 100%; padding: 50px 40px; background: linear-gradient(transparent, rgba(0,0,0,0.95)); box-sizing: border-box; }
+        .hero h1 { font-size: 48px; margin: 0; font-weight: 800; line-height: 1.1; color: #fff; }
         
-        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
         .card { background: var(--card); border: 1px solid var(--border); cursor: pointer; border-radius: 12px; overflow: hidden; transition: 0.3s; }
         .card:hover { transform: translateY(-5px); border-color: var(--primary); }
         .card img { width: 100%; height: 200px; object-fit: cover; }
@@ -70,10 +67,10 @@
         .contact-section { background: #0a0a0a; border: 2px solid var(--primary); border-radius: 20px; padding: 40px; max-width: 600px; margin: 60px auto; }
         .contact-section h2 { font-family: 'Orbitron'; color: var(--primary); text-align: center; margin-top: 0; }
         .contact-section input, .contact-section textarea { width: 100%; padding: 12px; margin-bottom: 15px; background: #000; border: 1px solid var(--border); color: #fff; border-radius: 8px; box-sizing: border-box; }
-        .contact-section button { width: 100%; padding: 15px; background: var(--primary); border: none; font-weight: 800; cursor: pointer; border-radius: 8px; font-size: 16px; transition: 0.3s; }
+        .contact-section button { width: 100%; padding: 15px; background: var(--primary); border: none; font-weight: 800; cursor: pointer; border-radius: 8px; font-size: 16px; transition: 0.3s; color: #000; }
         .contact-section button:hover { background: #fff; }
 
-        /* מודאל מדיניות פרטיות */
+        /* מודאל */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 5000; }
         .modal-content { background: #111; border: 2px solid var(--primary); width: 80%; max-width: 700px; margin: 10% auto; padding: 30px; border-radius: 15px; position: relative; }
         .close { float: left; color: var(--primary); font-size: 30px; font-weight: bold; cursor: pointer; }
@@ -82,23 +79,22 @@
         .policy-link { color: var(--primary); cursor: pointer; font-weight: bold; text-decoration: underline; }
 
         #cookie-notice { position: fixed; bottom: 0; width: 100%; background: #111; border-top: 2px solid var(--primary); padding: 15px; text-align: center; z-index: 6000; display: none; }
-        #cookie-notice button { background: var(--primary); border: none; padding: 5px 20px; margin-right: 15px; cursor: pointer; font-weight: bold; }
+        #cookie-notice button { background: var(--primary); border: none; padding: 5px 20px; margin-right: 15px; cursor: pointer; font-weight: bold; color: #000; }
     </style>
 </head>
 <body>
 
-<div id="radar-line"></div>
 <div class="ticker"><div class="ticker-move" id="tickerMsg">סריקה בביצוע... מערכת קודקוד מאמתת נתונים מול שרתי הביטחון...</div></div>
 
 <header id="mainHeader">
     <div class="nav-container">
         <div class="search-area"><input type="text" class="search-box" placeholder="חיפוש חכם..." onkeypress="if(event.key==='Enter') executeSearch(this.value)"></div>
-        <a href="#" class="logo">KOD<span>KOD</span></a>
+        <a href="#" class="logo" onclick="showHome()">KOD<span>KOD</span></a>
         <nav class="nav">
-            <a onclick="updateUI(db.filter(n=>n.cat.includes('ביטחון')))">ביטחון</a>
-            <a onclick="updateUI(db.filter(n=>n.cat.includes('כלכלה')))">כלכלה</a>
-            <a onclick="updateUI(db.filter(n=>n.cat.includes('פוליטיקה')))">פוליטיקה</a>
-            <a onclick="updateUI(db.filter(n=>n.cat.includes('עולם')))">עולם</a>
+            <a onclick="filterByCat('ביטחון')">ביטחון</a>
+            <a onclick="filterByCat('כלכלה')">כלכלה</a>
+            <a onclick="filterByCat('פוליטיקה')">פוליטיקה</a>
+            <a onclick="filterByCat('עולם')">עולם</a>
         </nav>
     </div>
 </header>
@@ -112,7 +108,7 @@
 <div class="wrapper">
     <main class="main-content">
         <div id="home">
-            <div class="hero" onclick="openHero()"><img id="hImg" src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200" class="hero-img"><div class="hero-overlay"><h1 id="hTitle">ממתין לסינכרון...</h1></div></div>
+            <div class="hero" onclick="openHero()"><img id="hImg" src="" class="hero-img"><div class="hero-overlay"><h1 id="hTitle">ממתין לסינכרון...</h1></div></div>
             <div class="grid" id="mainGrid"></div>
             
             <div class="contact-section" id="contact">
@@ -151,11 +147,19 @@
 <div id="cookie-notice">
     אתר זה משתמש בעוגיות. <button onclick="this.parentElement.style.display='none'">אישור</button>
 </div>
-    <div id="news-container" style="max-width: 1200px; margin: 20px auto; padding: 0 15px;"></div>
 
 <script>
-   <script>
     let db = [];
+
+    // ניהול גלילה ללוגו
+    window.addEventListener('scroll', () => {
+        const header = document.getElementById('mainHeader');
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
 
     async function init() {
         await loadGitHubNews();
@@ -182,18 +186,15 @@
             if (!Array.isArray(files)) return;
 
             let fetchedNews = [];
-            const recentFiles = files.reverse().slice(0, 15);
+            const recentFiles = files.filter(f => f.name.endsWith('.md')).reverse().slice(0, 15);
 
             for (const file of recentFiles) {
-                if (file.name === ".keep" || file.name === "bot-status.md") continue;
-
                 const contentRes = await fetch(file.download_url);
                 const rawText = await contentRes.text();
                 
                 const titleMatch = rawText.match(/title: "(.*)"/) || rawText.match(/title: (.*)/);
                 const title = titleMatch ? titleMatch[1].replace(/"/g, '') : "מבזק קודקוד";
                 
-                // שליפת התמונה האמיתית מהבוט
                 const imgMatch = rawText.match(/image: "(.*)"/);
                 const imgUrl = (imgMatch && imgMatch[1] && imgMatch[1] !== "None") ? imgMatch[1] : "https://images.unsplash.com/photo-1585007600263-ad1f301f2c27?w=800";
 
@@ -226,11 +227,21 @@
                 <img src="${n.img}" onerror="this.src='https://images.unsplash.com/photo-1585007600263-ad1f301f2c27?w=800'">
                 <div class="card-body">
                     <div style="color:var(--primary); font-size:11px; font-weight:800; text-transform:uppercase;">${n.cat}</div>
-                    <h3 style="margin:5px 0; font-size:18px;">${n.title}</h3>
+                    <h3 style="margin:5px 0; font-size:18px; color:#fff;">${n.title}</h3>
                 </div>
             </div>
         `).join('');
         document.getElementById('tickerMsg').innerText = data.slice(0, 10).map(n => ` • ${n.title}`).join('');
+    }
+
+    function filterByCat(catName) {
+        const filtered = db.filter(n => n.cat.includes(catName));
+        updateUI(filtered.length > 0 ? filtered : db);
+    }
+
+    function executeSearch(val) {
+        const filtered = db.filter(n => n.title.includes(val) || n.content.includes(val));
+        updateUI(filtered);
     }
 
     function openArt(id) {
@@ -247,11 +258,14 @@
         `;
     }
 
-    function showHome() { document.getElementById('article').style.display = 'none'; document.getElementById('home').style.display = 'block'; }
+    function showHome() { 
+        document.getElementById('article').style.display = 'none'; 
+        document.getElementById('home').style.display = 'block'; 
+    }
+    
     function openHero() { if(db.length > 0) openArt(db[0].id); }
     
     init();
-</script>
 </script>
 </body>
 </html>
