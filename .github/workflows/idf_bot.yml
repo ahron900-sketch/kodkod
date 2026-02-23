@@ -20,12 +20,14 @@ jobs:
         run: pip install feedparser
 
       - name: Run IDF Bot
-        run: python idf_scraper.py
+        run: |
+          mkdir -p content/news
+          python idf_scraper.py
 
       - name: Commit and push changes
         run: |
           git config --global user.name "IDF-Bot"
           git config --global user.email "bot@kodkodnews.co.il"
-          git add content/news/*.md
-          git commit -m "מבזק אוטומטי מדובר צהל" || exit 0
+          git add content/news/
+          git commit -m "מבזק אוטומטי מדובר צהל" || echo "No changes to commit"
           git push
