@@ -1,43 +1,33 @@
-import feedparser
-import os
-from datetime import datetime
+name: IDF Spokesperson Bot
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
 
-# רשימת מקורות ה-RSS
-SOURCES = {
-    "דובר צהל": "https://www.idf.il/RSS/hebrew/",
-    "ynet": "https://www.ynet.co.il/Integration/StoryRss1854.xml"
-}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-def scrape_news():
-    # יצירת התיקייה אם היא לא קיימת
-    os.makedirs('content/news', exist_ok=True)
-    
-    for source_name, url in SOURCES.items():
-        print(f"סורק את: {source_name}...")
-        feed = feedparser.parse(url)
-        
-        for entry in feed.entries[:10]:  # לוקח את 10 המבזקים האחרונים מכל מקור
-            # יצירת שם קובץ ייחודי לפי תאריך וכותרת
-            clean_title = "".join(x for x in entry.title if x.isalnum() or x in " -")[:50]
-            filename = f"content/news/{datetime.now().strftime('%Y%m%d%H%M')}-{clean_title}.md"
-            
-            # תוכן המבזק בפורמט Markdown
-            content = f"""---
-title: "{entry.title}"
-date: {datetime.now().isoformat()}
-source: "{source_name}"
-link: "{entry.link}"
----
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
 
-{entry.get('description', entry.get('summary', ''))}
+      - name: Install dependencies
+        run: pip install feedparser
 
-[לכתבה המלאה ב-{source_name}]({entry.link})
-"""
-            
-            # שמירת הקובץ
-            with open(filename, 'w', encoding='utf-8') as f:
-                f.write(content)
-                print(f"נשמר: {filename}")
+      - name: Run IDF Bot
+        run: |
+          mkdir -p content/news
+          python idf_scraper.py
 
-if __name__ == "__main__":
-    scrape_news()
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "IDF-Bot"
+          git config --global user.email "bot@kodkodnews.co.il"
+          git add content/news/
+          git commit -m "מבזק אוטומטי" || echo "No changes to commit"
+          git push
