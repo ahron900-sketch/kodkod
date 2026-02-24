@@ -7,114 +7,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;400;700;800&family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <style>
-        /* ברירת מחדל - אפור בהיר יוקרתי */
         :root {
-            --bg: #f5f5f5; 
-            --card: #ffffff; 
-            --primary: #f8e71c; 
-            --text: #111111; 
-            --dim: #555555; 
-            --border: #dddddd;
-            --primary-text: #a89a00; /* צהוב כהה לקריאות על רקע לבן */
-        }
-        
-        /* מצב חושך (בלחיצה על האייקון) */
-        body.dark-mode {
-            --bg: #000000; 
-            --card: #0f0f0f; 
+            --bg: #050505; 
+            --card: #151520; /* כחול-שחור כהה לכרטיסיות כמו בתמונה */
+            --primary: #f8e71c; /* הצהוב של קודקוד */
             --text: #ffffff; 
-            --dim: #777777; 
+            --dim: #cccccc; 
             --border: #1a1a1a;
-            --primary-text: #f8e71c; /* צהוב זוהר לרקע שחור */
         }
 
-        body { background: var(--bg); color: var(--text); font-family: 'Assistant', sans-serif; margin: 0; overflow-x: hidden; scroll-behavior: smooth; transition: background 0.3s, color 0.3s; }
+        body { background: var(--bg); color: var(--text); font-family: 'Assistant', sans-serif; margin: 0; overflow-x: hidden; scroll-behavior: smooth; }
         
+        /* הפס הצהוב למעלה (טיקר) */
         .ticker { background: var(--primary); color: #000; padding: 4px 0; font-weight: 800; font-size: 13px; overflow: hidden; white-space: nowrap; position: fixed; top: 0; width: 100%; z-index: 3000; }
         .ticker-move { display: inline-block; animation: ticker 45s linear infinite; }
         @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
         
-        header { background: rgba(var(--bg), 0.98); backdrop-filter: blur(15px); border-bottom: 1px solid var(--border); position: sticky; top: 25px; z-index: 2000; height: 100px; transition: 0.5s; display: flex; align-items: center; }
+        /* תפריט */
+        header { background: var(--bg); border-bottom: 1px solid var(--border); position: sticky; top: 25px; z-index: 2000; height: 80px; transition: 0.5s; display: flex; align-items: center; }
         header.scrolled { height: 60px; border-bottom: 2px solid var(--primary); }
-        .nav-container { width: 100%; max-width: 1300px; margin: 0 auto; display: flex; align-items: center; padding: 0 20px; position: relative; }
+        .nav-container { width: 100%; max-width: 1400px; margin: 0 auto; display: flex; align-items: center; padding: 0 20px; position: relative; }
         
-        .logo { font-family: 'Orbitron', sans-serif; font-size: 35px; color: var(--text); text-decoration: none; position: absolute; left: 50%; transform: translateX(-50%); transition: 0.5s; z-index: 10; cursor: pointer; }
-        .logo span { color: var(--primary-text); }
+        .logo { font-family: 'Orbitron', sans-serif; font-size: 30px; color: var(--text); text-decoration: none; position: absolute; left: 50%; transform: translateX(-50%); transition: 0.5s; cursor: pointer; font-weight: bold; letter-spacing: 1px; }
+        .logo span { color: var(--primary); }
         header.scrolled .logo { left: 20px; transform: translateX(0); font-size: 24px; }
         
-        .nav { display: flex; gap: 15px; opacity: 0; transition: 0.4s; pointer-events: none; margin-right: auto; }
-        header.scrolled .nav { opacity: 1; pointer-events: auto; margin-right: 180px; }
-        .nav a { text-decoration: none; color: var(--dim); font-weight: 800; cursor: pointer; font-size: 14px; }
-        .nav a:hover { color: var(--primary-text); }
+        .nav { display: flex; gap: 25px; margin-right: auto; }
+        .nav a { text-decoration: none; color: var(--dim); font-weight: bold; cursor: pointer; font-size: 15px; transition: 0.2s; }
+        .nav a:hover { color: var(--text); }
 
         .header-tools { display: flex; align-items: center; gap: 15px; z-index: 100; margin-left: 20px; }
         .search-wrapper { position: relative; display: flex; align-items: center; }
-        .search-input-fancy { width: 0; padding: 0; opacity: 0; transition: 0.4s; background: var(--card); border: 1px solid var(--border); color: var(--text); border-radius: 20px; outline: none; }
-        .search-wrapper.open .search-input-fancy { width: 180px; padding: 6px 15px; opacity: 1; border-color: var(--primary); }
+        .search-input-fancy { width: 0; padding: 0; opacity: 0; transition: 0.4s; background: transparent; border: none; border-bottom: 1px solid var(--dim); color: var(--text); outline: none; font-family: 'Assistant'; }
+        .search-wrapper.open .search-input-fancy { width: 150px; padding: 5px; opacity: 1; border-color: var(--primary); }
         
-        .icon-btn { background: none; border: none; color: var(--dim); cursor: pointer; transition: 0.3s; padding: 5px; display: flex; align-items: center; justify-content: center; }
-        .icon-btn svg { width: 22px; height: 22px; fill: currentColor; }
-        .icon-btn:hover { color: var(--primary-text); transform: translateY(-2px); }
+        .icon-btn { background: none; border: none; color: var(--text); cursor: pointer; transition: 0.3s; padding: 5px; display: flex; align-items: center; justify-content: center; }
+        .icon-btn svg { width: 20px; height: 20px; fill: currentColor; }
+        .icon-btn:hover { color: var(--primary); transform: translateY(-2px); }
         
-        .wrapper { display: flex; max-width: 1400px; margin: 40px auto; padding: 0 20px; gap: 30px; }
+        /* אזור תוכן מרכזי */
+        .wrapper { display: flex; max-width: 1500px; margin: 30px auto; padding: 0 20px; gap: 30px; }
         .main-content { flex: 1; }
-        .side-left { width: 210px; flex-shrink: 0; }
-        .ad-box { background: var(--card); border: 1px solid var(--border); height: 600px; position: sticky; top: 150px; display: flex; align-items: center; justify-content: center; color: var(--dim); font-weight: bold; writing-mode: vertical-rl; border-radius: 8px; }
+        .side-left { width: 250px; flex-shrink: 0; }
+        .ad-box { background: var(--bg); border-right: 1px solid var(--border); height: 600px; position: sticky; top: 120px; display: flex; align-items: center; justify-content: center; color: #333; font-weight: bold; writing-mode: vertical-rl; font-size: 14px; }
         
-        .hero { position: relative; height: 500px; border: 1px solid var(--border); overflow: hidden; cursor: pointer; background: var(--card); margin-bottom: 40px; border-radius: 15px; }
-        .hero-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: 1s; }
-        body.dark-mode .hero-img { opacity: 0.7; }
-        .hero:hover .hero-img { transform: scale(1.05); opacity: 1; }
-        .hero-overlay { position: absolute; bottom: 0; width: 100%; padding: 50px 40px; background: linear-gradient(transparent, rgba(0,0,0,0.95)); box-sizing: border-box; }
-        .hero h1 { font-size: 48px; margin: 0; font-weight: 800; line-height: 1.1; color: #fff; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); } 
+        /* כתבה ראשית חסרה - מחזיר את המבנה השחור של הסטטוס בוט */
+        .hero { position: relative; height: 450px; border-radius: 8px; overflow: hidden; cursor: pointer; background: var(--bg); margin-bottom: 30px; border: 1px solid var(--border); display: flex; align-items: flex-end; }
+        .hero-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.6; transition: 0.5s; z-index: 1; }
+        .hero:hover .hero-img { opacity: 0.8; }
+        .hero-overlay { position: relative; width: 100%; padding: 40px 30px; background: linear-gradient(transparent, rgba(0,0,0,0.95)); z-index: 2; box-sizing: border-box; text-align: right; }
+        .hero h1 { font-size: 50px; margin: 0; font-weight: 800; line-height: 1.1; color: #fff; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); font-family: 'Assistant'; } 
+        .hero-meta { color: var(--dim); font-size: 14px; margin-top: 15px; display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
         
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
-        .card { background: var(--card); border: 1px solid var(--border); cursor: pointer; border-radius: 12px; overflow: hidden; transition: 0.3s; }
-        .card img { width: 100%; height: 200px; object-fit: cover; }
-        .card-body { padding: 20px; }
+        /* גריד כתבות כמו בתמונה */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+        .card { background: var(--card); border-radius: 8px; cursor: pointer; overflow: hidden; transition: 0.3s; display: flex; flex-direction: column; }
+        .card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        .card img { width: 100%; height: 220px; object-fit: cover; border-bottom: 2px solid var(--bg); }
+        .card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; text-align: right; }
+        .card-cat { color: var(--primary); font-size: 13px; font-weight: bold; margin-bottom: 10px; text-align: left; }
+        .card h3 { margin: 0; font-size: 18px; color: #fff; line-height: 1.4; }
         
-        /* תיקון טופס יצירת קשר */
-        .contact-section { background: var(--card); border: 2px solid var(--primary-text); border-radius: 20px; padding: 40px; max-width: 600px; margin: 60px auto; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        body.dark-mode .contact-section { box-shadow: none; border-color: var(--primary); }
-        .contact-section h2 { font-family: 'Orbitron'; color: var(--primary-text); text-align: center; margin: 0 0 20px 0; }
-        .contact-section input, .contact-section textarea { width: 100%; padding: 12px; margin-bottom: 15px; background: var(--bg); border: 1px solid var(--border); color: var(--text); border-radius: 8px; box-sizing: border-box; font-family: 'Assistant'; }
-        
-        /* תיקון יישור תיבת האישור (Checkbox) */
-        .checkbox-container { display: flex; align-items: center; justify-content: flex-start; gap: 10px; margin-bottom: 15px; font-size: 14px; color: var(--dim); }
-        .checkbox-container input[type="checkbox"] { width: 18px; height: 18px; margin: 0; cursor: pointer; accent-color: var(--primary); flex-shrink: 0; }
-        .checkbox-container label { margin: 0; line-height: 1.4; }
-        .checkbox-container a { color: var(--primary-text); text-decoration: underline; cursor: pointer; font-weight: bold; }
-        
-        .contact-section button { width: 100%; padding: 15px; background: var(--primary); border: none; font-weight: 800; cursor: pointer; border-radius: 8px; font-size: 16px; transition: 0.3s; color: #000; }
+        /* טופס יצירת קשר - הלבן/צהוב שביקשת */
+        .contact-section { background: #ffffff; border: 2px solid var(--primary); border-radius: 15px; padding: 40px; max-width: 700px; margin: 60px auto; color: #333; }
+        .contact-section h2 { font-family: 'Assistant'; color: #d4c200; text-align: center; margin: 0 0 30px 0; font-size: 28px; font-weight: normal; }
+        .contact-section input, .contact-section textarea { width: 100%; padding: 15px; margin-bottom: 15px; background: #f9f9f9; border: 1px solid #e0e0e0; color: #333; border-radius: 5px; box-sizing: border-box; font-family: 'Assistant'; font-size: 15px; }
+        .contact-section input:focus, .contact-section textarea:focus { border-color: var(--primary); outline: none; background: #fff; }
+        .checkbox-container { display: flex; align-items: center; justify-content: flex-start; gap: 10px; margin-bottom: 25px; font-size: 14px; color: #666; }
+        .checkbox-container input[type="checkbox"] { width: 16px; height: 16px; margin: 0; cursor: pointer; }
+        .checkbox-container a { color: #d4c200; text-decoration: underline; cursor: pointer; font-weight: bold; }
+        .contact-section button { width: 100%; padding: 15px; background: var(--primary); border: none; font-weight: bold; cursor: pointer; border-radius: 5px; font-size: 18px; transition: 0.3s; color: #000; }
+        .contact-section button:hover { background: #e5d519; }
 
-        #article { display: none; }
+        /* אזור כתבה פתוחה */
+        #article { display: none; max-width: 900px; margin: 0 auto; padding-bottom: 50px; }
+        .back-btn { color: var(--primary); cursor: pointer; font-weight: bold; font-size: 18px; display: inline-block; margin-bottom: 20px; }
+        .art-header h1 { font-size: 40px; margin: 0 0 20px 0; line-height: 1.2; }
+        .art-img { width: 100%; border-radius: 8px; margin-bottom: 30px; }
+        .art-content { font-size: 20px; line-height: 1.8; color: #ddd; white-space: pre-wrap; }
         
-        .share-btn { display: flex; align-items: center; gap: 10px; font-family: 'Assistant'; font-weight: 800; font-size: 16px; padding: 10px 24px; border-radius: 30px; cursor: pointer; transition: 0.3s; border: none; }
-        .whatsapp-btn { background: #25D366; color: #fff; }
-        .whatsapp-btn:hover { background: #1ebe56; transform: scale(1.05); }
-        .whatsapp-btn svg { width: 22px; height: 22px; fill: currentColor; }
-        
-        .link-btn { background: var(--card); color: var(--text); border: 1px solid var(--border); }
-        .link-btn:hover { border-color: var(--primary-text); color: var(--primary-text); transform: scale(1.05); }
-        .link-btn svg { width: 22px; height: 22px; fill: currentColor; }
+        /* קרדיט מקורי כמו בתמונה */
+        .credit-line { margin-top: 40px; padding-top: 20px; border-top: 1px dashed var(--border); font-size: 16px; color: #aaa; }
+        .credit-line strong { color: #fff; }
+        .credit-line a { color: var(--primary); text-decoration: underline; margin-right: 5px; }
 
-        .read-more-btn { display: inline-block; margin-top: 15px; background: var(--primary); color: #000; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; }
+        .share-btn { display: inline-flex; align-items: center; gap: 8px; font-family: 'Assistant'; font-size: 14px; padding: 6px 15px; border-radius: 20px; cursor: pointer; transition: 0.3s; border: none; margin-left: 10px; margin-bottom: 20px; background: #222; color: #fff; }
+        .share-btn:hover { background: #333; }
+        .share-btn svg { width: 16px; height: 16px; fill: currentColor; }
 
-        footer { text-align: center; padding: 40px; border-top: 1px solid var(--border); color: var(--dim); }
+        footer { text-align: center; padding: 30px; border-top: 1px solid var(--border); color: var(--dim); font-size: 14px; }
+        .policy-link { color: var(--primary); cursor: pointer; font-weight: bold; text-decoration: none; margin-right: 5px; }
 
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 5000; }
-        .modal-content { background: var(--card); border: 1px solid var(--primary-text); width: 90%; max-width: 700px; margin: 5% auto; padding: 30px; border-radius: 15px; position: relative; color: var(--text); }
-        body.dark-mode .modal-content { border-color: var(--primary); }
+        .modal-content { background: var(--bg); border: 1px solid var(--border); width: 90%; max-width: 600px; margin: 10% auto; padding: 30px; border-radius: 8px; position: relative; color: var(--text); }
         .modal-body { max-height: 60vh; overflow-y: auto; padding-right: 10px; line-height: 1.6; }
-        .close { float: left; color: var(--primary-text); font-size: 28px; font-weight: bold; cursor: pointer; margin-bottom: 10px;}
+        .close { float: left; color: var(--dim); font-size: 28px; cursor: pointer; margin-bottom: 10px; transition: 0.2s; }
+        .close:hover { color: var(--primary); }
 
-        #cookie-notice { position: fixed; bottom: 0; width: 100%; background: var(--card); border-top: 2px solid var(--primary); padding: 15px; text-align: center; z-index: 6000; display: none; box-shadow: 0 -5px 15px rgba(0,0,0,0.1); }
-        #cookie-notice button { background: var(--primary); border: none; padding: 5px 20px; margin-right: 15px; cursor: pointer; font-weight: bold; color: #000; border-radius: 5px;}
+        #cookie-notice { position: fixed; bottom: 0; width: 100%; background: #111; border-top: 2px solid var(--primary); padding: 15px; text-align: center; z-index: 6000; display: none; box-shadow: 0 -5px 15px rgba(0,0,0,0.5); }
+        #cookie-notice button { background: var(--primary); border: none; padding: 5px 20px; margin-right: 15px; cursor: pointer; font-weight: bold; color: #000; border-radius: 3px;}
 
-        #successOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); z-index: 9999; align-items: center; justify-content: center; flex-direction: column; color: white; font-family: 'Assistant'; }
-        .check-circle { width: 90px; height: 90px; border-radius: 50%; background: #4caf50; display: flex; align-items: center; justify-content: center; animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
-        .check-mark { font-size: 45px; font-weight: bold; opacity: 0; transform: scale(0.5); animation: drawV 0.3s 0.2s forwards; }
-        .success-text { margin-top: 20px; font-size: 24px; font-weight: bold; opacity: 0; animation: drawV 0.3s 0.4s forwards; }
+        #successOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 9999; align-items: center; justify-content: center; flex-direction: column; color: white; font-family: 'Assistant'; }
+        .check-circle { width: 80px; height: 80px; border-radius: 50%; background: #4caf50; display: flex; align-items: center; justify-content: center; animation: popIn 0.3s forwards; }
+        .check-mark { font-size: 40px; font-weight: bold; opacity: 0; transform: scale(0.5); animation: drawV 0.3s 0.2s forwards; }
+        .success-text { margin-top: 20px; font-size: 22px; font-weight: bold; opacity: 0; animation: drawV 0.3s 0.3s forwards; }
         @keyframes popIn { 0% { transform: scale(0); } 100% { transform: scale(1); } }
         @keyframes drawV { to { opacity: 1; transform: scale(1); } }
     </style>
@@ -123,7 +119,7 @@
 
 <div id="successOverlay">
     <div class="check-circle"><div class="check-mark">✓</div></div>
-    <div class="success-text" id="successTextMsg">הפעולה הושלמה בהצלחה</div>
+    <div class="success-text" id="successTextMsg">הפעולה הושלמה</div>
 </div>
 
 <div class="ticker"><div class="ticker-move" id="tickerMsg">מערכת קודקוד - עדכונים בזמן אמת...</div></div>
@@ -132,16 +128,13 @@
     <div class="nav-container">
         <div class="header-tools">
             <div class="search-wrapper" id="searchWrapper">
-                <input type="text" id="searchInput" class="search-input-fancy" placeholder="חיפוש..." onkeypress="if(event.key==='Enter') executeSearch(this.value)">
+                <input type="text" id="searchInput" class="search-input-fancy" placeholder="חיפוש חכם..." onkeypress="if(event.key==='Enter') executeSearch(this.value)">
                 <button class="icon-btn" onclick="toggleSearch()" title="חיפוש">
                     <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
                 </button>
             </div>
             <button class="icon-btn" onclick="scrollToContact()" title="יצירת קשר">
                 <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-            </button>
-            <button class="icon-btn" onclick="toggleTheme()" title="מצב שחור/אפור">
-                <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg>
             </button>
         </div>
         <a class="logo" onclick="showHome()">KOD<span>KOD</span></a>
@@ -159,7 +152,10 @@
         <div id="home">
             <div class="hero" onclick="openHero()">
                 <img id="hImg" src="favicon.png" class="hero-img" onerror="this.src='favicon.png'">
-                <div class="hero-overlay"><h1 id="hTitle">מבזקי קודקוד בזמן אמת</h1></div>
+                <div class="hero-overlay">
+                    <h1 id="hTitle">סטטוס בוט</h1>
+                    <div class="hero-meta"><span id="liveClock">עודכן לאחרונה: ממתין לנתונים...</span></div>
+                </div>
             </div>
             <div class="grid" id="mainGrid"></div>
             
@@ -181,7 +177,7 @@
         </div>
         
         <div id="article">
-            <span style="color:var(--primary-text); cursor:pointer; font-weight:bold; font-size: 20px;" onclick="showHome()">➔ חזרה למפקדה</span>
+            <div class="back-btn" onclick="showHome()">➔ חזרה למפקדה</div>
             <div id="artView"></div>
         </div>
     </main>
@@ -189,29 +185,27 @@
 </div>
 
 <footer>
-    © 2026 KODKOD | <a class="policy-link" onclick="document.getElementById('privacyModal').style.display='block'" style="color:var(--primary-text); cursor:pointer; font-weight:bold; text-decoration:underline;">מדיניות פרטיות ותנאי שימוש</a>
+    © 2026 KODKOD | <a class="policy-link" onclick="document.getElementById('privacyModal').style.display='block'">מדיניות פרטיות</a>
 </footer>
 
 <div id="privacyModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="document.getElementById('privacyModal').style.display='none'">&times;</span>
-        <h2 style="font-family:'Orbitron'; color:var(--primary-text); margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 10px;">מדיניות פרטיות ותנאי שימוש</h2>
+        <h2 style="font-family:'Orbitron'; color:var(--primary); margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 10px;">מדיניות פרטיות</h2>
         <div class="modal-body">
-            <p><strong>1. כללי:</strong> ברוכים הבאים לאתר מערכת החדשות "קודקוד". השימוש באתר כפוף לתנאים המפורטים מטה.</p>
-            <p><strong>2. איסוף מידע:</strong> האתר אינו אוסף מידע אישי מזהה על הגולשים באופן אוטומטי.</p>
-            <p><strong>3. שימוש במידע:</strong> הפרטים שיימסרו דרך טפסי האתר ישמשו אך ורק לצורך מתן מענה.</p>
-            <p><strong>4. שימוש בעוגיות:</strong> האתר משתמש בעוגיות לצורך שיפור חווית הגלישה (כמו שמירת העדפת מצב לילה).</p>
-            <p><strong>5. אבטחה:</strong> אנו נוקטים באמצעים לאבטחת המידע.</p>
-            <p><strong>6. תוכן:</strong> החדשות נסרקות באופן אוטומטי. אנו מסננים תכנים ככל הניתן אך איננו אחראים לטעות במקור.</p>
+            <p><strong>1. כללי:</strong> ברוכים הבאים לאתר קודקוד. השימוש כפוף לתנאים אלו.</p>
+            <p><strong>2. איסוף מידע:</strong> איננו אוספים מידע אישי מזהה אלא אם נמסר מרצון בטופס יצירת הקשר.</p>
+            <p><strong>3. עוגיות:</strong> אנו משתמשים בעוגיות לשיפור חווית הגלישה (למשל, לזכור שאישרתם את המדיניות).</p>
+            <p><strong>4. תוכן מבוסס RSS:</strong> החדשות מגיעות ממקורות רשמיים בצורה אוטומטית. ייתכנו שגיאות או תמונות חסרות ממקורות אלו.</p>
         </div>
     </div>
 </div>
 
-<div id="cookie-notice">אתר זה משתמש בעוגיות כדי לשפר את חווית הגלישה. <button onclick="acceptCookies()">אישור</button></div>
+<div id="cookie-notice">אתר זה משתמש בעוגיות. <button onclick="acceptCookies()">אישור</button></div>
 
 <script>
     let db = [];
-    const defaultImg = "favicon.png"; // תמונת הלוגו המוגדרת מראש
+    const defaultImg = "favicon.png"; // תמיד ישתמש בלוגו אם חסרה תמונה
 
     function playSuccessAnimation(message) {
         document.getElementById('successTextMsg').innerText = message;
@@ -225,23 +219,17 @@
         const form = e.target;
         try {
             await fetch(form.action, { method: form.method, body: new FormData(form), headers: { 'Accept': 'application/json' } });
-            playSuccessAnimation('ההצעה נשלחה בהצלחה!');
+            playSuccessAnimation('נשלח בהצלחה!');
             form.reset();
-        } catch (err) { alert("אירעה שגיאה בשליחת הטופס, נסו שוב מאוחר יותר."); }
+        } catch (err) { alert("אירעה שגיאה. נסו שוב."); }
     }
 
-    function toggleTheme() { 
-        document.body.classList.toggle('dark-mode'); 
-        localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
-    }
-    
     function toggleSearch() { const w = document.getElementById('searchWrapper'); w.classList.toggle('open'); if(w.classList.contains('open')) document.getElementById('searchInput').focus(); }
     function scrollToContact() { showHome(); document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }); }
     
     function acceptCookies() { 
         document.getElementById('cookie-notice').style.display = 'none'; 
         localStorage.setItem('cookieSeen', 'true'); 
-        playSuccessAnimation('ההגדרות נשמרו בהצלחה');
     }
 
     window.addEventListener('scroll', () => {
@@ -249,6 +237,12 @@
         if (window.scrollY > 50) h.classList.add('scrolled');
         else h.classList.remove('scrolled');
     });
+
+    setInterval(() => {
+        const timeStr = new Date().toLocaleTimeString('he-IL');
+        const dateStr = new Date().toLocaleDateString('he-IL');
+        if(document.getElementById('liveClock')) document.getElementById('liveClock').innerText = `עודכן לאחרונה: ${timeStr} ${dateStr}`;
+    }, 1000);
 
     async function loadGitHubNews() {
         const repoOwner = "ahron900-sketch"; 
@@ -261,40 +255,46 @@
             
             const recentFiles = files.filter(f => f.name.endsWith('.md')).reverse().slice(0, 40);
             
-            // צנזורה כבדה יותר על נשים - מילים ספציפיות
-            const noWomenWords = ['אישה', 'נשים', 'בחורה', 'צעירה', 'דוגמנית', 'חיילת', 'אמא', 'נערה', 'היועמשית', 'היועמ"שית', 'מיארה', 'שחקנית', 'זמרת', 'שרת '];
+            // סינון נוקשה לתמונות
+            const noWomenWords = ['אישה', 'נשים', 'בחורה', 'דוגמנית', 'חיילת', 'נערה', 'היועמשית', 'היועמ"שית', 'מיארה', 'שחקנית', 'שרת '];
 
             for (const file of recentFiles) {
                 const contentRes = await fetch(file.download_url);
                 const rawText = await contentRes.text();
                 
-                // שליפת מטא דאטה ופתרון באגים
                 const titleMatch = rawText.match(/title: "(.*)"/) || rawText.match(/title: (.*)/);
-                let title = titleMatch ? titleMatch[1].replace(/"/g, '') : "מבזק קודקוד";
+                let title = titleMatch ? titleMatch[1].replace(/"/g, '') : "מבזק חדשות";
                 
                 const imgMatch = rawText.match(/image: "(.*)"/);
                 let img = (imgMatch && imgMatch[1] && imgMatch[1] !== "None") ? imgMatch[1] : defaultImg;
                 
-                // חסימת תמונת לוגו של ynet באופן ספציפי
-                if(img.toLowerCase().includes('ynet') && (img.toLowerCase().includes('logo') || img.toLowerCase().includes('default'))) {
+                // הסרת תמונות כלליות של מקורות
+                if(img.toLowerCase().includes('ynet') || img.toLowerCase().includes('walla') || img.toLowerCase().includes('logo')) {
                     img = defaultImg;
                 }
 
                 let cat = "חדשות";
+                let source = "קודקוד";
                 const catMatch = rawText.match(/category: "(.*)"/);
                 const sourceMatch = rawText.match(/source: "(.*)"/);
                 if (catMatch) cat = catMatch[1];
-                else if (sourceMatch) cat = sourceMatch[1];
+                if (sourceMatch) source = sourceMatch[1];
 
                 const parts = rawText.split('---');
-                let body = parts.length > 2 ? parts.slice(2).join('---').trim() : parts[parts.length - 1].trim();
+                let rawBody = parts.length > 2 ? parts.slice(2).join('---').trim() : parts[parts.length - 1].trim();
                 
-                // תיקון באג "הכתבה הריקה" (הפיכת markdown לכפתור יפה ולטקסט נקי)
-                body = body.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-                body = body.replace(/\[(.*?)\]\((.*?)\)/g, '<br><a href="$2" target="_blank" class="read-more-btn">קרא את הכתבה המלאה במקור ➔</a>');
+                // חילוץ הלינק המקורי מהטקסט (בשביל שורת הקרדיט החדשה)
+                let originalLink = "";
+                const linkMatch = rawBody.match(/\[(.*?)\]\((.*?)\)/);
+                if (linkMatch) {
+                    originalLink = linkMatch[2];
+                    rawBody = rawBody.replace(/\[(.*?)\]\((.*?)\)/g, ''); // מוחק את הלינק מהטקסט הראשי
+                }
+                
+                // מחיקת טקסט "קרדיט" ישן אם הבוט שמר אותו
+                rawBody = rawBody.replace(/\*\*קרדיט.*?\n/g, '').trim();
 
-                // הפעלת הצנזורה על התמונה
-                const textToCheck = (title + " " + body).toLowerCase();
+                const textToCheck = (title + " " + rawBody).toLowerCase();
                 for (let word of noWomenWords) {
                     if (textToCheck.includes(word)) {
                         img = defaultImg; 
@@ -303,7 +303,7 @@
                 }
 
                 if (!fetchedNews.find(n => n.title === title)) {
-                    fetchedNews.push({ id: file.sha, title: title, content: body, cat: cat, img: img });
+                    fetchedNews.push({ id: file.sha, title: title, content: rawBody, cat: cat, img: img, source: source, link: originalLink });
                 }
             }
             db = fetchedNews;
@@ -317,14 +317,17 @@
 
     function updateUI(data = db) {
         if (data.length === 0) return;
+        
+        // כתבה ראשית חזרה למראה של "סטטוס בוט" כמעט בדיוק
         document.getElementById('hImg').src = data[0].img;
         document.getElementById('hTitle').innerText = data[0].title;
+        
         document.getElementById('mainGrid').innerHTML = data.slice(1).map(n => `
             <div class="card" onclick="openArt('${n.id}')">
                 <img src="${n.img}" onerror="this.src='${defaultImg}'">
                 <div class="card-body">
-                    <span style="color:var(--primary-text); font-size:12px; font-weight:bold;">${n.cat}</span>
-                    <h3 style="margin-top:5px;">${n.title}</h3>
+                    <div class="card-cat">${n.cat}</div>
+                    <h3>${n.title}</h3>
                 </div>
             </div>
         `).join('');
@@ -342,17 +345,10 @@
         updateUI(filtered.length > 0 ? filtered : db);
     }
 
-    function shareWhatsApp(id) {
-        const n = db.find(x => x.id == id);
-        const url = window.location.origin + window.location.pathname + "?art=" + id;
-        const text = encodeURIComponent(`ראית את זה? בקודקוד חדשות: ${n.title}\n\n`);
-        window.open(`https://api.whatsapp.com/send?text=${text}${encodeURIComponent(url)}`);
-    }
-
     function copyLink(id) {
         const url = window.location.origin + window.location.pathname + "?art=" + id;
         navigator.clipboard.writeText(url);
-        playSuccessAnimation('הקישור הועתק בהצלחה!');
+        playSuccessAnimation('הקישור הועתק!');
     }
 
     function openArt(id) {
@@ -364,36 +360,42 @@
         document.getElementById('article').style.display = 'block';
         window.scrollTo(0,0);
         
+        // יצירת הקרדיט בדיוק לפי התמונה שלך
+        let creditHtml = '';
+        if (n.link) {
+            creditHtml = `<div class="credit-line">
+                <strong>קרדיט:</strong> התוכן פורסם במקור ב-${n.source}. <a href="${n.link}" target="_blank">[לכתבה המלאה]</a>
+            </div>`;
+        }
+        
         const otherArticles = db.filter(x => x.id !== id).slice(0, 6).map(m => `
-            <div class="card" onclick="openArt('${m.id}')" style="margin-top:20px; border-radius:12px; border:1px solid var(--border); overflow:hidden;">
-                <img src="${m.img}" onerror="this.src='${defaultImg}'" style="width:100%; height:150px; object-fit:cover;">
-                <div style="padding:15px; background:var(--card);">
-                    <span style="color:var(--primary-text); font-size:11px; font-weight:bold;">${m.cat}</span>
-                    <h4 style="margin:5px 0 0 0; font-size:16px;">${m.title}</h4>
+            <div class="card" onclick="openArt('${m.id}')">
+                <img src="${m.img}" onerror="this.src='${defaultImg}'">
+                <div class="card-body">
+                    <div class="card-cat">${m.cat}</div>
+                    <h3>${m.title}</h3>
                 </div>
             </div>
         `).join('');
 
         document.getElementById('artView').innerHTML = `
-            <h1 style="font-size:42px; margin:20px 0; line-height:1.1;">${n.title}</h1>
-            
-            <div style="display:flex; gap:15px; margin-bottom: 25px; flex-wrap:wrap;">
-                <button onclick="shareWhatsApp('${n.id}')" class="share-btn whatsapp-btn">
-                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.305-.885-.653-1.48-1.459-1.653-1.756-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                    שתף בוואטסאפ
-                </button>
-                <button onclick="copyLink('${n.id}')" class="share-btn link-btn">
-                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
-                    העתק קישור
-                </button>
+            <div class="art-header">
+                <h1>${n.title}</h1>
+                <div>
+                    <button onclick="copyLink('${n.id}')" class="share-btn">
+                        <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                        העתק קישור
+                    </button>
+                </div>
             </div>
-
-            <img src="${n.img}" onerror="this.src='${defaultImg}'" style="width:100%; border-radius:15px; margin-bottom:20px; border-bottom:4px solid var(--primary);">
-            <div style="font-size:22px; line-height:1.8; white-space: pre-wrap;">${n.content}</div>
             
-            <hr style="border-color:var(--border); margin: 50px 0 30px 0;">
-            <h2 style="font-family:'Orbitron'; color:var(--text); font-size:30px;">כל העדכונים להמשך קריאה:</h2>
-            <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+            <img src="${n.img}" onerror="this.src='${defaultImg}'" class="art-img">
+            <div class="art-content">${n.content}</div>
+            
+            ${creditHtml}
+            
+            <h2 style="font-family:'Orbitron'; color:var(--text); font-size:24px; margin-top: 50px;">עוד מבזקים:</h2>
+            <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));">
                 ${otherArticles}
             </div>
         `;
@@ -408,9 +410,6 @@
     
     function openHero() { if(db.length > 0) openArt(db[0].id); }
 
-    // טעינת ההעדפה של הגולש (שחור או אפור) מהזיכרון
-    if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-mode');
-    
     loadGitHubNews();
     
     if (localStorage.getItem('cookieSeen')) document.getElementById('cookie-notice').style.display = 'none';
