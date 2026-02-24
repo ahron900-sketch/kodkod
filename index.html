@@ -28,22 +28,36 @@
         header { background: rgba(5,5,5,0.98); backdrop-filter: blur(15px); border-bottom: 1px solid var(--border); position: sticky; top: 25px; z-index: 2000; height: 100px; transition: 0.5s; display: flex; align-items: center; }
         header.scrolled { height: 60px; border-bottom: 2px solid var(--primary); }
         .nav-container { width: 100%; max-width: 1300px; margin: 0 auto; display: flex; align-items: center; padding: 0 20px; position: relative; }
+        
         .logo { font-family: 'Orbitron', sans-serif; font-size: 35px; color: #fff; text-decoration: none; position: absolute; left: 50%; transform: translateX(-50%); transition: 0.5s; z-index: 10; cursor: pointer; }
         .logo span { color: var(--primary); }
         header.scrolled .logo { left: 20px; transform: translateX(0); font-size: 24px; }
         
-        .nav { display: flex; gap: 25px; opacity: 0; transition: 0.4s; pointer-events: none; margin-right: auto; }
+        .nav { display: flex; gap: 20px; opacity: 0; transition: 0.4s; pointer-events: none; margin-right: auto; }
         header.scrolled .nav { opacity: 1; pointer-events: auto; margin-right: 180px; }
-        .nav a { text-decoration: none; color: var(--dim); font-weight: 800; cursor: pointer; font-size: 14px; }
+        .nav a { text-decoration: none; color: var(--dim); font-weight: 800; cursor: pointer; font-size: 14px; margin: 0 12px; }
         .nav a:hover { color: var(--primary); }
+
+        .header-tools { display: flex; align-items: center; gap: 15px; z-index: 100; margin-left: 20px; }
+        .search-wrapper { position: relative; display: flex; align-items: center; }
+        .search-input-fancy { 
+            width: 0; padding: 0; opacity: 0; 
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #111; border: 1px solid var(--border);
+            color: #fff; border-radius: 20px; outline: none; font-family: 'Assistant';
+        }
+        .search-wrapper.open .search-input-fancy { width: 200px; padding: 8px 15px; opacity: 1; border-color: var(--primary); }
         
-        .search-area { display: flex; align-items: center; gap: 15px; margin-left: 20px; z-index: 10; }
-        .search-box { background: #111; border: 1px solid var(--border); color: #fff; padding: 6px 12px; font-family: 'Assistant'; outline: none; width: 150px; border-radius: 4px; }
+        .icon-btn { background: none; border: none; color: var(--text); cursor: pointer; transition: 0.3s; padding: 5px; display: flex; align-items: center; justify-content: center; }
+        .icon-btn svg { width: 22px; height: 22px; fill: currentColor; }
+        .icon-btn:hover { color: var(--primary); transform: translateY(-2px); }
         
         .wrapper { display: flex; max-width: 1400px; margin: 40px auto; padding: 0 20px; gap: 30px; }
         .main-content { flex: 1; }
-        .side-left { width: 160px; flex-shrink: 0; }
-        .ad-box { background: var(--card); border: 1px solid var(--border); height: 600px; position: sticky; top: 150px; display: flex; align-items: center; justify-content: center; color: #222; font-weight: bold; writing-mode: vertical-rl; border-radius: 8px; }
+        
+        /* הגדלת הפרסומת בסנטימטר (מ-160px ל-200px) */
+        .side-left { width: 200px; flex-shrink: 0; }
+        .ad-box { background: var(--card); border: 1px solid var(--border); height: 600px; position: sticky; top: 150px; display: flex; align-items: center; justify-content: center; color: #222; font-weight: bold; writing-mode: vertical-rl; border-radius: 8px; font-size: 18px; }
         
         .hero { position: relative; height: 500px; border: 1px solid var(--border); overflow: hidden; cursor: pointer; background: #000; margin-bottom: 40px; border-radius: 15px; }
         .hero-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; transition: 1s; }
@@ -58,21 +72,16 @@
         .card-body { padding: 20px; }
         
         .status-bar { background: #000; border-bottom: 1px solid var(--border); padding: 8px 0; display: flex; justify-content: center; gap: 40px; font-size: 12px; font-weight: bold; color: var(--dim); }
-        .status-item span { color: var(--primary); margin-left: 5px; }
 
         .contact-section { background: #0a0a0a; border: 2px solid var(--primary); border-radius: 20px; padding: 40px; max-width: 600px; margin: 60px auto; }
         .contact-section h2 { font-family: 'Orbitron'; color: var(--primary); text-align: center; margin-top: 0; }
         .contact-section input, .contact-section textarea { width: 100%; padding: 12px; margin-bottom: 15px; background: #000; border: 1px solid var(--border); color: #fff; border-radius: 8px; box-sizing: border-box; }
         .contact-section button { width: 100%; padding: 15px; background: var(--primary); border: none; font-weight: 800; cursor: pointer; border-radius: 8px; font-size: 16px; transition: 0.3s; color: #000; }
-        .contact-section button:hover { background: #fff; }
 
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 5000; }
-        .modal-content { background: #111; border: 2px solid var(--primary); width: 80%; max-width: 700px; margin: 10% auto; padding: 30px; border-radius: 15px; position: relative; }
-        .close { float: left; color: var(--primary); font-size: 30px; font-weight: bold; cursor: pointer; }
+        #article { display: none; }
+        .art-view-container { max-width: 850px; margin: 0 auto; }
 
         footer { text-align: center; padding: 40px; border-top: 1px solid var(--border); color: var(--dim); }
-        .policy-link { color: var(--primary); cursor: pointer; font-weight: bold; text-decoration: underline; }
-
         #cookie-notice { position: fixed; bottom: 0; width: 100%; background: #111; border-top: 2px solid var(--primary); padding: 15px; text-align: center; z-index: 6000; display: none; }
         #cookie-notice button { background: var(--primary); border: none; padding: 5px 20px; margin-right: 15px; cursor: pointer; font-weight: bold; color: #000; }
     </style>
@@ -83,7 +92,17 @@
 
 <header id="mainHeader">
     <div class="nav-container">
-        <div class="search-area"><input type="text" id="searchInput" class="search-box" placeholder="חיפוש חכם..." onkeypress="if(event.key==='Enter') executeSearch(this.value)"></div>
+        <div class="header-tools">
+            <div class="search-wrapper" id="searchWrapper">
+                <input type="text" id="searchInput" class="search-input-fancy" placeholder="חיפוש חופשי..." onkeypress="if(event.key==='Enter') executeSearch(this.value)">
+                <button class="icon-btn" onclick="toggleSearch()" title="חיפוש">
+                    <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                </button>
+            </div>
+            <button class="icon-btn" onclick="scrollToContact()" title="יצירת קשר">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </button>
+        </div>
         <a class="logo" onclick="showHome()">KOD<span>KOD</span></a>
         <nav class="nav">
             <a onclick="filterByCat('ביטחון')">ביטחון</a>
@@ -103,7 +122,7 @@
 <div class="wrapper">
     <main class="main-content">
         <div id="home">
-            <div class="hero" onclick="openHero()"><img id="hImg" src="" class="hero-img"><div class="hero-overlay"><h1 id="hTitle">סנכרון מבזקים...</h1></div></div>
+            <div class="hero" onclick="openHero()"><img id="hImg" src="" class="hero-img"><div class="hero-overlay"><h1 id="hTitle">טוען מבזק ראשי...</h1></div></div>
             <div class="grid" id="mainGrid"></div>
             
             <div class="contact-section" id="contact">
@@ -117,32 +136,30 @@
             </div>
         </div>
         
-        <div id="article" style="display:none">
-            <span style="color:var(--primary); cursor:pointer; font-weight:bold; font-size: 20px;" onclick="showHome()">➔ חזרה למרכז הפיקוד</span>
-            <div id="artView"></div>
+        <div id="article">
+            <div class="art-view-container">
+                <span style="color:var(--primary); cursor:pointer; font-weight:bold; font-size: 20px;" onclick="showHome()">➔ חזרה למרכז הפיקוד</span>
+                <div id="artView"></div>
+            </div>
         </div>
     </main>
     <aside class="side-left"><div class="ad-box">AD SPACE | KODKOD</div></aside>
 </div>
 
-<footer>
-    © 2026 KODKOD | <span class="policy-link" onclick="document.getElementById('privacyModal').style.display='block'">מדיניות פרטיות</span>
-</footer>
+<footer>© 2026 KODKOD | חדשות בזמן אמת</footer>
 
-<div id="privacyModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="document.getElementById('privacyModal').style.display='none'">&times;</span>
-        <h2 style="color:var(--primary); font-family:'Orbitron'">מדיניות פרטיות</h2>
-        <p>האתר אינו אוסף מידע אישי ללא הסכמה. המידע בטופס משמש לחזרה לפנייה בלבד.</p>
-    </div>
-</div>
-
-<div id="cookie-notice">
-    אתר זה משתמש בעוגיות. <button onclick="acceptCookies()">אישור</button>
-</div>
+<div id="cookie-notice">אתר זה משתמש בעוגיות. <button onclick="acceptCookies()">אישור</button></div>
 
 <script>
     let db = [];
+
+    function toggleSearch() {
+        const wrapper = document.getElementById('searchWrapper');
+        wrapper.classList.toggle('open');
+        if(wrapper.classList.contains('open')) document.getElementById('searchInput').focus();
+    }
+
+    function scrollToContact() { document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }); }
 
     window.addEventListener('scroll', () => {
         const header = document.getElementById('mainHeader');
@@ -153,14 +170,10 @@
     async function init() {
         await loadGitHubNews();
         setInterval(() => {
-            const clock = document.getElementById('liveClock');
-            if(clock) clock.innerText = new Date().toLocaleTimeString('he-IL');
-            const stress = document.getElementById('stStress');
-            if(stress) stress.innerText = Math.floor(Math.random() * 20 + 10) + "%";
+            if(document.getElementById('liveClock')) document.getElementById('liveClock').innerText = new Date().toLocaleTimeString('he-IL');
+            if(document.getElementById('stStress')) document.getElementById('stStress').innerText = Math.floor(Math.random() * 20 + 10) + "%";
         }, 1000);
-        if (!localStorage.getItem('cookieSeen')) {
-            document.getElementById('cookie-notice').style.display = 'block';
-        }
+        if (!localStorage.getItem('cookieSeen')) document.getElementById('cookie-notice').style.display = 'block';
     }
 
     function acceptCookies() {
@@ -231,7 +244,7 @@
         document.getElementById('article').style.display = 'block';
         window.scrollTo(0,0);
         document.getElementById('artView').innerHTML = `
-            <h1 style="font-size:40px; margin:20px 0;">${n.title}</h1>
+            <h1 style="font-size:40px; margin:20px 0; line-height:1.2;">${n.title}</h1>
             <img src="${n.img}" style="width:100%; border-radius:15px; margin-bottom:20px;">
             <div style="font-size:22px; line-height:1.7; color:#ccc; white-space: pre-wrap;">${n.content}</div>
         `;
