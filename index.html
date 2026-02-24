@@ -7,14 +7,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;400;700;800&family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <style>
+        /* ברירת המחדל - אפור פחם יוקרתי */
         :root {
-            --bg: #050505; --card: #0f0f0f; --primary: #f8e71c; 
-            --text: #ffffff; --dim: #777777; --border: #1a1a1a;
+            --bg: #2a2a2a; 
+            --card: #333333; 
+            --primary: #f8e71c; 
+            --text: #ffffff; 
+            --dim: #cccccc; 
+            --border: #4a4a4a;
         }
-        /* מצב אור */
-        body.light-mode {
-            --bg: #f5f5f5; --card: #ffffff; --text: #050505;
-            --dim: #555555; --border: #dddddd;
+        /* מצב חושך קיצוני (בלחיצה על האייקון) */
+        body.black-mode {
+            --bg: #000000; 
+            --card: #0f0f0f; 
+            --primary: #f8e71c; 
+            --text: #ffffff; 
+            --dim: #777777; 
+            --border: #1a1a1a;
         }
 
         body { background: var(--bg); color: var(--text); font-family: 'Assistant', sans-serif; margin: 0; overflow-x: hidden; scroll-behavior: smooth; transition: background 0.3s, color 0.3s; }
@@ -23,8 +32,7 @@
         .ticker-move { display: inline-block; animation: ticker 45s linear infinite; }
         @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
         
-        header { background: rgba(5,5,5,0.98); backdrop-filter: blur(15px); border-bottom: 1px solid var(--border); position: sticky; top: 25px; z-index: 2000; height: 100px; transition: 0.5s; display: flex; align-items: center; }
-        body.light-mode header { background: rgba(245,245,245,0.98); }
+        header { background: rgba(var(--bg), 0.98); backdrop-filter: blur(15px); border-bottom: 1px solid var(--border); position: sticky; top: 25px; z-index: 2000; height: 100px; transition: 0.5s; display: flex; align-items: center; }
         header.scrolled { height: 60px; border-bottom: 2px solid var(--primary); }
         .nav-container { width: 100%; max-width: 1300px; margin: 0 auto; display: flex; align-items: center; padding: 0 20px; position: relative; }
         
@@ -42,7 +50,7 @@
         .search-input-fancy { width: 0; padding: 0; opacity: 0; transition: 0.4s; background: var(--card); border: 1px solid var(--border); color: var(--text); border-radius: 20px; outline: none; }
         .search-wrapper.open .search-input-fancy { width: 180px; padding: 6px 15px; opacity: 1; border-color: var(--primary); }
         
-        .icon-btn { background: none; border: none; color: #ccc; cursor: pointer; transition: 0.3s; padding: 5px; display: flex; align-items: center; justify-content: center; }
+        .icon-btn { background: none; border: none; color: var(--text); cursor: pointer; transition: 0.3s; padding: 5px; display: flex; align-items: center; justify-content: center; }
         .icon-btn svg { width: 22px; height: 22px; fill: currentColor; }
         .icon-btn:hover { color: var(--primary); transform: translateY(-2px); }
         
@@ -51,9 +59,9 @@
         .side-left { width: 210px; flex-shrink: 0; }
         .ad-box { background: var(--card); border: 1px solid var(--border); height: 600px; position: sticky; top: 150px; display: flex; align-items: center; justify-content: center; color: var(--dim); font-weight: bold; writing-mode: vertical-rl; border-radius: 8px; }
         
-        .hero { position: relative; height: 500px; border: 1px solid var(--border); overflow: hidden; cursor: pointer; background: #000; margin-bottom: 40px; border-radius: 15px; }
-        .hero-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: 1s; }
-        .hero:hover .hero-img { transform: scale(1.05); opacity: 0.9; }
+        .hero { position: relative; height: 500px; border: 1px solid var(--border); overflow: hidden; cursor: pointer; background: var(--card); margin-bottom: 40px; border-radius: 15px; }
+        .hero-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: 1s; }
+        .hero:hover .hero-img { transform: scale(1.05); opacity: 1; }
         .hero-overlay { position: absolute; bottom: 0; width: 100%; padding: 50px 40px; background: linear-gradient(transparent, rgba(0,0,0,0.95)); box-sizing: border-box; }
         .hero h1 { font-size: 48px; margin: 0; font-weight: 800; line-height: 1.1; color: #fff; }
         
@@ -65,15 +73,23 @@
         .contact-section { background: var(--card); border: 2px solid var(--primary); border-radius: 20px; padding: 40px; max-width: 600px; margin: 60px auto; }
         .contact-section h2 { font-family: 'Orbitron'; color: var(--primary); text-align: center; margin: 0 0 20px 0; }
         .contact-section input, .contact-section textarea { width: 100%; padding: 12px; margin-bottom: 15px; background: var(--bg); border: 1px solid var(--border); color: var(--text); border-radius: 8px; box-sizing: border-box; }
-        
-        /* תיבת אישור למדיניות בטופס */
         .checkbox-container { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; font-size: 14px; color: var(--dim); }
         .checkbox-container input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; accent-color: var(--primary); }
         .checkbox-container a { color: var(--primary); text-decoration: underline; cursor: pointer; font-weight: bold; }
-        
         .contact-section button { width: 100%; padding: 15px; background: var(--primary); border: none; font-weight: 800; cursor: pointer; border-radius: 8px; font-size: 16px; transition: 0.3s; color: #000; }
 
         #article { display: none; }
+        
+        /* כפתורי שיתוף יוקרתיים */
+        .share-btn { display: flex; align-items: center; gap: 10px; font-family: 'Assistant'; font-weight: 800; font-size: 16px; padding: 10px 24px; border-radius: 30px; cursor: pointer; transition: 0.3s; border: none; }
+        .whatsapp-btn { background: #25D366; color: #fff; }
+        .whatsapp-btn:hover { background: #1ebe56; transform: scale(1.05); }
+        .whatsapp-btn svg { width: 22px; height: 22px; fill: currentColor; }
+        
+        .link-btn { background: var(--card); color: var(--text); border: 1px solid var(--border); }
+        .link-btn:hover { border-color: var(--primary); color: var(--primary); transform: scale(1.05); }
+        .link-btn svg { width: 22px; height: 22px; fill: currentColor; }
+
         footer { text-align: center; padding: 40px; border-top: 1px solid var(--border); color: var(--dim); }
 
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 5000; }
@@ -84,8 +100,7 @@
         #cookie-notice { position: fixed; bottom: 0; width: 100%; background: var(--card); border-top: 2px solid var(--primary); padding: 15px; text-align: center; z-index: 6000; display: none; }
         #cookie-notice button { background: var(--primary); border: none; padding: 5px 20px; margin-right: 15px; cursor: pointer; font-weight: bold; color: #000; }
 
-        /* אנימציית V ירוק של הצלחה */
-        #successOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); z-index: 9999; align-items: center; justify-content: center; flex-direction: column; color: white; font-family: 'Assistant'; }
+        #successOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); z-index: 9999; align-items: center; justify-content: center; flex-direction: column; color: white; font-family: 'Assistant'; }
         .check-circle { width: 90px; height: 90px; border-radius: 50%; background: #4caf50; display: flex; align-items: center; justify-content: center; animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
         .check-mark { font-size: 45px; font-weight: bold; opacity: 0; transform: scale(0.5); animation: drawV 0.3s 0.2s forwards; }
         .success-text { margin-top: 20px; font-size: 24px; font-weight: bold; opacity: 0; animation: drawV 0.3s 0.4s forwards; }
@@ -97,7 +112,7 @@
 
 <div id="successOverlay">
     <div class="check-circle"><div class="check-mark">✓</div></div>
-    <div class="success-text">הפעולה הושלמה בהצלחה</div>
+    <div class="success-text" id="successTextMsg">הפעולה הושלמה בהצלחה</div>
 </div>
 
 <div class="ticker"><div class="ticker-move" id="tickerMsg">מערכת קודקוד - עדכונים בזמן אמת...</div></div>
@@ -114,8 +129,8 @@
             <button class="icon-btn" onclick="scrollToContact()" title="יצירת קשר">
                 <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
             </button>
-            <button class="icon-btn" onclick="toggleTheme()" title="שינוי רקע">
-                <svg viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/></svg>
+            <button class="icon-btn" onclick="toggleTheme()" title="מצב שחור/אפור">
+                <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg>
             </button>
         </div>
         <a class="logo" onclick="showHome()">KOD<span>KOD</span></a>
@@ -132,8 +147,8 @@
     <main class="main-content">
         <div id="home">
             <div class="hero" onclick="openHero()">
-                <img id="hImg" src="" class="hero-img">
-                <div class="hero-overlay"><h1 id="hTitle">סנכרון מבזקים...</h1></div>
+                <img id="hImg" src="favicon.png" class="hero-img" onerror="this.src='favicon.png'">
+                <div class="hero-overlay"><h1 id="hTitle">מבזקי קודקוד בזמן אמת</h1></div>
             </div>
             <div class="grid" id="mainGrid"></div>
             
@@ -172,11 +187,11 @@
         <h2 style="font-family:'Orbitron'; color:var(--primary); margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 10px;">מדיניות פרטיות ותנאי שימוש</h2>
         <div class="modal-body">
             <p><strong>1. כללי:</strong> ברוכים הבאים לאתר מערכת החדשות "קודקוד". השימוש באתר כפוף לתנאים המפורטים מטה ומהווה הסכמה להם.</p>
-            <p><strong>2. איסוף מידע:</strong> האתר אינו אוסף מידע אישי מזהה על הגולשים באופן אוטומטי, אלא אם מידע זה נמסר מרצון חופשי (לדוגמה, מילוי טופס פנייה למפרסמים). מידע זה יישמר בסודיות.</p>
-            <p><strong>3. שימוש במידע:</strong> הפרטים שיימסרו דרך טפסי האתר ישמשו אך ורק לצורך מתן מענה וליצירת קשר מטעם הנהלת האתר. אנו מתחייבים לא להעביר או למכור את המידע לצד שלישי.</p>
-            <p><strong>4. שימוש בעוגיות (Cookies):</strong> האתר משתמש בעוגיות לצורך שיפור חווית הגלישה, כגון שמירת העדפות תצוגה (מצב אור/חושך) ואיסוף נתונים סטטיסטיים אנונימיים.</p>
-            <p><strong>5. אבטחה:</strong> אנו נוקטים באמצעים מקובלים לאבטחת המידע באתר, אך אין באפשרותנו להבטיח חסינות מוחלטת מפני חדירות למחשבים או לשרתים.</p>
-            <p><strong>6. תוכן ומקורות:</strong> החדשות המופיעות באתר נסרקות באופן אוטומטי ממקורות חיצוניים ורשמיים. מערכת קודקוד אינה אחראית לתוכן, לדיוק או לזכויות היוצרים של הטקסטים המובאים ממקורות אלו.</p>
+            <p><strong>2. איסוף מידע:</strong> האתר אינו אוסף מידע אישי מזהה על הגולשים באופן אוטומטי, אלא אם מידע זה נמסר מרצון חופשי.</p>
+            <p><strong>3. שימוש במידע:</strong> הפרטים שיימסרו דרך טפסי האתר ישמשו אך ורק לצורך מתן מענה וליצירת קשר מטעם הנהלת האתר.</p>
+            <p><strong>4. שימוש בעוגיות (Cookies):</strong> האתר משתמש בעוגיות לצורך שיפור חווית הגלישה, כגון שמירת העדפות תצוגה.</p>
+            <p><strong>5. אבטחה:</strong> אנו נוקטים באמצעים מקובלים לאבטחת המידע באתר.</p>
+            <p><strong>6. תוכן ומקורות:</strong> החדשות המופיעות באתר נסרקות באופן אוטומטי ממקורות חיצוניים ורשמיים. המערכת עושה כמיטב יכולתה לסנן תכנים לא הולמים בהתאם לרוח האתר.</p>
         </div>
     </div>
 </div>
@@ -186,43 +201,31 @@
 <script>
     let db = [];
 
-    // פונקציית אנימציית V ירוק
     function playSuccessAnimation(message) {
+        document.getElementById('successTextMsg').innerText = message;
         const overlay = document.getElementById('successOverlay');
-        const textElem = overlay.querySelector('.success-text');
-        if(message) textElem.innerText = message;
-        
         overlay.style.display = 'flex';
-        setTimeout(() => {
-            overlay.style.display = 'none';
-        }, 1800);
+        setTimeout(() => { overlay.style.display = 'none'; }, 1800);
     }
 
-    // שליחת הטופס ברקע עם אנימציה
     async function handleFormSubmit(e) {
         e.preventDefault();
         const form = e.target;
         try {
-            await fetch(form.action, {
-                method: form.method,
-                body: new FormData(form),
-                headers: { 'Accept': 'application/json' }
-            });
+            await fetch(form.action, { method: form.method, body: new FormData(form), headers: { 'Accept': 'application/json' } });
             playSuccessAnimation('ההצעה נשלחה בהצלחה!');
-            form.reset(); // ניקוי הטופס
-        } catch (err) {
-            alert("אירעה שגיאה בשליחת הטופס, נסו שוב מאוחר יותר.");
-        }
+            form.reset();
+        } catch (err) { alert("אירעה שגיאה בשליחת הטופס, נסו שוב מאוחר יותר."); }
     }
 
-    function toggleTheme() { document.body.classList.toggle('light-mode'); }
+    function toggleTheme() { document.body.classList.toggle('black-mode'); }
     function toggleSearch() { const w = document.getElementById('searchWrapper'); w.classList.toggle('open'); if(w.classList.contains('open')) document.getElementById('searchInput').focus(); }
-    function scrollToContact() { document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }); }
+    function scrollToContact() { showHome(); document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }); }
     
     function acceptCookies() { 
         document.getElementById('cookie-notice').style.display = 'none'; 
         localStorage.setItem('cookieSeen', 'true'); 
-        playSuccessAnimation('הגדרות נשמרו בהצלחה');
+        playSuccessAnimation('ההגדרות נשמרו בהצלחה');
     }
 
     window.addEventListener('scroll', () => {
@@ -239,23 +242,46 @@
             const response = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}`);
             const files = await response.json();
             let fetchedNews = [];
-            const recentFiles = files.filter(f => f.name.endsWith('.md')).reverse().slice(0, 15);
+            
+            // מושך 40 כתבות כדי למלא את האתר
+            const recentFiles = files.filter(f => f.name.endsWith('.md')).reverse().slice(0, 40);
+            
+            // רשימת המילים השחורות לסינון תמונות נשים ברמת הדפדפן
+            const noWomenWords = ['אישה', 'נשים', 'בחורה', 'צעירה', 'דוגמנית', 'חיילת', 'אמא', 'נערה'];
+
             for (const file of recentFiles) {
                 const contentRes = await fetch(file.download_url);
                 const rawText = await contentRes.text();
                 const titleMatch = rawText.match(/title: "(.*)"/) || rawText.match(/title: (.*)/);
+                let title = titleMatch ? titleMatch[1].replace(/"/g, '') : "מבזק";
+                
                 const imgMatch = rawText.match(/image: "(.*)"/);
+                let img = (imgMatch && imgMatch[1] && imgMatch[1] !== "None") ? imgMatch[1] : "favicon.png";
+                
+                const catMatch = rawText.match(/category: "(.*)"/);
+                let cat = catMatch ? catMatch[1] : "חדשות";
+
                 const parts = rawText.split('---');
                 const body = parts[parts.length - 1].trim();
-                fetchedNews.push({
-                    id: file.sha,
-                    title: titleMatch ? titleMatch[1].replace(/"/g, '') : "מבזק",
-                    content: body,
-                    img: (imgMatch && imgMatch[1] && imgMatch[1] !== "None") ? imgMatch[1] : "https://images.unsplash.com/photo-1585007600263-ad1f301f2c27?w=800"
-                });
+                
+                // בדיקת סינון תמונות מחמירה
+                const textToCheck = (title + " " + body).toLowerCase();
+                for (let word of noWomenWords) {
+                    if (textToCheck.includes(word)) {
+                        img = "favicon.png"; // תמונת ברירת מחדל לוגו
+                        break;
+                    }
+                }
+
+                fetchedNews.push({ id: file.sha, title: title, content: body, cat: cat, img: img });
             }
             db = fetchedNews;
             updateUI();
+            
+            // אם נכנסו מקישור של כתבה מסוימת, פתח אותה ישר
+            const urlParams = new URLSearchParams(window.location.search);
+            if(urlParams.get('art')) openArt(urlParams.get('art'));
+
         } catch (e) { console.error(e); }
     }
 
@@ -265,26 +291,93 @@
         document.getElementById('hTitle').innerText = data[0].title;
         document.getElementById('mainGrid').innerHTML = data.slice(1).map(n => `
             <div class="card" onclick="openArt('${n.id}')">
-                <img src="${n.img}">
-                <div class="card-body"><h3>${n.title}</h3></div>
+                <img src="${n.img}" onerror="this.src='favicon.png'">
+                <div class="card-body">
+                    <span style="color:var(--primary); font-size:11px; font-weight:bold;">${n.cat}</span>
+                    <h3 style="margin-top:5px;">${n.title}</h3>
+                </div>
             </div>
         `).join('');
+    }
+
+    // התיקון הקריטי לתפריט הניווט (חוזר לעמוד הראשי ומסנן)
+    function executeSearch(val) {
+        showHome();
+        const filtered = db.filter(n => n.title.includes(val) || n.content.includes(val));
+        updateUI(filtered);
+    }
+
+    function filterByCat(cat) {
+        showHome();
+        const filtered = db.filter(n => n.cat.includes(cat) || n.content.includes(cat));
+        updateUI(filtered.length > 0 ? filtered : db);
+    }
+
+    function shareWhatsApp(id) {
+        const n = db.find(x => x.id == id);
+        const url = window.location.origin + window.location.pathname + "?art=" + id;
+        const text = encodeURIComponent(`ראית את זה? בקודקוד חדשות: ${n.title}\n\n`);
+        window.open(`https://api.whatsapp.com/send?text=${text}${encodeURIComponent(url)}`);
+    }
+
+    function copyLink(id) {
+        const url = window.location.origin + window.location.pathname + "?art=" + id;
+        navigator.clipboard.writeText(url);
+        playSuccessAnimation('הקישור הועתק בהצלחה!');
     }
 
     function openArt(id) {
         const n = db.find(x => x.id == id);
         if(!n) return;
+        
+        window.history.pushState({id: id}, '', '?art=' + id);
         document.getElementById('home').style.display = 'none';
         document.getElementById('article').style.display = 'block';
         window.scrollTo(0,0);
+        
+        // יצירת הגריד של כל שאר הכתבות להמשך קריאה
+        const otherArticles = db.filter(x => x.id !== id).map(m => `
+            <div class="card" onclick="openArt('${m.id}')" style="margin-top:20px; border-radius:12px; border:1px solid var(--border); overflow:hidden;">
+                <img src="${m.img}" onerror="this.src='favicon.png'" style="width:100%; height:150px; object-fit:cover;">
+                <div style="padding:15px; background:var(--card);">
+                    <span style="color:var(--primary); font-size:11px; font-weight:bold;">${m.cat}</span>
+                    <h4 style="margin:5px 0 0 0; font-size:16px;">${m.title}</h4>
+                </div>
+            </div>
+        `).join('');
+
         document.getElementById('artView').innerHTML = `
-            <h1 style="font-size:40px; margin:20px 0;">${n.title}</h1>
-            <img src="${n.img}" style="width:100%; border-radius:15px; margin-bottom:20px;">
-            <div style="font-size:22px; line-height:1.7; white-space: pre-wrap;">${n.content}</div>
+            <h1 style="font-size:42px; margin:20px 0; line-height:1.1;">${n.title}</h1>
+            
+            <div style="display:flex; gap:15px; margin-bottom: 25px; flex-wrap:wrap;">
+                <button onclick="shareWhatsApp('${n.id}')" class="share-btn whatsapp-btn">
+                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.305-.885-.653-1.48-1.459-1.653-1.756-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    שתף בוואטסאפ
+                </button>
+                <button onclick="copyLink('${n.id}')" class="share-btn link-btn">
+                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                    העתק קישור
+                </button>
+            </div>
+
+            <img src="${n.img}" onerror="this.src='favicon.png'" style="width:100%; border-radius:15px; margin-bottom:20px; border-bottom:4px solid var(--primary);">
+            <div style="font-size:22px; line-height:1.8; white-space: pre-wrap;">${n.content}</div>
+            
+            <hr style="border-color:var(--border); margin: 50px 0 30px 0;">
+            <h2 style="font-family:'Orbitron'; color:var(--primary); font-size:30px;">כל העדכונים להמשך קריאה:</h2>
+            <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+                ${otherArticles}
+            </div>
         `;
     }
 
-    function showHome() { document.getElementById('article').style.display = 'none'; document.getElementById('home').style.display = 'block'; }
+    function showHome() { 
+        window.history.pushState({}, '', window.location.pathname);
+        document.getElementById('article').style.display = 'none'; 
+        document.getElementById('home').style.display = 'block'; 
+        updateUI(); // מחזיר את הגריד הראשי למצבו הטבעי
+    }
+    
     function openHero() { if(db.length > 0) openArt(db[0].id); }
 
     loadGitHubNews();
