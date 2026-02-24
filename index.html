@@ -3,104 +3,119 @@
 <head>
     <title>קודקוד - חדשות ומבזקים בזמן אמת</title>
     <meta name="description" content="אתר החדשות קודקוד מביא לכם את כל העדכונים, המבזקים והחדשות מהשטח בזמן אמת.">
-    <meta name="keywords" content="קודקוד, חדשות, מבזקים, עדכוני טרור, צבא, ביטחון, ישראל">
-    <meta name="author" content="קודקוד חדשות">
-
-    <meta property="og:title" content="קודקוד - חדשות בזמן אמת">
-    <meta property="og:description" content="כל העדכונים החמים במקום אחד.">
-    <meta property="og:url" content="https://kodkodnews.co.il">
-    <meta property="og:type" content="website">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;400;700;800&family=Orbitron:wght@700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="favicon.png">
     <style>
         :root {
             --bg: #050505; --card: #0f0f0f; --primary: #f8e71c; 
             --text: #ffffff; --dim: #777777; --border: #1a1a1a;
         }
-        body { background: var(--bg); color: var(--text); font-family: 'Assistant', sans-serif; margin: 0; overflow-x: hidden; scroll-behavior: smooth; }
+        /* מצב אור */
+        body.light-mode {
+            --bg: #f5f5f5; --card: #ffffff; --text: #050505;
+            --dim: #555555; --border: #dddddd;
+        }
+
+        body { background: var(--bg); color: var(--text); font-family: 'Assistant', sans-serif; margin: 0; overflow-x: hidden; scroll-behavior: smooth; transition: background 0.3s, color 0.3s; }
         
         .ticker { background: var(--primary); color: #000; padding: 4px 0; font-weight: 800; font-size: 13px; overflow: hidden; white-space: nowrap; position: fixed; top: 0; width: 100%; z-index: 3000; }
         .ticker-move { display: inline-block; animation: ticker 45s linear infinite; }
         @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
         
         header { background: rgba(5,5,5,0.98); backdrop-filter: blur(15px); border-bottom: 1px solid var(--border); position: sticky; top: 25px; z-index: 2000; height: 100px; transition: 0.5s; display: flex; align-items: center; }
+        body.light-mode header { background: rgba(245,245,245,0.98); }
         header.scrolled { height: 60px; border-bottom: 2px solid var(--primary); }
         .nav-container { width: 100%; max-width: 1300px; margin: 0 auto; display: flex; align-items: center; padding: 0 20px; position: relative; }
         
-        .logo { font-family: 'Orbitron', sans-serif; font-size: 35px; color: #fff; text-decoration: none; position: absolute; left: 50%; transform: translateX(-50%); transition: 0.5s; z-index: 10; cursor: pointer; }
+        .logo { font-family: 'Orbitron', sans-serif; font-size: 35px; color: var(--text); text-decoration: none; position: absolute; left: 50%; transform: translateX(-50%); transition: 0.5s; z-index: 10; cursor: pointer; }
         .logo span { color: var(--primary); }
         header.scrolled .logo { left: 20px; transform: translateX(0); font-size: 24px; }
         
-        .nav { display: flex; gap: 20px; opacity: 0; transition: 0.4s; pointer-events: none; margin-right: auto; }
+        .nav { display: flex; gap: 15px; opacity: 0; transition: 0.4s; pointer-events: none; margin-right: auto; }
         header.scrolled .nav { opacity: 1; pointer-events: auto; margin-right: 180px; }
-        .nav a { text-decoration: none; color: var(--dim); font-weight: 800; cursor: pointer; font-size: 14px; margin: 0 12px; }
+        .nav a { text-decoration: none; color: var(--dim); font-weight: 800; cursor: pointer; font-size: 14px; }
         .nav a:hover { color: var(--primary); }
 
         .header-tools { display: flex; align-items: center; gap: 15px; z-index: 100; margin-left: 20px; }
         .search-wrapper { position: relative; display: flex; align-items: center; }
-        .search-input-fancy { 
-            width: 0; padding: 0; opacity: 0; 
-            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            background: #111; border: 1px solid var(--border);
-            color: #fff; border-radius: 20px; outline: none; font-family: 'Assistant';
-        }
-        .search-wrapper.open .search-input-fancy { width: 200px; padding: 8px 15px; opacity: 1; border-color: var(--primary); }
+        .search-input-fancy { width: 0; padding: 0; opacity: 0; transition: 0.4s; background: var(--card); border: 1px solid var(--border); color: var(--text); border-radius: 20px; outline: none; }
+        .search-wrapper.open .search-input-fancy { width: 180px; padding: 6px 15px; opacity: 1; border-color: var(--primary); }
         
-        .icon-btn { background: none; border: none; color: var(--text); cursor: pointer; transition: 0.3s; padding: 5px; display: flex; align-items: center; justify-content: center; }
+        .icon-btn { background: none; border: none; color: #ccc; cursor: pointer; transition: 0.3s; padding: 5px; display: flex; align-items: center; justify-content: center; }
         .icon-btn svg { width: 22px; height: 22px; fill: currentColor; }
         .icon-btn:hover { color: var(--primary); transform: translateY(-2px); }
         
         .wrapper { display: flex; max-width: 1400px; margin: 40px auto; padding: 0 20px; gap: 30px; }
         .main-content { flex: 1; }
-        
-        /* הגדלת הפרסומת בסנטימטר (מ-160px ל-200px) */
-        .side-left { width: 200px; flex-shrink: 0; }
-        .ad-box { background: var(--card); border: 1px solid var(--border); height: 600px; position: sticky; top: 150px; display: flex; align-items: center; justify-content: center; color: #222; font-weight: bold; writing-mode: vertical-rl; border-radius: 8px; font-size: 18px; }
+        .side-left { width: 210px; flex-shrink: 0; }
+        .ad-box { background: var(--card); border: 1px solid var(--border); height: 600px; position: sticky; top: 150px; display: flex; align-items: center; justify-content: center; color: var(--dim); font-weight: bold; writing-mode: vertical-rl; border-radius: 8px; }
         
         .hero { position: relative; height: 500px; border: 1px solid var(--border); overflow: hidden; cursor: pointer; background: #000; margin-bottom: 40px; border-radius: 15px; }
-        .hero-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; transition: 1s; }
-        .hero:hover .hero-img { transform: scale(1.05); opacity: 0.8; }
+        .hero-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: 1s; }
+        .hero:hover .hero-img { transform: scale(1.05); opacity: 0.9; }
         .hero-overlay { position: absolute; bottom: 0; width: 100%; padding: 50px 40px; background: linear-gradient(transparent, rgba(0,0,0,0.95)); box-sizing: border-box; }
         .hero h1 { font-size: 48px; margin: 0; font-weight: 800; line-height: 1.1; color: #fff; }
         
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
         .card { background: var(--card); border: 1px solid var(--border); cursor: pointer; border-radius: 12px; overflow: hidden; transition: 0.3s; }
-        .card:hover { transform: translateY(-5px); border-color: var(--primary); }
         .card img { width: 100%; height: 200px; object-fit: cover; }
         .card-body { padding: 20px; }
         
-        .status-bar { background: #000; border-bottom: 1px solid var(--border); padding: 8px 0; display: flex; justify-content: center; gap: 40px; font-size: 12px; font-weight: bold; color: var(--dim); }
-
-        .contact-section { background: #0a0a0a; border: 2px solid var(--primary); border-radius: 20px; padding: 40px; max-width: 600px; margin: 60px auto; }
-        .contact-section h2 { font-family: 'Orbitron'; color: var(--primary); text-align: center; margin-top: 0; }
-        .contact-section input, .contact-section textarea { width: 100%; padding: 12px; margin-bottom: 15px; background: #000; border: 1px solid var(--border); color: #fff; border-radius: 8px; box-sizing: border-box; }
+        .contact-section { background: var(--card); border: 2px solid var(--primary); border-radius: 20px; padding: 40px; max-width: 600px; margin: 60px auto; }
+        .contact-section h2 { font-family: 'Orbitron'; color: var(--primary); text-align: center; margin: 0 0 20px 0; }
+        .contact-section input, .contact-section textarea { width: 100%; padding: 12px; margin-bottom: 15px; background: var(--bg); border: 1px solid var(--border); color: var(--text); border-radius: 8px; box-sizing: border-box; }
+        
+        /* תיבת אישור למדיניות בטופס */
+        .checkbox-container { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; font-size: 14px; color: var(--dim); }
+        .checkbox-container input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; accent-color: var(--primary); }
+        .checkbox-container a { color: var(--primary); text-decoration: underline; cursor: pointer; font-weight: bold; }
+        
         .contact-section button { width: 100%; padding: 15px; background: var(--primary); border: none; font-weight: 800; cursor: pointer; border-radius: 8px; font-size: 16px; transition: 0.3s; color: #000; }
 
         #article { display: none; }
-        .art-view-container { max-width: 850px; margin: 0 auto; }
-
         footer { text-align: center; padding: 40px; border-top: 1px solid var(--border); color: var(--dim); }
-        #cookie-notice { position: fixed; bottom: 0; width: 100%; background: #111; border-top: 2px solid var(--primary); padding: 15px; text-align: center; z-index: 6000; display: none; }
+
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 5000; }
+        .modal-content { background: var(--card); border: 1px solid var(--primary); width: 90%; max-width: 700px; margin: 5% auto; padding: 30px; border-radius: 15px; position: relative; color: var(--text); }
+        .modal-body { max-height: 60vh; overflow-y: auto; padding-right: 10px; line-height: 1.6; }
+        .close { float: left; color: var(--primary); font-size: 28px; font-weight: bold; cursor: pointer; margin-bottom: 10px;}
+
+        #cookie-notice { position: fixed; bottom: 0; width: 100%; background: var(--card); border-top: 2px solid var(--primary); padding: 15px; text-align: center; z-index: 6000; display: none; }
         #cookie-notice button { background: var(--primary); border: none; padding: 5px 20px; margin-right: 15px; cursor: pointer; font-weight: bold; color: #000; }
+
+        /* אנימציית V ירוק של הצלחה */
+        #successOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); z-index: 9999; align-items: center; justify-content: center; flex-direction: column; color: white; font-family: 'Assistant'; }
+        .check-circle { width: 90px; height: 90px; border-radius: 50%; background: #4caf50; display: flex; align-items: center; justify-content: center; animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        .check-mark { font-size: 45px; font-weight: bold; opacity: 0; transform: scale(0.5); animation: drawV 0.3s 0.2s forwards; }
+        .success-text { margin-top: 20px; font-size: 24px; font-weight: bold; opacity: 0; animation: drawV 0.3s 0.4s forwards; }
+        @keyframes popIn { 0% { transform: scale(0); } 100% { transform: scale(1); } }
+        @keyframes drawV { to { opacity: 1; transform: scale(1); } }
     </style>
 </head>
 <body>
 
-<div class="ticker"><div class="ticker-move" id="tickerMsg">מערכת קודקוד מאמתת נתונים...</div></div>
+<div id="successOverlay">
+    <div class="check-circle"><div class="check-mark">✓</div></div>
+    <div class="success-text">הפעולה הושלמה בהצלחה</div>
+</div>
+
+<div class="ticker"><div class="ticker-move" id="tickerMsg">מערכת קודקוד - עדכונים בזמן אמת...</div></div>
 
 <header id="mainHeader">
     <div class="nav-container">
         <div class="header-tools">
             <div class="search-wrapper" id="searchWrapper">
-                <input type="text" id="searchInput" class="search-input-fancy" placeholder="חיפוש חופשי..." onkeypress="if(event.key==='Enter') executeSearch(this.value)">
+                <input type="text" id="searchInput" class="search-input-fancy" placeholder="חיפוש..." onkeypress="if(event.key==='Enter') executeSearch(this.value)">
                 <button class="icon-btn" onclick="toggleSearch()" title="חיפוש">
                     <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
                 </button>
             </div>
             <button class="icon-btn" onclick="scrollToContact()" title="יצירת קשר">
                 <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </button>
+            <button class="icon-btn" onclick="toggleTheme()" title="שינוי רקע">
+                <svg viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/></svg>
             </button>
         </div>
         <a class="logo" onclick="showHome()">KOD<span>KOD</span></a>
@@ -113,73 +128,108 @@
     </div>
 </header>
 
-<div class="status-bar">
-    <div class="status-item">מתח זירה: <span id="stStress">14%</span></div>
-    <div class="status-item">סטטוס: <span>פעיל</span></div>
-    <div id="liveClock" style="color:var(--primary); font-family:'Orbitron'"></div>
-</div>
-
 <div class="wrapper">
     <main class="main-content">
         <div id="home">
-            <div class="hero" onclick="openHero()"><img id="hImg" src="" class="hero-img"><div class="hero-overlay"><h1 id="hTitle">טוען מבזק ראשי...</h1></div></div>
+            <div class="hero" onclick="openHero()">
+                <img id="hImg" src="" class="hero-img">
+                <div class="hero-overlay"><h1 id="hTitle">סנכרון מבזקים...</h1></div>
+            </div>
             <div class="grid" id="mainGrid"></div>
             
             <div class="contact-section" id="contact">
                 <h2>יצירת קשר למפרסמים</h2>
-                <form action="https://formspree.io/f/xeelpjwg" method="POST">
+                <form id="contactForm" action="https://formspree.io/f/xeelpjwg" method="POST" onsubmit="handleFormSubmit(event)">
                     <input type="text" name="name" placeholder="שם מלא / חברה" required>
                     <input type="email" name="email" placeholder="אימייל לחזרה" required>
                     <textarea name="message" rows="4" placeholder="פרטי ההצעה לפרסום" required></textarea>
+                    
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="policyAgree" required>
+                        <label for="policyAgree">אני מאשר/ת שקראתי והבנתי את <a onclick="document.getElementById('privacyModal').style.display='block'">מדיניות הפרטיות</a> של האתר.</label>
+                    </div>
+
                     <button type="submit">שלח הצעה למערכת</button>
                 </form>
             </div>
         </div>
         
         <div id="article">
-            <div class="art-view-container">
-                <span style="color:var(--primary); cursor:pointer; font-weight:bold; font-size: 20px;" onclick="showHome()">➔ חזרה למרכז הפיקוד</span>
-                <div id="artView"></div>
-            </div>
+            <span style="color:var(--primary); cursor:pointer; font-weight:bold; font-size: 20px;" onclick="showHome()">➔ חזרה למפקדה</span>
+            <div id="artView"></div>
         </div>
     </main>
     <aside class="side-left"><div class="ad-box">AD SPACE | KODKOD</div></aside>
 </div>
 
-<footer>© 2026 KODKOD | חדשות בזמן אמת</footer>
+<footer>
+    © 2026 KODKOD | <a class="policy-link" onclick="document.getElementById('privacyModal').style.display='block'">מדיניות פרטיות ותנאי שימוש</a>
+</footer>
 
-<div id="cookie-notice">אתר זה משתמש בעוגיות. <button onclick="acceptCookies()">אישור</button></div>
+<div id="privacyModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="document.getElementById('privacyModal').style.display='none'">&times;</span>
+        <h2 style="font-family:'Orbitron'; color:var(--primary); margin-top: 0; border-bottom: 1px solid var(--border); padding-bottom: 10px;">מדיניות פרטיות ותנאי שימוש</h2>
+        <div class="modal-body">
+            <p><strong>1. כללי:</strong> ברוכים הבאים לאתר מערכת החדשות "קודקוד". השימוש באתר כפוף לתנאים המפורטים מטה ומהווה הסכמה להם.</p>
+            <p><strong>2. איסוף מידע:</strong> האתר אינו אוסף מידע אישי מזהה על הגולשים באופן אוטומטי, אלא אם מידע זה נמסר מרצון חופשי (לדוגמה, מילוי טופס פנייה למפרסמים). מידע זה יישמר בסודיות.</p>
+            <p><strong>3. שימוש במידע:</strong> הפרטים שיימסרו דרך טפסי האתר ישמשו אך ורק לצורך מתן מענה וליצירת קשר מטעם הנהלת האתר. אנו מתחייבים לא להעביר או למכור את המידע לצד שלישי.</p>
+            <p><strong>4. שימוש בעוגיות (Cookies):</strong> האתר משתמש בעוגיות לצורך שיפור חווית הגלישה, כגון שמירת העדפות תצוגה (מצב אור/חושך) ואיסוף נתונים סטטיסטיים אנונימיים.</p>
+            <p><strong>5. אבטחה:</strong> אנו נוקטים באמצעים מקובלים לאבטחת המידע באתר, אך אין באפשרותנו להבטיח חסינות מוחלטת מפני חדירות למחשבים או לשרתים.</p>
+            <p><strong>6. תוכן ומקורות:</strong> החדשות המופיעות באתר נסרקות באופן אוטומטי ממקורות חיצוניים ורשמיים. מערכת קודקוד אינה אחראית לתוכן, לדיוק או לזכויות היוצרים של הטקסטים המובאים ממקורות אלו.</p>
+        </div>
+    </div>
+</div>
+
+<div id="cookie-notice">אתר זה משתמש בעוגיות כדי לשפר את חווית הגלישה שלך. <button onclick="acceptCookies()">אישור</button></div>
 
 <script>
     let db = [];
 
-    function toggleSearch() {
-        const wrapper = document.getElementById('searchWrapper');
-        wrapper.classList.toggle('open');
-        if(wrapper.classList.contains('open')) document.getElementById('searchInput').focus();
+    // פונקציית אנימציית V ירוק
+    function playSuccessAnimation(message) {
+        const overlay = document.getElementById('successOverlay');
+        const textElem = overlay.querySelector('.success-text');
+        if(message) textElem.innerText = message;
+        
+        overlay.style.display = 'flex';
+        setTimeout(() => {
+            overlay.style.display = 'none';
+        }, 1800);
     }
 
+    // שליחת הטופס ברקע עם אנימציה
+    async function handleFormSubmit(e) {
+        e.preventDefault();
+        const form = e.target;
+        try {
+            await fetch(form.action, {
+                method: form.method,
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+            });
+            playSuccessAnimation('ההצעה נשלחה בהצלחה!');
+            form.reset(); // ניקוי הטופס
+        } catch (err) {
+            alert("אירעה שגיאה בשליחת הטופס, נסו שוב מאוחר יותר.");
+        }
+    }
+
+    function toggleTheme() { document.body.classList.toggle('light-mode'); }
+    function toggleSearch() { const w = document.getElementById('searchWrapper'); w.classList.toggle('open'); if(w.classList.contains('open')) document.getElementById('searchInput').focus(); }
     function scrollToContact() { document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }); }
+    
+    function acceptCookies() { 
+        document.getElementById('cookie-notice').style.display = 'none'; 
+        localStorage.setItem('cookieSeen', 'true'); 
+        playSuccessAnimation('הגדרות נשמרו בהצלחה');
+    }
 
     window.addEventListener('scroll', () => {
-        const header = document.getElementById('mainHeader');
-        if (window.scrollY > 50) header.classList.add('scrolled');
-        else header.classList.remove('scrolled');
+        const h = document.getElementById('mainHeader');
+        if (window.scrollY > 50) h.classList.add('scrolled');
+        else h.classList.remove('scrolled');
     });
-
-    async function init() {
-        await loadGitHubNews();
-        setInterval(() => {
-            if(document.getElementById('liveClock')) document.getElementById('liveClock').innerText = new Date().toLocaleTimeString('he-IL');
-            if(document.getElementById('stStress')) document.getElementById('stStress').innerText = Math.floor(Math.random() * 20 + 10) + "%";
-        }, 1000);
-        if (!localStorage.getItem('cookieSeen')) document.getElementById('cookie-notice').style.display = 'block';
-    }
-
-    function acceptCookies() {
-        document.getElementById('cookie-notice').style.display = 'none';
-        localStorage.setItem('cookieSeen', 'true');
-    }
 
     async function loadGitHubNews() {
         const repoOwner = "ahron900-sketch"; 
@@ -188,7 +238,6 @@
         try {
             const response = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}`);
             const files = await response.json();
-            if (!Array.isArray(files)) return;
             let fetchedNews = [];
             const recentFiles = files.filter(f => f.name.endsWith('.md')).reverse().slice(0, 15);
             for (const file of recentFiles) {
@@ -196,21 +245,17 @@
                 const rawText = await contentRes.text();
                 const titleMatch = rawText.match(/title: "(.*)"/) || rawText.match(/title: (.*)/);
                 const imgMatch = rawText.match(/image: "(.*)"/);
-                const sourceMatch = rawText.match(/source: "(.*)"/);
                 const parts = rawText.split('---');
-                const body = parts.length >= 3 ? parts.slice(2).join('---').trim() : "טוען תוכן...";
+                const body = parts[parts.length - 1].trim();
                 fetchedNews.push({
                     id: file.sha,
                     title: titleMatch ? titleMatch[1].replace(/"/g, '') : "מבזק",
                     content: body,
-                    cat: sourceMatch ? sourceMatch[1] : "קודקוד",
                     img: (imgMatch && imgMatch[1] && imgMatch[1] !== "None") ? imgMatch[1] : "https://images.unsplash.com/photo-1585007600263-ad1f301f2c27?w=800"
                 });
             }
-            if (fetchedNews.length > 0) {
-                db = fetchedNews;
-                updateUI();
-            }
+            db = fetchedNews;
+            updateUI();
         } catch (e) { console.error(e); }
     }
 
@@ -220,21 +265,10 @@
         document.getElementById('hTitle').innerText = data[0].title;
         document.getElementById('mainGrid').innerHTML = data.slice(1).map(n => `
             <div class="card" onclick="openArt('${n.id}')">
-                <img src="${n.img}" onerror="this.src='https://images.unsplash.com/photo-1585007600263-ad1f301f2c27?w=800'">
-                <div class="card-body"><h3 style="color:#fff;">${n.title}</h3></div>
+                <img src="${n.img}">
+                <div class="card-body"><h3>${n.title}</h3></div>
             </div>
         `).join('');
-        document.getElementById('tickerMsg').innerText = data.slice(0, 10).map(n => ` • ${n.title}`).join('');
-    }
-
-    function executeSearch(val) {
-        const filtered = db.filter(n => n.title.includes(val) || n.content.includes(val));
-        updateUI(filtered);
-    }
-
-    function filterByCat(cat) {
-        const filtered = db.filter(n => n.cat.includes(cat) || n.content.includes(cat));
-        updateUI(filtered.length > 0 ? filtered : db);
     }
 
     function openArt(id) {
@@ -244,19 +278,18 @@
         document.getElementById('article').style.display = 'block';
         window.scrollTo(0,0);
         document.getElementById('artView').innerHTML = `
-            <h1 style="font-size:40px; margin:20px 0; line-height:1.2;">${n.title}</h1>
+            <h1 style="font-size:40px; margin:20px 0;">${n.title}</h1>
             <img src="${n.img}" style="width:100%; border-radius:15px; margin-bottom:20px;">
-            <div style="font-size:22px; line-height:1.7; color:#ccc; white-space: pre-wrap;">${n.content}</div>
+            <div style="font-size:22px; line-height:1.7; white-space: pre-wrap;">${n.content}</div>
         `;
     }
 
-    function showHome() { 
-        document.getElementById('article').style.display = 'none'; 
-        document.getElementById('home').style.display = 'block'; 
-    }
-    
+    function showHome() { document.getElementById('article').style.display = 'none'; document.getElementById('home').style.display = 'block'; }
     function openHero() { if(db.length > 0) openArt(db[0].id); }
-    init();
+
+    loadGitHubNews();
+    if (localStorage.getItem('cookieSeen')) document.getElementById('cookie-notice').style.display = 'none';
+    else document.getElementById('cookie-notice').style.display = 'block';
 </script>
 </body>
 </html>
