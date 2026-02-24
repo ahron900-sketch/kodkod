@@ -1,26 +1,24 @@
 import feedparser
 import os
-from datetime import datetime, timedelta
+from datetime import datetime
 from newspaper import Article
 import time
 
-def cleanup_old_files(path, days=3):
-    """מוחק קבצים שנוצרו לפני יותר מ-X ימים"""
-    now = datetime.now()
-    for filename in os.listdir(path):
-        if filename.endswith(".md"):
-            file_path = os.path.join(path, filename)
-            file_time = datetime.fromtimestamp(os.path.getctime(file_path))
-            if now - file_time > timedelta(days=days):
-                os.remove(file_path)
-                print(f"ניקוי: הקובץ {filename} הוסר כי הוא ישן.")
+# רשימת מילים שחייבות להופיע (אחת מהן לפחות)
+ALLOWED_KEYWORDS = ['ביטחון', 'צה"ל', 'כלכלה', 'פוליטי', 'ממשלה', 'כספים', 'צבא', 'ביטחוני', 'נתניהו', 'כנסת']
+
+# רשימת מילים אסורות (אלימות או תכנים לא הולמים)
+FORBIDDEN_KEYWORDS = ['רצח', 'אונס', 'גרפי', 'גופה', 'נרצחה', 'דקירה']
+
+def contains_allowed_topics(text):
+    return any(word in text for word in ALLOWED_KEYWORDS)
+
+def contains_violence(text):
+    return any(word in text for word in FORBIDDEN_KEYWORDS)
 
 def scrape_news():
     path = 'content/news'
     os.makedirs(path, exist_ok=True)
-    
-    # ניקוי קבצים ישנים לפני שמתחילים
-    cleanup_old_files(path)
     
     sources = {
         "וואלה": "https://rss.walla.co.il/feed/1",
@@ -31,12 +29,29 @@ def scrape_news():
     for name, url in sources.items():
         print(f"סורק את {name}...")
         feed = feedparser.parse(url)
-        for entry in feed.entries[:5]:
+        for entry in feed.entries[:10]:
             try:
+                # סינון לפי כותרת עוד לפני ההורדה
+                if not contains_allowed_topics(entry.title) or contains_violence(entry.title):
+                    continue
+
                 article = Article(entry.link, language='he')
                 article.download()
                 article.parse()
                 
+                # בדיקה נוספת בתוך הטקסט המלא
+                if contains_violence(article.text):
+                    continue
+
+                # --- סינון תמונות נשים (גישת הזהירות) ---
+                # אם הכתבה היא מוואלה או ynet, ואין לנו בוט זיהוי פנים פעיל כרגע, 
+                # הדרך הכי בטוחה היא להשתמש בתמונת לוגו של קודקוד במקום תמונה שעלולה להיות בעייתית
+                image_url = article.top_image
+                
+                # הגנה: אם הכתבה עוסקת בנושאים כלליים, נשים תמונה ניטרלית
+                if "ביטחון" not in article.title and "צבא" not in article.title:
+                    image_url = "https://kodkodnews.co.il/logo_placeholder.png"
+
                 timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
                 filename = f"{timestamp}-{os.urandom(2).hex()}.md"
                 filepath = os.path.join(path, filename)
@@ -45,14 +60,11 @@ def scrape_news():
 title: "{article.title}"
 date: "{datetime.now().isoformat()}"
 source: "{name}"
-image: "{article.top_image}"
+image: "{image_url}"
 link: "{entry.link}"
 ---
 
 {article.text}
-
----
-**קרדיט:** התוכן פורסם במקור ב-{name}. [לכתבה המלאה]({entry.link})
 """
                 with open(filepath, 'w', encoding='utf-8') as f:
                     f.write(content)
