@@ -25,9 +25,11 @@ def scrape_news():
     path = 'content/news'
     os.makedirs(path, exist_ok=True)
     sources = {
+     sources = {
         "וואלה": "https://rss.walla.co.il/feed/1",
         "ynet": "https://www.ynet.co.il/Integration/StoryRss1854.xml",
-        "דובר צהל": "https://www.idf.il/RSS/hebrew/"
+        "דובר צהל": "https://www.idf.il/RSS/hebrew/",
+        "אמס": "https://www.emess.co.il/feed/"
     }
     
     for name, url in sources.items():
