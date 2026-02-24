@@ -11,19 +11,17 @@ rss_feeds = {
     "אמס": "https://www.emess.co.il/feed/"
 }
 
-# תיקיית היעד היא pending כדי שזה יחכה לאישור שלך ב-GitHub
+# תיקיית היעד לכתבות הממתינות לאישור
 OUTPUT_DIR = "content/pending"
 
 def sanitize_filename(title):
     return re.sub(r'[\\/*?:"<>|]', "", title).strip()[:50]
 
 def clean_html(raw_html):
-    # ניקוי בסיסי של תגיות HTML
     cleanr = re.compile('<.*?>')
     return re.sub(cleanr, '', raw_html).strip()
 
 def extract_image(entry):
-    # מנסה למשוך תמונה מה-RSS
     if 'media_content' in entry and len(entry.media_content) > 0:
         return entry.media_content[0]['url']
     if 'links' in entry:
@@ -40,9 +38,9 @@ def fetch_news():
         print(f"Fetching from {source_name}...")
         feed = feedparser.parse(url)
         
-        for entry in feed.entries[:10]:  # לוקח 10 כתבות אחרונות מכל אתר
+        for entry in feed.entries[:10]:
             title = entry.get('title', 'ללא כותרת').strip()
-            title = title.replace('"', "'")  # כדי שלא ישבור את המטא-דאטה
+            title = title.replace('"', "'")
             
             link = entry.get('link', '')
             description = entry.get('description', '')
