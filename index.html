@@ -9,8 +9,8 @@
     <style>
         :root {
             --bg: #050505; 
-            --card: #151520; /* כחול-שחור כהה לכרטיסיות כמו בתמונה */
-            --primary: #f8e71c; /* הצהוב של קודקוד */
+            --card: #151520;
+            --primary: #f8e71c; /* הצהוב המקורי של קודקוד */
             --text: #ffffff; 
             --dim: #cccccc; 
             --border: #1a1a1a;
@@ -18,18 +18,17 @@
 
         body { background: var(--bg); color: var(--text); font-family: 'Assistant', sans-serif; margin: 0; overflow-x: hidden; scroll-behavior: smooth; }
         
-        /* הפס הצהוב למעלה (טיקר) */
         .ticker { background: var(--primary); color: #000; padding: 4px 0; font-weight: 800; font-size: 13px; overflow: hidden; white-space: nowrap; position: fixed; top: 0; width: 100%; z-index: 3000; }
         .ticker-move { display: inline-block; animation: ticker 45s linear infinite; }
         @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
         
-        /* תפריט */
         header { background: var(--bg); border-bottom: 1px solid var(--border); position: sticky; top: 25px; z-index: 2000; height: 80px; transition: 0.5s; display: flex; align-items: center; }
         header.scrolled { height: 60px; border-bottom: 2px solid var(--primary); }
         .nav-container { width: 100%; max-width: 1400px; margin: 0 auto; display: flex; align-items: center; padding: 0 20px; position: relative; }
         
+        /* השארתי את הלוגו בצבע המקורי */
         .logo { font-family: 'Orbitron', sans-serif; font-size: 30px; color: var(--text); text-decoration: none; position: absolute; left: 50%; transform: translateX(-50%); transition: 0.5s; cursor: pointer; font-weight: bold; letter-spacing: 1px; }
-        .logo span { color: var(--primary); }
+        .logo span { color: var(--primary); } 
         header.scrolled .logo { left: 20px; transform: translateX(0); font-size: 24px; }
         
         .nav { display: flex; gap: 25px; margin-right: auto; }
@@ -45,13 +44,11 @@
         .icon-btn svg { width: 20px; height: 20px; fill: currentColor; }
         .icon-btn:hover { color: var(--primary); transform: translateY(-2px); }
         
-        /* אזור תוכן מרכזי */
         .wrapper { display: flex; max-width: 1500px; margin: 30px auto; padding: 0 20px; gap: 30px; }
         .main-content { flex: 1; }
         .side-left { width: 250px; flex-shrink: 0; }
         .ad-box { background: var(--bg); border-right: 1px solid var(--border); height: 600px; position: sticky; top: 120px; display: flex; align-items: center; justify-content: center; color: #333; font-weight: bold; writing-mode: vertical-rl; font-size: 14px; }
         
-        /* כתבה ראשית חסרה - מחזיר את המבנה השחור של הסטטוס בוט */
         .hero { position: relative; height: 450px; border-radius: 8px; overflow: hidden; cursor: pointer; background: var(--bg); margin-bottom: 30px; border: 1px solid var(--border); display: flex; align-items: flex-end; }
         .hero-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.6; transition: 0.5s; z-index: 1; }
         .hero:hover .hero-img { opacity: 0.8; }
@@ -59,7 +56,6 @@
         .hero h1 { font-size: 50px; margin: 0; font-weight: 800; line-height: 1.1; color: #fff; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); font-family: 'Assistant'; } 
         .hero-meta { color: var(--dim); font-size: 14px; margin-top: 15px; display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
         
-        /* גריד כתבות כמו בתמונה */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
         .card { background: var(--card); border-radius: 8px; cursor: pointer; overflow: hidden; transition: 0.3s; display: flex; flex-direction: column; }
         .card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
@@ -68,7 +64,6 @@
         .card-cat { color: var(--primary); font-size: 13px; font-weight: bold; margin-bottom: 10px; text-align: left; }
         .card h3 { margin: 0; font-size: 18px; color: #fff; line-height: 1.4; }
         
-        /* טופס יצירת קשר - הלבן/צהוב שביקשת */
         .contact-section { background: #ffffff; border: 2px solid var(--primary); border-radius: 15px; padding: 40px; max-width: 700px; margin: 60px auto; color: #333; }
         .contact-section h2 { font-family: 'Assistant'; color: #d4c200; text-align: center; margin: 0 0 30px 0; font-size: 28px; font-weight: normal; }
         .contact-section input, .contact-section textarea { width: 100%; padding: 15px; margin-bottom: 15px; background: #f9f9f9; border: 1px solid #e0e0e0; color: #333; border-radius: 5px; box-sizing: border-box; font-family: 'Assistant'; font-size: 15px; }
@@ -79,14 +74,12 @@
         .contact-section button { width: 100%; padding: 15px; background: var(--primary); border: none; font-weight: bold; cursor: pointer; border-radius: 5px; font-size: 18px; transition: 0.3s; color: #000; }
         .contact-section button:hover { background: #e5d519; }
 
-        /* אזור כתבה פתוחה */
         #article { display: none; max-width: 900px; margin: 0 auto; padding-bottom: 50px; }
         .back-btn { color: var(--primary); cursor: pointer; font-weight: bold; font-size: 18px; display: inline-block; margin-bottom: 20px; }
         .art-header h1 { font-size: 40px; margin: 0 0 20px 0; line-height: 1.2; }
         .art-img { width: 100%; border-radius: 8px; margin-bottom: 30px; }
         .art-content { font-size: 20px; line-height: 1.8; color: #ddd; white-space: pre-wrap; }
         
-        /* קרדיט מקורי כמו בתמונה */
         .credit-line { margin-top: 40px; padding-top: 20px; border-top: 1px dashed var(--border); font-size: 16px; color: #aaa; }
         .credit-line strong { color: #fff; }
         .credit-line a { color: var(--primary); text-decoration: underline; margin-right: 5px; }
@@ -205,7 +198,7 @@
 
 <script>
     let db = [];
-    const defaultImg = "favicon.png"; // תמיד ישתמש בלוגו אם חסרה תמונה
+    const defaultImg = "favicon.png";
 
     function playSuccessAnimation(message) {
         document.getElementById('successTextMsg').innerText = message;
@@ -255,7 +248,7 @@
             
             const recentFiles = files.filter(f => f.name.endsWith('.md')).reverse().slice(0, 40);
             
-            // סינון נוקשה לתמונות
+            // מילים לסינון תמונות
             const noWomenWords = ['אישה', 'נשים', 'בחורה', 'דוגמנית', 'חיילת', 'נערה', 'היועמשית', 'היועמ"שית', 'מיארה', 'שחקנית', 'שרת '];
 
             for (const file of recentFiles) {
@@ -268,8 +261,8 @@
                 const imgMatch = rawText.match(/image: "(.*)"/);
                 let img = (imgMatch && imgMatch[1] && imgMatch[1] !== "None") ? imgMatch[1] : defaultImg;
                 
-                // הסרת תמונות כלליות של מקורות
-                if(img.toLowerCase().includes('ynet') || img.toLowerCase().includes('walla') || img.toLowerCase().includes('logo')) {
+                // הסרה אגרסיבית של תמונות ynet (גם לוגו וגם כל דבר שקשור אליהם)
+                if(img.toLowerCase().includes('ynet')) {
                     img = defaultImg;
                 }
 
@@ -283,15 +276,13 @@
                 const parts = rawText.split('---');
                 let rawBody = parts.length > 2 ? parts.slice(2).join('---').trim() : parts[parts.length - 1].trim();
                 
-                // חילוץ הלינק המקורי מהטקסט (בשביל שורת הקרדיט החדשה)
                 let originalLink = "";
                 const linkMatch = rawBody.match(/\[(.*?)\]\((.*?)\)/);
                 if (linkMatch) {
                     originalLink = linkMatch[2];
-                    rawBody = rawBody.replace(/\[(.*?)\]\((.*?)\)/g, ''); // מוחק את הלינק מהטקסט הראשי
+                    rawBody = rawBody.replace(/\[(.*?)\]\((.*?)\)/g, ''); 
                 }
                 
-                // מחיקת טקסט "קרדיט" ישן אם הבוט שמר אותו
                 rawBody = rawBody.replace(/\*\*קרדיט.*?\n/g, '').trim();
 
                 const textToCheck = (title + " " + rawBody).toLowerCase();
@@ -318,7 +309,6 @@
     function updateUI(data = db) {
         if (data.length === 0) return;
         
-        // כתבה ראשית חזרה למראה של "סטטוס בוט" כמעט בדיוק
         document.getElementById('hImg').src = data[0].img;
         document.getElementById('hTitle').innerText = data[0].title;
         
@@ -360,7 +350,6 @@
         document.getElementById('article').style.display = 'block';
         window.scrollTo(0,0);
         
-        // יצירת הקרדיט בדיוק לפי התמונה שלך
         let creditHtml = '';
         if (n.link) {
             creditHtml = `<div class="credit-line">
