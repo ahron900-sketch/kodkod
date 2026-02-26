@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-    <title>קודקוד - חדשות ומבזקים בזמן אמת</title>
-    <meta name="description" content="אתר החדשות קודקוד מביא לכם את כל העדכונים, המבזקים והחדשות מהשטח בזמן אמת.">
+    <title id="dynamicTitle">קודקוד - חדשות ומבזקים בזמן אמת</title>
+    <meta name="description" content="אתר החדשות קודקוד - מרכז מבזקים וחדשות בזמן אמת. סיקור נרחב של כלכלה, פוליטיקה, חברה, חדשות למגזר החרדי, עולם התורה וחצרות הרבנים.">
+    <meta name="keywords" content="חדשות, מבזקים, קודקוד חדשות, חדשות חרדים, עולם התורה, חצרות קודש, פוליטיקה, כלכלה, הציבור החרדי, חדשות ישראל">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "NewsMediaOrganization",
+      "name": "קודקוד חדשות",
+      "url": "https://www.kodkodnews.co.il",
+      "description": "דסק חדשות ומבזקים המכסה מגוון נושאים: פוליטיקה, כלכלה, חברה וחדשות המגזר החרדי ועולם התורה."
+    }
+    </script>
+    
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;400;700;800&family=Orbitron:wght@700&display=swap" rel="stylesheet">
     
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
@@ -70,9 +82,10 @@
         .hero h1 { font-size: 48px; margin: 0; font-weight: 800; line-height: 1.1; color: #fff; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); } 
         
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
-        .card { background: var(--card); border: 1px solid var(--border); cursor: pointer; border-radius: 12px; overflow: hidden; transition: 0.3s; }
+        .card { background: var(--card); border: 1px solid var(--border); cursor: pointer; border-radius: 12px; overflow: hidden; transition: 0.3s; position: relative;}
         .card img { width: 100%; height: 200px; object-fit: cover; }
         .card-body { padding: 20px; }
+        .card-cat-label { position: absolute; top: 10px; right: 10px; background: var(--primary); color: #000; font-weight: 800; font-size: 11px; padding: 2px 8px; border-radius: 4px; }
         
         .contact-section { background: var(--card); border: 2px solid var(--primary); border-radius: 20px; padding: 40px; max-width: 600px; margin: 60px auto; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         body.dark-mode .contact-section { box-shadow: none; border-color: var(--primary); }
@@ -86,8 +99,59 @@
         
         .contact-section button { width: 100%; padding: 15px; background: var(--primary); border: none; font-weight: 800; cursor: pointer; border-radius: 8px; font-size: 16px; transition: 0.3s; color: #000; }
 
-        #article { display: none; }
+        #article, #aboutPage { display: none; }
         
+        .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 25px; border-bottom: 2px solid var(--border); padding-bottom: 10px; }
+        .section-title { font-family: 'Orbitron'; font-size: 28px; margin: 0; color: var(--text); border-right: 5px solid var(--primary); padding-right: 15px; }
+        
+        /* כפתור חזרה חדש בצד ימין - מלבן */
+        .back-btn-rect { display: inline-block; background: var(--card); border: 2px solid var(--primary); color: var(--text); padding: 8px 30px; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 16px; transition: 0.3s; float: right; margin-bottom: 20px; margin-left: 20px;}
+        .back-btn-rect:hover { background: var(--primary); color: #000; }
+
+        /* עיצוב דף אודות עם רקע נוף */
+        .about-container {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1506744626753-1fa44df31c78?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+            padding: 60px 40px;
+            border-radius: 15px;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+        
+        .about-logo-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Orbitron';
+            font-size: 150px;
+            color: rgba(248, 231, 28, 0.1); /* צהוב שקוף */
+            z-index: 1;
+            pointer-events: none;
+            user-select: none;
+            white-space: nowrap;
+        }
+
+        .about-content-inner {
+            background: rgba(var(--card), 0.95);
+            color: var(--text);
+            padding: 40px;
+            border-radius: 12px;
+            position: relative;
+            z-index: 2;
+            line-height: 1.9;
+            font-size: 18px;
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        
+        body.dark-mode .about-content-inner { background: rgba(15, 15, 15, 0.95); color: #fff; }
+
+        .about-content-inner h2 { color: var(--primary); font-family: 'Orbitron'; margin-top: 0; font-size: 32px; text-shadow: 0 1px 2px rgba(0,0,0,0.5);}
+        .about-content-inner p { margin-bottom: 20px; }
+
         .share-btn { display: flex; align-items: center; gap: 10px; font-family: 'Assistant'; font-weight: 800; font-size: 16px; padding: 10px 24px; border-radius: 30px; cursor: pointer; transition: 0.3s; border: none; }
         .whatsapp-btn { background: #25D366; color: #fff; }
         .whatsapp-btn:hover { background: #1ebe56; transform: scale(1.05); }
@@ -119,6 +183,8 @@
         .success-text { margin-top: 25px; font-size: 28px; font-weight: bold; opacity: 0; animation: drawV 0.3s 0.4s forwards; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
         @keyframes popIn { 0% { transform: scale(0); } 100% { transform: scale(1); } }
         @keyframes drawV { to { opacity: 1; transform: scale(1); } }
+        
+        .clearfix::after { content: ""; clear: both; display: table; }
     </style>
 </head>
 <body>
@@ -128,7 +194,7 @@
     <div class="success-text" id="successTextMsg">הפעולה הושלמה בהצלחה</div>
 </div>
 
-<div class="ticker"><div class="ticker-move" id="tickerMsg">מערכת קודקוד - עדכונים בזמן אמת...</div></div>
+<div class="ticker"><div class="ticker-move" id="tickerMsg">מערכת קודקוד - חדשות ומבזקים מהארץ, מהעולם, ומחצרות הרבנים...</div></div>
 
 <header id="mainHeader">
     <div class="nav-container">
@@ -158,6 +224,8 @@
             <a onclick="filterByCat('כלכלה')">כלכלה</a>
             <a onclick="filterByCat('פוליטיקה')">פוליטיקה</a>
             <a onclick="filterByCat('עולם')">עולם</a>
+            <a onclick="filterByCat('הציבור')">הציבור</a>
+            <a onclick="showAbout()">אודות</a>
         </nav>
     </div>
 </header>
@@ -165,10 +233,18 @@
 <div class="wrapper">
     <main class="main-content">
         <div id="home">
-            <div class="hero" onclick="openHero()">
-                <img id="hImg" src="favicon.png" class="hero-img" onerror="this.src='favicon.png'">
-                <div class="hero-overlay"><h1 id="hTitle">מבזקי קודקוד בזמן אמת</h1></div>
+            <div id="heroSection">
+                <div class="hero" onclick="openHero()">
+                    <img id="hImg" src="favicon.png" class="hero-img" onerror="this.src='favicon.png'">
+                    <div class="hero-overlay"><h1 id="hTitle">מבזקי קודקוד בזמן אמת</h1></div>
+                </div>
             </div>
+
+            <div class="section-header clearfix" id="dynamicHeader" style="display:none;">
+                <button class="back-btn-rect" onclick="showHome()">חזרה</button>
+                <h2 class="section-title" id="gridTitle" style="float:left; line-height: 40px;">מבזקים</h2>
+            </div>
+
             <div class="grid" id="mainGrid"></div>
             
             <div class="contact-section" id="contact">
@@ -187,9 +263,33 @@
                 </form>
             </div>
         </div>
+
+        <div id="aboutPage">
+            <div class="clearfix" style="margin-bottom: 20px;">
+                <button class="back-btn-rect" onclick="showHome()">חזרה</button>
+            </div>
+            
+            <div class="about-container">
+                <div class="about-logo-bg">KODKOD</div>
+                <div class="about-content-inner">
+                    <h2>אודות מערכת קודקוד</h2>
+                    <p><strong>קודקוד (KODKOD)</strong> הוא דסק חדשות עצמאי ומוביל, שנוסד במטרה לספק מענה מדויק, נקי ומהיר לצורך הגובר בחדשות ומבזקים בזמן אמת. האתר הוקם מתוך הבנה כי הציבור צורך מידע בקצב מסחרר, ודורש פלטפורמה אמינה שמגישה את העובדות כפי שהן, ללא פילטרים וללא הטיות מוסוות.</p>
+                    
+                    <p>אנו גאים לשים דגש מיוחד ומרכזי על <strong>הציבור החרדי, עולם התורה, ישיבות וחצרות הרבנים</strong>. מערכת קודקוד פועלת מתוך כבוד עמוק למסורת ולערכי הקהילה, ומקפידה להביא אל קדמת הבמה דיווחים הנוגעים ללב הציבור הירא לדבר השם. אצלנו תמצאו סיקור נרחב של החלטות גדולי הדור, אירועים בחצרות הקודש, ועדכונים שוטפים על המתרחש בעולם הישיבות והחינוך הטהור.</p>
+                    
+                    <p>בנוסף לעולם התורה, קודקוד מספק מעטפת חדשותית מלאה הכוללת סיקור ביטחוני שוטף, פוליטיקה, כלכלה ועדכונים מהעולם. אנו מאמינים כי ציבור הקוראים שלנו זכאי לתמונת מצב רחבה ומדויקת של כלל האירועים המשפיעים על סדר היום בישראל, והכל תחת קורת גג אחת, נקייה ומוקפדת.</p>
+                    
+                    <p>חלק בלתי נפרד מהחזון שלנו מתממש בקטגוריית <strong>"הציבור"</strong>. אנו רואים בגולשים שלנו שותפים פעילים בעשייה החדשותית. מדור זה מוקדש לדיווחים המגיעים ישירות מכם, מהשטח – מהרחוב, מהישיבה, מהקהילה. כל דיווח עובר אימות על ידי עורכי המערכת ומוצג לראווה, מתוך אמונה שהעיניים שלכם בשטח הן המקור המהימן ביותר.</p>
+                    
+                    <p>מערכת קודקוד פועלת מסביב לשעון, מתוך מחויבות למקצוענות, למהירות ולשמירה על ערכי המוסר. אנו מזמינים אתכם להמשיך להתעדכן, לשתף ולהיות חלק מהקול החדש של החדשות בישראל.</p>
+                </div>
+            </div>
+        </div>
         
         <div id="article">
-            <span style="color:var(--primary); cursor:pointer; font-weight:bold; font-size: 20px; text-shadow: 0 0 1px rgba(0,0,0,0.2);" onclick="showHome()">➔ חזרה למפקדה</span>
+            <div class="clearfix">
+                <button class="back-btn-rect" onclick="showHome()">חזרה</button>
+            </div>
             <div id="artView"></div>
         </div>
     </main>
@@ -235,6 +335,10 @@
 <script>
     let db = [];
     const defaultImg = "favicon.png";
+
+    function updatePageMeta(title) {
+        document.getElementById('dynamicTitle').innerText = title + " | קודקוד חדשות";
+    }
 
     function playSuccessAnimation(message) {
         document.getElementById('successTextMsg').innerText = message;
@@ -286,6 +390,25 @@
         else h.classList.remove('scrolled');
     });
 
+    function showAbout() {
+        document.getElementById('home').style.display = 'none';
+        document.getElementById('article').style.display = 'none';
+        document.getElementById('aboutPage').style.display = 'block';
+        updatePageMeta("אודות המערכת");
+        window.scrollTo(0,0);
+    }
+
+    function showHome() { 
+        window.history.pushState({}, '', window.location.pathname);
+        document.getElementById('aboutPage').style.display = 'none';
+        document.getElementById('article').style.display = 'none'; 
+        document.getElementById('home').style.display = 'block'; 
+        document.getElementById('heroSection').style.display = 'block';
+        document.getElementById('dynamicHeader').style.display = 'none';
+        updatePageMeta("קודקוד - חדשות ומבזקים בזמן אמת");
+        updateUI(db); 
+    }
+
     async function loadGitHubNews() {
         const repoOwner = "ahron900-sketch"; 
         const repoName = "kodkod";
@@ -335,13 +458,19 @@
 
     function updateUI(data = db) {
         if (data.length === 0) return;
-        document.getElementById('hImg').src = data[0].img;
-        document.getElementById('hTitle').innerText = data[0].title;
-        document.getElementById('mainGrid').innerHTML = data.slice(1).map(n => `
+        
+        if (document.getElementById('dynamicHeader').style.display === 'none') {
+            document.getElementById('hImg').src = data[0].img;
+            document.getElementById('hTitle').innerText = data[0].title;
+        }
+
+        const list = (document.getElementById('dynamicHeader').style.display === 'none') ? data.slice(1) : data;
+
+        document.getElementById('mainGrid').innerHTML = list.map(n => `
             <div class="card" onclick="openArt('${n.id}')">
+                <span class="card-cat-label">${n.cat}</span>
                 <img src="${n.img}" onerror="this.src='${defaultImg}'">
                 <div class="card-body">
-                    <span style="color:var(--primary); font-size:12px; font-weight:bold;">${n.cat}</span>
                     <h3 style="margin-top:5px;">${n.title}</h3>
                 </div>
             </div>
@@ -356,7 +485,11 @@
 
     function filterByCat(cat) {
         showHome();
+        document.getElementById('heroSection').style.display = 'none';
+        document.getElementById('dynamicHeader').style.display = 'block';
+        document.getElementById('gridTitle').innerText = "מבזקי " + cat;
         const filtered = db.filter(n => n.cat.includes(cat) || (n.content && n.content.includes(cat)));
+        updatePageMeta("חדשות " + cat);
         updateUI(filtered.length > 0 ? filtered : db);
     }
 
@@ -379,14 +512,16 @@
         
         window.history.pushState({id: id}, '', '?art=' + id);
         document.getElementById('home').style.display = 'none';
+        document.getElementById('aboutPage').style.display = 'none';
         document.getElementById('article').style.display = 'block';
+        updatePageMeta(n.title);
         window.scrollTo(0,0);
         
         const otherArticles = db.filter(x => x.id !== id).slice(0, 6).map(m => `
-            <div class="card" onclick="openArt('${m.id}')" style="margin-top:20px; border-radius:12px; border:1px solid var(--border); overflow:hidden;">
+            <div class="card" onclick="openArt('${m.id}')" style="margin-top:20px; border-radius:12px; border:1px solid var(--border); overflow:hidden; position:relative;">
+                <span class="card-cat-label">${m.cat}</span>
                 <img src="${m.img}" onerror="this.src='${defaultImg}'" style="width:100%; height:150px; object-fit:cover;">
                 <div style="padding:15px; background:var(--card);">
-                    <span style="color:var(--primary); font-size:11px; font-weight:bold;">${m.cat}</span>
                     <h4 style="margin:5px 0 0 0; font-size:16px;">${m.title}</h4>
                 </div>
             </div>
@@ -422,13 +557,6 @@
         `;
     }
 
-    function showHome() { 
-        window.history.pushState({}, '', window.location.pathname);
-        document.getElementById('article').style.display = 'none'; 
-        document.getElementById('home').style.display = 'block'; 
-        updateUI(); 
-    }
-    
     function openHero() { if(db.length > 0) openArt(db[0].id); }
 
     if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-mode');
