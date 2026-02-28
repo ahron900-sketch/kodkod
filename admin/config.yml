@@ -10,21 +10,25 @@ public_folder: "/images/uploads"
 
 collections:
   - name: "pending"
-    label: "כתבות מהבוט (ממתינות)"
+    label: "מבזקים מהבוט (ממתינים לאישור)"
     folder: "content/pending"
     create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - { label: "כותרת", name: "title", widget: "string" }
-      - { label: "תאריך", name: "date", widget: "datetime" }
+      - { label: "כותרת הכתבה", name: "title", widget: "string" }
+      - { label: "תאריך ושעה", name: "date", widget: "datetime", format: "DD.MM.YYYY HH:mm" }
       - { label: "תמונה", name: "image", widget: "image", required: false }
-      - { label: "תוכן", name: "body", widget: "markdown" }
+      - { label: "קטגוריה", name: "category", widget: "select", options: ["ביטחון", "כלכלה", "פוליטיקה", "עולם", "הציבור"] }
+      - { label: "גוף הכתבה", name: "body", widget: "markdown" }
 
   - name: "news"
-    label: "מבזקים מאושרים"
+    label: "מבזקים שפורסמו באתר"
     folder: "content/news"
     create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - { label: "כותרת", name: "title", widget: "string" }
-      - { label: "תאריך", name: "date", widget: "datetime" }
+      - { label: "כותרת הכתבה", name: "title", widget: "string" }
+      - { label: "תאריך ושעה", name: "date", widget: "datetime", format: "DD.MM.YYYY HH:mm" }
       - { label: "תמונה", name: "image", widget: "image", required: false }
-      - { label: "תוכן", name: "body", widget: "markdown" }
+      - { label: "קטגוריה", name: "category", widget: "select", options: ["ביטחון", "כלכלה", "פוליטיקה", "עולם", "הציבור"] }
+      - { label: "גוף הכתבה", name: "body", widget: "markdown" }
