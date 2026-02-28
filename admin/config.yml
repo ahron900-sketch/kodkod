@@ -2,6 +2,7 @@ backend:
   name: github
   repo: ahron900-sketch/kodkod
   branch: main
+  base_url: https://api.github.com # מוסיף גישה ישירה
 
 publish_mode: editorial_workflow
 media_folder: "images/uploads"
