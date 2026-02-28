@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: ahron900-sketch/kodkod # וודא שזה שם המאגר המדויק שלך
+  repo: ahron900-sketch/kodkod
   branch: main
 
 publish_mode: editorial_workflow
@@ -24,8 +24,7 @@ collections:
     folder: "content/news"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    fields:
-      - { label: "כותרת", name: "title", widget: "string" }
+    fields:      - { label: "כותרת", name: "title", widget: "string" }
       - { label: "תאריך", name: "date", widget: "datetime", format: "DD.MM.YYYY HH:mm" }
       - { label: "תמונה", name: "image", widget: "image", required: false }
       - { label: "תוכן הכתבה", name: "body", widget: "markdown" }
