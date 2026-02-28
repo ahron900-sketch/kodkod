@@ -7,8 +7,19 @@ public_folder: "/images/uploads"
 
 collections:
   - name: "news"
-    label: "מבזקים"
+    label: "מבזקים מאושרים"
     folder: "content/news"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "כותרת הכתבה", name: "title", widget: "string" }
+      - { label: "תאריך ושעה", name: "date", widget: "datetime", format: "DD.MM.YYYY HH:mm" }
+      - { label: "תמונה", name: "image", widget: "image", required: false }
+      - { label: "גוף הכתבה", name: "body", widget: "markdown" }
+
+  - name: "pending"
+    label: "מבזקים לאישור (מהבוט)"
+    folder: "content/pending"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
