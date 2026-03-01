@@ -1,0 +1,11 @@
+---
+title: "המשטרה תבקש לשחרר ממעצר את כתב ynet יואב זיתון"
+date: 2026-03-01 19:01:09
+category: "חדשות"
+source: "ynet"
+image: "None"
+---
+
+
+
+[קרא את הכתבה המלאה במקור](https://www.ynet.co.il/news/article/h1tx6lgyzl)
