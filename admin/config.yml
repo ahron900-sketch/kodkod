@@ -2,24 +2,14 @@ backend:
   name: github
   repo: ahron900-sketch/kodkod
   branch: main
+  site_domain: kodkodnews.co.il
+  display_url: https://kodkodnews.co.il
 
 publish_mode: editorial_workflow
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
 collections:
-  - name: "pending"
-    label: "מבזקים לאישור (מהבוט)"
-    folder: "content/pending"
-    create: true
-    fields:
-      - { label: "כותרת", name: "title", widget: "string" }
-      - { label: "תיאור לגוגל (SEO)", name: "description", widget: "string", hint: "משפט קצר שיופיע בתוצאות החיפוש" }
-      - { label: "תאריך", name: "date", widget: "datetime", format: "DD.MM.YYYY HH:mm" }
-      - { label: "קטגוריה", name: "category", widget: "select", options: ["ביטחון", "צבא", "פוליטיקה", "כלכלה", "עולם", "כללי"] }
-      - { label: "תגיות", name: "tags", widget: "list", default: ["מבזק"] }
-      - { label: "תוכן", name: "body", widget: "markdown" }
-
   - name: "news"
     label: "מבזקים שפורסמו"
     folder: "content/news"
