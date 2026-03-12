@@ -8,5 +8,10 @@
       "source": "/admin/",
       "destination": "/admin/index.html"
     }
-  ]
+  ],
+  "functions": {
+    "api/auth.js": {
+      "runtime": "vercel-nodejs@20.x"
+    }
+  }
 }
