@@ -4,6 +4,8 @@ backend:
   branch: main
   site_domain: kodkodnews.co.il
   display_url: https://kodkodnews.co.il
+  base_url: https://kodkodnews.co.il
+  auth_endpoint: /api/auth
 
 publish_mode: editorial_workflow
 media_folder: "images/uploads"
@@ -14,10 +16,22 @@ collections:
     label: "מבזקים שפורסמו"
     folder: "content/news"
     create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - { label: "כותרת", name: "title", widget: "string" }
-      - { label: "תיאור לגוגל (SEO)", name: "description", widget: "string" }
-      - { label: "תאריך", name: "date", widget: "datetime", format: "DD.MM.YYYY HH:mm" }
+      - { label: "כותרת המבזק", name: "title", widget: "string" }
+      - { label: "תיאור קצר לגוגל (SEO)", name: "description", widget: "string", hint: "הטקסט שיופיע מתחת לכותרת בתוצאות החיפוש" }
+      - { label: "תאריך ושעה", name: "date", widget: "datetime", format: "DD.MM.YYYY HH:mm" }
+      - { label: "תמונה ראשית", name: "image", widget: "image", required: false }
       - { label: "קטגוריה", name: "category", widget: "select", options: ["ביטחון", "צבא", "פוליטיקה", "כלכלה", "עולם", "כללי"] }
       - { label: "תגיות", name: "tags", widget: "list", default: ["מבזק"] }
+      - { label: "תוכן המבזק", name: "body", widget: "markdown" }
+
+  - name: "pending"
+    label: "מבזקים לאישור (מהבוט)"
+    folder: "content/pending"
+    create: true
+    fields:
+      - { label: "כותרת", name: "title", widget: "string" }
+      - { label: "תיאור SEO", name: "description", widget: "string" }
+      - { label: "תאריך", name: "date", widget: "datetime", format: "DD.MM.YYYY HH:mm" }
       - { label: "תוכן", name: "body", widget: "markdown" }
