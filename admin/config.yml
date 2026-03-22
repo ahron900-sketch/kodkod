@@ -9,22 +9,25 @@ public_folder: "/images/uploads"
 
 collections:
   - name: "news"
-    label: "✅ מבזקים (אמס)"
+    label: "✅ מבזקים באתר (אמס)"
     folder: "content/news"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "כותרת", name: "title", widget: "string" }
-      - { label: "תאריך ושעה", name: "date", widget: "datetime", format: "DD.MM.YYYY HH:mm" }
-      - { label: "קטגוריה", name: "category", widget: "select", options: ["ביטחון", "צבא", "פוליטיקה", "כלכלה", "עולם", "הציבור"], default: "הציבור" }
-      - { label: "תוכן", name: "body", widget: "markdown" }
+      - { label: "תאריך ושעה", name: "date", widget: "string" }
+      - { label: "מקור", name: "source", widget: "string", required: false }
+      - { label: "תמונה", name: "image", widget: "image", required: false }
+      - { label: "לינק מקורי", name: "link", widget: "string", required: false }
+      - { label: "תוכן המבזק", name: "body", widget: "markdown" }
 
   - name: "pending"
-    label: "⏳ להמתנה (שאר האתרים)"
+    label: "⏳ להמתנה (שיוף ועריכה)"
     folder: "content/pending"
     create: true
     fields:
       - { label: "כותרת", name: "title", widget: "string" }
-      - { label: "מקור", name: "source", widget: "string" }
-      - { label: "תאריך", name: "date", widget: "datetime" }
-      - { label: "תוכן", name: "body", widget: "markdown" }
+      - { label: "תאריך ושעה", name: "date", widget: "string" }
+      - { label: "מקור", name: "source", widget: "string", required: false }
+      - { label: "תמונה", name: "image", widget: "image", required: false }
+      - { label: "תוכן המבזק", name: "body", widget: "markdown" }
