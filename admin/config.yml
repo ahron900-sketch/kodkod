@@ -3,7 +3,6 @@ backend:
   branch: main
 
 publish_mode: editorial_workflow
-
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
@@ -14,19 +13,18 @@ collections:
     create: true
     fields:
       - { label: "כותרת", name: "title", widget: "string" }
-      - { label: "תאריך ושעה", name: "date", widget: "string" }
-      - { label: "מקור", name: "source", widget: "string", required: false }
-      - { label: "תמונה", name: "image", widget: "string", required: false } # שינינו ל-string כי זה לינק חיצוני
-      - { label: "לינק מקורי", name: "link", widget: "string", required: false }
-      - { label: "תוכן המבזק", name: "body", widget: "markdown" }
+      - { label: "תאריך", name: "date", widget: "string" }
+      - { label: "מקור", name: "source", widget: "string" }
+      - { label: "תמונה (לינק)", name: "image", widget: "string", required: false }
+      - { label: "גוף הכתבה", name: "body", widget: "markdown" }
 
   - name: "pending"
-    label: "⏳ להמתנה (שיוף ועריכה)"
+    label: "⏳ להמתנה (עריכה ואישור)"
     folder: "content/pending"
     create: true
     fields:
       - { label: "כותרת", name: "title", widget: "string" }
-      - { label: "תאריך ושעה", name: "date", widget: "string" }
-      - { label: "מקור", name: "source", widget: "string", required: false }
-      - { label: "תמונה", name: "image", widget: "string", required: false }
-      - { label: "תוכן המבזק", name: "body", widget: "markdown" }
+      - { label: "תאריך", name: "date", widget: "string" }
+      - { label: "מקור", name: "source", widget: "string" }
+      - { label: "תמונה (לינק)", name: "image", widget: "string", required: false }
+      - { label: "גוף הכתבה", name: "body", widget: "markdown" }
