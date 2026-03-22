@@ -15,20 +15,16 @@ rss_feeds = {
 }
 
 # תיקיות יעד
-LIVE_DIR = "content/news"      # לאתר מיד (אמס)
-PENDING_DIR = "content/pending" # להמתנה (השאר)
-ARCHIVE_DIR = "content/archive" # ארכיון לקבצים ישנים
+LIVE_DIR = "content/news"
+PENDING_DIR = "content/pending"
+ARCHIVE_DIR = "content/archive"
 
 def sanitize_filename(title):
-    # ניקוי תווים למערכת הקבצים
     clean_name = re.sub(r'[\\/*?:"<>|]', "", title).strip()[:50]
     return clean_name if clean_name else "untitled"
 
-def clean_for_yml(text):
-    # הסרת מירכאות כפולות שמשבשות את ה-CMS
-    return text.replace('"', "'").replace("\n", " ")
-
 def clean_html(raw_html):
+    if not raw_html: return ""
     cleanr = re.compile('<.*?>')
     return re.sub(cleanr, '', raw_html).strip()
 
@@ -42,67 +38,58 @@ def extract_image(entry):
     return ""
 
 def manage_archive():
-    # העברת קבצים ישנים מ-pending לארכיון כדי לשמור על מהירות האדמין
+    # שומר על ה-CMS מהיר - מעביר ישנים לארכיון
     now = time.time()
-    if not os.path.exists(ARCHIVE_DIR):
-        os.makedirs(ARCHIVE_DIR)
-    
-    for f in os.listdir(PENDING_DIR):
-        f_path = os.path.join(PENDING_DIR, f)
-        if os.path.isfile(f_path) and f != ".gitkeep":
-            # אם הקובץ נוצר לפני יותר מ-3 ימים
-            if os.stat(f_path).st_mtime < now - 3 * 86400:
-                shutil.move(f_path, os.path.join(ARCHIVE_DIR, f))
-                print(f"Archived: {f}")
+    for d in [LIVE_DIR, PENDING_DIR]:
+        if not os.path.exists(d): os.makedirs(d)
+        for f in os.listdir(d):
+            f_path = os.path.join(d, f)
+            if os.path.isfile(f_path) and f != ".gitkeep":
+                # מעביר לארכיון אחרי 3 ימים
+                if os.stat(f_path).st_mtime < now - 3 * 86400:
+                    if not os.path.exists(ARCHIVE_DIR): os.makedirs(ARCHIVE_DIR)
+                    shutil.move(f_path, os.path.join(ARCHIVE_DIR, f))
 
 def fetch_news():
-    # יצירת התיקיות
-    for d in [LIVE_DIR, PENDING_DIR, ARCHIVE_DIR]:
-        if not os.path.exists(d):
-            os.makedirs(d)
-
-    # ניקוי ארכיון לפני תחילת העבודה
     manage_archive()
 
     for source_name, url in rss_feeds.items():
-        print(f"Fetching from {source_name}...")
+        print(f"מושך מ-{source_name}...")
         feed = feedparser.parse(url)
-        
         target_dir = LIVE_DIR if source_name == "אמס" else PENDING_DIR
         
         for entry in feed.entries[:10]:
-            raw_title = entry.get('title', 'ללא כותרת').strip()
-            title = clean_for_yml(raw_title)
-            
+            title = entry.get('title', 'ללא כותרת').strip().replace("\n", " ")
             link = entry.get('link', '')
-            description = entry.get('description', '')
-            content = clean_html(description)
+            content = clean_html(entry.get('description', ''))
             image_url = extract_image(entry)
             
             filename = f"{sanitize_filename(title)}.md"
-            filepath = os.path.join(target_dir, filename)
             
-            # בדיקה אם הכתבה קיימת בחדשות, בהמתנה או בארכיון
-            if not any(os.path.exists(os.path.join(d, filename)) for d in [LIVE_DIR, PENDING_DIR, ARCHIVE_DIR]):
-                
+            # בדיקה אם קיים כבר
+            exists = any(os.path.exists(os.path.join(d, filename)) for d in [LIVE_DIR, PENDING_DIR, ARCHIVE_DIR])
+            
+            if not exists:
                 date_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                 
+                # פורמט חסין שגיאות (YAML Block Scalar)
                 md_content = f"""---
-title: "{title}"
+title: >-
+  {title}
 date: "{date_str}"
-category: "חדשות"
 source: "{source_name}"
 image: "{image_url}"
 link: "{link}"
+category: "חדשות"
 ---
 
 {content}
 
 [קרא את הכתבה המלאה במקור]({link})
 """
-                with open(filepath, "w", encoding="utf-8") as f:
+                with open(os.path.join(target_dir, filename), "w", encoding="utf-8") as f:
                     f.write(md_content)
-                print(f"Saved: {title}")
+                print(f"נשמר: {title}")
 
 if __name__ == "__main__":
     fetch_news()
