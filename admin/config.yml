@@ -12,12 +12,11 @@ collections:
     label: "✅ מבזקים באתר (אמס)"
     folder: "content/news"
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "כותרת", name: "title", widget: "string" }
       - { label: "תאריך ושעה", name: "date", widget: "string" }
       - { label: "מקור", name: "source", widget: "string", required: false }
-      - { label: "תמונה", name: "image", widget: "image", required: false }
+      - { label: "תמונה", name: "image", widget: "string", required: false } # שינינו ל-string כי זה לינק חיצוני
       - { label: "לינק מקורי", name: "link", widget: "string", required: false }
       - { label: "תוכן המבזק", name: "body", widget: "markdown" }
 
@@ -29,5 +28,5 @@ collections:
       - { label: "כותרת", name: "title", widget: "string" }
       - { label: "תאריך ושעה", name: "date", widget: "string" }
       - { label: "מקור", name: "source", widget: "string", required: false }
-      - { label: "תמונה", name: "image", widget: "image", required: false }
+      - { label: "תמונה", name: "image", widget: "string", required: false }
       - { label: "תוכן המבזק", name: "body", widget: "markdown" }
