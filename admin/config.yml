@@ -9,34 +9,22 @@ public_folder: "/images/uploads"
 
 collections:
   - name: "news"
-    label: "מבזקים באתר"
+    label: "✅ מבזקים באתר (אמס)"
     folder: "content/news"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - { label: "כותרת המבזק", name: "title", widget: "string" }
-      - { label: "תיאור קצר (SEO)", name: "description", widget: "string", required: false }
+      - { label: "כותרת", name: "title", widget: "string" }
       - { label: "תאריך ושעה", name: "date", widget: "datetime", format: "DD.MM.YYYY HH:mm" }
-      - { label: "תמונה", name: "image", widget: "image", required: false }
-      - { label: "קטגוריה", name: "category", widget: "select", options: ["ביטחון", "צבא", "פוליטיקה", "כלכלה", "עולם", "הציבור"] }
-      - { label: "תוכן המבזק", name: "body", widget: "markdown" }
+      - { label: "קטגוריה", name: "category", widget: "select", options: ["ביטחון", "צבא", "פוליטיקה", "כלכלה", "עולם", "הציבור"], default: "הציבור" }
+      - { label: "תוכן", name: "body", widget: "markdown" }
 
   - name: "pending"
-    label: "חדשות מהבוט (בהמתנה)"
+    label: "⏳ להמתנה (שאר האתרים)"
     folder: "content/pending"
     create: true
     fields:
       - { label: "כותרת", name: "title", widget: "string" }
+      - { label: "מקור", name: "source", widget: "string" }
       - { label: "תאריך", name: "date", widget: "datetime" }
       - { label: "תוכן", name: "body", widget: "markdown" }
-
-  - name: "settings"
-    label: "הגדרות אתר"
-    files:
-      - name: "ads"
-        label: "ניהול פרסומות"
-        file: "content/settings/ads.json"
-        fields:
-          - { label: "פעיל?", name: "active", widget: "boolean", default: true }
-          - { label: "תמונה", name: "image", widget: "image" }
-          - { label: "לינק", name: "link", widget: "string" }
