@@ -1,15 +1,15 @@
 backend:
   name: git-gateway
-  branch: main # וודא שזה שם ה-branch שלך (main או master)
+  branch: main
 
-publish_mode: editorial_workflow # מאפשר לך לאשר כתבות לפני פרסום
+publish_mode: editorial_workflow
 
-media_folder: "images/uploads" # תיקייה לתמונות שתעלה מהאדמין
+media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
 collections:
   - name: "news"
-    label: "מבזקים לפרסום"
+    label: "מבזקים באתר"
     folder: "content/news"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
@@ -21,14 +21,22 @@ collections:
       - { label: "קטגוריה", name: "category", widget: "select", options: ["ביטחון", "צבא", "פוליטיקה", "כלכלה", "עולם", "הציבור"] }
       - { label: "תוכן המבזק", name: "body", widget: "markdown" }
 
+  - name: "pending"
+    label: "חדשות מהבוט (בהמתנה)"
+    folder: "content/pending"
+    create: true
+    fields:
+      - { label: "כותרת", name: "title", widget: "string" }
+      - { label: "תאריך", name: "date", widget: "datetime" }
+      - { label: "תוכן", name: "body", widget: "markdown" }
+
   - name: "settings"
     label: "הגדרות אתר"
-    delete: false # שלא יימחק בטעות
     files:
       - name: "ads"
-        label: "ניהול פרסומות (באנר צד)"
+        label: "ניהול פרסומות"
         file: "content/settings/ads.json"
         fields:
-          - { label: "האם הפרסומת פעילה?", name: "active", widget: "boolean", default: true }
-          - { label: "תמונת הבאנר", name: "image", widget: "image" }
-          - { label: "קישור בלחיצה (URL)", name: "link", widget: "string" }
+          - { label: "פעיל?", name: "active", widget: "boolean", default: true }
+          - { label: "תמונה", name: "image", widget: "image" }
+          - { label: "לינק", name: "link", widget: "string" }
