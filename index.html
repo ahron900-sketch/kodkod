@@ -72,7 +72,8 @@
         .wrapper { display: flex; max-width: 1400px; margin: 40px auto; padding: 0 20px; gap: 30px; }
         .main-content { flex: 1; }
         .side-left { width: 210px; flex-shrink: 0; }
-        .ad-box { background: var(--card); border: 1px solid var(--border); height: 600px; position: sticky; top: 150px; display: flex; align-items: center; justify-content: center; color: var(--dim); font-weight: bold; writing-mode: vertical-rl; border-radius: 8px; }
+        .ad-box { background: var(--card); border: 1px solid var(--border); height: 600px; position: sticky; top: 150px; display: flex; align-items: center; justify-content: center; color: var(--dim); font-weight: bold; writing-mode: vertical-rl; border-radius: 8px; overflow: hidden; }
+        .ad-box img { width: 100%; height: 100%; object-fit: cover; }
         
         .hero { position: relative; height: 500px; border: 1px solid var(--border); overflow: hidden; cursor: pointer; background: var(--card); margin-bottom: 40px; border-radius: 15px; }
         .hero-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: 1s; }
@@ -104,11 +105,9 @@
         .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 25px; border-bottom: 2px solid var(--border); padding-bottom: 10px; }
         .section-title { font-family: 'Orbitron'; font-size: 28px; margin: 0; color: var(--text); border-right: 5px solid var(--primary); padding-right: 15px; }
         
-        /* כפתור חזרה חדש בצד ימין - מלבן */
         .back-btn-rect { display: inline-block; background: var(--card); border: 2px solid var(--primary); color: var(--text); padding: 8px 30px; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 16px; transition: 0.3s; float: right; margin-bottom: 20px; margin-left: 20px;}
         .back-btn-rect:hover { background: var(--primary); color: #000; }
 
-        /* עיצוב דף אודות עם רקע נוף */
         .about-container {
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1506744626753-1fa44df31c78?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
             padding: 60px 40px;
@@ -126,7 +125,7 @@
             transform: translate(-50%, -50%);
             font-family: 'Orbitron';
             font-size: 150px;
-            color: rgba(248, 231, 28, 0.1); /* צהוב שקוף */
+            color: rgba(248, 231, 28, 0.1); 
             z-index: 1;
             pointer-events: none;
             user-select: none;
@@ -293,7 +292,9 @@
             <div id="artView"></div>
         </div>
     </main>
-    <aside class="side-left"><div class="ad-box">AD SPACE | KODKOD</div></aside>
+    <aside class="side-left" id="sidebarAd">
+        <div class="ad-box">AD SPACE | KODKOD</div>
+    </aside>
 </div>
 
 <footer>
@@ -335,6 +336,21 @@
 <script>
     let db = [];
     const defaultImg = "favicon.png";
+
+    // פונקציה חדשה לטעינת פרסומות מהאדמין
+    async function loadSidebarAd() {
+        try {
+            const res = await fetch('https://raw.githubusercontent.com/ahron900-sketch/kodkod/main/content/settings/ads.json');
+            const data = await res.json();
+            if(data.active && data.image) {
+                document.getElementById('sidebarAd').innerHTML = `
+                    <a href="${data.link}" target="_blank" class="ad-box">
+                        <img src="${data.image}" alt="Advertisement">
+                    </a>
+                `;
+            }
+        } catch(e) { console.log("Ad load failed or empty"); }
+    }
 
     function updatePageMeta(title) {
         document.getElementById('dynamicTitle').innerText = title + " | קודקוד חדשות";
@@ -520,60 +536,43 @@
         const otherArticles = db.filter(x => x.id !== id).slice(0, 6).map(m => `
             <div class="card" onclick="openArt('${m.id}')" style="margin-top:20px; border-radius:12px; border:1px solid var(--border); overflow:hidden; position:relative;">
                 <span class="card-cat-label">${m.cat}</span>
-                <img src="${m.img}" onerror="this.src='${defaultImg}'" style="width:100%; height:150px; object-fit:cover;">
-                <div style="padding:15px; background:var(--card);">
-                    <h4 style="margin:5px 0 0 0; font-size:16px;">${m.title}</h4>
-                </div>
+                <img src="${m.img}" onerror="this.src='${defaultImg}'">
+                <div class="card-body"><h3>${m.title}</h3></div>
             </div>
         `).join('');
 
         document.getElementById('artView').innerHTML = `
-            <h1 style="font-size:42px; margin:20px 0; line-height:1.1;">${n.title}</h1>
-            
-            <div style="display:flex; gap:15px; margin-bottom: 25px; flex-wrap:wrap;">
-                <button onclick="shareWhatsApp('${n.id}')" class="share-btn whatsapp-btn">
-                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.305-.885-.653-1.48-1.459-1.653-1.756-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                    שתף בוואטסאפ
-                </button>
-                <button onclick="copyLink('${n.id}')" class="share-btn link-btn">
-                    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
-                    העתק קישור
-                </button>
-                
-                <button onclick="reportContent('${n.title.replace(/'/g, "\\'")}')" class="share-btn report-btn" title="דווח על תוכן פוגעני">
-                    <svg viewBox="0 0 24 24"><path d="M15.73 3H8.27L3 8.27v7.46L8.27 21h7.46L21 15.73V8.27L15.73 3zM12 17.3c-.72 0-1.3-.58-1.3-1.3 0-.72.58-1.3 1.3-1.3.72 0 1.3.58 1.3 1.3 0 .72-.58 1.3-1.3 1.3zm1-4.3h-2V7h2v6z"/></svg>
-                    דווח על תוכן
-                </button>
+            <h1 style="font-size:40px; font-weight:800; line-height:1.2; margin-bottom:10px;">${n.title}</h1>
+            <div style="display:flex; gap:15px; margin-bottom:25px;">
+                <button class="share-btn whatsapp-btn" onclick="shareWhatsApp('${n.id}')"><svg viewBox="0 0 24 24"><path d="M12.031 6.172c-2.32 0-4.591.899-6.336 2.545a8.134 8.134 0 0 0-2.43 5.767c.01 1.636.511 3.23 1.455 4.614l-1.07 3.84 3.993-1.033a8.196 8.196 0 0 0 4.388 1.258h.001c2.321 0 4.592-.899 6.338-2.545a8.133 8.133 0 0 0 2.43-5.768c-.01-1.635-.512-3.23-1.456-4.614a8.146 8.146 0 0 0-3.813-4.064zM18.156 17.354a6.746 6.746 0 0 1-4.71 1.894h-.001c-1.285 0-2.541-.336-3.64-1.01l-.261-.157-2.383.615.635-2.28-.172-.271a6.764 6.764 0 0 1-1.127-3.722c.005-3.714 3.06-6.736 6.817-6.736a6.772 6.772 0 0 1 4.795 1.986 6.732 6.732 0 0 1 2.023 4.774 6.745 6.745 0 0 1-2.021 4.722zm-2.043-2.731c-.114-.19-.418-.303-.873-.531-.456-.228-2.693-1.328-3.111-1.479-.417-.152-.721-.227-.114-.304s1.253-1.139 1.537-1.479c.285-.341.285-.569.114-.797-.171-.227-.721-1.744-1.101-2.654-.37-.883-.721-.758-1.101-.758s-.759-.038-1.176-.038c-.417 0-1.099.152-1.668.759-.569.607-2.164 2.124-2.164 5.16s2.202 5.961 2.506 6.378c.304.417 4.331 6.621 10.485 9.274 1.464.631 2.607.417 3.513.264.906-.152 2.694-.906 3.073-2.35.379-1.442.379-2.693.266-2.959s-.418-.418-.873-.721z"/></svg> שיתוף בוואטסאפ</button>
+                <button class="share-btn link-btn" onclick="copyLink('${n.id}')"><svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg> העתקת קישור</button>
+                <button class="share-btn report-btn" onclick="reportContent('${n.title.replace(/'/g, "\\'")}')"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg> דווח על תוכן</button>
             </div>
-
-            <img src="${n.img}" onerror="this.src='${defaultImg}'" style="width:100%; border-radius:15px; margin-bottom:20px; border-bottom:4px solid var(--primary);">
-            <div style="font-size:22px; line-height:1.8; white-space: pre-wrap;">${n.content}</div>
-            
-            <hr style="border-color:var(--border); margin: 50px 0 30px 0;">
-            <h2 style="font-family:'Orbitron'; color:var(--text); font-size:30px;">כל העדכונים להמשך קריאה:</h2>
-            <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
-                ${otherArticles}
+            <img src="${n.img}" onerror="this.src='${defaultImg}'" style="width:100%; max-height:500px; object-fit:cover; border-radius:15px; margin-bottom:30px;">
+            <div style="font-size:22px; line-height:1.7; color:var(--text);">${n.content}</div>
+            <div style="margin-top:50px; border-top:2px solid var(--border); padding-top:30px;">
+                <h2 style="font-family:'Orbitron'; color:var(--primary);">כתבות נוספות</h2>
+                <div class="grid">${otherArticles}</div>
             </div>
         `;
     }
 
-    function openHero() { if(db.length > 0) openArt(db[0].id); }
+    function openHero() {
+        if(db.length > 0) openArt(db[0].id);
+    }
+
+    // הפעלה ראשונית
+    loadGitHubNews();
+    loadSidebarAd(); // טעינת הפרסומת עם עליית האתר
 
     if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-mode');
-    
-    loadGitHubNews();
-    
-    if (localStorage.getItem('cookieSeen')) document.getElementById('cookie-notice').style.display = 'none';
-    else document.getElementById('cookie-notice').style.display = 'block';
+    if (!localStorage.getItem('cookieSeen')) document.getElementById('cookie-notice').style.display = 'block';
 
-    // התחברות למערכת הניהול
-    if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", user => {
-            if (!user) {
-                window.netlifyIdentity.on("login", () => { document.location.href = "/admin/"; });
-            }
-        });
-    }
+    window.onpopstate = function(e) {
+        if(e.state && e.state.id) openArt(e.state.id);
+        else showHome();
+    };
 </script>
+
 </body>
 </html>
