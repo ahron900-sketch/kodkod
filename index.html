@@ -507,7 +507,7 @@
     async function loadGitHubNews() {
         const repoOwner = "ahron900-sketch"; 
         const repoName = "kodkod";
-        const path = "content/pending"; 
+        const path = "content/news"; // <-- כאן בוצע השינוי לתיקיית news
         try {
             const response = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}`);
             const files = await response.json();
@@ -530,7 +530,9 @@
             }
             db = fetchedNews;
             updateUI();
-        } catch (e) {}
+        } catch (e) {
+            console.error("שגיאה במשיכת חדשות מגיטהאב:", e);
+        }
     }
 
     function updateUI(data = db, isCategory = false) {
