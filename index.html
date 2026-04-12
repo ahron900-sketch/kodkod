@@ -128,29 +128,27 @@
         .card { background: var(--card); border: 1px solid var(--border); cursor: pointer; border-radius: 12px; overflow: hidden; transition: 0.3s; position: relative;}
         .card img { width: 100%; height: 200px; object-fit: cover; }
         .card-body { padding: 20px; }
-        .card-body h3 { text-align: right; direction: rtl; unicode-bidi: isolate; margin: 0; } /* תיקון לבאג ה-"<-" */
+        .card-body h3 { text-align: right; direction: rtl; unicode-bidi: isolate; margin: 0; }
         .card-cat-label { position: absolute; top: 10px; right: 10px; background: var(--primary); color: #000; font-weight: 800; font-size: 11px; padding: 2px 8px; border-radius: 4px; }
         
-        /* צור קשר */
+        #article, #aboutPage, #advertisePage, #redMailPage, #bombasticContactPage { display: none; }
+        
+        .back-btn-rect { display: inline-block; background: var(--card); border: 2px solid var(--primary); color: var(--text); padding: 8px 30px; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 16px; transition: 0.3s; float: right; margin-bottom: 20px; margin-left: 20px;}
+        .back-btn-rect:hover { background: var(--primary); color: #000; }
+
+        /* סגנון למייל האדום וליצירת קשר הבומבסטי */
         .contact-section { background: var(--card); border: 2px solid var(--primary); border-radius: 20px; padding: 40px; max-width: 600px; margin: 60px auto; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         body.dark-mode .contact-section { box-shadow: none; border-color: var(--primary); }
         .contact-section h2 { font-family: 'Orbitron'; color: var(--primary); text-align: center; margin: 0 0 20px 0; text-shadow: 0 0 1px rgba(0,0,0,0.2); }
         .contact-section input, .contact-section textarea { width: 100%; padding: 12px; margin-bottom: 15px; background: var(--bg); border: 1px solid var(--border); color: var(--text); border-radius: 8px; box-sizing: border-box; font-family: 'Assistant'; }
         .contact-section button { width: 100%; padding: 15px; background: var(--primary); border: none; font-weight: 800; cursor: pointer; border-radius: 8px; font-size: 16px; transition: 0.3s; color: #000; }
 
-        #article, #aboutPage, #advertisePage, #redMailPage, #bombasticContactPage { display: none; }
-        
-        .back-btn-rect { display: inline-block; background: var(--card); border: 2px solid var(--primary); color: var(--text); padding: 8px 30px; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 16px; transition: 0.3s; float: right; margin-bottom: 20px; margin-left: 20px;}
-        .back-btn-rect:hover { background: var(--primary); color: #000; }
-
-        /* סגנון למייל האדום */
         .red-mail-hero { background: linear-gradient(rgba(200, 0, 0, 0.9), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1557683316-973673baf926?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') center/cover no-repeat; padding: 80px 40px; border-radius: 20px; color: #fff; text-align: center; margin-bottom: 40px; border: 3px solid #ff4d4d; }
         .red-mail-hero h1 { font-family: 'Orbitron'; font-size: 50px; color: #ff4d4d; margin-bottom: 10px; text-shadow: 0 0 10px rgba(255,0,0,0.5); }
         .red-mail-card { background: var(--card); padding: 40px; border-radius: 15px; border: 1px solid var(--border); margin-bottom: 30px; }
         .red-mail-step { display: flex; align-items: flex-start; gap: 20px; margin-bottom: 30px; border-right: 4px solid var(--primary); padding-right: 20px; }
         .step-num { font-size: 30px; font-weight: 900; color: var(--primary); opacity: 0.5; }
 
-        /* עיצוב לעמוד יצירת קשר הבומבסטי */
         .bombastic-contact {
             background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') center/cover fixed;
             padding: 80px 20px;
@@ -175,6 +173,27 @@
 
         #successOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 9999; align-items: center; justify-content: center; flex-direction: column; color: white; font-family: 'Assistant'; }
         .check-circle { width: 100px; height: 100px; border-radius: 50%; background: #4caf50; display: flex; align-items: center; justify-content: center; }
+
+        /* סגנונות חדשים לדף האודות המשודרג */
+        .about-enhanced { background: var(--card); border: 1px solid var(--border); border-radius: 15px; padding: 50px; max-width: 900px; margin: 0 auto; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        .about-enhanced h1 { font-size: 42px; font-weight: 900; color: var(--text); margin-bottom: 20px; line-height: 1.2; }
+        .about-enhanced h1 span { color: var(--primary); }
+        .about-enhanced .lead { font-size: 22px; font-weight: 700; color: var(--dim); margin-bottom: 30px; line-height: 1.6; }
+        
+        .read-more-content { max-height: 0; overflow: hidden; transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1); opacity: 0; }
+        .read-more-content.expanded { max-height: 3000px; opacity: 1; margin-top: 30px; }
+        
+        .about-enhanced h2 { font-size: 28px; color: var(--text); margin-top: 40px; border-bottom: 2px solid var(--primary); display: inline-block; padding-bottom: 5px; }
+        .about-enhanced h3 { font-size: 22px; color: var(--dim); margin-top: 25px; }
+        .about-enhanced p { font-size: 18px; line-height: 1.8; color: var(--text); }
+        .about-enhanced ul { list-style-type: none; padding: 0; margin-top: 20px; }
+        .about-enhanced ul li { font-size: 18px; padding-right: 25px; position: relative; margin-bottom: 15px; color: var(--text); }
+        .about-enhanced ul li::before { content: "✔"; position: absolute; right: 0; color: var(--primary); font-weight: bold; }
+
+        .btn-toggle-read { background: var(--primary); color: #000; font-size: 18px; font-weight: 800; padding: 12px 30px; border: none; border-radius: 30px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; margin: 0 auto; transition: 0.3s; box-shadow: 0 4px 10px rgba(248, 231, 28, 0.3); }
+        .btn-toggle-read:hover { transform: scale(1.05); }
+        .btn-toggle-read svg { width: 24px; height: 24px; transition: transform 0.4s; }
+        .btn-toggle-read.active svg { transform: rotate(180deg); }
     </style>
 </head>
 <body>
@@ -233,17 +252,7 @@
             <div id="categoryHeaderContainer"></div>
             
             <div class="grid" id="mainGrid"></div>
-            
-            <div class="contact-section" id="contact">
-                <h2>יצירת קשר למפרסמים</h2>
-                <form action="https://formspree.io/f/xeelpjwg" method="POST" onsubmit="handleFormSubmit(event)">
-                    <input type="text" name="name" placeholder="שם מלא / חברה" required>
-                    <input type="email" name="email" placeholder="אימייל לחזרה" required>
-                    <textarea name="message" rows="4" placeholder="פרטי ההצעה לפרסום" required></textarea>
-                    <button type="submit">שלח הצעה למערכת</button>
-                </form>
             </div>
-        </div>
 
         <div id="redMailPage">
             <div class="clearfix"><button class="back-btn-rect" onclick="showHome()">חזרה לראשי</button></div>
@@ -321,8 +330,48 @@
         </div>
 
         <div id="aboutPage">
-            <div class="clearfix"><button class="back-btn-rect" onclick="showHome()">חזרה</button></div>
-            <div class="about-container"><div class="about-logo-bg">KODKOD</div><div class="about-content-inner"><h2>אודות</h2><p>קודקוד הוא דסק חדשות עצמאי.</p></div></div>
+            <div class="clearfix"><button class="back-btn-rect" onclick="showHome()">חזרה לראשי</button></div>
+            
+            <article class="about-enhanced">
+                <h1>קודקוד <span>–</span> הלב הפועם של עולם החדשות החרדי</h1>
+                <p class="lead">
+                    ברוכים הבאים ל"קודקוד", המרכז החדשותי המוביל המנגיש את אירועי היום לכלל המגזר החרדי. אנו מחויבים להביא לכם את המידע המדויק, המהיר והאיכותי ביותר, תוך שמירה על ערכי התורה, כבוד המגזר וסינון קפדני.
+                </p>
+                
+                <button class="btn-toggle-read" id="toggleReadBtn" onclick="toggleReadMore()">
+                    <span id="btnText">קרא עוד</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                </button>
+
+                <div class="read-more-content" id="extendedAboutContent">
+                    <h2>החזון שלנו – המצפן החדשותי של הציבור החרדי</h2>
+                    <p>
+                        אתר "קודקוד" הוקם מתוך הבנה עמוקה של צרכי הציבור החרדי בעידן הדיגיטלי המהיר. אנו חיים בתקופה שבה המידע זורם מכל עבר בקצב מסחרר, אך במקביל, הצורך בתוכן מסונן, נקי ואמין מעולם לא היה קריטי יותר. החזון שלנו הוא להוות את "כיכר העיר" הדיגיטלית החדשה – מקום מפגש בטוח שבו קוראים מכל הגילאים ומכל הקהילות, מחסידים וליטאים ועד לבני עדות המזרח, יכולים להתעדכן בנעשה בארץ ובעולם מבלי להתפשר על השקפת עולמם.
+                    </p>
+
+                    <h3>סיקור עמוק ומהימן - חדשות חצרות קודש</h3>
+                    <p>
+                        עולם התורה, הישיבות וחצרות הרבנים נמצאים בראש סדר העדיפויות שלנו. מערכת קודקוד פועלת ללא הרף כדי להביא לכם דיווחים חיים, תמונות בלעדיות וסיקורים נרחבים מאירועי החג, חתונות הענק, כינוסי ההלכה והמסעות של גדולי ישראל. אנו מקפידים על כבוד תלמידי חכמים ומעניקים במה מכובדת לכלל הקהילות.
+                    </p>
+
+                    <h3>כלכלה מזווית יהודית, פוליטיקה וממשל</h3>
+                    <p>
+                        בצד החדשות המגזריות, "קודקוד" מספק כיסוי מקיף וחסר פשרות של הנעשה במסדרונות השלטון, הכנסת והממשלה. הפרשנים הפוליטיים שלנו מנתחים את המהלכים המורכבים ביותר בשפה ברורה וקולחת. בנוסף, מדור הכלכלה שלנו מנגיש מידע חשוב על צרכנות נבונה, שוק ההון, נדל"ן והלכות ריבית בשוק המודרני, הכל מותאם במיוחד לאורח החיים של הבית היהודי.
+                    </p>
+
+                    <h2>למה לקרוא דווקא ב"קודקוד"?</h2>
+                    <ul>
+                        <li><strong>מהירות ללא פשרות:</strong> מערכת המבזקים שלנו פועלת 24 שעות ביממה (למעט שבתות וחגים) כדי להביא לכם התראות ועדכונים בזמן אמת, לפני כולם.</li>
+                        <li><strong>תוכן נקי וראוי:</strong> כל ידיעה, תמונה או סרטון שעולים לאתר עוברים בדיקה וסינון קפדניים כדי להבטיח התאמה מלאה לכללי ההלכה ולצביון המגזר.</li>
+                        <li><strong>אובייקטיביות ומקצועיות:</strong> אנו מחויבים לאמת. הכתבים שלנו מספקים דיווחים אמינים הישר מהשטח, ללא הטיות וללא אינטרסים זרים.</li>
+                        <li><strong>טכנולוגיה ונגישות:</strong> האתר נבנה בטכנולוגיות המתקדמות ביותר כדי להבטיח גלישה חלקה, מהירה ונוחה מכל מכשיר.</li>
+                    </ul>
+
+                    <p style="margin-top: 30px; font-weight: bold; text-align: center; font-size: 20px; color: var(--primary); text-shadow: 0 0 2px rgba(0,0,0,0.1);">
+                        "קודקוד" – כי בחדשות, הדיוק הוא מעל הכל. תודה שאתם צועדים יחד איתנו.
+                    </p>
+                </div>
+            </article>
         </div>
 
         <div id="advertisePage">
@@ -412,23 +461,36 @@
         safePushState({page: 'about'}, 'אודות', '?page=about');
     }
 
+    // פונקציה חדשה לאנימציית ה"קרא עוד" בדף האודות
+    function toggleReadMore() {
+        const content = document.getElementById('extendedAboutContent');
+        const btn = document.getElementById('toggleReadBtn');
+        const btnText = document.getElementById('btnText');
+        
+        content.classList.toggle('expanded');
+        btn.classList.toggle('active');
+        
+        if(content.classList.contains('expanded')) {
+            btnText.innerText = 'סגור';
+        } else {
+            btnText.innerText = 'קרא עוד';
+        }
+    }
+
     function showHome() { 
         hideAllPages();
         document.getElementById('home').style.display = 'block'; 
         document.getElementById('heroSection').style.display = 'block';
-        document.getElementById('contact').style.display = 'block';
-        document.getElementById('categoryHeaderContainer').innerHTML = ''; // מנקה את כותרת הקטגוריה
+        document.getElementById('categoryHeaderContainer').innerHTML = ''; 
         updatePageMeta("קודקוד - חדשות ומבזקים בזמן אמת");
         updateUI(db); 
         safePushState({page: 'home'}, 'בית', window.location.pathname);
     }
 
-    // פונקציית סינון חדשה שפותחת עמוד קטגוריה
     function filterByCat(cat) {
         hideAllPages();
         document.getElementById('home').style.display = 'block';
         document.getElementById('heroSection').style.display = 'none'; 
-        document.getElementById('contact').style.display = 'none'; 
         
         const filtered = db.filter(n => n.cat === cat);
         
@@ -445,7 +507,7 @@
     async function loadGitHubNews() {
         const repoOwner = "ahron900-sketch"; 
         const repoName = "kodkod";
-        const path = "content/pending"; // שונה ל- pending
+        const path = "content/pending"; 
         try {
             const response = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}`);
             const files = await response.json();
@@ -471,7 +533,6 @@
         } catch (e) {}
     }
 
-    // הוסר התו המיותר שיצר את החץ בכתבות
     function updateUI(data = db, isCategory = false) {
         if (data.length === 0) return;
         
