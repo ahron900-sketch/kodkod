@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <title id="dynamicTitle">קודקוד - בקרוב החשיפה הגדולה</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <style>
+        /* הגדרות עיצוב למסך ההמתנה המטורף */
+        :root {
+            --gold: #fdbb2d;
+            --dark-blue: #1a2a6c;
+        }
+
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            overflow: hidden; /* מונע גלילה לאתר הקיים */
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        /* הרקע המונפש */
+        #launch-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(-45deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            z-index: 999999; /* מעל הכל */
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            color: white; text-align: center;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .content-box {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(15px);
+            padding: 50px; border-radius: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            max-width: 90%;
+        }
+
+        h1 { font-size: 4rem; margin: 0; color: var(--gold); text-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        p { font-size: 1.5rem; margin: 10px 0 40px; opacity: 0.9; }
+
+        /* הטיימר */
+        .timer-container { display: flex; gap: 20px; justify-content: center; }
+        .time-part {
+            background: rgba(255,255,255,0.1);
+            padding: 20px; border-radius: 20px; min-width: 100px;
+            border-bottom: 5px solid var(--gold);
+        }
+        .time-num { font-size: 3.5rem; font-weight: 800; display: block; color: #fff; }
+        .time-label { font-size: 1rem; color: var(--gold); }
+
+        .btn-notify {
+            margin-top: 40px; padding: 15px 40px;
+            font-size: 1.2rem; background: var(--gold);
+            color: #000; border: none; border-radius: 50px;
+            cursor: pointer; font-weight: bold; transition: 0.3s;
+        }
+        .btn-notify:hover { transform: scale(1.1); box-shadow: 0 0 20px var(--gold); }
+    </style>
+</head>
+<body>
+
+    <div id="launch-overlay">
+        <div class="content-box">
+            <img src="favicon.png" style="width: 80px; margin-bottom: 20px;" onerror="this.style.display='none'">
+            <h1>קודקוד חדשות</h1>
+            <p>המהפכה בחדשות המגזר החרדי מתחילה בעוד:</p>
+
+            <div class="timer-container">
+                <div class="time-part"><span class="time-num" id="days">00</span><span class="time-label">ימים</span></div>
+                <div class="time-part"><span class="time-num" id="hours">00</span><span class="time-label">שעות</span></div>
+                <div class="time-part"><span class="time-num" id="minutes">00</span><span class="time-label">דקות</span></div>
+                <div class="time-part"><span class="time-num" id="seconds">00</span><span class="time-label">שניות</span></div>
+            </div>
+
+            <button class="btn-notify" onclick="alert('נרשמת בהצלחה! עדכון יישלח אליך ביום ההשקה.')">עדכנו אותי כשהאתר עולה</button>
+        </div>
+    </div>
+
+    <script>
+        // הגדרת תאריך היעד: 1 באוגוסט 2026
+        const targetDate = new Date("August 1, 2026 00:00:00").getTime();
+
+        const updateTimer = setInterval(() => {
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+
+            if (diff <= 0) {
+                clearInterval(updateTimer);
+                document.getElementById('launch-overlay').style.display = 'none'; // חושף את האתר ביום הפתיחה
+                return;
+            }
+
+            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById('minutes').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('seconds').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+        }, 1000);
+    </script>
+
+</body>
+</html>
