@@ -1,4 +1,5 @@
 import feedparser
+import html
 import os
 import re
 import time
@@ -6,45 +7,30 @@ import shutil
 import urllib.request
 from datetime import datetime
 
-# מקורות RSS - ישראל + עולם, ממוינים לקטגוריות
+# מקורות RSS - כולם בעברית, ממוינים לקטגוריות (כל URL כאן נבדק ואומת שמחזיר כתבות)
 rss_feeds = {
-    # חדשות חרדיות / ישראל
+    # חרדים
     "אמס": ("https://www.emess.co.il/feed/", "חרדים"),
-    "כיכר השבת": ("https://www.kikar.co.il/rss", "חרדים"),
     "כל רגע": ("https://93fm.co.il/feed/", "חרדים"),
     "בחדרי חרדים": ("https://www.bhol.co.il/feed", "חרדים"),
+
+    # חדשות ישראל
     "ynet": ("https://www.ynet.co.il/Integration/StoryRss2.xml", "חדשות"),
     "וואלה חדשות": ("https://rss.walla.co.il/feed/1?type=main", "חדשות"),
     "מאקו": ("https://www.mako.co.il/rss/news-israel.xml", "חדשות"),
-    "כאן חדשות": ("https://www.kan.org.il/rss/rss.aspx?FolderName=Web-Israel", "חדשות"),
-    "גלובס": ("https://www.globes.co.il/webservice/rss/rssfeeder.asmx/FeederNode?iID=585", "כלכלה"),
-    "כלכליסט": ("https://www.calcalist.co.il/GeneralRSS/0,16335,L-8,00.xml", "כלכלה"),
-    "ynet ספורט": ("https://www.ynet.co.il/Integration/StoryRss1539.xml", "ספורט"),
+    "מעריב": ("https://www.maariv.co.il/Rss/RssFeedsAllNews", "חדשות"),
 
-    # חדשות עולם (אנגלית)
-    "BBC World": ("http://feeds.bbci.co.uk/news/world/rss.xml", "עולם"),
-    "CNN World": ("http://rss.cnn.com/rss/edition_world.rss", "עולם"),
-    "Reuters World": ("https://feeds.reuters.com/Reuters/worldNews", "עולם"),
-    "Al Jazeera": ("https://www.aljazeera.com/xml/rss/all.xml", "עולם"),
-    "NY Times World": ("https://rss.nytimes.com/services/xml/rss/nyt/World.xml", "עולם"),
-    "The Guardian World": ("https://www.theguardian.com/world/rss", "עולם"),
+    # כלכלה
+    "גלובס": ("https://www.globes.co.il/webservice/rss/rssfeeder.asmx/FeederNode?iID=585", "כלכלה"),
 
     # טכנולוגיה
-    "TechCrunch": ("https://techcrunch.com/feed/", "טכנולוגיה"),
-    "The Verge": ("https://www.theverge.com/rss/index.xml", "טכנולוגיה"),
     "Geektime": ("https://www.geektime.co.il/feed/", "טכנולוגיה"),
-
-    # ספורט עולם
-    "BBC Sport": ("http://feeds.bbci.co.uk/sport/rss.xml", "ספורט"),
-    "ESPN": ("https://www.espn.com/espn/rss/news", "ספורט"),
 }
 
 # ערוצי יוטיוב - נשאבים כווידאו דרך YouTube RSS (אין צורך במפתח API)
+# הוסף כאן channel_id אמיתיים (נמצא ב-view-source של דף הערוץ, tag <meta itemprop="channelId">)
 youtube_channels = {
-    # channel_id: (display name, category)
-    "UCeY0bbntWzzVIaj2z3QigXg": ("NBC News", "עולם"),
-    "UCknLrEdhRCp1aegoMqRaCZg": ("DW News", "עולם"),
-    "UCupvZG-5ko_eiXAupbDfxWw": ("CNN", "עולם"),
+    # "CHANNEL_ID_HERE": ("שם המקור", "קטגוריה"),
 }
 
 LIVE_DIR = "content/news"
@@ -59,7 +45,8 @@ def clean_html(raw_html):
     if not raw_html:
         return ""
     cleanr = re.compile('<.*?>')
-    return re.sub(cleanr, '', raw_html).strip()
+    text = re.sub(cleanr, '', raw_html).strip()
+    return html.unescape(text)
 
 def extract_image(entry):
     if 'media_thumbnail' in entry and len(entry.media_thumbnail) > 0:
@@ -86,20 +73,78 @@ OG_IMAGE_RE = re.compile(
 )
 
 
-def fetch_og_image(link):
+def fetch_page(link, max_bytes=400_000):
     if not link:
         return ""
     try:
         req = urllib.request.Request(link, headers={"User-Agent": "Mozilla/5.0 (compatible; KodkodBot/1.0)"})
         with urllib.request.urlopen(req, timeout=6) as resp:
-            html_bytes = resp.read(200_000)  # only need the <head>, cap the read
-        html_text = html_bytes.decode("utf-8", errors="ignore")
-        m = OG_IMAGE_RE.search(html_text)
-        if m:
-            return m.group(1)
+            html_bytes = resp.read(max_bytes)
+        return html_bytes.decode("utf-8", errors="ignore")
     except Exception:
-        pass
-    return ""
+        return ""
+
+
+def fetch_og_image(link):
+    html_text = fetch_page(link, max_bytes=200_000)
+    if not html_text:
+        return ""
+    m = OG_IMAGE_RE.search(html_text)
+    return m.group(1) if m else ""
+
+
+ARTICLE_TAG_RE = re.compile(r'<article[^>]*>(.*?)</article>', re.DOTALL | re.IGNORECASE)
+# common WordPress/CMS content-wrapper class names, tried when there's no <article> tag.
+# We don't try to precisely match the closing </div> (nesting makes that unreliable with
+# regex) - instead grab a generous bounded slice after the opening tag and let the
+# paragraph-length + junk-marker filters below reject anything that isn't real prose.
+CONTENT_DIV_OPEN_RE = re.compile(
+    r'<div[^>]+class=["\'][^"\']*\b(?:article-content-inside|entry-content|post-content|article-body|article__content)\b[^"\']*["\'][^>]*>',
+    re.IGNORECASE,
+)
+PARAGRAPH_RE = re.compile(r'<p[^>]*>(.*?)</p>', re.DOTALL | re.IGNORECASE)
+TAG_STRIP_RE = re.compile(r'<[^>]+>')
+CONTENT_SLICE_SIZE = 20_000
+
+# words that show up in nav/cookie/menu junk but essentially never in real article prose -
+# if too many paragraphs contain these, we probably scraped chrome, not content
+JUNK_MARKERS_RE = re.compile(
+    r'\b(cookie|subscribe|navigation|skip to content|sign in|newsletter|all rights reserved|privacy policy)\b',
+    re.IGNORECASE,
+)
+
+
+def fetch_full_article_text(link, min_len_needed):
+    """Best-effort: pull the <article> block's paragraphs from the live page
+    when the RSS summary is too short. Returns '' if it can't find enough,
+    or if what it found looks like nav/cookie-banner junk rather than prose."""
+    html_text = fetch_page(link)
+    if not html_text:
+        return ""
+    scope = None
+    m = ARTICLE_TAG_RE.search(html_text)
+    if m:
+        scope = m.group(1)
+    else:
+        m2 = CONTENT_DIV_OPEN_RE.search(html_text)
+        if m2:
+            scope = html_text[m2.end():m2.end() + CONTENT_SLICE_SIZE]
+    if not scope:
+        return ""
+    paragraphs = []
+    junk_hits = 0
+    for p in PARAGRAPH_RE.findall(scope):
+        text = TAG_STRIP_RE.sub("", p).strip()
+        text = re.sub(r'\s+', ' ', text)
+        text = html.unescape(text)
+        if len(text) > 30:  # skip short boilerplate/caption paragraphs
+            paragraphs.append(text)
+            if JUNK_MARKERS_RE.search(text):
+                junk_hits += 1
+    if not paragraphs or junk_hits > len(paragraphs) // 3:
+        return ""
+    joined = "\n\n".join(paragraphs)
+    return joined if len(joined) > min_len_needed else ""
 
 def manage_archive():
     now = time.time()
@@ -117,6 +162,9 @@ def manage_archive():
                     except Exception:
                         pass
 
+MIN_CONTENT_LEN = 400
+
+
 def save_article(title, link, content, image_url, source_name, category, video_id=""):
     filename = f"{sanitize_filename(title)}.md"
     exists = any(os.path.exists(os.path.join(d, filename)) for d in [LIVE_DIR, PENDING_DIR, ARCHIVE_DIR])
@@ -124,6 +172,10 @@ def save_article(title, link, content, image_url, source_name, category, video_i
         return
     if not image_url and not video_id:
         image_url = fetch_og_image(link)
+    if not video_id and len(content) < MIN_CONTENT_LEN:
+        full_text = fetch_full_article_text(link, MIN_CONTENT_LEN)
+        if full_text:
+            content = full_text
     date_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     video_line = f'\nvideo_id: "{video_id}"' if video_id else ""
     md_content = f"""---
