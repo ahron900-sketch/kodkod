@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eef0f4"/>
+      <stop offset="1" stop-color="#dde1e8"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#g)"/>
+  <text x="300" y="210" font-family="Arial, sans-serif" font-size="28" fill="#9aa0ac" text-anchor="middle" font-weight="700">קודקוד חדשות</text>
+</svg>

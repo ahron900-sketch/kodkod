@@ -31,10 +31,11 @@
       resultsEl.innerHTML = matches
         .slice(0, 60)
         .map((a) => {
-          const img = a.image || "/favicon.png";
+          const img = a.image || "/assets/placeholder.svg";
+          const playBadge = a.video ? '<span class="play-badge">▶</span>' : "";
           return `
           <a class="card" href="/article/${a.slug}.html">
-            <div class="card-img" style="background-image:url('${escapeHtml(img)}')"></div>
+            <div class="card-img" style="background-image:url('${escapeHtml(img)}')">${playBadge}</div>
             <div class="card-body">
               <span class="card-cat">${escapeHtml(a.category)}</span>
               <h3>${escapeHtml(a.title)}</h3>

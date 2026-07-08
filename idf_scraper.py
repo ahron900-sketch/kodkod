@@ -38,6 +38,14 @@ rss_feeds = {
     "ESPN": ("https://www.espn.com/espn/rss/news", "ספורט"),
 }
 
+# ערוצי יוטיוב - נשאבים כווידאו דרך YouTube RSS (אין צורך במפתח API)
+youtube_channels = {
+    # channel_id: (display name, category)
+    "UCeY0bbntWzzVIaj2z3QigXg": ("NBC News", "עולם"),
+    "UCknLrEdhRCp1aegoMqRaCZg": ("DW News", "עולם"),
+    "UCupvZG-5ko_eiXAupbDfxWw": ("CNN", "עולם"),
+}
+
 LIVE_DIR = "content/news"
 PENDING_DIR = "content/pending"
 ARCHIVE_DIR = "content/archive"
@@ -53,6 +61,8 @@ def clean_html(raw_html):
     return re.sub(cleanr, '', raw_html).strip()
 
 def extract_image(entry):
+    if 'media_thumbnail' in entry and len(entry.media_thumbnail) > 0:
+        return entry.media_thumbnail[0].get('url', "")
     if 'media_content' in entry and len(entry.media_content) > 0:
         return entry.media_content[0].get('url', "")
     if 'links' in entry:
@@ -61,6 +71,11 @@ def extract_image(entry):
                 return link.href
     if 'enclosures' in entry and len(entry.enclosures) > 0:
         return entry.enclosures[0].get('url', "")
+    # fall back to first <img> found in the description HTML
+    desc = entry.get('description', '') or entry.get('summary', '')
+    m = re.search(r'<img[^>]+src="([^"]+)"', desc)
+    if m:
+        return m.group(1)
     return ""
 
 def manage_archive():
@@ -79,6 +94,32 @@ def manage_archive():
                     except Exception:
                         pass
 
+def save_article(title, link, content, image_url, source_name, category, video_id=""):
+    filename = f"{sanitize_filename(title)}.md"
+    exists = any(os.path.exists(os.path.join(d, filename)) for d in [LIVE_DIR, PENDING_DIR, ARCHIVE_DIR])
+    if exists:
+        return
+    date_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    video_line = f'\nvideo_id: "{video_id}"' if video_id else ""
+    md_content = f"""---
+title: >-
+  {title}
+date: "{date_str}"
+source: "{source_name}"
+image: "{image_url}"
+link: "{link}"
+category: "{category}"{video_line}
+---
+
+{content}
+
+[קרא את הכתבה המלאה במקור]({link})
+"""
+    with open(os.path.join(LIVE_DIR, filename), "w", encoding="utf-8") as f:
+        f.write(md_content)
+    print(f"נשמר: {title}")
+
+
 def fetch_news():
     manage_archive()
 
@@ -90,38 +131,30 @@ def fetch_news():
             print(f"שגיאה בשאיבה מ-{source_name}: {e}")
             continue
 
-        target_dir = LIVE_DIR
-
         for entry in feed.entries[:15]:
             title = entry.get('title', 'ללא כותרת').strip().replace("\n", " ")
             link = entry.get('link', '')
             content = clean_html(entry.get('description', '') or entry.get('summary', ''))
             image_url = extract_image(entry)
+            save_article(title, link, content, image_url, source_name, category)
 
-            filename = f"{sanitize_filename(title)}.md"
+    for channel_id, (source_name, category) in youtube_channels.items():
+        feed_url = f"https://www.youtube.com/feeds/videos.xml?channel_id={channel_id}"
+        print(f"מתחיל שאיבת וידאו מ-{source_name}...")
+        try:
+            feed = feedparser.parse(feed_url)
+        except Exception as e:
+            print(f"שגיאה בשאיבת וידאו מ-{source_name}: {e}")
+            continue
 
-            exists = any(os.path.exists(os.path.join(d, filename)) for d in [LIVE_DIR, PENDING_DIR, ARCHIVE_DIR])
+        for entry in feed.entries[:10]:
+            title = entry.get('title', 'ללא כותרת').strip().replace("\n", " ")
+            link = entry.get('link', '')
+            video_id = entry.get('yt_videoid', '')
+            content = clean_html(entry.get('summary', ''))
+            image_url = extract_image(entry)
+            save_article(title, link, content, image_url, source_name, category, video_id=video_id)
 
-            if not exists:
-                date_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
-                md_content = f"""---
-title: >-
-  {title}
-date: "{date_str}"
-source: "{source_name}"
-image: "{image_url}"
-link: "{link}"
-category: "{category}"
----
-
-{content}
-
-[קרא את הכתבה המלאה במקור]({link})
-"""
-                with open(os.path.join(target_dir, filename), "w", encoding="utf-8") as f:
-                    f.write(md_content)
-                print(f"נשמר: {title}")
 
 if __name__ == "__main__":
     fetch_news()

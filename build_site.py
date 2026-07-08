@@ -71,6 +71,7 @@ def load_articles():
             "image": data.get("image", ""),
             "link": data.get("link", ""),
             "category": data.get("category", "חדשות"),
+            "video_id": data.get("video_id", ""),
             "body": body,
             "slug": slug,
         })
@@ -128,12 +129,16 @@ PAGE_FOOT = """
 """
 
 
+PLACEHOLDER_IMG = "/assets/placeholder.svg"
+
+
 def render_card(a, featured=False):
-    img = a["image"] or "/favicon.png"
+    img = a["image"] or PLACEHOLDER_IMG
     cls = "card featured" if featured else "card"
+    play_badge = '<span class="play-badge">▶</span>' if a.get("video_id") else ""
     return f"""
     <a class="{cls}" href="/article/{a['slug']}.html">
-      <div class="card-img" style="background-image:url('{html.escape(img)}')"></div>
+      <div class="card-img" style="background-image:url('{html.escape(img)}')">{play_badge}</div>
       <div class="card-body">
         <span class="card-cat">{html.escape(a['category'])}</span>
         <h3>{html.escape(a['title'])}</h3>
@@ -239,10 +244,10 @@ def build():
     rest = articles
     if articles:
         hero = articles[0]
-        hero_img = hero["image"] or "/favicon.png"
+        hero_img = hero["image"] or PLACEHOLDER_IMG
         hero_html = f"""
         <a class="hero" href="/article/{hero['slug']}.html">
-          <img src="{html.escape(hero_img)}" class="hero-img" onerror="this.style.display='none'">
+          <img src="{html.escape(hero_img)}" class="hero-img" onerror="this.src='{PLACEHOLDER_IMG}'">
           <div class="hero-overlay"><span class="card-cat">{html.escape(hero['category'])}</span><h1>{html.escape(hero['title'])}</h1></div>
         </a>"""
         rest = articles[1:]
@@ -259,14 +264,19 @@ def build():
 
     # Article pages
     for a in articles:
-        img_html = f'<img src="{html.escape(a["image"])}" class="article-img" onerror="this.style.display=\'none\'">' if a["image"] else ""
+        if a.get("video_id"):
+            media_html = f'<div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/{html.escape(a["video_id"])}" title="{html.escape(a["title"])}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'
+        elif a["image"]:
+            media_html = f'<img src="{html.escape(a["image"])}" class="article-img" onerror="this.src=\'{PLACEHOLDER_IMG}\'">'
+        else:
+            media_html = ""
         body_paragraphs = render_body(a["body"])
         body = f"""
         <main class="article">
           <span class="card-cat">{html.escape(a['category'])}</span>
           <h1>{html.escape(a['title'])}</h1>
           <div class="article-meta">{html.escape(a['source'])} · {html.escape(a['date'])}</div>
-          {img_html}
+          {media_html}
           <div class="article-body">{body_paragraphs}</div>
           <a class="source-link" href="{html.escape(a['link'])}" target="_blank" rel="noopener">קרא את הכתבה המלאה במקור</a>
         </main>"""
@@ -290,6 +300,7 @@ def build():
             "source": a["source"],
             "date": a["date"],
             "image": a["image"],
+            "video": bool(a.get("video_id")),
         }
         for a in articles
     ]
