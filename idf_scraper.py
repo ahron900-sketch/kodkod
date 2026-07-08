@@ -3,6 +3,7 @@ import os
 import re
 import time
 import shutil
+import urllib.request
 from datetime import datetime
 
 # מקורות RSS - ישראל + עולם, ממוינים לקטגוריות
@@ -78,6 +79,28 @@ def extract_image(entry):
         return m.group(1)
     return ""
 
+
+OG_IMAGE_RE = re.compile(
+    r'<meta[^>]+(?:property|name)=["\']og:image["\'][^>]+content=["\']([^"\']+)["\']',
+    re.IGNORECASE,
+)
+
+
+def fetch_og_image(link):
+    if not link:
+        return ""
+    try:
+        req = urllib.request.Request(link, headers={"User-Agent": "Mozilla/5.0 (compatible; KodkodBot/1.0)"})
+        with urllib.request.urlopen(req, timeout=6) as resp:
+            html_bytes = resp.read(200_000)  # only need the <head>, cap the read
+        html_text = html_bytes.decode("utf-8", errors="ignore")
+        m = OG_IMAGE_RE.search(html_text)
+        if m:
+            return m.group(1)
+    except Exception:
+        pass
+    return ""
+
 def manage_archive():
     now = time.time()
     for d in [LIVE_DIR, PENDING_DIR]:
@@ -99,6 +122,8 @@ def save_article(title, link, content, image_url, source_name, category, video_i
     exists = any(os.path.exists(os.path.join(d, filename)) for d in [LIVE_DIR, PENDING_DIR, ARCHIVE_DIR])
     if exists:
         return
+    if not image_url and not video_id:
+        image_url = fetch_og_image(link)
     date_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     video_line = f'\nvideo_id: "{video_id}"' if video_id else ""
     md_content = f"""---
