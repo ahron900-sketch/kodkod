@@ -328,3 +328,4 @@ a { text-decoration: none; color: inherit; }
   .hero { height: 260px; }
   .hero-overlay h1 { font-size: 1.4rem; }
 }
+/* trigger redeploy after CNAME fix */
