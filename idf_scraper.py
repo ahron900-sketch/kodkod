@@ -104,6 +104,7 @@ CONTENT_DIV_OPEN_RE = re.compile(
 )
 PARAGRAPH_RE = re.compile(r'<p[^>]*>(.*?)</p>', re.DOTALL | re.IGNORECASE)
 TAG_STRIP_RE = re.compile(r'<[^>]+>')
+SCRIPT_STYLE_RE = re.compile(r'<(script|style)\b[^>]*>.*?</\1>', re.DOTALL | re.IGNORECASE)
 CONTENT_SLICE_SIZE = 20_000
 
 # words that show up in nav/cookie/menu junk but essentially never in real article prose -
@@ -112,6 +113,14 @@ JUNK_MARKERS_RE = re.compile(
     r'\b(cookie|subscribe|navigation|skip to content|sign in|newsletter|all rights reserved|privacy policy)\b',
     re.IGNORECASE,
 )
+# leaked inline JS/JSON that sometimes rides along inside a caption <p> on JS-heavy
+# sites (e.g. Next.js's self.__next_s.push hydration snippets) - reject any paragraph
+# containing these outright rather than just down-weighting it
+SCRIPT_LEAK_RE = re.compile(r'(self\.__next_s|"@context"|\.push\(\[|application/ld\+json)')
+# photo-credit captions ("caption text | צילום: X") sometimes get concatenated into the
+# same <p> as real body text with no separator but the pipe - split on each "| credit:"
+# segment and drop everything up to and including it, keeping only what follows
+CAPTION_SPLIT_RE = re.compile(r'.*?\|\s*(?:צילום|Photo|AP|Reuters|AFP|Credit)\s*:[^|]*', re.IGNORECASE)
 
 
 def fetch_full_article_text(link, min_len_needed):
@@ -131,12 +140,16 @@ def fetch_full_article_text(link, min_len_needed):
             scope = html_text[m2.end():m2.end() + CONTENT_SLICE_SIZE]
     if not scope:
         return ""
+    scope = SCRIPT_STYLE_RE.sub("", scope)
     paragraphs = []
     junk_hits = 0
     for p in PARAGRAPH_RE.findall(scope):
+        if SCRIPT_LEAK_RE.search(p):
+            continue
         text = TAG_STRIP_RE.sub("", p).strip()
         text = re.sub(r'\s+', ' ', text)
         text = html.unescape(text)
+        text = CAPTION_SPLIT_RE.sub("", text).strip()
         if len(text) > 30:  # skip short boilerplate/caption paragraphs
             paragraphs.append(text)
             if JUNK_MARKERS_RE.search(text):
