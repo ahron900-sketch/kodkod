@@ -1,0 +1,56 @@
+name: Build and Deploy Site
+on:
+  push:
+    branches: [main]
+    paths:
+      - "content/**"
+      - "build_site.py"
+      - "assets/**"
+      - "favicon.png"
+  workflow_dispatch:
+  schedule:
+    - cron: '*/20 * * * *'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Build static site
+        run: |
+          python build_site.py
+          cp -r assets/. public_site/assets/
+          cp favicon.png public_site/favicon.png 2>/dev/null || true
+          cp CNAME public_site/CNAME 2>/dev/null || true
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public_site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

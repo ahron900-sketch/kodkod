@@ -16,10 +16,10 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9'
+          python-version: '3.11'
 
       - name: Install Dependencies
-        run: pip install feedparser newspaper3k lxml_html_clean
+        run: pip install feedparser lxml_html_clean
 
       - name: Execute Scraper
         run: python idf_scraper.py
@@ -29,6 +29,7 @@ jobs:
           git config --global user.name "News-Bot"
           git config --global user.email "bot@kodkodnews.co.il"
           mkdir -p content/news
-          git add .
-          git commit -m "עדכון חדשות מלא עם תמונות: $(date)" || exit 0
+          git add content/
+          git commit -m "עדכון חדשות: $(date)" || exit 0
+          git pull --rebase origin main
           git push origin main
