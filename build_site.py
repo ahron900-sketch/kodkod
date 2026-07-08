@@ -11,6 +11,7 @@ OUTPUT_DIR = "public_site"
 SITE_NAME = "קודקוד חדשות"
 SITE_URL = "https://kodkodnews.co.il"
 TIP_FORM_ACTION = "https://formspree.io/f/xeelpjwg"
+ARTICLE_PREVIEW_CHARS = 900
 
 
 def slugify(text, fallback):
@@ -94,22 +95,32 @@ PAGE_HEAD = """<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
 <meta name="description" content="{description}">
+<link rel="canonical" href="{canonical}">
+<meta property="og:type" content="{og_type}">
+<meta property="og:title" content="{title}">
+<meta property="og:description" content="{description}">
+<meta property="og:url" content="{canonical}">
+<meta property="og:site_name" content="{site_name}">
+{og_image_tag}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="robots" content="index, follow">
 <link rel="icon" href="/favicon.png">
-<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;400;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css">
+{structured_data}
 <script>
 if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark-mode');
 </script>
 </head>
 <body>
-<div class="ticker"><div class="ticker-move">{ticker_text}</div></div>
 <header class="site-header">
-  <a href="/" class="logo">KOD<span>KOD</span></a>
+  <a href="/" class="logo">קודקוד <span>חדשות</span></a>
   <form class="search-form" action="/search.html" method="get">
     <input type="text" name="q" placeholder="חיפוש חדשות..." autocomplete="off">
     <button type="submit">חיפוש</button>
   </form>
-  <button class="theme-toggle" onclick="document.documentElement.classList.toggle('dark-mode'); localStorage.setItem('theme', document.documentElement.classList.contains('dark-mode') ? 'dark' : 'light');" title="מצב כהה/בהיר">🌓</button>
+  <button class="theme-toggle" onclick="document.documentElement.classList.toggle('dark-mode'); localStorage.setItem('theme', document.documentElement.classList.contains('dark-mode') ? 'dark' : 'light');" title="מצב כהה/בהיר">◐</button>
   <nav class="categories">{cat_links}</nav>
 </header>
 """
@@ -118,7 +129,7 @@ PAGE_FOOT = """
 <footer class="site-footer">
   <nav class="footer-nav">
     <a href="/about.html">אודות</a>
-    <a href="/tip-line.html">המייל האדום - שלחו סקופ</a>
+    <a href="/tip-line.html">שלחו לנו סקופ</a>
     <a href="/advertise.html">פרסמו אצלנו</a>
   </nav>
   <p>© {year} קודקוד חדשות — כל הזכויות שמורות</p>
@@ -129,22 +140,21 @@ PAGE_FOOT = """
 """
 
 
-PLACEHOLDER_IMG = "/assets/placeholder.svg"
-
-
-def render_card(a, featured=False):
+def render_card(a):
     img = a["image"] or PLACEHOLDER_IMG
-    cls = "card featured" if featured else "card"
-    play_badge = '<span class="play-badge">▶</span>' if a.get("video_id") else ""
+    video_badge = '<span class="video-badge">וידאו</span>' if a.get("video_id") else ""
     return f"""
-    <a class="{cls}" href="/article/{a['slug']}.html">
-      <div class="card-img" style="background-image:url('{html.escape(img)}')">{play_badge}</div>
+    <a class="card" href="/article/{a['slug']}.html">
+      <div class="card-img" style="background-image:url('{html.escape(img)}')">{video_badge}</div>
       <div class="card-body">
         <span class="card-cat">{html.escape(a['category'])}</span>
         <h3>{html.escape(a['title'])}</h3>
         <span class="card-meta">{html.escape(a['source'])} · {html.escape(a['date'][:10])}</span>
       </div>
     </a>"""
+
+
+PLACEHOLDER_IMG = "/assets/placeholder.svg"
 
 
 def cat_nav(categories, active=None):
@@ -175,13 +185,23 @@ def render_body(body_text):
     return "".join(paragraphs)
 
 
-def write_page(path, title, description, categories, active_cat, body_html, ticker_text):
+def write_page(path, title, description, categories, active_cat, body_html,
+               ticker_text, canonical=None, og_type="website", og_image="", structured_data=""):
+    canonical = canonical or SITE_URL + "/"
+    og_image_tag = f'<meta property="og:image" content="{html.escape(og_image)}">' if og_image else ""
     full = PAGE_HEAD.format(
         title=html.escape(title),
         description=html.escape(description),
+        canonical=html.escape(canonical),
+        og_type=og_type,
+        site_name=SITE_NAME,
+        og_image_tag=og_image_tag,
         cat_links=cat_nav(categories, active_cat),
-        ticker_text=html.escape(ticker_text),
-    ) + body_html + PAGE_FOOT.format(year=datetime.now().year)
+        structured_data=structured_data,
+    )
+    full = full.replace("<header class=\"site-header\">",
+                         f'<div class="ticker"><div class="ticker-move">{html.escape(ticker_text)}</div></div>\n<header class="site-header">')
+    full += body_html + PAGE_FOOT.format(year=datetime.now().year)
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         f.write(full)
@@ -190,13 +210,13 @@ def write_page(path, title, description, categories, active_cat, body_html, tick
 ABOUT_BODY = """
 <main class="static-page">
   <h1>קודקוד <span>–</span> הלב הפועם של עולם החדשות</h1>
-  <p class="lead">ברוכים הבאים ל"קודקוד", מרכז חדשותי המנגיש את אירועי היום במהירות ובאמינות, עם סיקור רחב של חדשות ישראל והעולם, כלכלה, טכנולוגיה, ספורט וחצרות הקודש.</p>
+  <p class="lead">ברוכים הבאים ל"קודקוד", מרכז חדשותי המנגיש את אירועי היום במהירות ובאמינות, עם סיקור רחב של חדשות ישראל, כלכלה, טכנולוגיה וחרדים.</p>
   <h2>החזון שלנו</h2>
-  <p>לרכז במקום אחד מבזקים ממיטב המקורות בישראל ובעולם, בעברית קריאה, בלי רעש ובלי פרסום פולשני.</p>
+  <p>לרכז במקום אחד מבזקים ממיטב המקורות בישראל, בעברית קריאה, בלי רעש ובלי פרסום פולשני.</p>
   <h2>למה קודקוד?</h2>
   <ul>
     <li><strong>מהירות:</strong> עדכון אוטומטי לאורך היממה ממגוון מקורות.</li>
-    <li><strong>מגוון:</strong> חדשות, עולם, כלכלה, טכנולוגיה, ספורט וחרדים — הכול תחת קורת גג אחת.</li>
+    <li><strong>מגוון:</strong> חדשות, כלכלה, טכנולוגיה וחרדים — הכול תחת קורת גג אחת.</li>
     <li><strong>נקי:</strong> ממשק פשוט, ללא רעש מיותר.</li>
   </ul>
 </main>"""
@@ -215,7 +235,7 @@ ADVERTISE_BODY = f"""
 
 TIP_LINE_BODY = f"""
 <main class="static-page">
-  <h1>המייל <span>האדום</span></h1>
+  <h1>שלחו לנו <span>סקופ</span></h1>
   <p class="lead">ראיתם משהו חריג? יש לכם תיעוד בלעדי מהשטח? שלחו לנו עכשיו — בסודיות מלאה.</p>
   <form class="contact-form" action="{TIP_FORM_ACTION}" method="POST">
     <input type="text" name="name" placeholder="שם (או 'אנונימי')" required>
@@ -225,6 +245,21 @@ TIP_LINE_BODY = f"""
     <button type="submit">שגר דיווח לחדר המבזקים</button>
   </form>
 </main>"""
+
+
+def article_structured_data(a, canonical):
+    data = {
+        "@context": "https://schema.org",
+        "@type": "NewsArticle",
+        "headline": a["title"],
+        "datePublished": a["dt"].isoformat() if a["dt"] != datetime.min else "",
+        "author": {"@type": "Organization", "name": a["source"] or SITE_NAME},
+        "publisher": {"@type": "Organization", "name": SITE_NAME},
+        "mainEntityOfPage": canonical,
+    }
+    if a["image"]:
+        data["image"] = [a["image"]]
+    return f'<script type="application/ld+json">{json.dumps(data, ensure_ascii=False)}</script>'
 
 
 def build():
@@ -253,43 +288,93 @@ def build():
         rest = articles[1:]
     cards = "".join(render_card(a) for a in rest[:60])
     body = f'<main class="grid">{hero_html}<div class="grid-inner">{cards}</div></main>'
-    write_page(os.path.join(OUTPUT_DIR, "index.html"), SITE_NAME, "האתר החדשותי המהיר בישראל ובעולם", categories, None, body, ticker_text)
+    write_page(os.path.join(OUTPUT_DIR, "index.html"), SITE_NAME,
+               "קודקוד חדשות - האתר החדשותי המהיר בישראל: חדשות, כלכלה, טכנולוגיה וחרדים במקום אחד",
+               categories, None, body, ticker_text, canonical=SITE_URL + "/")
 
     # Category pages
     for c in categories:
         c_articles = [a for a in articles if a["category"] == c]
         cards = "".join(render_card(a) for a in c_articles[:100])
         body = f'<main class="grid"><h1 class="page-title">{html.escape(c)}</h1><div class="grid-inner">{cards}</div></main>'
-        write_page(os.path.join(OUTPUT_DIR, "category", f"{slugify(c, c)}.html"), f"{c} - {SITE_NAME}", f"חדשות {c}", categories, c, body, ticker_text)
+        cat_url = f"{SITE_URL}/category/{slugify(c, c)}.html"
+        write_page(os.path.join(OUTPUT_DIR, "category", f"{slugify(c, c)}.html"),
+                   f"חדשות {c} - {SITE_NAME}", f"כל הכתבות בקטגוריית {c} - עדכונים שוטפים מהאתר החדשותי קודקוד",
+                   categories, c, body, ticker_text, canonical=cat_url)
 
     # Article pages
-    for a in articles:
+    for i, a in enumerate(articles):
         if a.get("video_id"):
             media_html = f'<div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/{html.escape(a["video_id"])}" title="{html.escape(a["title"])}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'
         elif a["image"]:
             media_html = f'<img src="{html.escape(a["image"])}" class="article-img" onerror="this.src=\'{PLACEHOLDER_IMG}\'">'
         else:
             media_html = ""
-        body_paragraphs = render_body(a["body"])
+
+        body_html_full = render_body(a["body"])
+        is_long = len(a["body"]) > ARTICLE_PREVIEW_CHARS
+        if is_long:
+            # split rendered paragraphs at roughly the preview length, not mid-tag
+            parts = re.findall(r'<p>.*?</p>', body_html_full, re.DOTALL)
+            running = 0
+            cut_idx = len(parts)
+            for idx, p in enumerate(parts):
+                running += len(p)
+                if running >= ARTICLE_PREVIEW_CHARS:
+                    cut_idx = idx + 1
+                    break
+            preview_html = "".join(parts[:cut_idx])
+            rest_html = "".join(parts[cut_idx:])
+            body_content = f"""
+              <div class="article-body">{preview_html}</div>
+              <div class="article-body article-body-more" hidden>{rest_html}</div>
+              <button class="read-more-btn" onclick="
+                this.previousElementSibling.hidden = false;
+                this.hidden = true;
+              ">קרא עוד</button>"""
+        else:
+            body_content = f'<div class="article-body">{body_html_full}</div>'
+
+        # related articles: same category, excluding this one, most recent first
+        related = [x for x in articles if x["category"] == a["category"] and x["slug"] != a["slug"]][:6]
+        related_html = ""
+        if related:
+            related_cards = "".join(render_card(x) for x in related)
+            related_html = f"""
+            <section class="related-section">
+              <h2 class="page-title">עוד בנושא {html.escape(a['category'])}</h2>
+              <div class="grid-inner">{related_cards}</div>
+            </section>"""
+
+        canonical = f"{SITE_URL}/article/{a['slug']}.html"
         body = f"""
         <main class="article">
           <span class="card-cat">{html.escape(a['category'])}</span>
           <h1>{html.escape(a['title'])}</h1>
           <div class="article-meta">{html.escape(a['source'])} · {html.escape(a['date'])}</div>
           {media_html}
-          <div class="article-body">{body_paragraphs}</div>
+          {body_content}
           <a class="source-link" href="{html.escape(a['link'])}" target="_blank" rel="noopener">קרא את הכתבה המלאה במקור</a>
-        </main>"""
-        write_page(os.path.join(OUTPUT_DIR, "article", f"{a['slug']}.html"), a["title"], a["title"], categories, a["category"], body, ticker_text)
+        </main>
+        {related_html}"""
+        description = re.sub(r'<[^>]+>', '', body_html_full)[:160].strip()
+        write_page(os.path.join(OUTPUT_DIR, "article", f"{a['slug']}.html"), a["title"],
+                   description or a["title"], categories, a["category"], body, ticker_text,
+                   canonical=canonical, og_type="article", og_image=a["image"],
+                   structured_data=article_structured_data(a, canonical))
 
     # Search page
     body = '<main class="grid"><h1 class="page-title">תוצאות חיפוש</h1><div id="search-results" class="grid-inner"></div></main>'
-    write_page(os.path.join(OUTPUT_DIR, "search.html"), f"חיפוש - {SITE_NAME}", "חיפוש חדשות", categories, None, body, ticker_text)
+    write_page(os.path.join(OUTPUT_DIR, "search.html"), f"חיפוש - {SITE_NAME}", "חיפוש חדשות באתר קודקוד",
+               categories, None, body, ticker_text, canonical=f"{SITE_URL}/search.html")
 
     # Static pages
-    write_page(os.path.join(OUTPUT_DIR, "about.html"), f"אודות - {SITE_NAME}", "אודות קודקוד חדשות", categories, None, ABOUT_BODY, ticker_text)
-    write_page(os.path.join(OUTPUT_DIR, "advertise.html"), f"פרסום - {SITE_NAME}", "פרסמו בקודקוד חדשות", categories, None, ADVERTISE_BODY, ticker_text)
-    write_page(os.path.join(OUTPUT_DIR, "tip-line.html"), f"המייל האדום - {SITE_NAME}", "שלחו סקופ לקודקוד", categories, None, TIP_LINE_BODY, ticker_text)
+    write_page(os.path.join(OUTPUT_DIR, "about.html"), f"אודות - {SITE_NAME}", "אודות קודקוד חדשות",
+               categories, None, ABOUT_BODY, ticker_text, canonical=f"{SITE_URL}/about.html")
+    write_page(os.path.join(OUTPUT_DIR, "advertise.html"), f"פרסום - {SITE_NAME}", "פרסמו בקודקוד חדשות",
+               categories, None, ADVERTISE_BODY, ticker_text, canonical=f"{SITE_URL}/advertise.html")
+    write_page(os.path.join(OUTPUT_DIR, "tip-line.html"), f"שלחו סקופ - {SITE_NAME}", "שלחו סקופ לקודקוד",
+               categories, None, TIP_LINE_BODY, ticker_text, canonical=f"{SITE_URL}/tip-line.html")
 
     # Search index JSON (client-side search, no server/API needed)
     search_index = [
@@ -318,6 +403,10 @@ def build():
     sitemap += "</urlset>\n"
     with open(os.path.join(OUTPUT_DIR, "sitemap.xml"), "w", encoding="utf-8") as f:
         f.write(sitemap)
+
+    # robots.txt
+    with open(os.path.join(OUTPUT_DIR, "robots.txt"), "w", encoding="utf-8") as f:
+        f.write(f"User-agent: *\nAllow: /\nSitemap: {SITE_URL}/sitemap.xml\n")
 
     print(f"נבנה אתר עם {len(articles)} כתבות ב-{len(categories)} קטגוריות.")
 
