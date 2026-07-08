@@ -37,8 +37,10 @@ jobs:
         run: |
           python build_site.py
           cp -r assets/. public_site/assets/
-          cp favicon.png public_site/favicon.png 2>/dev/null || true
-          cp CNAME public_site/CNAME 2>/dev/null || true
+          cp favicon.png public_site/favicon.png
+          cp CNAME public_site/CNAME
+          echo "Verifying CNAME landed in the deploy artifact:"
+          cat public_site/CNAME
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
