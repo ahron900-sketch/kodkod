@@ -13,6 +13,7 @@ SITE_URL = "https://kodkodnews.co.il"
 TIP_FORM_ACTION = "https://formspree.io/f/xeelpjwg"
 ARTICLE_PREVIEW_CHARS = 900
 WP_BOILERPLATE_RE = re.compile(r'^The post .* appeared first on .*\.?$')
+RECIPE_CATEGORY = "בישול ומתכונים"
 
 
 def extract_dek(body_text, max_len=180):
@@ -162,13 +163,16 @@ PAGE_FOOT = """
 
 def render_card(a):
     img = a["image"] or PLACEHOLDER_IMG
+    is_recipe = a["category"] == RECIPE_CATEGORY
     video_badge = '<span class="badge badge-video">וידאו</span>' if a.get("video_id") else ""
-    quick_badge = '<span class="badge badge-quick">בקצרה</span>' if a.get("is_quick") and not a.get("video_id") else ""
+    quick_badge = '<span class="badge badge-quick">בקצרה</span>' if a.get("is_quick") and not a.get("video_id") and not is_recipe else ""
+    recipe_badge = '<span class="badge badge-recipe">מתכון</span>' if is_recipe else ""
+    card_cls = "card card-recipe" if is_recipe else "card"
     return f"""
-    <a class="card" href="/article/{a['slug']}.html" data-slug="{html.escape(a['slug'])}" data-title="{html.escape(a['title'])}" data-img="{html.escape(img)}" data-cat="{html.escape(a['category'])}">
+    <a class="{card_cls}" href="/article/{a['slug']}.html" data-slug="{html.escape(a['slug'])}" data-title="{html.escape(a['title'])}" data-img="{html.escape(img)}" data-cat="{html.escape(a['category'])}">
       <div class="card-img-wrap">
         <img class="card-img" src="{html.escape(img)}" alt="{html.escape(a['title'])}" loading="lazy" onerror="this.src='{PLACEHOLDER_IMG}'">
-        {video_badge}{quick_badge}
+        {video_badge}{quick_badge}{recipe_badge}
       </div>
       <div class="card-body">
         <span class="card-cat">{html.escape(a['category'])}</span>
@@ -383,25 +387,29 @@ def build():
 
     articles = load_articles()
     categories = sorted({a["category"] for a in articles})
-    ticker_text = "   •   ".join(a["title"] for a in articles[:12]) or "מערכת קודקוד - חדשות ומבזקים מהארץ ומהעולם"
+    ticker_articles = [a for a in articles if a["category"] != RECIPE_CATEGORY]
+    ticker_text = "   •   ".join(a["title"] for a in ticker_articles[:12]) or "מערכת קודקוד - חדשות ומבזקים מהארץ ומהעולם"
 
     # Articles without a real image are never shown in listings (hero, cards,
     # quick strip, related) - only their own article page still renders for
     # anyone who has the direct link. video_id counts as "has visuals".
     listable = [a for a in articles if a["image"] or a.get("video_id")]
 
-    # Homepage (hero + grid)
+    # Homepage (hero + grid). Recipes are a different kind of content
+    # (features/lifestyle, not news) and should never be picked as the
+    # lead story.
+    hero_candidates = [a for a in listable if a["category"] != RECIPE_CATEGORY]
     hero_html = ""
     rest = listable
-    if listable:
-        hero = listable[0]
+    if hero_candidates:
+        hero = hero_candidates[0]
         hero_img = hero["image"] or PLACEHOLDER_IMG
         hero_html = f"""
         <a class="hero" href="/article/{hero['slug']}.html">
           <img src="{html.escape(hero_img)}" class="hero-img" onerror="this.src='{PLACEHOLDER_IMG}'">
           <div class="hero-overlay"><span class="card-cat">{html.escape(hero['category'])}</span><h1>{html.escape(hero['title'])}</h1></div>
         </a>"""
-        rest = articles[1:]
+        rest = [a for a in listable if a["slug"] != hero["slug"]]
 
     quick_articles = [a for a in rest if a.get("is_quick")][:8]
     quick_html = ""
