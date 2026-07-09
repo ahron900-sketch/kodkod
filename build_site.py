@@ -12,6 +12,23 @@ SITE_NAME = "קודקוד חדשות"
 SITE_URL = "https://kodkodnews.co.il"
 TIP_FORM_ACTION = "https://formspree.io/f/xeelpjwg"
 ARTICLE_PREVIEW_CHARS = 900
+WP_BOILERPLATE_RE = re.compile(r'^The post .* appeared first on .*\.?$')
+
+
+def extract_dek(body_text, max_len=180):
+    """First real sentence of the body, used as a subtitle under the headline."""
+    for line in body_text.split("\n"):
+        line = line.strip()
+        if not line or WP_BOILERPLATE_RE.match(line):
+            continue
+        clean = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', line)  # unwrap markdown links
+        clean = html.unescape(clean).strip()
+        if len(clean) < 15:
+            continue
+        if len(clean) > max_len:
+            clean = clean[:max_len].rsplit(" ", 1)[0] + "…"
+        return clean
+    return ""
 
 
 def slugify(text, fallback):
@@ -75,6 +92,8 @@ def load_articles():
             "video_id": data.get("video_id", ""),
             "body": body,
             "slug": slug,
+            "dek": extract_dek(body),
+            "is_quick": len(body) < 500 and not data.get("video_id"),
         })
     articles.sort(key=lambda a: a["dt"], reverse=True)
     seen = {}
@@ -142,15 +161,28 @@ PAGE_FOOT = """
 
 def render_card(a):
     img = a["image"] or PLACEHOLDER_IMG
-    video_badge = '<span class="video-badge">וידאו</span>' if a.get("video_id") else ""
+    video_badge = '<span class="badge badge-video">וידאו</span>' if a.get("video_id") else ""
+    quick_badge = '<span class="badge badge-quick">בקצרה</span>' if a.get("is_quick") and not a.get("video_id") else ""
     return f"""
-    <a class="card" href="/article/{a['slug']}.html">
-      <div class="card-img" style="background-image:url('{html.escape(img)}')">{video_badge}</div>
+    <a class="card" href="/article/{a['slug']}.html" data-slug="{html.escape(a['slug'])}" data-title="{html.escape(a['title'])}" data-img="{html.escape(img)}" data-cat="{html.escape(a['category'])}">
+      <div class="card-img-wrap">
+        <img class="card-img" src="{html.escape(img)}" alt="{html.escape(a['title'])}" loading="lazy" onerror="this.src='{PLACEHOLDER_IMG}'">
+        {video_badge}{quick_badge}
+      </div>
       <div class="card-body">
         <span class="card-cat">{html.escape(a['category'])}</span>
         <h3>{html.escape(a['title'])}</h3>
         <span class="card-meta">{html.escape(a['source'])} · {html.escape(a['date'][:10])}</span>
       </div>
+    </a>"""
+
+
+def render_quick_card(a):
+    return f"""
+    <a class="quick-card" href="/article/{a['slug']}.html">
+      <span class="card-cat">{html.escape(a['category'])}</span>
+      <h4>{html.escape(a['title'])}</h4>
+      <span class="card-meta">{html.escape(a['source'])} · {html.escape(a['date'][:10])}</span>
     </a>"""
 
 
@@ -166,7 +198,6 @@ def cat_nav(categories, active=None):
 
 
 MD_LINK_RE = re.compile(r'\[([^\]]+)\]\((https?://[^\s)]+)\)')
-WP_BOILERPLATE_RE = re.compile(r'^The post .* appeared first on .*\.?$')
 
 
 def render_body(body_text):
@@ -286,8 +317,25 @@ def build():
           <div class="hero-overlay"><span class="card-cat">{html.escape(hero['category'])}</span><h1>{html.escape(hero['title'])}</h1></div>
         </a>"""
         rest = articles[1:]
+
+    quick_articles = [a for a in rest if a.get("is_quick")][:8]
+    quick_html = ""
+    if quick_articles:
+        quick_cards = "".join(render_quick_card(a) for a in quick_articles)
+        quick_html = f"""
+        <section class="quick-section">
+          <h2 class="section-title">בקצרה</h2>
+          <div class="quick-strip">{quick_cards}</div>
+        </section>"""
+
+    recently_viewed_html = """
+        <section class="recent-section" id="recently-viewed-section" hidden>
+          <h2 class="section-title">כתבות שקראת לאחרונה</h2>
+          <div class="grid-inner" id="recently-viewed-grid"></div>
+        </section>"""
+
     cards = "".join(render_card(a) for a in rest[:60])
-    body = f'<main class="grid">{hero_html}<div class="grid-inner">{cards}</div></main>'
+    body = f'<main class="grid">{hero_html}{quick_html}{recently_viewed_html}<div class="grid-inner">{cards}</div></main>'
     write_page(os.path.join(OUTPUT_DIR, "index.html"), SITE_NAME,
                "קודקוד חדשות - האתר החדשותי המהיר בישראל: חדשות, כלכלה, טכנולוגיה וחרדים במקום אחד",
                categories, None, body, ticker_text, canonical=SITE_URL + "/")
@@ -307,9 +355,11 @@ def build():
         if a.get("video_id"):
             media_html = f'<div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/{html.escape(a["video_id"])}" title="{html.escape(a["title"])}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'
         elif a["image"]:
-            media_html = f'<img src="{html.escape(a["image"])}" class="article-img" onerror="this.src=\'{PLACEHOLDER_IMG}\'">'
+            media_html = f'<img src="{html.escape(a["image"])}" class="article-img" loading="eager" onerror="this.src=\'{PLACEHOLDER_IMG}\'">'
         else:
             media_html = ""
+
+        dek_html = f'<p class="article-dek">{html.escape(a["dek"])}</p>' if a.get("dek") else ""
 
         body_html_full = render_body(a["body"])
         is_long = len(a["body"]) > ARTICLE_PREVIEW_CHARS
@@ -347,16 +397,31 @@ def build():
             </section>"""
 
         canonical = f"{SITE_URL}/article/{a['slug']}.html"
+        view_tracker = f"""
+        <script>
+        (function() {{
+          try {{
+            var key = 'kk_recent';
+            var entry = {{slug: {json.dumps(a['slug'], ensure_ascii=False)}, title: {json.dumps(a['title'], ensure_ascii=False)}, img: {json.dumps(a['image'] or PLACEHOLDER_IMG, ensure_ascii=False)}, cat: {json.dumps(a['category'], ensure_ascii=False)}}};
+            var list = JSON.parse(localStorage.getItem(key) || '[]');
+            list = list.filter(function(x) {{ return x.slug !== entry.slug; }});
+            list.unshift(entry);
+            localStorage.setItem(key, JSON.stringify(list.slice(0, 12)));
+          }} catch (e) {{}}
+        }})();
+        </script>"""
         body = f"""
         <main class="article">
           <span class="card-cat">{html.escape(a['category'])}</span>
           <h1>{html.escape(a['title'])}</h1>
+          {dek_html}
           <div class="article-meta">{html.escape(a['source'])} · {html.escape(a['date'])}</div>
           {media_html}
           {body_content}
           <a class="source-link" href="{html.escape(a['link'])}" target="_blank" rel="noopener">קרא את הכתבה המלאה במקור</a>
         </main>
-        {related_html}"""
+        {related_html}
+        {view_tracker}"""
         description = re.sub(r'<[^>]+>', '', body_html_full)[:160].strip()
         write_page(os.path.join(OUTPUT_DIR, "article", f"{a['slug']}.html"), a["title"],
                    description or a["title"], categories, a["category"], body, ticker_text,

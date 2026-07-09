@@ -32,10 +32,13 @@
         .slice(0, 60)
         .map((a) => {
           const img = a.image || "/assets/placeholder.svg";
-          const playBadge = a.video ? '<span class="play-badge">▶</span>' : "";
+          const videoBadge = a.video ? '<span class="badge badge-video">וידאו</span>' : "";
           return `
           <a class="card" href="/article/${a.slug}.html">
-            <div class="card-img" style="background-image:url('${escapeHtml(img)}')">${playBadge}</div>
+            <div class="card-img-wrap">
+              <img class="card-img" src="${escapeHtml(img)}" alt="" loading="lazy" onerror="this.src='/assets/placeholder.svg'">
+              ${videoBadge}
+            </div>
             <div class="card-body">
               <span class="card-cat">${escapeHtml(a.category)}</span>
               <h3>${escapeHtml(a.title)}</h3>
@@ -48,6 +51,42 @@
     .catch(() => {
       resultsEl.innerHTML = "<p>שגיאה בטעינת תוצאות החיפוש.</p>";
     });
+
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+})();
+
+(function () {
+  var section = document.getElementById("recently-viewed-section");
+  var grid = document.getElementById("recently-viewed-grid");
+  if (!section || !grid) return;
+
+  var list;
+  try {
+    list = JSON.parse(localStorage.getItem("kk_recent") || "[]");
+  } catch (e) {
+    list = [];
+  }
+  if (!list.length) return;
+
+  grid.innerHTML = list
+    .map(function (a) {
+      return (
+        '<a class="card" href="/article/' + a.slug + '.html">' +
+        '<div class="card-img-wrap"><img class="card-img" src="' + escapeHtml(a.img) + '" alt="" loading="lazy"></div>' +
+        '<div class="card-body">' +
+        '<span class="card-cat">' + escapeHtml(a.cat) + "</span>" +
+        "<h3>" + escapeHtml(a.title) + "</h3>" +
+        "</div></a>"
+      );
+    })
+    .join("");
+  section.hidden = false;
 
   function escapeHtml(str) {
     return String(str)
