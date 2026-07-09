@@ -384,19 +384,83 @@ TIP_LINE_BODY = f"""
 </main>"""
 
 
+def json_ld_script(data):
+    return '<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False) + '</script>'
+
+
 def article_structured_data(a, canonical):
+    published = a["dt"].isoformat() if a["dt"] != datetime.min else ""
     data = {
         "@context": "https://schema.org",
         "@type": "NewsArticle",
         "headline": a["title"],
-        "datePublished": a["dt"].isoformat() if a["dt"] != datetime.min else "",
+        "description": a.get("dek", "") or a["title"],
+        "datePublished": published,
+        "dateModified": published,
+        "articleSection": a["category"],
+        "inLanguage": "he",
         "author": {"@type": "Organization", "name": a["source"] or SITE_NAME},
-        "publisher": {"@type": "Organization", "name": SITE_NAME},
-        "mainEntityOfPage": canonical,
+        "publisher": {
+            "@type": "Organization",
+            "name": SITE_NAME,
+            "url": SITE_URL + "/",
+        },
+        "mainEntityOfPage": {"@type": "WebPage", "@id": canonical},
     }
     if a["image"]:
         data["image"] = [a["image"]]
-    return f'<script type="application/ld+json">{json.dumps(data, ensure_ascii=False)}</script>'
+    breadcrumb = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": SITE_NAME, "item": SITE_URL + "/"},
+            {"@type": "ListItem", "position": 2, "name": a["category"], "item": f"{SITE_URL}/category/{slugify(a['category'], a['category'])}.html"},
+            {"@type": "ListItem", "position": 3, "name": a["title"], "item": canonical},
+        ],
+    }
+    return json_ld_script(data) + json_ld_script(breadcrumb)
+
+
+def category_structured_data(category_name, canonical):
+    data = {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": f"{category_name} - {SITE_NAME}",
+        "url": canonical,
+        "isPartOf": {"@type": "WebSite", "name": SITE_NAME, "url": SITE_URL + "/"},
+    }
+    breadcrumb = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": SITE_NAME, "item": SITE_URL + "/"},
+            {"@type": "ListItem", "position": 2, "name": category_name, "item": canonical},
+        ],
+    }
+    return json_ld_script(data) + json_ld_script(breadcrumb)
+
+
+def homepage_structured_data():
+    data = {
+        "@context": "https://schema.org",
+        "@type": "NewsMediaOrganization",
+        "name": SITE_NAME,
+        "url": SITE_URL + "/",
+        "logo": {"@type": "ImageObject", "url": SITE_URL + "/favicon.png"},
+        "description": "קודקוד הוא מרכז חדשותי דיגיטלי ישראלי המרכז מבזקים ממיטב מקורות החדשות בעברית - חדשות, כלכלה, טכנולוגיה, חרדים ובישול.",
+    }
+    website = {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": SITE_NAME,
+        "url": SITE_URL + "/",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": f"{SITE_URL}/search.html?q={{search_term_string}}",
+            "query-input": "required name=search_term_string",
+        },
+    }
+    return json_ld_script(data) + json_ld_script(website)
 
 
 def build():
@@ -471,7 +535,8 @@ def build():
     body = f'<main class="grid">{hero_html}{ad_slot_html()}{quick_html}{recently_viewed_html}{categories_html}</main>'
     write_page(os.path.join(OUTPUT_DIR, "index.html"), SITE_NAME,
                "קודקוד חדשות - האתר החדשותי המהיר בישראל: חדשות, כלכלה, טכנולוגיה וחרדים במקום אחד",
-               categories, None, body, ticker_text, canonical=SITE_URL + "/")
+               categories, None, body, ticker_text, canonical=SITE_URL + "/",
+               structured_data=homepage_structured_data())
 
     # Category pages
     for c in categories:
@@ -489,7 +554,8 @@ def build():
         cat_url = f"{SITE_URL}/category/{slugify(c, c)}.html"
         write_page(os.path.join(OUTPUT_DIR, "category", f"{slugify(c, c)}.html"),
                    f"חדשות {c} - {SITE_NAME}", f"כל הכתבות בקטגוריית {c} - עדכונים שוטפים מהאתר החדשותי קודקוד",
-                   categories, c, body, ticker_text, canonical=cat_url)
+                   categories, c, body, ticker_text, canonical=cat_url,
+                   structured_data=category_structured_data(c, cat_url))
 
     # Article pages
     for i, a in enumerate(articles):
@@ -635,21 +701,63 @@ def build():
     with open(os.path.join(OUTPUT_DIR, "assets", "search-index.json"), "w", encoding="utf-8") as f:
         json.dump(search_index, f, ensure_ascii=False)
 
-    # sitemap.xml
-    urls = (
-        [f"{SITE_URL}/", f"{SITE_URL}/about.html", f"{SITE_URL}/advertise.html", f"{SITE_URL}/tip-line.html"]
-        + [f"{SITE_URL}/category/{slugify(c, c)}.html" for c in categories]
-        + [f"{SITE_URL}/article/{a['slug']}.html" for a in articles]
+    # sitemap.xml - static pages, categories, and every article (with an
+    # <image:image> extension when the article has a real photo, so image
+    # search can index it too)
+    now = datetime.now()
+    static_urls = [f"{SITE_URL}/", f"{SITE_URL}/about.html", f"{SITE_URL}/advertise.html", f"{SITE_URL}/tip-line.html"]
+    category_urls = [f"{SITE_URL}/category/{slugify(c, c)}.html" for c in categories]
+
+    sitemap = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
+        'xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n'
     )
-    sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-    sitemap += "".join(f"  <url><loc>{u}</loc></url>\n" for u in urls)
+    lastmod_today = now.strftime("%Y-%m-%d")
+    for u in static_urls + category_urls:
+        sitemap += f"  <url><loc>{u}</loc><lastmod>{lastmod_today}</lastmod></url>\n"
+    for a in articles:
+        loc = f"{SITE_URL}/article/{a['slug']}.html"
+        lastmod = (a["dt"] if a["dt"] != datetime.min else now).strftime("%Y-%m-%d")
+        image_tag = f"<image:image><image:loc>{html.escape(a['image'])}</image:loc></image:image>" if a["image"] else ""
+        sitemap += f"  <url><loc>{loc}</loc><lastmod>{lastmod}</lastmod>{image_tag}</url>\n"
     sitemap += "</urlset>\n"
     with open(os.path.join(OUTPUT_DIR, "sitemap.xml"), "w", encoding="utf-8") as f:
         f.write(sitemap)
 
+    # Google News sitemap - only articles from the last 48 hours, per spec
+    # (https://support.google.com/news/publisher-center/answer/9606224)
+    news_cutoff = now.timestamp() - 48 * 3600
+    recent_articles = [a for a in articles if a["dt"] != datetime.min and a["dt"].timestamp() >= news_cutoff]
+    news_sitemap = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
+        'xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">\n'
+    )
+    for a in recent_articles:
+        loc = f"{SITE_URL}/article/{a['slug']}.html"
+        pub_date = a["dt"].strftime("%Y-%m-%dT%H:%M:%S+03:00")
+        news_sitemap += (
+            "  <url>\n"
+            f"    <loc>{loc}</loc>\n"
+            "    <news:news>\n"
+            f"      <news:publication><news:name>{html.escape(SITE_NAME)}</news:name><news:language>he</news:language></news:publication>\n"
+            f"      <news:publication_date>{pub_date}</news:publication_date>\n"
+            f"      <news:title>{html.escape(a['title'])}</news:title>\n"
+            "    </news:news>\n"
+            "  </url>\n"
+        )
+    news_sitemap += "</urlset>\n"
+    with open(os.path.join(OUTPUT_DIR, "news-sitemap.xml"), "w", encoding="utf-8") as f:
+        f.write(news_sitemap)
+
     # robots.txt
     with open(os.path.join(OUTPUT_DIR, "robots.txt"), "w", encoding="utf-8") as f:
-        f.write(f"User-agent: *\nAllow: /\nSitemap: {SITE_URL}/sitemap.xml\n")
+        f.write(
+            f"User-agent: *\nAllow: /\n"
+            f"Sitemap: {SITE_URL}/sitemap.xml\n"
+            f"Sitemap: {SITE_URL}/news-sitemap.xml\n"
+        )
 
     print(f"נבנה אתר עם {len(articles)} כתבות ב-{len(categories)} קטגוריות.")
 
