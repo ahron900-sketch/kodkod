@@ -25,6 +25,12 @@ rss_feeds = {
 
     # טכנולוגיה
     "Geektime": ("https://www.geektime.co.il/feed/", "טכנולוגיה"),
+
+    # בישול ומתכונים
+    "מאקו אוכל": ("https://rcs.mako.co.il/rss/food-recipes.xml", "בישול ומתכונים"),
+    "מאקו - כל האוכל": ("https://rcs.mako.co.il/rss/c7250a2610f26110VgnVCM1000005201000aRCRD.xml", "בישול ומתכונים"),
+    "וואלה אוכל": ("https://rss.walla.co.il/feed/9?type=main", "בישול ומתכונים"),
+    "Foody": ("https://www.foody.co.il/feed", "בישול ומתכונים"),
 }
 
 # ערוצי יוטיוב - נשאבים כווידאו דרך YouTube RSS (אין צורך במפתח API)

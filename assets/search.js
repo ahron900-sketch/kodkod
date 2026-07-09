@@ -139,3 +139,79 @@
     order.forEach(function (el) { grid.appendChild(el); });
   });
 })();
+
+(function () {
+  var bar = document.querySelector(".engagement-bar");
+  var likeBtn = document.getElementById("like-btn");
+  var shareBtn = document.getElementById("share-btn");
+  if (!bar) return;
+
+  var slug = bar.getAttribute("data-slug");
+
+  if (likeBtn) {
+    var likeKey = "kk_liked";
+    var liked;
+    try {
+      liked = JSON.parse(localStorage.getItem(likeKey) || "[]");
+    } catch (e) {
+      liked = [];
+    }
+    var isLiked = liked.indexOf(slug) !== -1;
+    if (isLiked) {
+      likeBtn.classList.add("liked");
+      likeBtn.setAttribute("aria-pressed", "true");
+      likeBtn.querySelector("#like-count").textContent = "אהבתי!";
+    }
+    likeBtn.addEventListener("click", function () {
+      var idx = liked.indexOf(slug);
+      if (idx === -1) {
+        liked.push(slug);
+        likeBtn.classList.add("liked");
+        likeBtn.setAttribute("aria-pressed", "true");
+        likeBtn.querySelector("#like-count").textContent = "אהבתי!";
+      } else {
+        liked.splice(idx, 1);
+        likeBtn.classList.remove("liked");
+        likeBtn.setAttribute("aria-pressed", "false");
+        likeBtn.querySelector("#like-count").textContent = "אהבתי";
+      }
+      try {
+        localStorage.setItem(likeKey, JSON.stringify(liked));
+      } catch (e) {}
+    });
+  }
+
+  if (shareBtn) {
+    shareBtn.addEventListener("click", function () {
+      var title = shareBtn.getAttribute("data-title");
+      var url = shareBtn.getAttribute("data-url");
+      if (navigator.share) {
+        navigator.share({ title: title, url: url }).catch(function () {});
+      } else if (navigator.clipboard) {
+        navigator.clipboard.writeText(url).then(function () {
+          var span = shareBtn.querySelector("span");
+          var original = span.textContent;
+          span.textContent = "הועתק!";
+          setTimeout(function () { span.textContent = original; }, 1800);
+        });
+      }
+    });
+  }
+})();
+
+(function () {
+  var player = document.querySelector(".kk-player");
+  if (!player) return;
+  var playBtn = player.querySelector(".kk-player-play");
+  var videoId = player.getAttribute("data-video-id");
+
+  playBtn.addEventListener("click", function () {
+    var iframe = document.createElement("iframe");
+    iframe.src = "https://www.youtube-nocookie.com/embed/" + videoId + "?autoplay=1";
+    iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
+    iframe.setAttribute("allowfullscreen", "");
+    iframe.setAttribute("frameborder", "0");
+    player.innerHTML = "";
+    player.appendChild(iframe);
+  });
+})();

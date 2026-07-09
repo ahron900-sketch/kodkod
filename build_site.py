@@ -189,7 +189,56 @@ def render_quick_card(a):
 
 PLACEHOLDER_IMG = "/assets/placeholder.svg"
 
-AD_SLOT_HTML = '<div class="ad-slot"><span>מקום פרסומת</span></div>'
+# Mock ad creatives - purely visual placeholders (no real network/tracking) so
+# the layout demos like a live site rather than empty dashed boxes.
+MOCK_ADS = [
+    {
+        "cls": "ad-fin",
+        "eyebrow": "מומלץ עבורך",
+        "title": "תיק השקעות חכם ב-90 שניות",
+        "body": "השוואת קרנות מדד בעמלות הנמוכות בישראל",
+        "cta": "להשוואה חינם",
+    },
+    {
+        "cls": "ad-travel",
+        "eyebrow": "דיל השבוע",
+        "title": "טיסות ישירות לאירופה",
+        "body": "החל מ-₪899 בכרטיס הלוך ושוב, מקומות אחרונים",
+        "cta": "לצפייה בדילים",
+    },
+    {
+        "cls": "ad-tech",
+        "eyebrow": "חדש בישראל",
+        "title": "אוזניות ביטול רעשים דור חדש",
+        "body": "עד 40 שעות סוללה, משלוח חינם עד הבית",
+        "cta": "לרכישה עכשיו",
+    },
+    {
+        "cls": "ad-food",
+        "eyebrow": "פינוק לשבת",
+        "title": "ארגז ירקות טרי מהחקלאי",
+        "body": "מגיע ישר מהשדה עד הדלת, ללא תיווך",
+        "cta": "להזמנה השבוע",
+    },
+]
+
+_ad_counter = {"i": 0}
+
+
+def ad_slot_html():
+    ad = MOCK_ADS[_ad_counter["i"] % len(MOCK_ADS)]
+    _ad_counter["i"] += 1
+    return f"""<div class="ad-slot {ad['cls']}">
+      <span class="ad-tag">פרסומת</span>
+      <div class="ad-creative">
+        <span class="ad-eyebrow">{html.escape(ad['eyebrow'])}</span>
+        <h4 class="ad-title">{html.escape(ad['title'])}</h4>
+        <p class="ad-body">{html.escape(ad['body'])}</p>
+        <span class="ad-cta">{html.escape(ad['cta'])}</span>
+      </div>
+    </div>"""
+
+
 
 
 def cat_nav(categories, active=None):
@@ -237,9 +286,9 @@ def write_page(path, title, description, categories, active_cat, body_html,
                          f'<div class="ticker"><div class="ticker-move">{html.escape(ticker_text)}</div></div>\n<header class="site-header">')
     page_shell = f"""
 <div class="page-shell">
-  <aside class="side-rail side-rail-right">{AD_SLOT_HTML}</aside>
+  <aside class="side-rail side-rail-right">{ad_slot_html()}</aside>
   <div class="page-shell-content">{body_html}</div>
-  <aside class="side-rail side-rail-left">{AD_SLOT_HTML}</aside>
+  <aside class="side-rail side-rail-left">{ad_slot_html()}</aside>
 </div>"""
     full += page_shell + PAGE_FOOT.format(year=datetime.now().year)
     os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -379,10 +428,10 @@ def build():
           </div>
           <div class="grid-inner">{c_cards}</div>
         </section>
-        {AD_SLOT_HTML}""")
+        {ad_slot_html()}""")
     categories_html = "".join(category_sections)
 
-    body = f'<main class="grid">{hero_html}{AD_SLOT_HTML}{quick_html}{recently_viewed_html}{categories_html}</main>'
+    body = f'<main class="grid">{hero_html}{ad_slot_html()}{quick_html}{recently_viewed_html}{categories_html}</main>'
     write_page(os.path.join(OUTPUT_DIR, "index.html"), SITE_NAME,
                "קודקוד חדשות - האתר החדשותי המהיר בישראל: חדשות, כלכלה, טכנולוגיה וחרדים במקום אחד",
                categories, None, body, ticker_text, canonical=SITE_URL + "/")
@@ -408,7 +457,17 @@ def build():
     # Article pages
     for i, a in enumerate(articles):
         if a.get("video_id"):
-            media_html = f'<div class="video-embed"><iframe src="https://www.youtube-nocookie.com/embed/{html.escape(a["video_id"])}" title="{html.escape(a["title"])}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'
+            vid = html.escape(a["video_id"])
+            thumb = a["image"] or f"https://i.ytimg.com/vi/{a['video_id']}/hqdefault.jpg"
+            media_html = f"""
+            <div class="kk-player" data-video-id="{vid}">
+              <div class="kk-player-poster" style="background-image:url('{html.escape(thumb)}')">
+                <span class="kk-player-brand">קודקוד פלייר</span>
+                <button class="kk-player-play" aria-label="נגן וידאו">
+                  <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+              </div>
+            </div>"""
         elif a["image"]:
             media_html = f'<img src="{html.escape(a["image"])}" class="article-img" loading="eager" onerror="this.src=\'{PLACEHOLDER_IMG}\'">'
         else:
@@ -465,6 +524,20 @@ def build():
           }} catch (e) {{}}
         }})();
         </script>"""
+        engagement_bar = f"""
+        <div class="engagement-bar" data-slug="{html.escape(a['slug'])}">
+          <button class="like-btn" id="like-btn" aria-pressed="false">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+            <span id="like-count">אהבתי</span>
+          </button>
+          <button class="share-btn" id="share-btn" data-title="{html.escape(a['title'])}" data-url="{html.escape(canonical)}">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="10.6" x2="15.4" y2="6.4"/><line x1="8.6" y1="13.4" x2="15.4" y2="17.6"/></svg>
+            <span>שיתוף</span>
+          </button>
+          <a class="source-link-icon" href="{html.escape(a['link'])}" target="_blank" rel="noopener" title="קרא את הכתבה המלאה במקור">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>"""
         body = f"""
         <main class="article">
           <span class="card-cat">{html.escape(a['category'])}</span>
@@ -473,9 +546,9 @@ def build():
           <div class="article-meta">{html.escape(a['source'])} · {html.escape(a['date'])}</div>
           {media_html}
           {body_content}
-          <a class="source-link" href="{html.escape(a['link'])}" target="_blank" rel="noopener">קרא את הכתבה המלאה במקור</a>
+          {engagement_bar}
         </main>
-        {AD_SLOT_HTML}
+        {ad_slot_html()}
         {related_html}
         {view_tracker}"""
         description = re.sub(r'<[^>]+>', '', body_html_full)[:160].strip()
