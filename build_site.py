@@ -252,11 +252,16 @@ def ad_slot_html(compact=False):
 
 
 
+VIDEO_ICON_SVG = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>'
+
+
 def cat_nav(categories, active=None):
     links = ['<a href="/" class="{}">כל החדשות</a>'.format("active" if active is None else "")]
     for c in categories:
         cls = "active" if c == active else ""
         links.append(f'<a href="/category/{slugify(c, c)}.html" class="{cls}">{html.escape(c)}</a>')
+    video_cls = "active" if active == "וידאו" else ""
+    links.append(f'<a href="/video.html" class="nav-video {video_cls}">{VIDEO_ICON_SVG}<span>וידאו</span></a>')
     return "".join(links)
 
 
@@ -490,10 +495,18 @@ def build():
     if hero_candidates:
         hero = hero_candidates[0]
         hero_img = hero["image"] or PLACEHOLDER_IMG
+        hero_dek = f'<p class="hero-dek">{html.escape(hero["dek"])}</p>' if hero.get("dek") else ""
         hero_html = f"""
         <a class="hero" href="/article/{hero['slug']}.html">
-          <img src="{html.escape(hero_img)}" class="hero-img" onerror="this.src='{PLACEHOLDER_IMG}'">
-          <div class="hero-overlay"><span class="card-cat">{html.escape(hero['category'])}</span><h1>{html.escape(hero['title'])}</h1></div>
+          <div class="hero-img-wrap">
+            <img src="{html.escape(hero_img)}" class="hero-img" onerror="this.src='{PLACEHOLDER_IMG}'">
+          </div>
+          <div class="hero-text">
+            <span class="card-cat">{html.escape(hero['category'])}</span>
+            <h1>{html.escape(hero['title'])}</h1>
+            {hero_dek}
+            <span class="card-meta">{html.escape(hero['source'])} · {html.escape(hero['date'][:10])}</span>
+          </div>
         </a>"""
         rest = [a for a in listable if a["slug"] != hero["slug"]]
 
@@ -556,6 +569,16 @@ def build():
                    f"חדשות {c} - {SITE_NAME}", f"כל הכתבות בקטגוריית {c} - עדכונים שוטפים מהאתר החדשותי קודקוד",
                    categories, c, body, ticker_text, canonical=cat_url,
                    structured_data=category_structured_data(c, cat_url))
+
+    # Video page - all articles with a video_id, regardless of their news category
+    video_articles = [a for a in listable if a.get("video_id")]
+    video_cards = "".join(render_card(a) for a in video_articles)
+    video_body = f'<main class="grid"><h1 class="page-title">וידאו</h1><div class="grid-inner">{video_cards}</div></main>'
+    video_url = f"{SITE_URL}/video.html"
+    write_page(os.path.join(OUTPUT_DIR, "video.html"), f"וידאו - {SITE_NAME}",
+               "קטעי חדשות מצולמים ממיטב ערוצי החדשות בישראל, בנגן הווידאו הייעודי של קודקוד",
+               categories, "וידאו", video_body, ticker_text, canonical=video_url,
+               structured_data=category_structured_data("וידאו", video_url))
 
     # Article pages
     for i, a in enumerate(articles):
@@ -705,7 +728,7 @@ def build():
     # <image:image> extension when the article has a real photo, so image
     # search can index it too)
     now = datetime.now()
-    static_urls = [f"{SITE_URL}/", f"{SITE_URL}/about.html", f"{SITE_URL}/advertise.html", f"{SITE_URL}/tip-line.html"]
+    static_urls = [f"{SITE_URL}/", f"{SITE_URL}/about.html", f"{SITE_URL}/advertise.html", f"{SITE_URL}/tip-line.html", f"{SITE_URL}/video.html"]
     category_urls = [f"{SITE_URL}/category/{slugify(c, c)}.html" for c in categories]
 
     sitemap = (
