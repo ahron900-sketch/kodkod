@@ -225,6 +225,54 @@ html.dark-mode .site-header {
   margin-bottom: 4px;
 }
 
+/* Page shell with sticky side ad rails - only shows on very wide viewports */
+.page-shell {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+.page-shell-content {
+  flex: 1;
+  min-width: 0;
+  max-width: 1120px;
+}
+.side-rail {
+  display: none;
+  flex-shrink: 0;
+  width: 200px;
+}
+@media (min-width: 1500px) {
+  .side-rail { display: block; }
+  .side-rail .ad-slot {
+    position: sticky;
+    top: 90px;
+    height: 400px;
+    margin: 32px 0 0;
+    writing-mode: initial;
+  }
+}
+
+.sort-bar {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+.sort-bar select {
+  padding: 7px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 0.88rem;
+}
+
 .section-title {
   font-size: 1.4rem;
   font-weight: 800;

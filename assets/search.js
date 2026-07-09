@@ -126,3 +126,16 @@
       .replace(/"/g, "&quot;");
   }
 })();
+
+(function () {
+  var select = document.getElementById("sort-select");
+  var grid = document.getElementById("category-grid");
+  if (!select || !grid) return;
+
+  var originalOrder = Array.from(grid.children);
+
+  select.addEventListener("change", function () {
+    var order = select.value === "oldest" ? originalOrder.slice().reverse() : originalOrder;
+    order.forEach(function (el) { grid.appendChild(el); });
+  });
+})();

@@ -235,7 +235,13 @@ def write_page(path, title, description, categories, active_cat, body_html,
     )
     full = full.replace("<header class=\"site-header\">",
                          f'<div class="ticker"><div class="ticker-move">{html.escape(ticker_text)}</div></div>\n<header class="site-header">')
-    full += body_html + PAGE_FOOT.format(year=datetime.now().year)
+    page_shell = f"""
+<div class="page-shell">
+  <aside class="side-rail side-rail-right">{AD_SLOT_HTML}</aside>
+  <div class="page-shell-content">{body_html}</div>
+  <aside class="side-rail side-rail-left">{AD_SLOT_HTML}</aside>
+</div>"""
+    full += page_shell + PAGE_FOOT.format(year=datetime.now().year)
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         f.write(full)
@@ -323,11 +329,16 @@ def build():
     categories = sorted({a["category"] for a in articles})
     ticker_text = "   •   ".join(a["title"] for a in articles[:12]) or "מערכת קודקוד - חדשות ומבזקים מהארץ ומהעולם"
 
+    # Articles without a real image are never shown in listings (hero, cards,
+    # quick strip, related) - only their own article page still renders for
+    # anyone who has the direct link. video_id counts as "has visuals".
+    listable = [a for a in articles if a["image"] or a.get("video_id")]
+
     # Homepage (hero + grid)
     hero_html = ""
-    rest = articles
-    if articles:
-        hero = articles[0]
+    rest = listable
+    if listable:
+        hero = listable[0]
         hero_img = hero["image"] or PLACEHOLDER_IMG
         hero_html = f"""
         <a class="hero" href="/article/{hero['slug']}.html">
@@ -378,9 +389,17 @@ def build():
 
     # Category pages
     for c in categories:
-        c_articles = [a for a in articles if a["category"] == c]
-        cards = "".join(render_card(a) for a in c_articles[:100])
-        body = f'<main class="grid"><h1 class="page-title">{html.escape(c)}</h1><div class="grid-inner">{cards}</div></main>'
+        c_articles = [a for a in listable if a["category"] == c][:100]
+        cards = "".join(render_card(a) for a in c_articles)
+        sort_bar = """
+        <div class="sort-bar">
+          <label for="sort-select">מיון:</label>
+          <select id="sort-select">
+            <option value="newest">החדשות ביותר</option>
+            <option value="oldest">הישנות ביותר</option>
+          </select>
+        </div>"""
+        body = f'<main class="grid"><h1 class="page-title">{html.escape(c)}</h1>{sort_bar}<div class="grid-inner" id="category-grid">{cards}</div></main>'
         cat_url = f"{SITE_URL}/category/{slugify(c, c)}.html"
         write_page(os.path.join(OUTPUT_DIR, "category", f"{slugify(c, c)}.html"),
                    f"חדשות {c} - {SITE_NAME}", f"כל הכתבות בקטגוריית {c} - עדכונים שוטפים מהאתר החדשותי קודקוד",
@@ -422,7 +441,7 @@ def build():
             body_content = f'<div class="article-body">{body_html_full}</div>'
 
         # related articles: same category, excluding this one, most recent first
-        related = [x for x in articles if x["category"] == a["category"] and x["slug"] != a["slug"]][:6]
+        related = [x for x in listable if x["category"] == a["category"] and x["slug"] != a["slug"]][:6]
         related_html = ""
         if related:
             related_cards = "".join(render_card(x) for x in related)
