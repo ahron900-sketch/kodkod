@@ -36,7 +36,10 @@ rss_feeds = {
 # ערוצי יוטיוב - נשאבים כווידאו דרך YouTube RSS (אין צורך במפתח API)
 # הוסף כאן channel_id אמיתיים (נמצא ב-view-source של דף הערוץ, tag <meta itemprop="channelId">)
 youtube_channels = {
-    # "CHANNEL_ID_HERE": ("שם המקור", "קטגוריה"),
+    "UC_HwfTAcjBESKZRJq6BTCpg": ("כאן חדשות", "חדשות"),
+    "UCvQmPpU20hw1Trss_CVwaew": ("חדשות 13", "חדשות"),
+    "UCpSSzrovhI4fA2PQNItecUA": ("ynet", "חדשות"),
+    "UCisowXt5wZkp2sR3rFh9lnQ": ("i24NEWS עברית", "חדשות"),
 }
 
 LIVE_DIR = "content/news"
@@ -194,11 +197,41 @@ def manage_archive():
 
 MIN_CONTENT_LEN = 400
 
+# Sponsored/advertorial content filter - strict by design: any hint of paid
+# promotion, in the title, URL, or body, rejects the article outright. When
+# in doubt, reject rather than risk publishing an ad as a news item.
+SPONSORED_MARKERS = [
+    "בשיתוף", "מאמר ממומן", "תוכן ממומן", "תוכן שיווקי", "פרסומת", "פרסום מסחרי",
+    "פוסט ממומן", "כתבה ממומנת", "פרסומי", "מקודם", "sponsored", "advertorial",
+    "promoted", "paid content", "in partnership with", "in collaboration with",
+    "מומלץ ע\"י", "מומלץ על ידי",
+]
+SPONSORED_URL_MARKERS = [
+    "/sponsored/", "/advertorial/", "/promoted/", "/marketing/", "/tazarot/",
+    "/paid/", "/ads/", "sponsored=1", "utm_source=sponsored",
+]
+
+
+def is_sponsored_content(title, link, content):
+    haystacks = [title or "", link or "", content or ""]
+    combined = " ".join(haystacks).lower()
+    for marker in SPONSORED_MARKERS:
+        if marker.lower() in combined:
+            return True
+    link_lower = (link or "").lower()
+    for marker in SPONSORED_URL_MARKERS:
+        if marker in link_lower:
+            return True
+    return False
+
 
 def save_article(title, link, content, image_url, source_name, category, video_id=""):
     filename = f"{sanitize_filename(title)}.md"
     exists = any(os.path.exists(os.path.join(d, filename)) for d in [LIVE_DIR, PENDING_DIR, ARCHIVE_DIR])
     if exists:
+        return
+    if is_sponsored_content(title, link, content):
+        print(f"דילוג (תוכן ממומן חשוד): {title}")
         return
     if not image_url and not video_id:
         image_url = fetch_og_image(link)
@@ -206,6 +239,11 @@ def save_article(title, link, content, image_url, source_name, category, video_i
         full_text = fetch_full_article_text(link, MIN_CONTENT_LEN)
         if full_text:
             content = full_text
+    # re-check after pulling the full article body - sponsorship disclosure
+    # is often buried lower in the text, not in the short RSS teaser
+    if is_sponsored_content(title, link, content):
+        print(f"דילוג (תוכן ממומן חשוד - זוהה בגוף הכתבה): {title}")
+        return
     date_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     video_line = f'\nvideo_id: "{video_id}"' if video_id else ""
     md_content = f"""---
