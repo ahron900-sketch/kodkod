@@ -194,6 +194,7 @@ PLACEHOLDER_IMG = "/assets/placeholder.svg"
 MOCK_ADS = [
     {
         "cls": "ad-fin",
+        "img": "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=900&q=70",
         "eyebrow": "מומלץ עבורך",
         "title": "תיק השקעות חכם ב-90 שניות",
         "body": "השוואת קרנות מדד בעמלות הנמוכות בישראל",
@@ -201,6 +202,7 @@ MOCK_ADS = [
     },
     {
         "cls": "ad-travel",
+        "img": "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=900&q=70",
         "eyebrow": "דיל השבוע",
         "title": "טיסות ישירות לאירופה",
         "body": "החל מ-₪899 בכרטיס הלוך ושוב, מקומות אחרונים",
@@ -208,6 +210,7 @@ MOCK_ADS = [
     },
     {
         "cls": "ad-tech",
+        "img": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=900&q=70",
         "eyebrow": "חדש בישראל",
         "title": "אוזניות ביטול רעשים דור חדש",
         "body": "עד 40 שעות סוללה, משלוח חינם עד הבית",
@@ -215,6 +218,7 @@ MOCK_ADS = [
     },
     {
         "cls": "ad-food",
+        "img": "https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?w=900&q=70",
         "eyebrow": "פינוק לשבת",
         "title": "ארגז ירקות טרי מהחקלאי",
         "body": "מגיע ישר מהשדה עד הדלת, ללא תיווך",
@@ -225,10 +229,13 @@ MOCK_ADS = [
 _ad_counter = {"i": 0}
 
 
-def ad_slot_html():
+def ad_slot_html(compact=False):
     ad = MOCK_ADS[_ad_counter["i"] % len(MOCK_ADS)]
     _ad_counter["i"] += 1
-    return f"""<div class="ad-slot {ad['cls']}">
+    size_cls = "ad-slot-compact" if compact else ""
+    return f"""<div class="ad-slot {ad['cls']} {size_cls}">
+      <div class="ad-slot-bg" style="background-image:url('{html.escape(ad['img'])}')"></div>
+      <div class="ad-slot-shine"></div>
       <span class="ad-tag">פרסומת</span>
       <div class="ad-creative">
         <span class="ad-eyebrow">{html.escape(ad['eyebrow'])}</span>
@@ -286,9 +293,9 @@ def write_page(path, title, description, categories, active_cat, body_html,
                          f'<div class="ticker"><div class="ticker-move">{html.escape(ticker_text)}</div></div>\n<header class="site-header">')
     page_shell = f"""
 <div class="page-shell">
-  <aside class="side-rail side-rail-right">{ad_slot_html()}</aside>
+  <aside class="side-rail side-rail-right">{ad_slot_html(compact=True)}</aside>
   <div class="page-shell-content">{body_html}</div>
-  <aside class="side-rail side-rail-left">{ad_slot_html()}</aside>
+  <aside class="side-rail side-rail-left">{ad_slot_html(compact=True)}</aside>
 </div>"""
     full += page_shell + PAGE_FOOT.format(year=datetime.now().year)
     os.makedirs(os.path.dirname(path), exist_ok=True)

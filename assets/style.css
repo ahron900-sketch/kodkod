@@ -248,7 +248,7 @@ html.dark-mode .site-header {
   .side-rail .ad-slot {
     position: sticky;
     top: 90px;
-    height: 400px;
+    height: 250px;
     margin: 32px 0 0;
     writing-mode: initial;
   }
@@ -328,7 +328,7 @@ html.dark-mode .site-header {
 }
 .ad-creative {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   padding: 22px 26px;
   display: flex;
   flex-direction: column;
@@ -367,39 +367,50 @@ html.dark-mode .site-header {
 }
 .ad-slot:hover .ad-cta { background: rgba(255,255,255,0.3); }
 
-/* Each mock creative gets its own animated gradient + subtle floating shape */
+/* Real photo background with a slow Ken Burns zoom, tinted per creative
+   so the overlaid text stays readable */
+.ad-slot-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  animation: ad-zoom 14s ease-in-out infinite alternate;
+}
+@keyframes ad-zoom {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.15); }
+}
 .ad-slot::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-size: 200% 200%;
-  animation: ad-gradient 8s ease infinite;
+  z-index: 1;
+  mix-blend-mode: multiply;
 }
-@keyframes ad-gradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-.ad-fin::before { background-image: linear-gradient(120deg, #0f2027, #203a43, #2c5364); }
-.ad-travel::before { background-image: linear-gradient(120deg, #1e3c72, #2a5298, #4facfe); }
-.ad-tech::before { background-image: linear-gradient(120deg, #232526, #414345, #0a6cd6); }
-.ad-food::before { background-image: linear-gradient(120deg, #3a6073, #16222a, #6a8532); }
+.ad-fin::before { background: linear-gradient(120deg, rgba(15,32,39,0.85), rgba(44,83,100,0.55)); }
+.ad-travel::before { background: linear-gradient(120deg, rgba(30,60,114,0.85), rgba(79,172,254,0.5)); }
+.ad-tech::before { background: linear-gradient(120deg, rgba(20,20,22,0.88), rgba(10,108,214,0.55)); }
+.ad-food::before { background: linear-gradient(120deg, rgba(22,34,42,0.85), rgba(106,133,50,0.5)); }
 
-.ad-slot::after {
-  content: "";
+/* Diagonal shine sweep - a subtle "premium ad" cue that repeats periodically */
+.ad-slot-shine {
   position: absolute;
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.08);
-  top: -60px;
-  left: -40px;
-  animation: ad-float 6s ease-in-out infinite;
+  top: 0;
+  bottom: 0;
+  width: 60%;
+  z-index: 1;
+  background: linear-gradient(100deg, transparent 30%, rgba(255,255,255,0.18) 48%, rgba(255,255,255,0.28) 50%, rgba(255,255,255,0.18) 52%, transparent 70%);
+  transform: translateX(-140%);
+  animation: ad-shine 5s ease-in-out infinite;
+  animation-delay: 1.5s;
 }
-@keyframes ad-float {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(20px, 30px) scale(1.15); }
+@keyframes ad-shine {
+  0%, 60% { transform: translateX(-140%); }
+  85% { transform: translateX(140%); }
+  100% { transform: translateX(140%); }
 }
+
+.ad-slot-compact .ad-slot-bg { animation-duration: 18s; }
 
 .quick-strip {
   display: flex;
