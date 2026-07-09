@@ -600,7 +600,7 @@ def build():
                categories, None, body, ticker_text, canonical=f"{SITE_URL}/search.html")
 
     # Static pages
-    about_structured_data = f'<script type="application/ld+json">{json.dumps({
+    about_schema = {
         "@context": "https://schema.org",
         "@type": "AboutPage",
         "mainEntity": {
@@ -609,7 +609,8 @@ def build():
             "url": SITE_URL + "/",
             "description": "קודקוד הוא מרכז חדשותי דיגיטלי ישראלי המרכז מבזקים ממיטב מקורות החדשות בעברית - חדשות, כלכלה, טכנולוגיה, חרדים ובישול.",
         },
-    }, ensure_ascii=False)}</script>'
+    }
+    about_structured_data = '<script type="application/ld+json">' + json.dumps(about_schema, ensure_ascii=False) + '</script>'
     write_page(os.path.join(OUTPUT_DIR, "about.html"), f"אודות קודקוד - מי אנחנו וכיצד אנחנו עובדים | {SITE_NAME}",
                "קודקוד הוא מרכז חדשותי המרכז מבזקים ממיטב מקורות החדשות בישראל - חדשות, כלכלה, טכנולוגיה, חרדים ובישול. קראו על החזון, תחומי הסיקור והדרך בה אנחנו עובדים.",
                categories, None, ABOUT_BODY, ticker_text, canonical=f"{SITE_URL}/about.html", structured_data=about_structured_data)
