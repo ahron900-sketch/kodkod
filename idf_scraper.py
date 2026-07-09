@@ -48,22 +48,33 @@ def clean_html(raw_html):
     text = re.sub(cleanr, '', raw_html).strip()
     return html.unescape(text)
 
+def upgrade_image_quality(url):
+    """Some sources' RSS gives a tiny thumbnail variant of the real image -
+    swap in the full-resolution version where we know the URL pattern."""
+    if not url:
+        return url
+    # mako.co.il: "..._autoOrient_a.jpg" is an ~80x60 crop; the same filename
+    # without the trailing "_a" is the real, full-size image
+    url = re.sub(r'(_autoOrient)_a(\.\w+)(\?.*)?$', r'\1\2', url)
+    return url
+
+
 def extract_image(entry):
     if 'media_thumbnail' in entry and len(entry.media_thumbnail) > 0:
-        return entry.media_thumbnail[0].get('url', "")
+        return upgrade_image_quality(entry.media_thumbnail[0].get('url', ""))
     if 'media_content' in entry and len(entry.media_content) > 0:
-        return entry.media_content[0].get('url', "")
+        return upgrade_image_quality(entry.media_content[0].get('url', ""))
     if 'links' in entry:
         for link in entry.links:
             if 'image' in link.get('type', ''):
-                return link.href
+                return upgrade_image_quality(link.href)
     if 'enclosures' in entry and len(entry.enclosures) > 0:
-        return entry.enclosures[0].get('url', "")
+        return upgrade_image_quality(entry.enclosures[0].get('url', ""))
     # fall back to first <img> found in the description HTML
     desc = entry.get('description', '') or entry.get('summary', '')
     m = re.search(r'<img[^>]+src="([^"]+)"', desc)
     if m:
-        return m.group(1)
+        return upgrade_image_quality(m.group(1))
     return ""
 
 
@@ -90,7 +101,7 @@ def fetch_og_image(link):
     if not html_text:
         return ""
     m = OG_IMAGE_RE.search(html_text)
-    return m.group(1) if m else ""
+    return upgrade_image_quality(m.group(1)) if m else ""
 
 
 ARTICLE_TAG_RE = re.compile(r'<article[^>]*>(.*?)</article>', re.DOTALL | re.IGNORECASE)
