@@ -128,20 +128,21 @@ PAGE_HEAD = """<!DOCTYPE html>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css">
 {structured_data}
-<script>
-if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark-mode');
-</script>
 </head>
 <body>
 <header class="site-header">
   <a href="/" class="logo">קודקוד <span>חדשות</span></a>
+  <nav class="categories">{cat_links}</nav>
+  <button class="search-toggle" id="search-toggle" aria-label="חיפוש" aria-expanded="false">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  </button>
+</header>
+<div class="search-drawer" id="search-drawer">
   <form class="search-form" action="/search.html" method="get">
-    <input type="text" name="q" placeholder="חיפוש חדשות..." autocomplete="off">
+    <input type="text" name="q" placeholder="חיפוש חדשות..." autocomplete="off" id="search-drawer-input">
     <button type="submit">חיפוש</button>
   </form>
-  <button class="theme-toggle" onclick="document.documentElement.classList.toggle('dark-mode'); localStorage.setItem('theme', document.documentElement.classList.contains('dark-mode') ? 'dark' : 'light');" title="מצב כהה/בהיר">◐</button>
-  <nav class="categories">{cat_links}</nav>
-</header>
+</div>
 """
 
 PAGE_FOOT = """
@@ -187,6 +188,8 @@ def render_quick_card(a):
 
 
 PLACEHOLDER_IMG = "/assets/placeholder.svg"
+
+AD_SLOT_HTML = '<div class="ad-slot"><span>מקום פרסומת</span></div>'
 
 
 def cat_nav(categories, active=None):
@@ -242,20 +245,35 @@ ABOUT_BODY = """
 <main class="static-page">
   <h1>קודקוד <span>–</span> הלב הפועם של עולם החדשות</h1>
   <p class="lead">ברוכים הבאים ל"קודקוד", מרכז חדשותי המנגיש את אירועי היום במהירות ובאמינות, עם סיקור רחב של חדשות ישראל, כלכלה, טכנולוגיה וחרדים.</p>
-  <h2>החזון שלנו</h2>
-  <p>לרכז במקום אחד מבזקים ממיטב המקורות בישראל, בעברית קריאה, בלי רעש ובלי פרסום פולשני.</p>
+
+  <h2>מה אנחנו עושים</h2>
+  <p>קודקוד הוא אגרגטור חדשות: המערכת שלנו אוספת מבזקים ממיטב מקורות החדשות בישראל, ומציגה אותם במקום אחד, בעברית קריאה ובעיצוב נקי. כל כתבה מקושרת ומיוחסת למקור המקורי שממנו היא הגיעה - קודקוד אינו טוען לבעלות על התוכן, ותמיד תמצאו קישור לכתבה המלאה באתר המקור.</p>
+
   <h2>למה קודקוד?</h2>
   <ul>
     <li><strong>מהירות:</strong> עדכון אוטומטי לאורך היממה ממגוון מקורות.</li>
     <li><strong>מגוון:</strong> חדשות, כלכלה, טכנולוגיה וחרדים — הכול תחת קורת גג אחת.</li>
     <li><strong>נקי:</strong> ממשק פשוט, ללא רעש מיותר.</li>
+    <li><strong>מקור מכובד:</strong> כל כתבה מקושרת בבירור למקור המקורי שלה.</li>
   </ul>
+
+  <h2>יצירת קשר</h2>
+  <p>יש לכם משוב, תיקון, או שאלה? אתם מוזמנים <a href="/tip-line.html">לשלוח לנו הודעה</a>.</p>
 </main>"""
 
 ADVERTISE_BODY = f"""
 <main class="static-page">
   <h1>פרסמו <span>אצלנו</span></h1>
-  <p class="lead">קודקוד חדשות מגיע לקהל קוראים רחב ומגוון. מעוניינים לפרסם? צרו קשר ונחזור אליכם בהקדם.</p>
+  <p class="lead">קודקוד חדשות מגיע לקהל קוראים רחב ומגוון. מעוניינים לפרסם באתר? צרו קשר ונחזור אליכם בהקדם עם פרטים על מיקומי הפרסום וההיקפים הזמינים.</p>
+
+  <h2>מיקומי פרסום באתר</h2>
+  <ul>
+    <li><strong>באנר עמוד הבית:</strong> מתחת לכתבה הראשית, נצפה על ידי כל מבקר.</li>
+    <li><strong>בין קטגוריות:</strong> באנרים בין מקטעי הקטגוריות השונות בעמוד הבית.</li>
+    <li><strong>בתוך הכתבה:</strong> מיקום פרסומת בסיום כל כתבה, לפני אזור "עוד בנושא".</li>
+  </ul>
+
+  <h2>השאירו פרטים</h2>
   <form class="contact-form" action="{TIP_FORM_ACTION}" method="POST">
     <input type="text" name="name" placeholder="שם מלא / חברה" required>
     <input type="email" name="email" placeholder="אימייל לחזרה" required>
@@ -334,8 +352,26 @@ def build():
           <div class="grid-inner" id="recently-viewed-grid"></div>
         </section>"""
 
-    cards = "".join(render_card(a) for a in rest[:60])
-    body = f'<main class="grid">{hero_html}{quick_html}{recently_viewed_html}<div class="grid-inner">{cards}</div></main>'
+    # per-category sections: 9 articles each + a "view all" link to the category page
+    category_sections = []
+    for c in categories:
+        c_articles = [a for a in rest if a["category"] == c][:9]
+        if not c_articles:
+            continue
+        c_cards = "".join(render_card(a) for a in c_articles)
+        cat_url = f"/category/{slugify(c, c)}.html"
+        category_sections.append(f"""
+        <section class="cat-section">
+          <div class="cat-section-head">
+            <h2 class="section-title">{html.escape(c)}</h2>
+            <a class="view-all-btn" href="{cat_url}">לכל הכתבות</a>
+          </div>
+          <div class="grid-inner">{c_cards}</div>
+        </section>
+        {AD_SLOT_HTML}""")
+    categories_html = "".join(category_sections)
+
+    body = f'<main class="grid">{hero_html}{AD_SLOT_HTML}{quick_html}{recently_viewed_html}{categories_html}</main>'
     write_page(os.path.join(OUTPUT_DIR, "index.html"), SITE_NAME,
                "קודקוד חדשות - האתר החדשותי המהיר בישראל: חדשות, כלכלה, טכנולוגיה וחרדים במקום אחד",
                categories, None, body, ticker_text, canonical=SITE_URL + "/")
@@ -420,6 +456,7 @@ def build():
           {body_content}
           <a class="source-link" href="{html.escape(a['link'])}" target="_blank" rel="noopener">קרא את הכתבה המלאה במקור</a>
         </main>
+        {AD_SLOT_HTML}
         {related_html}
         {view_tracker}"""
         description = re.sub(r'<[^>]+>', '', body_html_full)[:160].strip()

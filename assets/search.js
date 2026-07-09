@@ -1,4 +1,34 @@
 (function () {
+  const toggle = document.getElementById("search-toggle");
+  const drawer = document.getElementById("search-drawer");
+  if (toggle && drawer) {
+    function closeDrawer() {
+      drawer.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+    }
+    function openDrawer() {
+      drawer.classList.add("open");
+      toggle.setAttribute("aria-expanded", "true");
+      const input = document.getElementById("search-drawer-input");
+      if (input) input.focus();
+    }
+    toggle.addEventListener("click", function (e) {
+      e.stopPropagation();
+      if (drawer.classList.contains("open")) closeDrawer();
+      else openDrawer();
+    });
+    document.addEventListener("click", function (e) {
+      if (drawer.classList.contains("open") && !drawer.contains(e.target) && e.target !== toggle) {
+        closeDrawer();
+      }
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeDrawer();
+    });
+  }
+})();
+
+(function () {
   const params = new URLSearchParams(window.location.search);
   const q = (params.get("q") || "").trim();
 
