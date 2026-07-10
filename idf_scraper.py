@@ -123,6 +123,13 @@ CONTENT_DIV_OPEN_RE = re.compile(
     re.IGNORECASE,
 )
 PARAGRAPH_RE = re.compile(r'<p[^>]*>(.*?)</p>', re.DOTALL | re.IGNORECASE)
+# ynet (and other Draft.js-based editors) don't use <p> at all - each
+# paragraph is a <div class="...text_editor_paragraph...">; fall back to
+# this when no <p> tags are found in the content scope
+DIV_PARAGRAPH_RE = re.compile(
+    r'<div[^>]+class=["\'][^"\']*text_editor_paragraph[^"\']*["\'][^>]*>(.*?)</div>',
+    re.DOTALL | re.IGNORECASE,
+)
 TAG_STRIP_RE = re.compile(r'<[^>]+>')
 SCRIPT_STYLE_RE = re.compile(r'<(script|style)\b[^>]*>.*?</\1>', re.DOTALL | re.IGNORECASE)
 CONTENT_SLICE_SIZE = 20_000
@@ -161,9 +168,12 @@ def fetch_full_article_text(link, min_len_needed):
     if not scope:
         return ""
     scope = SCRIPT_STYLE_RE.sub("", scope)
+    raw_paragraphs = PARAGRAPH_RE.findall(scope)
+    if not raw_paragraphs:
+        raw_paragraphs = DIV_PARAGRAPH_RE.findall(scope)
     paragraphs = []
     junk_hits = 0
-    for p in PARAGRAPH_RE.findall(scope):
+    for p in raw_paragraphs:
         if SCRIPT_LEAK_RE.search(p):
             continue
         text = TAG_STRIP_RE.sub("", p).strip()
@@ -225,26 +235,96 @@ def is_sponsored_content(title, link, content):
     return False
 
 
+# Gibberish/broken-content detector: catches leftover markdown links, raw
+# HTML tags, or text that's mostly not real words (mojibake, stray symbol
+# soup) slipping past the earlier extraction filters.
+LEFTOVER_MARKUP_RE = re.compile(r'\[[^\]]*\]\([^)]*\)|<[a-zA-Z/][^>]*>')
+
+
+def is_gibberish_or_broken(content):
+    if not content:
+        return True
+    if LEFTOVER_MARKUP_RE.search(content):
+        return True
+    letters = sum(1 for ch in content if ch.isalpha())
+    if letters < len(content) * 0.5:
+        return True
+    return False
+
+
+# Video filter: YouTube's public RSS feed has no duration field (that needs
+# the paid Data API), so we can only filter by title/keyword heuristics -
+# reject anything that reads as a live stream or a full broadcast segment
+# rather than a short news clip.
+LIVE_BROADCAST_MARKERS = [
+    "live", "לייב", "שידור חי", "בשידור חי", "פרק מלא", "השידור המלא",
+    "מהדורה מלאה", "הכל תקשורת", "לצפייה ישירה", "שידור ישיר",
+]
+
+
+def is_live_broadcast(title):
+    title_lower = (title or "").lower()
+    return any(marker.lower() in title_lower for marker in LIVE_BROADCAST_MARKERS)
+
+
 def save_article(title, link, content, image_url, source_name, category, video_id=""):
     filename = f"{sanitize_filename(title)}.md"
     exists = any(os.path.exists(os.path.join(d, filename)) for d in [LIVE_DIR, PENDING_DIR, ARCHIVE_DIR])
     if exists:
         return
+
+    # Filter 3: no sponsored/advertorial content, checked against the RSS
+    # teaser first (cheap, before any network fetch)
     if is_sponsored_content(title, link, content):
-        print(f"דילוג (תוכן ממומן חשוד): {title}")
+        print(f"נפסל (תוכן ממומן חשוד): {title}")
         return
-    if not image_url and not video_id:
+
+    # Video entries skip the image/full-text gates below (they have their
+    # own visual - the video itself) but go through the live-broadcast filter
+    if video_id:
+        if is_live_broadcast(title):
+            print(f"נפסל (שידור חי/פרק מלא, לא קליפ חדשות): {title}")
+            return
+        if not image_url:
+            image_url = f"https://i.ytimg.com/vi/{video_id}/hqdefault.jpg"
+        date_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        _write_article_file(filename, title, date_str, source_name, image_url, link, category, content, video_id)
+        return
+
+    # Filter 1: a real image is mandatory - try the RSS image first, then
+    # the article page's og:image; no image at all means the article is
+    # rejected outright, not just hidden from listings
+    if not image_url:
         image_url = fetch_og_image(link)
-    if not video_id and len(content) < MIN_CONTENT_LEN:
+    if not image_url:
+        print(f"נפסל (אין תמונה איכותית): {title}")
+        return
+
+    # Filter 2: need the full article body, not just a short RSS teaser -
+    # if the full-text fetch fails, this article is rejected rather than
+    # saved with a stub/snippet
+    if len(content) < MIN_CONTENT_LEN:
         full_text = fetch_full_article_text(link, MIN_CONTENT_LEN)
-        if full_text:
-            content = full_text
+        if not full_text:
+            print(f"נפסל (לא נמצאה כתבה מלאה, רק תקציר): {title}")
+            return
+        content = full_text
+
+    if is_gibberish_or_broken(content):
+        print(f"נפסל (תוכן שבור/גיבריש/קישורים שיוריים): {title}")
+        return
+
     # re-check after pulling the full article body - sponsorship disclosure
     # is often buried lower in the text, not in the short RSS teaser
     if is_sponsored_content(title, link, content):
-        print(f"דילוג (תוכן ממומן חשוד - זוהה בגוף הכתבה): {title}")
+        print(f"נפסל (תוכן ממומן חשוד - זוהה בגוף הכתבה): {title}")
         return
+
     date_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    _write_article_file(filename, title, date_str, source_name, image_url, link, category, content)
+
+
+def _write_article_file(filename, title, date_str, source_name, image_url, link, category, content, video_id=""):
     video_line = f'\nvideo_id: "{video_id}"' if video_id else ""
     md_content = f"""---
 title: >-
