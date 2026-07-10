@@ -280,15 +280,15 @@ def save_article(title, link, content, image_url, source_name, category, video_i
         return
 
     # Video entries skip the image/full-text gates below (they have their
-    # own visual - the video itself) but go through the live-broadcast filter
+    # own visual - the video itself). Live broadcasts / full episodes are
+    # kept, but routed to their own category instead of the regular news
+    # video feed, so they land on a separate page rather than being lost.
     if video_id:
-        if is_live_broadcast(title):
-            print(f"נפסל (שידור חי/פרק מלא, לא קליפ חדשות): {title}")
-            return
+        video_category = "טלוויזיה ושידורים חיים" if is_live_broadcast(title) else category
         if not image_url:
             image_url = f"https://i.ytimg.com/vi/{video_id}/hqdefault.jpg"
         date_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        _write_article_file(filename, title, date_str, source_name, image_url, link, category, content, video_id)
+        _write_article_file(filename, title, date_str, source_name, image_url, link, video_category, content, video_id)
         return
 
     # Filter 1: a real image is mandatory - try the RSS image first, then

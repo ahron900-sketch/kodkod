@@ -14,6 +14,7 @@ TIP_FORM_ACTION = "https://formspree.io/f/xeelpjwg"
 ARTICLE_PREVIEW_CHARS = 900
 WP_BOILERPLATE_RE = re.compile(r'^The post .* appeared first on .*\.?$')
 RECIPE_CATEGORY = "בישול ומתכונים"
+TV_CATEGORY = "טלוויזיה ושידורים חיים"
 
 
 def extract_dek(body_text, max_len=180):
@@ -258,10 +259,14 @@ VIDEO_ICON_SVG = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" st
 def cat_nav(categories, active=None):
     links = ['<a href="/" class="{}">כל החדשות</a>'.format("active" if active is None else "")]
     for c in categories:
+        if c == TV_CATEGORY:
+            continue
         cls = "active" if c == active else ""
         links.append(f'<a href="/category/{slugify(c, c)}.html" class="{cls}">{html.escape(c)}</a>')
     video_cls = "active" if active == "וידאו" else ""
     links.append(f'<a href="/video.html" class="nav-video {video_cls}">{VIDEO_ICON_SVG}<span>וידאו</span></a>')
+    tv_cls = "active" if active == TV_CATEGORY else ""
+    links.append(f'<a href="/tv.html" class="nav-video {tv_cls}">{VIDEO_ICON_SVG}<span>טלוויזיה</span></a>')
     return "".join(links)
 
 
@@ -527,8 +532,11 @@ def build():
         </section>"""
 
     # per-category sections: 9 articles each + a "view all" link to the category page
+    # (TV_CATEGORY gets its own dedicated /tv.html instead, see below)
     category_sections = []
     for c in categories:
+        if c == TV_CATEGORY:
+            continue
         c_articles = [a for a in rest if a["category"] == c][:9]
         if not c_articles:
             continue
@@ -551,8 +559,10 @@ def build():
                categories, None, body, ticker_text, canonical=SITE_URL + "/",
                structured_data=homepage_structured_data())
 
-    # Category pages
+    # Category pages (TV_CATEGORY has its own /tv.html instead)
     for c in categories:
+        if c == TV_CATEGORY:
+            continue
         c_articles = [a for a in listable if a["category"] == c][:100]
         cards = "".join(render_card(a) for a in c_articles)
         sort_bar = """
@@ -570,8 +580,8 @@ def build():
                    categories, c, body, ticker_text, canonical=cat_url,
                    structured_data=category_structured_data(c, cat_url))
 
-    # Video page - all articles with a video_id, regardless of their news category
-    video_articles = [a for a in listable if a.get("video_id")]
+    # Video page - short news clips only (TV_CATEGORY has its own page below)
+    video_articles = [a for a in listable if a.get("video_id") and a["category"] != TV_CATEGORY]
     video_cards = "".join(render_card(a) for a in video_articles)
     video_body = f'<main class="grid"><h1 class="page-title">וידאו</h1><div class="grid-inner">{video_cards}</div></main>'
     video_url = f"{SITE_URL}/video.html"
@@ -579,6 +589,17 @@ def build():
                "קטעי חדשות מצולמים ממיטב ערוצי החדשות בישראל, בנגן הווידאו הייעודי של קודקוד",
                categories, "וידאו", video_body, ticker_text, canonical=video_url,
                structured_data=category_structured_data("וידאו", video_url))
+
+    # Separate page for live broadcasts / full TV episodes, kept apart from
+    # the short news-clip video feed
+    tv_articles = [a for a in listable if a.get("video_id") and a["category"] == TV_CATEGORY]
+    tv_cards = "".join(render_card(a) for a in tv_articles)
+    tv_body = f'<main class="grid"><h1 class="page-title">{TV_CATEGORY}</h1><div class="grid-inner">{tv_cards}</div></main>'
+    tv_url = f"{SITE_URL}/tv.html"
+    write_page(os.path.join(OUTPUT_DIR, "tv.html"), f"{TV_CATEGORY} - {SITE_NAME}",
+               "שידורים חיים ופרקים מלאים מערוצי החדשות בישראל",
+               categories, TV_CATEGORY, tv_body, ticker_text, canonical=tv_url,
+               structured_data=category_structured_data(TV_CATEGORY, tv_url))
 
     # Article pages
     for i, a in enumerate(articles):
@@ -728,7 +749,7 @@ def build():
     # <image:image> extension when the article has a real photo, so image
     # search can index it too)
     now = datetime.now()
-    static_urls = [f"{SITE_URL}/", f"{SITE_URL}/about.html", f"{SITE_URL}/advertise.html", f"{SITE_URL}/tip-line.html", f"{SITE_URL}/video.html"]
+    static_urls = [f"{SITE_URL}/", f"{SITE_URL}/about.html", f"{SITE_URL}/advertise.html", f"{SITE_URL}/tip-line.html", f"{SITE_URL}/video.html", f"{SITE_URL}/tv.html"]
     category_urls = [f"{SITE_URL}/category/{slugify(c, c)}.html" for c in categories]
 
     sitemap = (
