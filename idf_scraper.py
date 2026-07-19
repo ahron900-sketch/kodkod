@@ -1,11 +1,12 @@
 import feedparser
+import glob
 import html
 import os
 import re
 import time
 import shutil
 import urllib.request
-from datetime import datetime
+from datetime import datetime, timedelta
 
 # מקורות RSS - כולם בעברית, ממוינים לקטגוריות (כל URL כאן נבדק ואומת שמחזיר כתבות)
 rss_feeds = {
@@ -267,10 +268,94 @@ def is_live_broadcast(title):
     return any(marker.lower() in title_lower for marker in LIVE_BROADCAST_MARKERS)
 
 
-def save_article(title, link, content, image_url, source_name, category, video_id=""):
+# Cross-source duplicate-story detection: the same breaking story often gets
+# published, independently, by several outlets within minutes of each other,
+# each with a slightly different headline. Filesystem mtimes can't be used to
+# find "recent" articles here - a fresh git checkout resets every file's mtime
+# to checkout time, so we parse the real `date:` field out of each article's
+# frontmatter instead (same approach build_site.py / generate_magazine.py use).
+DUPLICATE_LOOKBACK_HOURS = 48
+DUPLICATE_SIMILARITY_THRESHOLD = 0.55
+DUPLICATE_MIN_SHARED_WORDS = 4
+FRONTMATTER_TITLE_RE = re.compile(r'title:\s*>-\s*\n((?:[ \t]+.*\n?)+)')
+FRONTMATTER_DATE_RE = re.compile(r'\ndate:\s*"([^"]+)"')
+# deliberately excludes bare numbers: dates/times/episode numbers in template-y
+# titles (e.g. daily broadcast videos "NEWS 24/26 הבוקר 18/07" vs "...19/07")
+# are the single biggest false-positive source - they share every word except
+# the day-of-month digit, which digits-as-words would wrongly count as signal
+TITLE_WORD_RE = re.compile(r'[א-ת]{2,}|[a-zA-Z]{2,}')
+TITLE_STOPWORDS = {
+    "של", "עם", "על", "אל", "אך", "או", "גם", "לא", "כי", "זה", "זו", "אלה",
+    "הוא", "היא", "הם", "הן", "אני", "אתה", "את", "אנחנו", "יש", "אין",
+    "כך", "כן", "רק", "עוד", "כבר", "מה", "מי", "איך", "למה", "מתי", "אחרי",
+    "לפני", "בין", "תוך", "בעקבות", "לאחר", "במהלך", "בשל", "נגד", "כדי",
+}
+
+
+def normalize_title_words(title):
+    words = TITLE_WORD_RE.findall(title or "")
+    return {w for w in words if w not in TITLE_STOPWORDS}
+
+
+def load_recent_titles(hours=DUPLICATE_LOOKBACK_HOURS):
+    """Returns a list of normalized word-sets, one per article published (per
+    its frontmatter date) within the last `hours` - used to catch the same
+    story being re-saved from a different source."""
+    cutoff = datetime.now() - timedelta(hours=hours)
+    titles = []
+    for path in glob.glob(os.path.join(LIVE_DIR, "*.md")):
+        try:
+            with open(path, encoding="utf-8") as f:
+                head = f.read(600)
+        except Exception:
+            continue
+        date_m = FRONTMATTER_DATE_RE.search(head)
+        if not date_m:
+            continue
+        try:
+            dt = datetime.strptime(date_m.group(1), "%Y-%m-%d %H:%M:%S")
+        except Exception:
+            continue
+        if dt < cutoff:
+            continue
+        title_m = FRONTMATTER_TITLE_RE.search(head)
+        if not title_m:
+            continue
+        title_text = " ".join(line.strip() for line in title_m.group(1).splitlines() if line.strip())
+        words = normalize_title_words(title_text)
+        if words:
+            titles.append(words)
+    return titles
+
+
+def is_duplicate_of_recent(title, recent_title_word_sets):
+    """Fuzzy (Jaccard-similarity) check against titles already published in
+    the lookback window - catches the same story from a different outlet,
+    not just an exact-filename repeat (already handled separately)."""
+    words = normalize_title_words(title)
+    if len(words) < DUPLICATE_MIN_SHARED_WORDS:
+        return False
+    for other in recent_title_word_sets:
+        if not other:
+            continue
+        shared = words & other
+        if len(shared) < DUPLICATE_MIN_SHARED_WORDS:
+            continue
+        union = words | other
+        if union and len(shared) / len(union) >= DUPLICATE_SIMILARITY_THRESHOLD:
+            return True
+    return False
+
+
+def save_article(title, link, content, image_url, source_name, category, video_id="", recent_titles=None):
     filename = f"{sanitize_filename(title)}.md"
     exists = any(os.path.exists(os.path.join(d, filename)) for d in [LIVE_DIR, PENDING_DIR, ARCHIVE_DIR])
     if exists:
+        return
+
+    # Filter 0: same story already published by another source recently
+    if recent_titles is not None and is_duplicate_of_recent(title, recent_titles):
+        print(f"נפסל (כפילות - הסיפור כבר פורסם ממקור אחר): {title}")
         return
 
     # Filter 3: no sponsored/advertorial content, checked against the RSS
@@ -289,6 +374,8 @@ def save_article(title, link, content, image_url, source_name, category, video_i
             image_url = f"https://i.ytimg.com/vi/{video_id}/hqdefault.jpg"
         date_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         _write_article_file(filename, title, date_str, source_name, image_url, link, video_category, content, video_id)
+        if recent_titles is not None:
+            recent_titles.append(normalize_title_words(title))
         return
 
     # Filter 1: a real image is mandatory - try the RSS image first, then
@@ -322,6 +409,8 @@ def save_article(title, link, content, image_url, source_name, category, video_i
 
     date_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     _write_article_file(filename, title, date_str, source_name, image_url, link, category, content)
+    if recent_titles is not None:
+        recent_titles.append(normalize_title_words(title))
 
 
 def _write_article_file(filename, title, date_str, source_name, image_url, link, category, content, video_id=""):
@@ -347,6 +436,8 @@ category: "{category}"{video_line}
 
 def fetch_news():
     manage_archive()
+    recent_titles = load_recent_titles()
+    print(f"נטענו {len(recent_titles)} כותרות מ-{DUPLICATE_LOOKBACK_HOURS} השעות האחרונות לבדיקת כפילויות")
 
     for source_name, (url, category) in rss_feeds.items():
         print(f"מתחיל שאיבה מ-{source_name}...")
@@ -361,7 +452,7 @@ def fetch_news():
             link = entry.get('link', '')
             content = clean_html(entry.get('description', '') or entry.get('summary', ''))
             image_url = extract_image(entry)
-            save_article(title, link, content, image_url, source_name, category)
+            save_article(title, link, content, image_url, source_name, category, recent_titles=recent_titles)
 
     for channel_id, (source_name, category) in youtube_channels.items():
         feed_url = f"https://www.youtube.com/feeds/videos.xml?channel_id={channel_id}"
@@ -378,7 +469,7 @@ def fetch_news():
             video_id = entry.get('yt_videoid', '')
             content = clean_html(entry.get('summary', ''))
             image_url = extract_image(entry)
-            save_article(title, link, content, image_url, source_name, category, video_id=video_id)
+            save_article(title, link, content, image_url, source_name, category, video_id=video_id, recent_titles=recent_titles)
 
 
 if __name__ == "__main__":

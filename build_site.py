@@ -171,9 +171,31 @@ PAGE_FOOT = """
     <a href="/about.html">אודות</a>
     <a href="/tip-line.html">שלחו לנו סקופ</a>
     <a href="/advertise.html">פרסמו אצלנו</a>
+    <a href="/privacy.html">מדיניות פרטיות</a>
+    <a href="/terms.html">תנאי שימוש</a>
+    <a href="/accessibility.html">הצהרת נגישות</a>
   </nav>
   <p>© {year} קודקוד חדשות — כל הזכויות שמורות</p>
 </footer>
+<div class="cookie-banner" id="cookie-banner" hidden>
+  <p>קודקוד שומר מידע מקומי בדפדפן שלכם (כתבות אחרונות, סימוני "אהבתי") כדי לשפר את החוויה. המידע נשאר במכשיר שלכם בלבד ואינו נשלח לשרת. פרטים ב<a href="/privacy.html" target="_blank">מדיניות הפרטיות</a>.</p>
+  <div class="cookie-banner-actions">
+    <button id="cookie-decline" class="cookie-btn cookie-btn-secondary">דחייה</button>
+    <button id="cookie-accept" class="cookie-btn cookie-btn-primary">אישור</button>
+  </div>
+</div>
+<div class="a11y-widget" id="a11y-widget">
+  <button class="a11y-toggle" id="a11y-toggle" aria-label="אפשרויות נגישות" aria-expanded="false">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="4" r="2"/><path d="M19 7h-6.5L10 4H5a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h2l1.5 2L7 20h3l1.7-7h.6L14 20h3l-2.5-9L17 9h2a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
+  </button>
+  <div class="a11y-panel" id="a11y-panel" hidden>
+    <button data-a11y="font-inc">הגדל גופן</button>
+    <button data-a11y="font-dec">הקטן גופן</button>
+    <button data-a11y="contrast">ניגודיות גבוהה</button>
+    <button data-a11y="stop-motion">עצירת אנימציות</button>
+    <button data-a11y="reset">איפוס</button>
+  </div>
+</div>
 <script src="/assets/search.js"></script>
 </body>
 </html>
@@ -397,6 +419,10 @@ ADVERTISE_BODY = f"""
     <input type="text" name="name" placeholder="שם מלא / חברה" required>
     <input type="email" name="email" placeholder="אימייל לחזרה" required>
     <textarea name="message" rows="5" placeholder="ספרו לנו על הקמפיין שלכם..." required></textarea>
+    <label class="consent-checkbox">
+      <input type="checkbox" name="privacy_consent" value="yes" required>
+      <span>קראתי ואני מסכים/ה ל<a href="/privacy.html" target="_blank">מדיניות הפרטיות</a> - הפרטים ישמשו ליצירת קשר בלבד</span>
+    </label>
     <button type="submit">שלח בקשה</button>
   </form>
 </main>"""
@@ -410,8 +436,97 @@ TIP_LINE_BODY = f"""
     <input type="text" name="location" placeholder="מיקום האירוע" required>
     <input type="text" name="media_link" placeholder="קישור לתמונה או סרטון">
     <textarea name="content" rows="6" placeholder="מה קרה שם? ספרו לנו הכל..." required></textarea>
+    <label class="consent-checkbox">
+      <input type="checkbox" name="privacy_consent" value="yes" required>
+      <span>קראתי ואני מסכים/ה ל<a href="/privacy.html" target="_blank">מדיניות הפרטיות</a> - הפרטים ישמשו ליצירת קשר בלבד</span>
+    </label>
     <button type="submit">שגר דיווח לחדר המבזקים</button>
   </form>
+</main>"""
+
+PRIVACY_BODY = """
+<main class="static-page legal-page">
+  <h1>מדיניות <span>פרטיות</span></h1>
+  <p class="lead">מדיניות זו מסבירה אילו נתונים קודקוד אוסף, כיצד הם נשמרים, ומהן הזכויות שלכם. המדיניות מנוסחת בהתאם לחוק הגנת הפרטיות, התשמ"א-1981, ותיקון 13 לחוק (בתוקף מאוגוסט 2025).</p>
+
+  <h2>מה קודקוד הוא - ומה הוא לא</h2>
+  <p>קודקוד הוא אתר סטטי המתארח על תשתית GitHub Pages, ללא שרת צד-שרת, ללא בסיס נתונים, וללא מערכת הרשמת משתמשים. האתר אינו אוסף, שומר, או מעבד מידע אישי בשרתים שלו - כי אין לו שרתים כאלה.</p>
+
+  <h2>מידע הנשמר בדפדפן שלכם (localStorage)</h2>
+  <p>האתר שומר מידע מקומי בדפדפן שלכם בלבד, באמצעות טכנולוגיית localStorage (דומה לעוגיות אך אינה נשלחת לשרת כלשהו). מידע זה כולל:</p>
+  <ul>
+    <li><strong>כתבות שנצפו לאחרונה:</strong> רשימת הכתבות שקראתם, כדי להציג לכם אותן בעמוד הבית.</li>
+    <li><strong>כתבות שסימנתם "אהבתי":</strong> נשמר מקומית כדי להציג את הסימון בביקור הבא.</li>
+    <li><strong>העדפת מצב תצוגה:</strong> ניגודיות, גודל טקסט ועצירת אנימציות, אם שיניתם דרך רכיב הנגישות.</li>
+    <li><strong>בחירת ההסכמה שלכם למדיניות זו.</strong></li>
+  </ul>
+  <p>מידע זה <strong>אינו</strong> נשלח לשרת כלשהו, אינו משותף עם צד שלישי, ואינו מזהה אתכם אישית. הוא קיים רק במכשיר שלכם, ואתם יכולים למחוק אותו בכל עת דרך הגדרות הדפדפן.</p>
+
+  <h2>טפסים ויצירת קשר</h2>
+  <p>כאשר אתם ממלאים טופס באתר (יצירת קשר, פרסום, או דיווח על סקופ), הפרטים שאתם מזינים - שם, אימייל, ותוכן הפנייה - נשלחים באמצעות שירות חיצוני בשם <strong>Formspree</strong>, המעבד את הטופס ומעביר אותו אלינו במייל. Formspree הוא צד שלישי, ומדיניות הפרטיות שלו חלה על עיבוד הנתונים בצדו. איננו משתמשים במידע זה למטרה כלשהי מעבר למענה לפנייתכם.</p>
+
+  <h2>עוגיות וכלי מעקב</h2>
+  <p>קודקוד אינו משתמש בעוגיות מעקב (tracking cookies), פיקסלים פרסומיים, או כלי אנליטיקה חיצוניים כלשהם, נכון לכתיבת מדיניות זו. מיקומי הפרסומת המוצגים באתר הם תוכן הדגמה בלבד ואינם טוענים סקריפטים של רשת פרסום חיצונית.</p>
+
+  <h2>קישורים לאתרים חיצוניים</h2>
+  <p>קודקוד הוא אתר המרכז כתבות ממקורות חדשות שונים. כל כתבה מקושרת לאתר המקור המקורי. לאחר לחיצה על קישור כזה, אתם עוברים לאתר חיצוני שאינו בשליטתנו, ומדיניות הפרטיות שלו חלה משם ואילך.</p>
+
+  <h2>הזכויות שלכם</h2>
+  <p>מאחר שהאתר אינו שומר מידע אישי מזהה בשרת כלשהו, אין לנו מאגר מידע לעיין בו, לתקן, או למחוק על-פי בקשה. מידע שנשמר בדפדפן שלכם (localStorage) ניתן למחיקה בכל עת דרך הגדרות הדפדפן. אם שלחתם לנו טופס, ניתן לפנות אלינו לבקש מחיקת הפנייה.</p>
+
+  <h2>יצירת קשר בנושאי פרטיות</h2>
+  <p>לשאלות או בקשות בנושא פרטיות, ניתן לפנות אלינו דרך <a href="/tip-line.html">עמוד יצירת הקשר</a>.</p>
+
+  <p class="legal-updated">מדיניות זו עודכנה לאחרונה: יולי 2026.</p>
+</main>"""
+
+TERMS_BODY = """
+<main class="static-page legal-page">
+  <h1>תנאי <span>שימוש</span></h1>
+  <p class="lead">השימוש באתר קודקוד כפוף לתנאים המפורטים להלן. גלישה באתר מהווה הסכמה לתנאים אלה.</p>
+
+  <h2>אופי האתר</h2>
+  <p>קודקוד הוא אגרגטור חדשות אוטומטי. האתר אוסף ומציג מבזקים ממקורות חדשות קיימים בישראל, עם ייחוס וקישור מלא למקור המקורי של כל כתבה. קודקוד אינו כותב, עורך, או אחראי לתוכן הכתבות המקוריות, ואינו טוען לבעלות עליהן. זכויות היוצרים בתוכן הכתבות שייכות למקור המקורי שלהן בלבד.</p>
+
+  <h2>שימוש הוגן</h2>
+  <p>הצגת קטעי כתבות עם ייחוס וקישור למקור נעשית במסגרת שימוש הוגן ומקובל באגרגציית חדשות. כל כתבה כוללת קישור ברור לכתבה המלאה באתר המקור, וקודקוד ממליץ לקוראים לבקר באתר המקור לקריאה מלאה ולתמיכה בעיתונות המקורית.</p>
+
+  <h2>אין אחריות לתוכן צד שלישי</h2>
+  <p>קודקוד אינו אחראי לדיוק, לעדכניות, או לאמינות התוכן המקורי המוצג באתר, שכן מדובר בתוכן שנוצר ונערך על-ידי גורמים שלישיים (מקורות החדשות). כל טענה בנוגע לתוכן כתבה יש להפנות למקור המקורי שלה.</p>
+
+  <h2>שימוש אסור</h2>
+  <p>אין להשתמש באתר לצורך פעילות בלתי חוקית, להעתיק או להפיץ מחדש את מבנה האתר או קוד המקור שלו לצרכים מסחריים ללא אישור, או לנסות לשבש את פעילות האתר.</p>
+
+  <h2>שינויים בתנאים</h2>
+  <p>קודקוד רשאי לעדכן תנאים אלה מעת לעת. המשך השימוש באתר לאחר עדכון מהווה הסכמה לתנאים המעודכנים.</p>
+
+  <h2>יצירת קשר</h2>
+  <p>לשאלות בנוגע לתנאי השימוש, ניתן לפנות אלינו דרך <a href="/tip-line.html">עמוד יצירת הקשר</a>.</p>
+
+  <p class="legal-updated">תנאים אלה עודכנו לאחרונה: יולי 2026.</p>
+</main>"""
+
+ACCESSIBILITY_BODY = """
+<main class="static-page legal-page">
+  <h1>הצהרת <span>נגישות</span></h1>
+  <p class="lead">קודקוד רואה חשיבות רבה במתן שירות שוויוני ונגיש לכלל הציבור, לרבות אנשים עם מוגבלות, ופועל להנגשת האתר בהתאם לתקן הישראלי (ת"י) 5568 להנגשת תכנים באינטרנט, ברמת AA, ובהתאם לחוק שוויון זכויות לאנשים עם מוגבלות, התשנ"ח-1998.</p>
+
+  <h2>אמצעי הנגישות באתר</h2>
+  <ul>
+    <li><strong>רכיב נגישות:</strong> בכל עמוד קיים כפתור צף המאפשר הגדלת/הקטנת גופן, מעבר לניגודיות גבוהה, ועצירת אנימציות ואפקטי גלילה.</li>
+    <li><strong>ניווט מקלדת:</strong> ניתן לנווט בין כל הקישורים, הכפתורים והשדות באתר באמצעות מקש Tab בלבד.</li>
+    <li><strong>טקסט חלופי לתמונות:</strong> תמונות הכתבות באתר כוללות תיאור טקסטואלי חלופי (alt) המאפשר לתוכנות הקראה להנגיש את התוכן.</li>
+    <li><strong>מבנה סמנטי:</strong> האתר בנוי עם כותרות היררכיות (H1-H3) ותגיות HTML סמנטיות, לתמיכה בקוראי מסך.</li>
+    <li><strong>ניגודיות צבעים:</strong> צבעי הטקסט והרקע באתר נבחרו כך שיעמדו ביחס ניגודיות של 4.5:1 לפחות.</li>
+  </ul>
+
+  <h2>מגבלות ידועות</h2>
+  <p>קודקוד הוא אגרגטור המציג תוכן חיצוני (כתבות, תמונות, ולעיתים מוצגים גם סרטוני וידאו) שמקורו באתרי חדשות אחרים. ייתכן שתוכן זה, בהיותו חיצוני, אינו עומד באופן מלא בדרישות הנגישות. אנו פועלים לשפר את חוויית הנגישות באופן שוטף.</p>
+
+  <h2>פנייה בנושא נגישות</h2>
+  <p>נתקלתם בבעיית נגישות באתר? נשמח לדעת ולטפל בפנייתכם. ניתן לפנות אלינו דרך <a href="/tip-line.html">עמוד יצירת הקשר</a>, בציון "נגישות" בתוכן הפנייה.</p>
+
+  <p class="legal-updated">הצהרה זו עודכנה לאחרונה ונבדקה: יולי 2026.</p>
 </main>"""
 
 
@@ -592,6 +707,7 @@ def build():
         c_cards = "".join(render_card(a) for a in c_articles)
         cat_url = f"/category/{slugify(c, c)}.html"
         category_sections.append(f"""
+        <div class="cat-section-wrap" data-category="{html.escape(c)}">
         <section class="cat-section reveal">
           <div class="cat-section-head">
             <h2 class="section-title">{html.escape(c)}</h2>
@@ -599,8 +715,9 @@ def build():
           </div>
           <div class="grid-inner">{c_cards}</div>
         </section>
-        {ad_slot_html()}""")
-    categories_html = "".join(category_sections)
+        {ad_slot_html()}
+        </div>""")
+    categories_html = f'<div id="personalized-sections">{"".join(category_sections)}</div>'
 
     body = f'<main class="grid">{hero_html}{bento_html}{ad_slot_html()}{quick_html}{recently_viewed_html}{categories_html}</main>'
     write_page(os.path.join(OUTPUT_DIR, "index.html"), SITE_NAME,
@@ -778,6 +895,7 @@ def build():
         <script>
         (function() {{
           try {{
+            if (localStorage.getItem('kk_cookie_consent') === 'declined') return;
             var key = 'kk_recent';
             var entry = {{slug: {json.dumps(a['slug'], ensure_ascii=False)}, title: {json.dumps(a['title'], ensure_ascii=False)}, img: {json.dumps(a['image'] or PLACEHOLDER_IMG, ensure_ascii=False)}, cat: {json.dumps(a['category'], ensure_ascii=False)}}};
             var list = JSON.parse(localStorage.getItem(key) || '[]');
@@ -844,6 +962,15 @@ def build():
                categories, None, ADVERTISE_BODY, ticker_text, canonical=f"{SITE_URL}/advertise.html")
     write_page(os.path.join(OUTPUT_DIR, "tip-line.html"), f"שלחו סקופ - {SITE_NAME}", "שלחו סקופ לקודקוד",
                categories, None, TIP_LINE_BODY, ticker_text, canonical=f"{SITE_URL}/tip-line.html")
+    write_page(os.path.join(OUTPUT_DIR, "privacy.html"), f"מדיניות פרטיות - {SITE_NAME}",
+               "מדיניות הפרטיות של קודקוד חדשות - אילו נתונים נאספים, כיצד הם נשמרים, ומהן זכויותיכם",
+               categories, None, PRIVACY_BODY, ticker_text, canonical=f"{SITE_URL}/privacy.html")
+    write_page(os.path.join(OUTPUT_DIR, "terms.html"), f"תנאי שימוש - {SITE_NAME}",
+               "תנאי השימוש באתר קודקוד חדשות",
+               categories, None, TERMS_BODY, ticker_text, canonical=f"{SITE_URL}/terms.html")
+    write_page(os.path.join(OUTPUT_DIR, "accessibility.html"), f"הצהרת נגישות - {SITE_NAME}",
+               "הצהרת הנגישות של קודקוד חדשות בהתאם לתקן הישראלי 5568 ולחוק שוויון זכויות לאנשים עם מוגבלות",
+               categories, None, ACCESSIBILITY_BODY, ticker_text, canonical=f"{SITE_URL}/accessibility.html")
 
     # Search index JSON (client-side search, no server/API needed)
     search_index = [
@@ -865,7 +992,7 @@ def build():
     # <image:image> extension when the article has a real photo, so image
     # search can index it too)
     now = datetime.now()
-    static_urls = [f"{SITE_URL}/", f"{SITE_URL}/about.html", f"{SITE_URL}/advertise.html", f"{SITE_URL}/tip-line.html", f"{SITE_URL}/video.html", f"{SITE_URL}/tv.html", f"{SITE_URL}/magazine.html"]
+    static_urls = [f"{SITE_URL}/", f"{SITE_URL}/about.html", f"{SITE_URL}/advertise.html", f"{SITE_URL}/tip-line.html", f"{SITE_URL}/video.html", f"{SITE_URL}/tv.html", f"{SITE_URL}/magazine.html", f"{SITE_URL}/privacy.html", f"{SITE_URL}/terms.html", f"{SITE_URL}/accessibility.html"]
     category_urls = [f"{SITE_URL}/category/{slugify(c, c)}.html" for c in categories]
     magazine_urls = [f"{SITE_URL}/magazine/{issue['week_id']}.html" for issue in magazine_issues]
 

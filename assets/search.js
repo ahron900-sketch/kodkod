@@ -176,7 +176,9 @@
         likeBtn.querySelector("#like-count").textContent = "אהבתי";
       }
       try {
-        localStorage.setItem(likeKey, JSON.stringify(liked));
+        if (localStorage.getItem("kk_cookie_consent") !== "declined") {
+          localStorage.setItem(likeKey, JSON.stringify(liked));
+        }
       } catch (e) {}
     });
   }
@@ -232,4 +234,141 @@
     });
   }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
   els.forEach(function (el) { observer.observe(el); });
+})();
+
+(function () {
+  var banner = document.getElementById("cookie-banner");
+  if (!banner) return;
+  var KEY = "kk_cookie_consent";
+  var existing;
+  try {
+    existing = localStorage.getItem(KEY);
+  } catch (e) {
+    existing = null;
+  }
+  if (!existing) {
+    banner.hidden = false;
+  }
+
+  var acceptBtn = document.getElementById("cookie-accept");
+  var declineBtn = document.getElementById("cookie-decline");
+
+  if (acceptBtn) {
+    acceptBtn.addEventListener("click", function () {
+      try { localStorage.setItem(KEY, "accepted"); } catch (e) {}
+      banner.hidden = true;
+    });
+  }
+  if (declineBtn) {
+    declineBtn.addEventListener("click", function () {
+      try {
+        localStorage.setItem(KEY, "declined");
+        // honor the choice immediately - clear anything already stored
+        localStorage.removeItem("kk_recent");
+        localStorage.removeItem("kk_liked");
+      } catch (e) {}
+      banner.hidden = true;
+    });
+  }
+})();
+
+(function () {
+  var toggle = document.getElementById("a11y-toggle");
+  var panel = document.getElementById("a11y-panel");
+  if (!toggle || !panel) return;
+
+  var STORAGE_KEY = "kk_a11y";
+  var root = document.documentElement;
+  var FONT_STEP = 1;
+  var MIN_SIZE = 14;
+  var MAX_SIZE = 24;
+
+  function loadState() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+    } catch (e) {
+      return {};
+    }
+  }
+  function saveState(state) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  }
+  function applyState(state) {
+    root.classList.toggle("a11y-contrast", !!state.contrast);
+    root.classList.toggle("a11y-stop-motion", !!state.stopMotion);
+    if (state.fontSize) {
+      root.style.fontSize = state.fontSize + "px";
+    } else {
+      root.style.fontSize = "";
+    }
+  }
+
+  var state = loadState();
+  applyState(state);
+
+  toggle.addEventListener("click", function () {
+    var isHidden = panel.hidden;
+    panel.hidden = !isHidden;
+    toggle.setAttribute("aria-expanded", String(isHidden));
+  });
+
+  document.addEventListener("click", function (e) {
+    if (!panel.hidden && !panel.contains(e.target) && e.target !== toggle) {
+      panel.hidden = true;
+      toggle.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  panel.querySelectorAll("button[data-a11y]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var action = btn.getAttribute("data-a11y");
+      var current = getComputedStyle(root).fontSize;
+      var currentSize = parseFloat(current) || 17;
+      if (action === "font-inc") {
+        state.fontSize = Math.min(MAX_SIZE, currentSize + FONT_STEP);
+      } else if (action === "font-dec") {
+        state.fontSize = Math.max(MIN_SIZE, currentSize - FONT_STEP);
+      } else if (action === "contrast") {
+        state.contrast = !state.contrast;
+      } else if (action === "stop-motion") {
+        state.stopMotion = !state.stopMotion;
+      } else if (action === "reset") {
+        state = {};
+      }
+      applyState(state);
+      saveState(state);
+    });
+  });
+})();
+
+(function () {
+  // Honest, real personalization: reorders this visitor's own homepage
+  // category sections based on their own local reading history
+  // (kk_recent, saved to their browser only). Never leaves the browser,
+  // never touches the scraper/server side, and only runs if the visitor
+  // hasn't declined local storage.
+  var wrap = document.getElementById("personalized-sections");
+  if (!wrap) return;
+  try {
+    if (localStorage.getItem("kk_cookie_consent") === "declined") return;
+    var recent = JSON.parse(localStorage.getItem("kk_recent") || "[]");
+    if (!recent.length) return;
+    var counts = {};
+    recent.forEach(function (item) {
+      if (item.cat) counts[item.cat] = (counts[item.cat] || 0) + 1;
+    });
+    var sections = Array.from(wrap.querySelectorAll(".cat-section-wrap"));
+    if (sections.length < 2) return;
+    sections.sort(function (a, b) {
+      var ac = counts[a.getAttribute("data-category")] || 0;
+      var bc = counts[b.getAttribute("data-category")] || 0;
+      return bc - ac;
+    });
+    var hasPreference = sections.some(function (s) {
+      return (counts[s.getAttribute("data-category")] || 0) > 0;
+    });
+    if (hasPreference) {
+      sections.forEach(function (s) { wrap.appendChild(s); });
+    }
+  } catch (e) {}
 })();
