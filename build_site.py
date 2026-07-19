@@ -238,6 +238,15 @@ PLACEHOLDER_IMG = "/assets/placeholder.svg"
 # the layout demos like a live site rather than empty dashed boxes.
 MOCK_ADS = [
     {
+        "cls": "ad-sport",
+        "img": "https://a.espncdn.com/combiner/i?img=%2Fphoto%2F2026%2F0719%2Fr1691457_1296x729_16%2D9.jpg",
+        "eyebrow": "תוצאות מונדיאל 2026",
+        "title": "ספרד אלופת העולם! ניצחון דרמטי 1:0 על ארגנטינה",
+        "body": "השער המכריע של פרננד טורס בדקה ה-106 - כל הפרטים על הגמר ההיסטורי",
+        "cta": "לכתבה המלאה",
+        "href": f"/article/{slugify('ספרד אלופת העולם 2026: ניצחון דרמטי 1:0 על ארגנטינה בגמר היסטורי', 'מונדיאל-2026-גמר')}.html",
+    },
+    {
         "cls": "ad-fin",
         "img": "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=900&q=70",
         "eyebrow": "מומלץ עבורך",
@@ -278,17 +287,22 @@ def ad_slot_html(compact=False):
     ad = MOCK_ADS[_ad_counter["i"] % len(MOCK_ADS)]
     _ad_counter["i"] += 1
     size_cls = "ad-slot-compact" if compact else ""
-    return f"""<div class="ad-slot {ad['cls']} {size_cls}">
+    # slots that point at a real internal article (e.g. the results banner)
+    # get wrapped in an actual link instead of staying purely decorative
+    tag, tag_attrs, close_tag = "div", "", "div"
+    if ad.get("href"):
+        tag, tag_attrs, close_tag = "a", f' href="{html.escape(ad["href"])}"', "a"
+    return f"""<{tag} class="ad-slot {ad['cls']} {size_cls}"{tag_attrs}>
       <div class="ad-slot-bg" style="background-image:url('{html.escape(ad['img'])}')"></div>
       <div class="ad-slot-shine"></div>
-      <span class="ad-tag">פרסומת</span>
+      <span class="ad-tag">{'מומלץ' if ad.get('href') else 'פרסומת'}</span>
       <div class="ad-creative">
         <span class="ad-eyebrow">{html.escape(ad['eyebrow'])}</span>
         <h4 class="ad-title">{html.escape(ad['title'])}</h4>
         <p class="ad-body">{html.escape(ad['body'])}</p>
         <span class="ad-cta">{html.escape(ad['cta'])}</span>
       </div>
-    </div>"""
+    </{close_tag}>"""
 
 
 
