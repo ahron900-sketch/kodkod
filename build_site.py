@@ -7,6 +7,7 @@ import shutil
 from datetime import datetime
 
 CONTENT_DIR = "content/news"
+MAGAZINE_DIR = "content/magazine"
 OUTPUT_DIR = "public_site"
 SITE_NAME = "קודקוד חדשות"
 SITE_URL = "https://kodkodnews.co.il"
@@ -107,6 +108,23 @@ def load_articles():
         else:
             seen[base] = 0
     return articles
+
+
+def load_magazine_issues():
+    """Weekly magazine issues, generated separately by generate_magazine.py
+    (runs on its own schedule) and committed as JSON snapshots. Returns them
+    newest-first; a missing/empty directory just means no issue yet."""
+    issues = []
+    if not os.path.isdir(MAGAZINE_DIR):
+        return issues
+    for path in sorted(glob.glob(os.path.join(MAGAZINE_DIR, "*.json")), reverse=True):
+        try:
+            with open(path, encoding="utf-8") as f:
+                issues.append(json.load(f))
+        except Exception:
+            continue
+    issues.sort(key=lambda i: i.get("week_id", ""), reverse=True)
+    return issues
 
 
 PAGE_HEAD = """<!DOCTYPE html>
@@ -254,6 +272,7 @@ def ad_slot_html(compact=False):
 
 
 VIDEO_ICON_SVG = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>'
+MAGAZINE_ICON_SVG = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>'
 
 
 def cat_nav(categories, active=None):
@@ -267,6 +286,8 @@ def cat_nav(categories, active=None):
     links.append(f'<a href="/video.html" class="nav-video {video_cls}">{VIDEO_ICON_SVG}<span>וידאו</span></a>')
     tv_cls = "active" if active == TV_CATEGORY else ""
     links.append(f'<a href="/tv.html" class="nav-video {tv_cls}">{VIDEO_ICON_SVG}<span>טלוויזיה</span></a>')
+    magazine_cls = "active" if active == "מגזין" else ""
+    links.append(f'<a href="/magazine.html" class="nav-video {magazine_cls}">{MAGAZINE_ICON_SVG}<span>מגזין</span></a>')
     return "".join(links)
 
 
@@ -515,12 +536,40 @@ def build():
         </a>"""
         rest = [a for a in listable if a["slug"] != hero["slug"]]
 
+    # Bento/mosaic module: one large tile + a stack of smaller ones, instead
+    # of dropping straight into a uniform grid right under the hero
+    bento_candidates = [a for a in rest if a["category"] != RECIPE_CATEGORY][:5]
+    bento_html = ""
+    if len(bento_candidates) >= 3:
+        big, *small = bento_candidates
+        big_img = big["image"] or PLACEHOLDER_IMG
+        small_items = "".join(f"""
+          <a class="bento-small" href="/article/{s['slug']}.html">
+            <div class="bento-small-img" style="background-image:url('{html.escape(s['image'] or PLACEHOLDER_IMG)}')"></div>
+            <div class="bento-small-body">
+              <span class="card-cat">{html.escape(s['category'])}</span>
+              <h4>{html.escape(s['title'])}</h4>
+            </div>
+          </a>""" for s in small)
+        bento_html = f"""
+        <section class="bento-section reveal">
+          <a class="bento-big" href="/article/{big['slug']}.html">
+            <div class="bento-big-img" style="background-image:url('{html.escape(big_img)}')"></div>
+            <div class="bento-big-body">
+              <span class="card-cat">{html.escape(big['category'])}</span>
+              <h2>{html.escape(big['title'])}</h2>
+              <span class="card-meta">{html.escape(big['source'])} · {html.escape(big['date'][:10])}</span>
+            </div>
+          </a>
+          <div class="bento-small-stack">{small_items}</div>
+        </section>"""
+
     quick_articles = [a for a in rest if a.get("is_quick")][:8]
     quick_html = ""
     if quick_articles:
         quick_cards = "".join(render_quick_card(a) for a in quick_articles)
         quick_html = f"""
-        <section class="quick-section">
+        <section class="quick-section reveal">
           <h2 class="section-title">בקצרה</h2>
           <div class="quick-strip">{quick_cards}</div>
         </section>"""
@@ -543,7 +592,7 @@ def build():
         c_cards = "".join(render_card(a) for a in c_articles)
         cat_url = f"/category/{slugify(c, c)}.html"
         category_sections.append(f"""
-        <section class="cat-section">
+        <section class="cat-section reveal">
           <div class="cat-section-head">
             <h2 class="section-title">{html.escape(c)}</h2>
             <a class="view-all-btn" href="{cat_url}">לכל הכתבות</a>
@@ -553,7 +602,7 @@ def build():
         {ad_slot_html()}""")
     categories_html = "".join(category_sections)
 
-    body = f'<main class="grid">{hero_html}{ad_slot_html()}{quick_html}{recently_viewed_html}{categories_html}</main>'
+    body = f'<main class="grid">{hero_html}{bento_html}{ad_slot_html()}{quick_html}{recently_viewed_html}{categories_html}</main>'
     write_page(os.path.join(OUTPUT_DIR, "index.html"), SITE_NAME,
                "קודקוד חדשות - האתר החדשותי המהיר בישראל: חדשות, כלכלה, טכנולוגיה וחרדים במקום אחד",
                categories, None, body, ticker_text, canonical=SITE_URL + "/",
@@ -600,6 +649,73 @@ def build():
                "שידורים חיים ופרקים מלאים מערוצי החדשות בישראל",
                categories, TV_CATEGORY, tv_body, ticker_text, canonical=tv_url,
                structured_data=category_structured_data(TV_CATEGORY, tv_url))
+
+    # Weekly magazine - issues are generated separately (generate_magazine.py,
+    # its own weekly schedule) and just rendered here as static pages
+    magazine_issues = load_magazine_issues()
+    os.makedirs(os.path.join(OUTPUT_DIR, "magazine"), exist_ok=True)
+
+    issue_cards = []
+    for issue in magazine_issues:
+        cover = issue.get("cover") or {}
+        cover_img = cover.get("image", "") or PLACEHOLDER_IMG
+        issue_cards.append(f"""
+        <a class="magazine-issue-card" href="/magazine/{issue['week_id']}.html">
+          <div class="magazine-issue-cover" style="background-image:url('{html.escape(cover_img)}')"></div>
+          <div class="magazine-issue-info">
+            <span class="magazine-issue-label">גיליון {html.escape(issue['week_id'])}</span>
+            <h3>{html.escape(cover.get('title', ''))}</h3>
+            <span class="card-meta">{issue.get('article_count', 0)} כתבות</span>
+          </div>
+        </a>""")
+    magazine_index_body = f"""
+    <main class="grid">
+      <h1 class="page-title">המגזין השבועי</h1>
+      <p class="magazine-intro">מדי שבוע, קודקוד מרכז את הכתבות הבולטות ביותר שהופיעו באתר לגיליון אחד - בעיצוב מגזין, מסודר לפי נושאים.</p>
+      <div class="grid-inner magazine-issues-grid">{"".join(issue_cards) or '<p>הגיליון הראשון בדרך - חזרו בקרוב.</p>'}</div>
+    </main>"""
+    magazine_index_url = f"{SITE_URL}/magazine.html"
+    write_page(os.path.join(OUTPUT_DIR, "magazine.html"), f"המגזין השבועי - {SITE_NAME}",
+               "המגזין השבועי של קודקוד - סיכום הכתבות הבולטות של השבוע, מסודר לפי נושאים",
+               categories, "מגזין", magazine_index_body, ticker_text, canonical=magazine_index_url,
+               structured_data=category_structured_data("מגזין", magazine_index_url))
+
+    for issue in magazine_issues:
+        cover = issue.get("cover") or {}
+        cover_img = cover.get("image", "") or PLACEHOLDER_IMG
+        section_html_parts = []
+        for section in issue.get("sections", []):
+            article_cards = "".join(f"""
+            <a class="magazine-article" href="{html.escape(art['link'])}" target="_blank" rel="noopener">
+              <div class="magazine-article-img" style="background-image:url('{html.escape(art['image'] or PLACEHOLDER_IMG)}')"></div>
+              <div class="magazine-article-body">
+                <h4>{html.escape(art['title'])}</h4>
+                <p>{html.escape(art.get('dek', ''))}</p>
+                <span class="card-meta">{html.escape(art['source'])}</span>
+              </div>
+            </a>""" for art in section["articles"])
+            section_html_parts.append(f"""
+            <section class="magazine-section">
+              <h2 class="magazine-section-title">{html.escape(section['category'])}</h2>
+              <div class="magazine-section-grid">{article_cards}</div>
+            </section>""")
+
+        issue_body = f"""
+        <main class="grid magazine-issue-page">
+          <div class="magazine-cover" style="background-image:url('{html.escape(cover_img)}')">
+            <div class="magazine-cover-overlay">
+              <span class="magazine-issue-label">גיליון {html.escape(issue['week_id'])}</span>
+              <h1>{html.escape(cover.get('title', 'המגזין השבועי'))}</h1>
+            </div>
+          </div>
+          {"".join(section_html_parts)}
+        </main>"""
+        issue_url = f"{SITE_URL}/magazine/{issue['week_id']}.html"
+        write_page(os.path.join(OUTPUT_DIR, "magazine", f"{issue['week_id']}.html"),
+                   f"גיליון {issue['week_id']} - המגזין השבועי - {SITE_NAME}",
+                   f"גיליון המגזין השבועי של קודקוד לשבוע {issue['week_id']} - {issue.get('article_count', 0)} כתבות נבחרות",
+                   categories, "מגזין", issue_body, ticker_text, canonical=issue_url,
+                   structured_data=category_structured_data(f"גיליון {issue['week_id']}", issue_url))
 
     # Article pages
     for i, a in enumerate(articles):
@@ -749,8 +865,9 @@ def build():
     # <image:image> extension when the article has a real photo, so image
     # search can index it too)
     now = datetime.now()
-    static_urls = [f"{SITE_URL}/", f"{SITE_URL}/about.html", f"{SITE_URL}/advertise.html", f"{SITE_URL}/tip-line.html", f"{SITE_URL}/video.html", f"{SITE_URL}/tv.html"]
+    static_urls = [f"{SITE_URL}/", f"{SITE_URL}/about.html", f"{SITE_URL}/advertise.html", f"{SITE_URL}/tip-line.html", f"{SITE_URL}/video.html", f"{SITE_URL}/tv.html", f"{SITE_URL}/magazine.html"]
     category_urls = [f"{SITE_URL}/category/{slugify(c, c)}.html" for c in categories]
+    magazine_urls = [f"{SITE_URL}/magazine/{issue['week_id']}.html" for issue in magazine_issues]
 
     sitemap = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
@@ -758,7 +875,7 @@ def build():
         'xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n'
     )
     lastmod_today = now.strftime("%Y-%m-%d")
-    for u in static_urls + category_urls:
+    for u in static_urls + category_urls + magazine_urls:
         sitemap += f"  <url><loc>{u}</loc><lastmod>{lastmod_today}</lastmod></url>\n"
     for a in articles:
         loc = f"{SITE_URL}/article/{a['slug']}.html"

@@ -1,0 +1,32 @@
+name: Weekly Magazine
+on:
+  workflow_dispatch:
+  schedule:
+    # Fridays at 10:00 UTC (13:00 Israel time) - once a week, no manual step needed
+    - cron: '0 10 * * 5'
+
+jobs:
+  generate-issue:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Generate weekly issue
+        run: python generate_magazine.py
+
+      - name: Commit and push if a new issue was created
+        run: |
+          git config --global user.name "Magazine-Bot"
+          git config --global user.email "bot@kodkodnews.co.il"
+          git add content/magazine/
+          git commit -m "גיליון מגזין שבועי חדש: $(date +%Y-W%V)" || exit 0
+          git pull --rebase origin main
+          git push origin main

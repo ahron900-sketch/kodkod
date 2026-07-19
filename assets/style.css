@@ -857,6 +857,219 @@ html.dark-mode .site-header {
 }
 .footer-nav a:hover { color: var(--accent); }
 
+/* Scroll-reveal: sections start faded/offset, JS flips .is-visible when
+   they enter the viewport (IntersectionObserver). No-JS/reduced-motion
+   users still see everything - this only ever adds polish, never hides
+   content. */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* Bento/mosaic module - one large story + a stack of smaller ones,
+   instead of dropping straight into a uniform grid under the hero */
+.bento-section {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 20px;
+  margin-bottom: 32px;
+}
+.bento-big {
+  position: relative;
+  display: block;
+  border-radius: var(--radius);
+  overflow: hidden;
+  min-height: 380px;
+  background: var(--surface-2);
+  box-shadow: var(--shadow-lg);
+}
+.bento-big-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.bento-big:hover .bento-big-img { transform: scale(1.05); }
+.bento-big-body {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 28px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.88));
+}
+.bento-big-body h2 {
+  color: #fff;
+  font-size: 1.55rem;
+  font-weight: 800;
+  line-height: 1.35;
+  margin: 8px 0;
+}
+.bento-big-body .card-meta { color: rgba(255,255,255,0.8); }
+.bento-big-body .card-cat { color: #fff; opacity: 0.9; }
+
+.bento-small-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.bento-small {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease;
+  flex: 1;
+}
+.bento-small:hover { transform: translateY(-3px); }
+.bento-small-img {
+  flex: 0 0 96px;
+  align-self: stretch;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--surface-2);
+}
+.bento-small-body { padding: 10px 14px 10px 0; min-width: 0; }
+.bento-small-body h4 {
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin: 4px 0 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (max-width: 900px) {
+  .bento-section { grid-template-columns: 1fr; }
+  .bento-big { min-height: 260px; }
+}
+
+/* Magazine */
+.magazine-intro {
+  grid-column: 1 / -1;
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin: 0 0 24px;
+  max-width: 640px;
+}
+.magazine-issues-grid { grid-column: 1 / -1; }
+.magazine-issue-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease;
+}
+.magazine-issue-card:hover { transform: translateY(-5px); }
+.magazine-issue-cover {
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--surface-2);
+}
+.magazine-issue-info { padding: 16px; }
+.magazine-issue-label {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+.magazine-issue-info h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 8px;
+  line-height: 1.4;
+}
+
+.magazine-issue-page { max-width: 1000px; }
+.magazine-cover {
+  position: relative;
+  height: 380px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 40px;
+  box-shadow: var(--shadow-lg);
+}
+.magazine-cover-overlay {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 36px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.9));
+}
+.magazine-cover-overlay h1 {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 8px 0 0;
+  line-height: 1.35;
+}
+.magazine-section { margin-bottom: 40px; }
+.magazine-section-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  border-bottom: 2px solid var(--accent);
+  display: inline-block;
+  padding-bottom: 6px;
+  margin: 0 0 20px;
+}
+.magazine-section-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+.magazine-article {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease;
+}
+.magazine-article:hover { transform: translateY(-4px); }
+.magazine-article-img {
+  height: 150px;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--surface-2);
+}
+.magazine-article-body { padding: 14px; }
+.magazine-article-body h4 {
+  font-size: 0.98rem;
+  font-weight: 700;
+  margin: 0 0 6px;
+  line-height: 1.4;
+}
+.magazine-article-body p {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  margin: 0 0 8px;
+}
+
 @media (max-width: 640px) {
   body { font-size: 16px; }
   .site-header { padding: 10px 16px; flex-wrap: wrap; }
@@ -868,4 +1081,6 @@ html.dark-mode .site-header {
   .hero-text h1 { font-size: 1.4rem; }
   .grid, .article, .static-page, .related-section { padding: 20px 16px 48px; }
   .cat-section-head { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .magazine-cover { height: 240px; }
+  .magazine-cover-overlay h1 { font-size: 1.4rem; }
 }
