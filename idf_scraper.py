@@ -1,6 +1,7 @@
 import feedparser
 import glob
 import html
+import json
 import os
 import re
 import time
@@ -364,6 +365,65 @@ def is_duplicate_of_recent(title, recent_title_word_sets):
     return False
 
 
+# Optional AI summary: a short, honestly-labeled 2-3 sentence Hebrew TL;DR
+# generated from the REAL full article text, shown as its own clearly-marked
+# box above the actual excerpt+attribution+link - never a replacement for it,
+# and never presented as if it were the original reporting. Uses Groq's
+# free-tier, OpenAI-compatible API (no SDK dependency - a plain HTTPS POST,
+# same pattern as the rest of this file's network calls). If GROQ_API_KEY
+# isn't set, or the call fails for any reason, this silently no-ops and the
+# article is still published normally, just without the summary box.
+GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
+GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
+GROQ_MODEL = "llama-3.3-70b-versatile"
+AI_SUMMARY_SYSTEM_PROMPT = (
+    "אתה עוזר עריכה לאתר חדשות ישראלי. תפקידך היחיד הוא לכתוב תקציר קצר "
+    "(2-3 משפטים, עברית תקנית) של הכתבה שתקבל - אך ורק על סמך העובדות "
+    "שמופיעות בטקסט עצמו, ללא הוספת פרטים, השערות, או דעות שאינם מופיעים "
+    "בו. זהו תקציר המתפרסם בנוסף לכתבה המקורית המלאה (עם ייחוס וקישור "
+    "למקור), ולא כתחליף לה - אל תנסח את התקציר כאילו הוא הכתבה עצמה או "
+    "כאילו אתה מקור הידיעה. השב אך ורק ב-JSON תקני בפורמט הבא, ללא טקסט "
+    'נוסף: {"summary": "..."}'
+)
+
+
+def generate_ai_summary(title, content):
+    if not GROQ_API_KEY:
+        return ""
+    try:
+        payload = json.dumps({
+            "model": GROQ_MODEL,
+            "response_format": {"type": "json_object"},
+            "temperature": 0.3,
+            "messages": [
+                {"role": "system", "content": AI_SUMMARY_SYSTEM_PROMPT},
+                {"role": "user", "content": f"כותרת: {title}\n\nגוף הכתבה:\n{content[:6000]}"},
+            ],
+        }).encode("utf-8")
+        req = urllib.request.Request(
+            GROQ_API_URL,
+            data=payload,
+            headers={
+                "Authorization": f"Bearer {GROQ_API_KEY}",
+                "Content-Type": "application/json",
+            },
+            method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=20) as resp:
+            result = json.loads(resp.read().decode("utf-8"))
+        raw = result["choices"][0]["message"]["content"]
+        summary = json.loads(raw).get("summary", "").strip()
+        # frontmatter writes this as a single indented continuation line -
+        # collapse any embedded newlines so the block-scalar parser in
+        # build_site.py's parse_frontmatter (which only expects one physical
+        # line here) can't get corrupted by a multi-line model response
+        summary = re.sub(r'\s+', ' ', summary).strip()
+        return summary
+    except Exception as e:
+        print(f"תקציר AI נכשל (מדלג, הכתבה עדיין תתפרסם): {e}")
+        return ""
+
+
 def save_article(title, link, content, image_url, source_name, category, video_id="", recent_titles=None):
     filename = f"{sanitize_filename(title)}.md"
     exists = any(os.path.exists(os.path.join(d, filename)) for d in [LIVE_DIR, PENDING_DIR, ARCHIVE_DIR])
@@ -427,14 +487,19 @@ def save_article(title, link, content, image_url, source_name, category, video_i
         print(f"נפסל (תוכן ממומן חשוד - זוהה בגוף הכתבה): {title}")
         return
 
+    ai_summary = generate_ai_summary(title, content)
+    if ai_summary:
+        time.sleep(2)  # free-tier rate-limit safety margin between Groq calls
+
     date_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    _write_article_file(filename, title, date_str, source_name, image_url, link, category, content)
+    _write_article_file(filename, title, date_str, source_name, image_url, link, category, content, ai_summary=ai_summary)
     if recent_titles is not None:
         recent_titles.append(normalize_title_words(title))
 
 
-def _write_article_file(filename, title, date_str, source_name, image_url, link, category, content, video_id=""):
+def _write_article_file(filename, title, date_str, source_name, image_url, link, category, content, video_id="", ai_summary=""):
     video_line = f'\nvideo_id: "{video_id}"' if video_id else ""
+    ai_summary_line = f'\nai_summary: >-\n  {ai_summary}' if ai_summary else ""
     md_content = f"""---
 title: >-
   {title}
@@ -442,7 +507,7 @@ date: "{date_str}"
 source: "{source_name}"
 image: "{image_url}"
 link: "{link}"
-category: "{category}"{video_line}
+category: "{category}"{video_line}{ai_summary_line}
 ---
 
 {content}

@@ -639,6 +639,32 @@ html.dark-mode .site-header {
   margin-bottom: 20px;
 }
 
+/* Optional AI-generated summary - deliberately styled as a distinct,
+   clearly-labeled box so it reads as an add-on, never mistaken for the
+   original reporting that follows it */
+.ai-summary-box {
+  background: var(--surface-2);
+  border-inline-start: 3px solid var(--accent);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin: 4px 0 24px;
+}
+.ai-summary-label {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+.ai-summary-box p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--ink);
+  line-height: 1.6;
+}
+
 .article-img {
   width: 100%;
   max-height: 460px;
