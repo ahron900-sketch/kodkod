@@ -4,6 +4,7 @@ import json
 import glob
 import html
 import shutil
+import urllib.request
 from datetime import datetime, timezone
 from email.utils import format_datetime
 
@@ -52,6 +53,69 @@ ARTICLE_PREVIEW_CHARS = 900
 # can't be a plain literal like the constants above) - safe empty default in
 # case anything ever imports this module without calling build() first
 FOOTER_PROMO_HTML = ""
+WEATHER_BAR_HTML = ""
+
+# Weather: open-meteo.com is genuinely free and keyless (no account/API key
+# of any kind, verified before wiring this up) - fetched once per build at
+# the same 2h cadence as everything else, never client-side. Real
+# coordinates for real cities, no placeholders.
+WEATHER_CITIES = [
+    ("תל אביב", 32.0853, 34.7818),
+    ("ירושלים", 31.7683, 35.2137),
+    ("חיפה", 32.7940, 34.9896),
+    ("באר שבע", 31.2530, 34.7915),
+]
+HEBREW_WEEKDAYS = ["יום שני", "יום שלישי", "יום רביעי", "יום חמישי", "יום שישי", "יום שבת", "יום ראשון"]
+HEBREW_MONTHS = ["ינואר", "פברואר", "מרץ", "אפריל", "מאי", "יוני",
+                 "יולי", "אוגוסט", "ספטמבר", "אוקטובר", "נובמבר", "דצמבר"]
+# Standard WMO weather codes (open-meteo's own documented scheme)
+WEATHER_CODE_MAP = {
+    0: ("בהיר", "☀️"), 1: ("בהיר בעיקר", "🌤️"), 2: ("מעונן חלקית", "⛅"), 3: ("מעונן", "☁️"),
+    45: ("ערפילי", "🌫️"), 48: ("ערפילי", "🌫️"),
+    51: ("טפטוף קל", "🌦️"), 53: ("טפטוף", "🌦️"), 55: ("טפטוף חזק", "🌦️"),
+    56: ("טפטוף קפוא", "🌧️"), 57: ("טפטוף קפוא חזק", "🌧️"),
+    61: ("גשם קל", "🌧️"), 63: ("גשם", "🌧️"), 65: ("גשם חזק", "🌧️"),
+    66: ("גשם קפוא", "🌧️"), 67: ("גשם קפוא חזק", "🌧️"),
+    71: ("שלג קל", "❄️"), 73: ("שלג", "❄️"), 75: ("שלג כבד", "❄️"), 77: ("גרגירי שלג", "❄️"),
+    80: ("ממטרים קלים", "🌦️"), 81: ("ממטרים", "🌦️"), 82: ("ממטרים חזקים", "🌦️"),
+    85: ("ממטרי שלג קלים", "🌨️"), 86: ("ממטרי שלג", "🌨️"),
+    95: ("סופת רעמים", "⛈️"), 96: ("סופת רעמים עם ברד", "⛈️"), 99: ("סופת רעמים עם ברד כבד", "⛈️"),
+}
+
+
+def hebrew_date_str(dt):
+    weekday = HEBREW_WEEKDAYS[dt.weekday()]
+    month = HEBREW_MONTHS[dt.month - 1]
+    return f"{weekday}, {dt.day} ב{month} {dt.year}"
+
+
+def weather_desc(code):
+    return WEATHER_CODE_MAP.get(code, ("", "🌡️"))
+
+
+def fetch_weather():
+    results = []
+    for name, lat, lon in WEATHER_CITIES:
+        try:
+            url = (f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}"
+                   f"&current=temperature_2m,weather_code"
+                   f"&daily=temperature_2m_max,temperature_2m_min,weather_code"
+                   f"&timezone=Asia%2FJerusalem&forecast_days=5")
+            with urllib.request.urlopen(url, timeout=8) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+            current = data.get("current", {})
+            desc, emoji = weather_desc(current.get("weather_code"))
+            results.append({
+                "name": name,
+                "temp": current.get("temperature_2m"),
+                "desc": desc,
+                "emoji": emoji,
+                "daily": data.get("daily", {}),
+            })
+        except Exception as e:
+            print(f"מזג אוויר עבור {name} נכשל (מדלג): {e}")
+            continue
+    return results
 WP_BOILERPLATE_RE = re.compile(r'^The post .* appeared first on .*\.?$')
 RECIPE_CATEGORY = "בישול ומתכונים"
 TV_CATEGORY = "טלוויזיה ושידורים חיים"
@@ -473,7 +537,7 @@ def write_page(path, title, description, categories, active_cat, body_html,
         robots_content=robots_content,
     )
     full = full.replace("<header class=\"site-header\">",
-                         f'<div class="ticker"><div class="ticker-move">{html.escape(ticker_text)}</div></div>\n<header class="site-header">')
+                         f'{WEATHER_BAR_HTML}\n<div class="ticker"><div class="ticker-move">{html.escape(ticker_text)}</div></div>\n<header class="site-header">')
     page_shell = f"""
 <div class="page-shell">
   <aside class="side-rail side-rail-right">{ad_slot_html(compact=True)}</aside>
@@ -891,6 +955,18 @@ def build():
     global FOOTER_PROMO_HTML
     FOOTER_PROMO_HTML = build_footer_promo_html(categories, ticker_articles)
 
+    global WEATHER_BAR_HTML
+    weather_data = fetch_weather()
+    if weather_data:
+        main_city = weather_data[0]
+        WEATHER_BAR_HTML = (
+            '<a class="weather-bar" href="/weather.html">'
+            f'<span class="weather-date">{html.escape(hebrew_date_str(datetime.now()))}</span>'
+            f'<span class="weather-now">{main_city["emoji"]} {html.escape(main_city["name"])} '
+            f'{round(main_city["temp"]) if main_city["temp"] is not None else "-"}°</span>'
+            '</a>'
+        )
+
     # Articles without a real image are never shown in listings (hero, cards,
     # quick strip, related) - only their own article page still renders for
     # anyone who has the direct link. video_id counts as "has visuals".
@@ -968,14 +1044,23 @@ def build():
           <div class="bento-small-stack">{small_items}</div>
         </section>"""
 
-    quick_articles = pick_diverse([a for a in rest if a.get("is_quick")], 8, max_per_category=2)
+    quick_articles = pick_diverse([a for a in rest if a.get("is_quick")], 20, max_per_category=3)
     quick_html = ""
     if quick_articles:
-        quick_cards = "".join(render_quick_card(a) for a in quick_articles)
+        quick_visible = quick_articles[:6]
+        quick_cards = "".join(render_quick_card(a) for a in quick_visible)
+        # extra items beyond what's rendered feed the auto-rotating carousel
+        # in search.js (one card swaps in/out every few seconds) - passed as
+        # a data attribute so no second request is needed for it.
+        quick_playlist = [{
+            "slug": a["slug"], "title": a["title"], "source": a["source"],
+            "date": a["date"][:10], "category": a["category"],
+        } for a in quick_articles]
+        quick_playlist_json = html.escape(json.dumps(quick_playlist, ensure_ascii=False))
         quick_html = f"""
         <section class="quick-section reveal">
           <h2 class="section-title">בקצרה</h2>
-          <div class="quick-strip">{quick_cards}</div>
+          <div class="quick-strip" id="quick-strip" data-playlist="{quick_playlist_json}" data-shown="{len(quick_visible)}">{quick_cards}</div>
         </section>"""
 
     recently_viewed_html = """
@@ -984,19 +1069,38 @@ def build():
           <div class="grid-inner" id="recently-viewed-grid"></div>
         </section>"""
 
-    # per-category sections: 9 articles each + a "view all" link to the category page
-    # (TV_CATEGORY gets its own dedicated /tv.html instead, see below).
-    # Recipes are lifestyle content, not news - shown last, not wherever it
-    # happens to fall alphabetically
+    # per-category sections: each gets its own lead (its single freshest
+    # article, prominent) + a 2x2 grid of the next 4 beside it - instead of
+    # a flat uniform grid, so scrolling past each category feels like its
+    # own small front page. TV_CATEGORY gets its own dedicated /tv.html
+    # instead. Recipes are lifestyle content, not news - shown last, not
+    # wherever it happens to fall alphabetically.
     category_sections = []
     for c in sorted(categories, key=lambda c: (c == RECIPE_CATEGORY, c)):
         if c == TV_CATEGORY:
             continue
-        c_articles = [a for a in rest if a["category"] == c][:9]
+        c_articles = [a for a in rest if a["category"] == c][:5]
         if not c_articles:
             continue
-        c_cards = "".join(render_card(a) for a in c_articles)
         cat_url = f"/category/{slugify(c, c)}.html"
+        lead, *smalls = c_articles
+        lead_dek = f'<p class="cat-lead-dek">{html.escape(lead["dek"])}</p>' if lead.get("dek") else ""
+        lead_html = f"""
+            <a class="cat-lead-main" href="/article/{lead['slug']}.html">
+              <div class="cat-lead-img" style="background-image:url('{html.escape(lead['image'] or PLACEHOLDER_IMG)}')"></div>
+              <div class="cat-lead-body">
+                <h3>{html.escape(lead['title'])}</h3>
+                {lead_dek}
+                <span class="card-meta">{html.escape(lead['source'])} · {html.escape(lead['date'][:10])}</span>
+              </div>
+            </a>"""
+        grid_html = ""
+        if smalls:
+            small_cards = "".join(render_card(a) for a in smalls)
+            # grid-inner (in addition to cat-lead-grid) so this still gets
+            # picked up by the existing client-side affinity re-ranker,
+            # which selects by that class
+            grid_html = f'<div class="cat-lead-grid grid-inner">{small_cards}</div>'
         category_sections.append(f"""
         <div class="cat-section-wrap" data-category="{html.escape(c)}">
         <section class="cat-section reveal">
@@ -1004,7 +1108,7 @@ def build():
             <h2 class="section-title">{html.escape(c)}</h2>
             <a class="view-all-btn" href="{cat_url}">לכל הכתבות</a>
           </div>
-          <div class="grid-inner">{c_cards}</div>
+          <div class="cat-lead-layout">{lead_html}{grid_html}</div>
         </section>
         {ad_slot_html()}
         </div>""")
@@ -1302,6 +1406,46 @@ def build():
     body = '<main class="grid"><h1 class="page-title">תוצאות חיפוש</h1><div id="search-results" class="grid-inner"></div></main>'
     write_page(os.path.join(OUTPUT_DIR, "search.html"), f"חיפוש - {SITE_NAME}", "חיפוש חדשות באתר קודקוד",
                categories, None, body, ticker_text, canonical=f"{SITE_URL}/search.html", noindex=True)
+
+    # Weather page - real server-rendered content (refreshed every build,
+    # same 2h cadence as everything else), so unlike search/liked this one
+    # is left indexable
+    if weather_data:
+        city_cards = []
+        for city in weather_data:
+            daily = city.get("daily", {})
+            days = daily.get("time", [])
+            highs = daily.get("temperature_2m_max", [])
+            lows = daily.get("temperature_2m_min", [])
+            codes = daily.get("weather_code", [])
+            day_rows = []
+            for i in range(len(days)):
+                d = datetime.strptime(days[i], "%Y-%m-%d")
+                day_name = HEBREW_WEEKDAYS[d.weekday()]
+                _, day_emoji = weather_desc(codes[i] if i < len(codes) else None)
+                day_rows.append(f"""
+                <div class="weather-day">
+                  <span class="weather-day-name">{html.escape(day_name)}</span>
+                  <span class="weather-day-emoji">{day_emoji}</span>
+                  <span class="weather-day-temps">{round(highs[i])}° / {round(lows[i])}°</span>
+                </div>""")
+            city_cards.append(f"""
+            <div class="weather-city-card">
+              <h2>{html.escape(city['name'])}</h2>
+              <div class="weather-current">
+                <span class="weather-current-emoji">{city['emoji']}</span>
+                <span class="weather-current-temp">{round(city['temp']) if city['temp'] is not None else '-'}°</span>
+                <span class="weather-current-desc">{html.escape(city['desc'])}</span>
+              </div>
+              <div class="weather-forecast">{''.join(day_rows)}</div>
+            </div>""")
+        weather_body = f"""<main class="grid">
+          <h1 class="page-title">מזג האוויר - {html.escape(hebrew_date_str(datetime.now()))}</h1>
+          <div class="weather-cities">{''.join(city_cards)}</div>
+        </main>"""
+        write_page(os.path.join(OUTPUT_DIR, "weather.html"), f"מזג אוויר - {SITE_NAME}",
+                   "תחזית מזג אוויר עדכנית לערים המרכזיות בישראל",
+                   categories, None, weather_body, ticker_text, canonical=f"{SITE_URL}/weather.html")
 
     # Static pages
     about_schema = {

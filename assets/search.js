@@ -794,3 +794,94 @@ window.kkAffinity = (function () {
     });
   } catch (e) {}
 })();
+
+(function () {
+  // "בקצרה" auto-rotation: every few seconds the oldest card (visually
+  // left-most, since the strip is RTL) exits and the next article from the
+  // server-embedded playlist enters from the right. Uses FLIP (record
+  // positions, insert/measure, animate from old->new) so the whole row
+  // shifts smoothly instead of the middle cards jumping.
+  var strip = document.getElementById("quick-strip");
+  if (!strip) return;
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  var playlist;
+  try {
+    playlist = JSON.parse(strip.getAttribute("data-playlist") || "[]");
+  } catch (e) {
+    playlist = [];
+  }
+  var shown = parseInt(strip.getAttribute("data-shown"), 10) || 0;
+  if (!playlist.length || playlist.length <= shown) return;
+
+  var nextIndex = shown % playlist.length;
+  var DURATION = 450;
+  var paused = false;
+  strip.addEventListener("mouseenter", function () { paused = true; });
+  strip.addEventListener("mouseleave", function () { paused = false; });
+
+  function buildCard(item) {
+    var a = document.createElement("a");
+    a.className = "quick-card";
+    a.href = "/article/" + item.slug + ".html";
+    var cat = document.createElement("span");
+    cat.className = "card-cat";
+    cat.textContent = item.category || "";
+    var h4 = document.createElement("h4");
+    h4.textContent = item.title || "";
+    var meta = document.createElement("span");
+    meta.className = "card-meta";
+    meta.textContent = (item.source || "") + " · " + (item.date || "");
+    a.appendChild(cat);
+    a.appendChild(h4);
+    a.appendChild(meta);
+    return a;
+  }
+
+  function tick() {
+    if (paused || document.hidden) return;
+    var cards = Array.prototype.slice.call(strip.children);
+    if (!cards.length) return;
+    var oldLast = cards[cards.length - 1];
+    var firstLefts = cards.map(function (c) { return c.getBoundingClientRect().left; });
+
+    var newCard = buildCard(playlist[nextIndex]);
+    newCard.style.transition = "none";
+    newCard.style.opacity = "0";
+    newCard.style.transform = "translateX(40px)";
+    strip.insertBefore(newCard, strip.firstElementChild);
+
+    cards.forEach(function (c, i) {
+      var delta = firstLefts[i] - c.getBoundingClientRect().left;
+      c.style.transition = "none";
+      c.style.transform = "translateX(" + delta + "px)";
+    });
+    void strip.offsetWidth; // force reflow so transition:none registers before animating
+
+    requestAnimationFrame(function () {
+      cards.forEach(function (c) {
+        c.style.transition = "transform " + DURATION + "ms ease";
+        c.style.transform = "translateX(0)";
+      });
+      newCard.style.transition = "transform " + DURATION + "ms ease, opacity " + DURATION + "ms ease";
+      newCard.style.transform = "translateX(0)";
+      newCard.style.opacity = "1";
+      oldLast.style.opacity = "0";
+    });
+
+    setTimeout(function () {
+      cards.forEach(function (c) {
+        c.style.transition = "";
+        c.style.transform = "";
+      });
+      newCard.style.transition = "";
+      newCard.style.transform = "";
+      newCard.style.opacity = "";
+      if (oldLast.parentNode === strip) strip.removeChild(oldLast);
+    }, DURATION + 60);
+
+    nextIndex = (nextIndex + 1) % playlist.length;
+  }
+
+  setInterval(tick, 3000);
+})();
