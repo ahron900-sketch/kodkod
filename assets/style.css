@@ -873,6 +873,13 @@ html.dark-mode .site-header {
   margin: 0 auto;
   padding: 0 24px 60px;
 }
+
+.comments-section {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 24px 60px;
+}
+.comments-section .section-title { margin-bottom: 20px; }
 .related-section .page-title {
   margin-bottom: 20px;
 }

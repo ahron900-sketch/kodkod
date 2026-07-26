@@ -13,6 +13,39 @@ OUTPUT_DIR = "public_site"
 SITE_NAME = "קודקוד חדשות"
 SITE_URL = "https://kodkodnews.co.il"
 TIP_FORM_ACTION = "https://formspree.io/f/xeelpjwg"
+
+# Comments (giscus - GitHub Discussions as the backend, no server of our own).
+# Commenters log in with an existing GitHub account (not anonymous - giscus
+# doesn't support that; see the write-up on this). GISCUS_REPO_ID is this
+# repo's real node_id, fetched from the public GitHub API. GISCUS_CATEGORY_ID
+# can't be obtained the same way: it only exists once Discussions is enabled
+# on the repo, which is a one-time owner action giscus.app's setup flow
+# walks through. Comments stay off (this constant empty) until it's filled in.
+GISCUS_REPO_ID = "R_kgDORWVAhg"
+GISCUS_CATEGORY_ID = ""
+
+COMMENTS_SECTION_HTML = ""
+if GISCUS_CATEGORY_ID:
+    COMMENTS_SECTION_HTML = f"""
+        <section class="comments-section">
+          <h2 class="section-title">תגובות</h2>
+          <script src="https://giscus.app/client.js"
+                  data-repo="ahron900-sketch/kodkod"
+                  data-repo-id="{GISCUS_REPO_ID}"
+                  data-category="General"
+                  data-category-id="{GISCUS_CATEGORY_ID}"
+                  data-mapping="pathname"
+                  data-strict="0"
+                  data-reactions-enabled="1"
+                  data-emit-metadata="0"
+                  data-input-position="top"
+                  data-theme="{SITE_URL}/assets/giscus-theme.css"
+                  data-lang="he"
+                  crossorigin="anonymous"
+                  async>
+          </script>
+        </section>"""
+
 ARTICLE_PREVIEW_CHARS = 900
 WP_BOILERPLATE_RE = re.compile(r'^The post .* appeared first on .*\.?$')
 RECIPE_CATEGORY = "בישול ומתכונים"
@@ -552,6 +585,9 @@ PRIVACY_BODY = """
   <h2>עיבוד AI בכתבות</h2>
   <p>חלק מהכתבות באתר עשויות לכלול תיבת "עיקרי הדברים - AI" (תמצית של 3-4 נקודות עובדתיות) ותגיות נושא, מעל הכתבה עצמה - הכל נוצר אוטומטית על סמך טקסט הכתבה המקורית בלבד, באמצעות שירות בינה מלאכותית חיצוני (Groq). אותו תהליך עשוי גם לתקן שגיאות כתיב ופיסוק בטקסט הכתבה, מבלי לשנות עובדות או משמעות. תהליך זה שולח את טקסט הכתבה (לא מידע אישי של המבקרים באתר) לעיבוד אצל הספק החיצוני. התוצרים מתפרסמים בנוסף לכתבה המלאה עם ייחוס וקישור למקור, ולעולם לא במקומה.</p>
 
+  <h2>תגובות בכתבות</h2>
+  <p>מערכת התגובות באתר (giscus) מבוססת על GitHub Discussions - כדי להשאיר תגובה נדרשת התחברות עם חשבון GitHub קיים (התגובות אינן אנונימיות; שם המשתמש ותמונת הפרופיל שלכם ב-GitHub מוצגים לצד התגובה, כפי שקורה בכל דיון ב-GitHub). תוכן התגובה מאוחסן כדיון ציבורי במאגר ה-GitHub של האתר, בכפוף למדיניות הפרטיות ותנאי השימוש של GitHub. אינכם חייבים להשתמש במערכת התגובות כדי לקרוא את האתר.</p>
+
   <h2>עוגיות וכלי מעקב</h2>
   <p>קודקוד אינו משתמש בעוגיות מעקב (tracking cookies), פיקסלים פרסומיים, או כלי אנליטיקה חיצוניים כלשהם, נכון לכתיבת מדיניות זו. מיקומי הפרסומת המוצגים באתר הם תוכן הדגמה בלבד ואינם טוענים סקריפטים של רשת פרסום חיצונית.</p>
 
@@ -608,7 +644,7 @@ ACCESSIBILITY_BODY = """
   </ul>
 
   <h2>מגבלות ידועות</h2>
-  <p>קודקוד הוא אגרגטור המציג תוכן חיצוני (כתבות, תמונות, ולעיתים מוצגים גם סרטוני וידאו) שמקורו באתרי חדשות אחרים. ייתכן שתוכן זה, בהיותו חיצוני, אינו עומד באופן מלא בדרישות הנגישות. אנו פועלים לשפר את חוויית הנגישות באופן שוטף.</p>
+  <p>קודקוד הוא אגרגטור המציג תוכן חיצוני (כתבות, תמונות, ולעיתים מוצגים גם סרטוני וידאו) שמקורו באתרי חדשות אחרים. ייתכן שתוכן זה, בהיותו חיצוני, אינו עומד באופן מלא בדרישות הנגישות. בנוסף, מערכת התגובות (giscus) טעונה כווידג'ט חיצוני שאיננו שולטים באופן מלא בנגישותו. אנו פועלים לשפר את חוויית הנגישות באופן שוטף.</p>
 
   <h2>פנייה בנושא נגישות</h2>
   <p>נתקלתם בבעיית נגישות באתר? נשמח לדעת ולטפל בפנייתכם. ניתן לפנות אלינו דרך <a href="/tip-line.html">עמוד יצירת הקשר</a>, בציון "נגישות" בתוכן הפנייה.</p>
@@ -1141,6 +1177,7 @@ def build():
         </main>
         {ad_slot_html()}
         {related_html}
+        {COMMENTS_SECTION_HTML}
         {view_tracker}"""
         description = (" ".join(a["ai_takeaways"][:2]) if a.get("ai_takeaways")
                         else re.sub(r'<[^>]+>', '', body_html_full))[:160].strip()

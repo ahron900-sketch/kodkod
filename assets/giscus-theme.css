@@ -1,0 +1,51 @@
+/* Custom giscus theme matching קודקוד's warm terracotta/ivory design tokens.
+   Loaded by giscus as a standalone stylesheet inside its own iframe (see
+   https://github.com/giscus/giscus/blob/main/ADVANCED-USAGE.md#custom-theme),
+   so it must be self-contained - no @import, no reference to the site's own
+   assets/style.css. Variable names follow GitHub's own Primer design tokens,
+   the same ones used in giscus's own custom_example.css. */
+main {
+  --color-canvas-default: #faf7f3;
+  --color-canvas-subtle: #f5efe8;
+  --color-canvas-overlay: #ffffff;
+  --color-canvas-inset: #f5efe8;
+
+  --color-fg-default: #211a15;
+  --color-fg-muted: #736358;
+  --color-fg-subtle: #a3927f;
+  --color-fg-on-emphasis: #ffffff;
+
+  --color-border-default: #e5dcd2;
+  --color-border-muted: #ede4d9;
+
+  --color-neutral-muted: rgba(193, 89, 47, 0.08);
+
+  --color-accent-fg: #c1592f;
+  --color-accent-emphasis: #c1592f;
+  --color-accent-muted: rgba(193, 89, 47, 0.3);
+  --color-accent-subtle: rgba(193, 89, 47, 0.1);
+
+  --color-btn-text: #211a15;
+  --color-btn-bg: #f5efe8;
+  --color-btn-border: #e5dcd2;
+  --color-btn-hover-bg: #ede4d9;
+  --color-btn-hover-border: #d8cbbc;
+  --color-btn-active-bg: #ede4d9;
+
+  --color-btn-primary-text: #ffffff;
+  --color-btn-primary-bg: #c1592f;
+  --color-btn-primary-border: #a94a26;
+  --color-btn-primary-hover-bg: #a94a26;
+  --color-btn-primary-hover-border: #93411f;
+  --color-btn-primary-selected-bg: #a94a26;
+
+  --color-danger-fg: #c0392b;
+  --color-success-fg: #2e7d32;
+  --color-attention-fg: #b8720a;
+  --color-attention-subtle: rgba(184, 114, 10, 0.1);
+
+  --color-scale-gray-1: #f5efe8;
+  --color-scale-gray-2: #e5dcd2;
+  --color-scale-gray-4: #a3927f;
+  --color-scale-gray-9: #211a15;
+}
