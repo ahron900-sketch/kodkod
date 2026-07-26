@@ -1102,6 +1102,10 @@ html.dark-mode .site-header {
   justify-content: space-between;
   gap: 16px;
 }
+/* .cookie-banner sets its own display, which otherwise beats the browser's
+   default [hidden]{display:none} at equal specificity - without this, JS
+   setting the hidden attribute on accept/decline has no visual effect */
+.cookie-banner[hidden] { display: none; }
 .cookie-banner p {
   margin: 0;
   font-size: 0.9rem;
@@ -1156,28 +1160,31 @@ html.dark-mode .site-header {
   color: var(--ink-soft);
 }
 
-/* Accessibility widget */
+/* Accessibility widget - a tab mounted flush to the left edge of the
+   viewport (flat on the wall side, rounded facing the page), sitting high
+   enough to clear the cookie banner's footprint so it's never covered by it */
 .a11y-widget {
   position: fixed;
-  bottom: 24px;
-  left: 24px;
+  bottom: 110px;
+  left: 0;
   z-index: 400;
 }
 .a11y-toggle {
-  width: 52px;
+  width: 46px;
   height: 52px;
-  border-radius: 50%;
+  border-radius: 0 26px 26px 0;
   background: var(--accent);
   color: #fff;
   border: none;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-inline-start: 4px;
   cursor: pointer;
   box-shadow: var(--shadow-lg);
-  transition: transform 0.2s ease;
+  transition: width 0.2s ease;
 }
-.a11y-toggle:hover { transform: scale(1.06); }
+.a11y-toggle:hover { width: 54px; }
 .a11y-panel {
   position: absolute;
   bottom: 62px;
@@ -1232,5 +1239,5 @@ html.a11y-stop-motion .reveal { opacity: 1 !important; transform: none !importan
 @media (max-width: 640px) {
   .cookie-banner { flex-direction: column; align-items: stretch; text-align: center; }
   .cookie-banner-actions { justify-content: center; }
-  .a11y-widget { bottom: 16px; left: 16px; }
+  .a11y-widget { bottom: 200px; left: 0; }
 }
