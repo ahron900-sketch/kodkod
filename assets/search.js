@@ -269,7 +269,7 @@ window.kkAffinity = (function () {
   if (slides.length < 2) return;
 
   var current = 0;
-  var ROTATE_MS = 5000;
+  var ROTATE_MS = 2000;
   var timer = null;
 
   function showSlide(index) {

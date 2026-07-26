@@ -759,7 +759,7 @@ def build():
     listable = [a for a in articles if a["image"] or a.get("video_id")]
 
     # Homepage hero carousel: top 5 non-recipe candidates, one active slide at
-    # a time, auto-rotated client-side every 5s (assets/search.js). The pool
+    # a time, auto-rotated client-side every 2s (assets/search.js). The pool
     # itself only changes when the site rebuilds (every 2h via deploy.yml),
     # since it's just the 5 freshest qualifying articles at build time.
     HERO_SLIDE_COUNT = 5
