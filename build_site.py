@@ -4,7 +4,8 @@ import json
 import glob
 import html
 import shutil
-from datetime import datetime
+from datetime import datetime, timezone
+from email.utils import format_datetime
 
 CONTENT_DIR = "content/news"
 MAGAZINE_DIR = "content/magazine"
@@ -142,9 +143,11 @@ PAGE_HEAD = """<!DOCTYPE html>
 <meta property="og:site_name" content="{site_name}">
 {og_image_tag}
 <meta name="twitter:card" content="summary_large_image">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="icon" href="/favicon.png">
 <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+<link rel="alternate" type="application/rss+xml" title="{site_name} - כל הכתבות" href="{site_url}/rss.xml">
+{extra_rss_link}
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css">
 {structured_data}
@@ -347,18 +350,25 @@ def render_body(body_text):
 
 
 def write_page(path, title, description, categories, active_cat, body_html,
-               ticker_text, canonical=None, og_type="website", og_image="", structured_data=""):
+               ticker_text, canonical=None, og_type="website", og_image="", structured_data="",
+               category_rss_url=None):
     canonical = canonical or SITE_URL + "/"
     og_image_tag = f'<meta property="og:image" content="{html.escape(og_image)}">' if og_image else ""
+    extra_rss_link = ""
+    if category_rss_url:
+        extra_rss_link = (f'<link rel="alternate" type="application/rss+xml" '
+                           f'title="{html.escape(active_cat)} - {SITE_NAME}" href="{html.escape(category_rss_url)}">')
     full = PAGE_HEAD.format(
         title=html.escape(title),
         description=html.escape(description),
         canonical=html.escape(canonical),
         og_type=og_type,
         site_name=SITE_NAME,
+        site_url=SITE_URL,
         og_image_tag=og_image_tag,
         cat_links=cat_nav(categories, active_cat),
         structured_data=structured_data,
+        extra_rss_link=extra_rss_link,
     )
     full = full.replace("<header class=\"site-header\">",
                          f'<div class="ticker"><div class="ticker-move">{html.escape(ticker_text)}</div></div>\n<header class="site-header">')
@@ -391,6 +401,10 @@ ABOUT_BODY = """
     <li><strong>חרדים:</strong> עדכונים מעולם היהדות החרדית והדתית בישראל ובעולם.</li>
     <li><strong>כלכלה:</strong> שוק ההון, עסקים ומגמות כלכליות.</li>
     <li><strong>טכנולוגיה:</strong> חדשנות, סטארטאפים והייטק ישראלי ועולמי.</li>
+    <li><strong>ספורט:</strong> תוצאות, סיקור אירועי ספורט ותקצירים מהארץ ומהעולם.</li>
+    <li><strong>בריאות:</strong> עדכונים ומחקרים מעולם הרפואה והבריאות.</li>
+    <li><strong>תרבות ובידור:</strong> קולנוע, טלוויזיה, מוזיקה וספרות.</li>
+    <li><strong>רכב:</strong> חדשות רכב, מבחני דרכים ועדכוני תעשייה.</li>
     <li><strong>בישול ומתכונים:</strong> תוכן אוכל ולייף-סטייל ממיטב אתרי הבישול בישראל.</li>
     <li><strong>וידאו:</strong> קטעי חדשות מצולמים מערוצי החדשות המובילים, מוצגים בנגן הווידאו הייעודי של קודקוד.</li>
   </ul>
@@ -398,7 +412,7 @@ ABOUT_BODY = """
   <h2>למה קודקוד?</h2>
   <ul>
     <li><strong>מהירות:</strong> עדכון אוטומטי לאורך היממה, כל 15 דקות, ממגוון רחב של מקורות.</li>
-    <li><strong>מגוון:</strong> חדשות, כלכלה, טכנולוגיה, חרדים ובישול - הכול תחת קורת גג אחת.</li>
+    <li><strong>מגוון:</strong> חדשות, כלכלה, טכנולוגיה, ספורט, בריאות, תרבות, רכב, חרדים ובישול - הכול תחת קורת גג אחת.</li>
     <li><strong>נקי:</strong> ממשק מהיר וקריא, ללא רעש מיותר, עם גופן גדול ונוח לקריאה.</li>
     <li><strong>מקור מכובד:</strong> כל כתבה מקושרת בבירור למקור המקורי שלה, ומיוחסת לכתב ולערוץ שפרסם אותה.</li>
     <li><strong>חינמי ופתוח:</strong> קודקוד נגיש לכולם ללא צורך בהרשמה או תשלום.</li>
@@ -548,6 +562,43 @@ def json_ld_script(data):
     return '<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False) + '</script>'
 
 
+RSS_FEED_LIMIT = 40
+
+
+def rss_item_xml(a):
+    canonical = f"{SITE_URL}/article/{a['slug']}.html"
+    pub_date = format_datetime(a["dt"].replace(tzinfo=timezone.utc)) if a["dt"] != datetime.min else ""
+    description = html.escape(a.get("dek") or a["title"])
+    enclosure = f'<enclosure url="{html.escape(a["image"])}" type="image/jpeg"/>' if a.get("image") else ""
+    return f"""  <item>
+    <title>{html.escape(a['title'])}</title>
+    <link>{canonical}</link>
+    <guid isPermaLink="true">{canonical}</guid>
+    <pubDate>{pub_date}</pubDate>
+    <category>{html.escape(a['category'])}</category>
+    <description>{description}</description>
+    {enclosure}
+  </item>"""
+
+
+def write_rss_feed(path, feed_url, title, description, articles, limit=RSS_FEED_LIMIT):
+    items = "".join(rss_item_xml(a) for a in articles[:limit])
+    xml = f"""<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>{html.escape(title)}</title>
+  <link>{SITE_URL}/</link>
+  <description>{html.escape(description)}</description>
+  <language>he-il</language>
+  <atom:link href="{html.escape(feed_url)}" rel="self" type="application/rss+xml"/>
+{items}
+</channel>
+</rss>"""
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(xml)
+
+
 def article_structured_data(a, canonical):
     published = a["dt"].isoformat() if a["dt"] != datetime.min else ""
     data = {
@@ -581,7 +632,18 @@ def article_structured_data(a, canonical):
     return json_ld_script(data) + json_ld_script(breadcrumb)
 
 
-def category_structured_data(category_name, canonical):
+def article_list_items(articles, limit=20):
+    """Minimal ListItem entries (position + url) for an ItemList of articles -
+    Google's documented pattern for a listing page, deliberately not nesting
+    full NewsArticle objects here since each article already carries its own
+    complete NewsArticle schema on its own page."""
+    return [
+        {"@type": "ListItem", "position": i + 1, "url": f"{SITE_URL}/article/{a['slug']}.html"}
+        for i, a in enumerate(articles[:limit])
+    ]
+
+
+def category_structured_data(category_name, canonical, articles=None):
     data = {
         "@context": "https://schema.org",
         "@type": "CollectionPage",
@@ -589,6 +651,8 @@ def category_structured_data(category_name, canonical):
         "url": canonical,
         "isPartOf": {"@type": "WebSite", "name": SITE_NAME, "url": SITE_URL + "/"},
     }
+    if articles:
+        data["mainEntity"] = {"@type": "ItemList", "itemListElement": article_list_items(articles)}
     breadcrumb = {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
@@ -600,14 +664,16 @@ def category_structured_data(category_name, canonical):
     return json_ld_script(data) + json_ld_script(breadcrumb)
 
 
-def homepage_structured_data():
+def homepage_structured_data(articles=None):
     data = {
         "@context": "https://schema.org",
         "@type": "NewsMediaOrganization",
         "name": SITE_NAME,
         "url": SITE_URL + "/",
         "logo": {"@type": "ImageObject", "url": SITE_URL + "/favicon.png"},
-        "description": "קודקוד הוא מרכז חדשותי דיגיטלי ישראלי המרכז מבזקים ממיטב מקורות החדשות בעברית - חדשות, כלכלה, טכנולוגיה, חרדים ובישול.",
+        "description": "קודקוד הוא מרכז חדשותי דיגיטלי ישראלי המרכז מבזקים ממיטב מקורות החדשות בעברית - חדשות, כלכלה, טכנולוגיה, חרדים, ספורט, בריאות, תרבות ורכב.",
+        "correctionsPolicy": SITE_URL + "/tip-line.html",
+        "missionCoveragePrioritiesPolicy": SITE_URL + "/about.html",
     }
     website = {
         "@context": "https://schema.org",
@@ -620,7 +686,16 @@ def homepage_structured_data():
             "query-input": "required name=search_term_string",
         },
     }
-    return json_ld_script(data) + json_ld_script(website)
+    parts = [json_ld_script(data), json_ld_script(website)]
+    if articles:
+        item_list = {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "name": f"כתבות אחרונות - {SITE_NAME}",
+            "itemListElement": article_list_items(articles),
+        }
+        parts.append(json_ld_script(item_list))
+    return "".join(parts)
 
 
 def build():
@@ -641,29 +716,41 @@ def build():
     # anyone who has the direct link. video_id counts as "has visuals".
     listable = [a for a in articles if a["image"] or a.get("video_id")]
 
-    # Homepage (hero + grid). Recipes are a different kind of content
-    # (features/lifestyle, not news) and should never be picked as the
-    # lead story.
+    # Homepage hero carousel: top 5 non-recipe candidates, one active slide at
+    # a time, auto-rotated client-side every 5s (assets/search.js). The pool
+    # itself only changes when the site rebuilds (every 2h via deploy.yml),
+    # since it's just the 5 freshest qualifying articles at build time.
+    HERO_SLIDE_COUNT = 5
     hero_candidates = [a for a in listable if a["category"] != RECIPE_CATEGORY]
     hero_html = ""
     rest = listable
     if hero_candidates:
-        hero = hero_candidates[0]
-        hero_img = hero["image"] or PLACEHOLDER_IMG
-        hero_dek = f'<p class="hero-dek">{html.escape(hero["dek"])}</p>' if hero.get("dek") else ""
+        hero_slides = hero_candidates[:HERO_SLIDE_COUNT]
+        slides_html = []
+        dots_html = []
+        for i, hero in enumerate(hero_slides):
+            hero_img = hero["image"] or PLACEHOLDER_IMG
+            hero_dek = f'<p class="hero-dek">{html.escape(hero["dek"])}</p>' if hero.get("dek") else ""
+            active_cls = " active" if i == 0 else ""
+            slides_html.append(f"""
+          <a class="hero-slide{active_cls}" href="/article/{hero['slug']}.html" data-slide="{i}">
+            <div class="hero-img-wrap">
+              <img src="{html.escape(hero_img)}" class="hero-img" onerror="this.src='{PLACEHOLDER_IMG}'">
+            </div>
+            <div class="hero-text">
+              <span class="card-cat">{html.escape(hero['category'])}</span>
+              <h1>{html.escape(hero['title'])}</h1>
+              {hero_dek}
+              <span class="card-meta">{html.escape(hero['source'])} · {html.escape(hero['date'][:10])}</span>
+            </div>
+          </a>""")
+            dots_html.append(f'<button class="hero-dot{active_cls}" data-slide="{i}" aria-label="כתבה {i + 1}"></button>')
         hero_html = f"""
-        <a class="hero" href="/article/{hero['slug']}.html">
-          <div class="hero-img-wrap">
-            <img src="{html.escape(hero_img)}" class="hero-img" onerror="this.src='{PLACEHOLDER_IMG}'">
-          </div>
-          <div class="hero-text">
-            <span class="card-cat">{html.escape(hero['category'])}</span>
-            <h1>{html.escape(hero['title'])}</h1>
-            {hero_dek}
-            <span class="card-meta">{html.escape(hero['source'])} · {html.escape(hero['date'][:10])}</span>
-          </div>
-        </a>"""
-        rest = [a for a in listable if a["slug"] != hero["slug"]]
+        <div class="hero" id="hero-carousel">{''.join(slides_html)}
+          <div class="hero-dots">{''.join(dots_html)}</div>
+        </div>"""
+        hero_slugs = {h["slug"] for h in hero_slides}
+        rest = [a for a in listable if a["slug"] not in hero_slugs]
 
     # Bento/mosaic module: one large tile + a stack of smaller ones, instead
     # of dropping straight into a uniform grid right under the hero
@@ -733,17 +820,25 @@ def build():
         </div>""")
     categories_html = f'<div id="personalized-sections">{"".join(category_sections)}</div>'
 
+    desc_categories = [c for c in categories if c != TV_CATEGORY]
+    homepage_description = f"קודקוד חדשות - האתר החדשותי המהיר בישראל: {', '.join(desc_categories)} ועוד, במקום אחד"
+
     body = f'<main class="grid">{hero_html}{bento_html}{ad_slot_html()}{quick_html}{recently_viewed_html}{categories_html}</main>'
     write_page(os.path.join(OUTPUT_DIR, "index.html"), SITE_NAME,
-               "קודקוד חדשות - האתר החדשותי המהיר בישראל: חדשות, כלכלה, טכנולוגיה וחרדים במקום אחד",
+               homepage_description,
                categories, None, body, ticker_text, canonical=SITE_URL + "/",
-               structured_data=homepage_structured_data())
+               structured_data=homepage_structured_data(listable))
+
+    write_rss_feed(os.path.join(OUTPUT_DIR, "rss.xml"), f"{SITE_URL}/rss.xml",
+                   SITE_NAME, "עדכוני חדשות שוטפים מקודקוד - כל הקטגוריות במקום אחד",
+                   [a for a in listable if a["category"] != TV_CATEGORY])
 
     # Category pages (TV_CATEGORY has its own /tv.html instead)
     for c in categories:
         if c == TV_CATEGORY:
             continue
-        c_articles = [a for a in listable if a["category"] == c][:100]
+        c_all_articles = [a for a in listable if a["category"] == c]
+        c_articles = c_all_articles[:100]
         cards = "".join(render_card(a) for a in c_articles)
         sort_bar = """
         <div class="sort-bar">
@@ -755,10 +850,14 @@ def build():
         </div>"""
         body = f'<main class="grid"><h1 class="page-title">{html.escape(c)}</h1>{sort_bar}<div class="grid-inner" id="category-grid">{cards}</div></main>'
         cat_url = f"{SITE_URL}/category/{slugify(c, c)}.html"
+        cat_rss_url = f"{SITE_URL}/rss/{slugify(c, c)}.xml"
         write_page(os.path.join(OUTPUT_DIR, "category", f"{slugify(c, c)}.html"),
                    f"חדשות {c} - {SITE_NAME}", f"כל הכתבות בקטגוריית {c} - עדכונים שוטפים מהאתר החדשותי קודקוד",
                    categories, c, body, ticker_text, canonical=cat_url,
-                   structured_data=category_structured_data(c, cat_url))
+                   structured_data=category_structured_data(c, cat_url, c_all_articles),
+                   category_rss_url=cat_rss_url)
+        write_rss_feed(os.path.join(OUTPUT_DIR, "rss", f"{slugify(c, c)}.xml"), cat_rss_url,
+                        f"{c} - {SITE_NAME}", f"עדכוני {c} מקודקוד", c_all_articles)
 
     # Video page - short news clips only (TV_CATEGORY has its own page below)
     video_articles = [a for a in listable if a.get("video_id") and a["category"] != TV_CATEGORY]

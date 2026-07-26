@@ -32,6 +32,20 @@ rss_feeds = {
     "מאקו - כל האוכל": ("https://rcs.mako.co.il/rss/c7250a2610f26110VgnVCM1000005201000aRCRD.xml", "בישול ומתכונים"),
     "וואלה אוכל": ("https://rss.walla.co.il/feed/9?type=main", "בישול ומתכונים"),
     "Foody": ("https://www.foody.co.il/feed", "בישול ומתכונים"),
+
+    # ספורט
+    "וואלה ספורט": ("https://rss.walla.co.il/feed/3?type=main", "ספורט"),
+
+    # בריאות
+    "וואלה בריאות": ("https://rss.walla.co.il/feed/139?type=main", "בריאות"),
+    "מאקו בריאות": ("https://rcs.mako.co.il/rss/c827a3ef43336410VgnVCM2000002a0c10acRCRD.xml", "בריאות"),
+
+    # תרבות ובידור
+    "וואלה תרבות": ("https://rss.walla.co.il/feed/4?type=main", "תרבות ובידור"),
+    "מאקו תרבות": ("https://rcs.mako.co.il/rss/c7a987610879a310VgnVCM2000002a0c10acRCRD.xml", "תרבות ובידור"),
+
+    # רכב
+    "וואלה רכב": ("https://rss.walla.co.il/feed/31?type=main", "רכב"),
 }
 
 # ערוצי יוטיוב - נשאבים כווידאו דרך YouTube RSS (אין צורך במפתח API)

@@ -219,6 +219,45 @@
 })();
 
 (function () {
+  var carousel = document.getElementById("hero-carousel");
+  if (!carousel) return;
+  var slides = carousel.querySelectorAll(".hero-slide");
+  var dots = carousel.querySelectorAll(".hero-dot");
+  if (slides.length < 2) return;
+
+  var current = 0;
+  var ROTATE_MS = 5000;
+  var timer = null;
+
+  function showSlide(index) {
+    slides.forEach(function (s, i) { s.classList.toggle("active", i === index); });
+    dots.forEach(function (d, i) { d.classList.toggle("active", i === index); });
+    current = index;
+  }
+  function start() {
+    timer = setInterval(function () {
+      showSlide((current + 1) % slides.length);
+    }, ROTATE_MS);
+  }
+  function stop() {
+    if (timer) clearInterval(timer);
+    timer = null;
+  }
+
+  dots.forEach(function (dot, i) {
+    dot.addEventListener("click", function () {
+      stop();
+      showSlide(i);
+      start();
+    });
+  });
+  carousel.addEventListener("mouseenter", stop);
+  carousel.addEventListener("mouseleave", start);
+
+  start();
+})();
+
+(function () {
   var els = document.querySelectorAll(".reveal");
   if (!els.length) return;
   if (!("IntersectionObserver" in window)) {
