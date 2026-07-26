@@ -129,6 +129,7 @@ def load_articles():
         ai_takeaways = [t.strip() for t in data.get("ai_takeaways", "").split("•") if t.strip()]
         ai_tags = [t.strip() for t in data.get("ai_tags", "").split(",") if t.strip()]
         quick_image = data.get("quick_image") == "1"
+        is_sponsored = data.get("sponsored") == "1"
 
         articles.append({
             "title": title,
@@ -146,6 +147,7 @@ def load_articles():
             "quick_image": quick_image,
             "ai_takeaways": ai_takeaways,
             "ai_tags": ai_tags,
+            "is_sponsored": is_sponsored,
         })
     articles.sort(key=lambda a: a["dt"], reverse=True)
     seen = {}
@@ -299,12 +301,13 @@ def render_card(a):
     video_badge = '<span class="badge badge-video">וידאו</span>' if a.get("video_id") else ""
     quick_badge = '<span class="badge badge-quick">בקצרה</span>' if a.get("is_quick") and not a.get("video_id") and not is_recipe else ""
     recipe_badge = '<span class="badge badge-recipe">מתכון</span>' if is_recipe else ""
+    sponsored_badge = '<span class="badge badge-sponsored">תוכן שיווקי</span>' if a.get("is_sponsored") else ""
     card_cls = "card card-recipe" if is_recipe else "card"
     return f"""
     <a class="{card_cls}" href="/article/{a['slug']}.html" data-slug="{html.escape(a['slug'])}" data-title="{html.escape(a['title'])}" data-img="{html.escape(img)}" data-cat="{html.escape(a['category'])}" data-source="{html.escape(a['source'])}" data-type="{content_type_of(a)}">
       <div class="card-img-wrap">
         <img class="card-img" src="{html.escape(img)}" alt="{html.escape(a['title'])}" loading="lazy" onerror="this.src='{PLACEHOLDER_IMG}'">
-        {video_badge}{quick_badge}{recipe_badge}
+        {video_badge}{quick_badge}{recipe_badge}{sponsored_badge}
       </div>
       <div class="card-body">
         <span class="card-cat">{html.escape(a['category'])}</span>
@@ -621,6 +624,7 @@ TERMS_BODY = """
 
   <h2>אופי האתר</h2>
   <p>קודקוד הוא אגרגטור חדשות אוטומטי. האתר אוסף ומציג מבזקים ממקורות חדשות קיימים בישראל, עם ייחוס וקישור מלא למקור המקורי של כל כתבה. קודקוד אינו כותב, עורך, או אחראי לתוכן הכתבות המקוריות, ואינו טוען לבעלות עליהן. זכויות היוצרים בתוכן הכתבות שייכות למקור המקורי שלהן בלבד. חלק מהכתבות עשויות לכלול, בנוסף, תיבת "עיקרי הדברים - AI" ותגיות נושא, המסומנות בבירור - נוצרות אוטומטית מטקסט הכתבה המקורית, ומתפרסמות לצד הכתבה המלאה ולא במקומה.</p>
+  <p>לצד הכתבות המצוטטות, קודקוד עשוי לפרסם מדי פעם תוכן שיווקי בתשלום מטעם גורם עסקי. תוכן כזה מסומן תמיד ובבירור - הן בתג "תוכן שיווקי" בכל מקום שבו הכתבה מופיעה באתר, והן בבאנר גלוי בראש הכתבה עצמה - ואינו מוצג כתוכן עיתונאי.</p>
 
   <h2>שימוש הוגן</h2>
   <p>הצגת קטעי כתבות עם ייחוס וקישור למקור נעשית במסגרת שימוש הוגן ומקובל באגרגציית חדשות. כל כתבה כוללת קישור ברור לכתבה המלאה באתר המקור, וקודקוד ממליץ לקוראים לבקר באתר המקור לקריאה מלאה ולתמיכה בעיתונות המקורית.</p>
@@ -707,6 +711,20 @@ def write_rss_feed(path, feed_url, title, description, articles, limit=RSS_FEED_
 
 def article_structured_data(a, canonical):
     published = a["dt"].isoformat() if a["dt"] != datetime.min else ""
+    # Sponsored/paid content doesn't get marked up as NewsArticle - Google's
+    # guidance treats that as editorial content, and this isn't; a plain
+    # BreadcrumbList (still accurate regardless of content type) is enough
+    if a.get("is_sponsored"):
+        breadcrumb_only = {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": SITE_NAME, "item": SITE_URL + "/"},
+                {"@type": "ListItem", "position": 2, "name": a["category"], "item": f"{SITE_URL}/category/{slugify(a['category'], a['category'])}.html"},
+                {"@type": "ListItem", "position": 3, "name": a["title"], "item": canonical},
+            ],
+        }
+        return json_ld_script(breadcrumb_only)
     data = {
         "@context": "https://schema.org",
         "@type": "NewsArticle",
@@ -996,7 +1014,7 @@ def build():
 
     write_rss_feed(os.path.join(OUTPUT_DIR, "rss.xml"), f"{SITE_URL}/rss.xml",
                    SITE_NAME, "עדכוני חדשות שוטפים מקודקוד - כל הקטגוריות במקום אחד",
-                   [a for a in listable if a["category"] != TV_CATEGORY])
+                   [a for a in listable if a["category"] != TV_CATEGORY and not a.get("is_sponsored")])
 
     # Category pages (TV_CATEGORY has its own /tv.html instead)
     for c in categories:
@@ -1026,7 +1044,8 @@ def build():
                    category_rss_url=cat_rss_url,
                    noindex=not c_all_articles)
         write_rss_feed(os.path.join(OUTPUT_DIR, "rss", f"{slugify(c, c)}.xml"), cat_rss_url,
-                        f"{c} - {SITE_NAME}", f"עדכוני {c} מקודקוד", c_all_articles)
+                        f"{c} - {SITE_NAME}", f"עדכוני {c} מקודקוד",
+                        [a for a in c_all_articles if not a.get("is_sponsored")])
 
     # Video page - short news clips only (TV_CATEGORY has its own page below)
     video_articles = [a for a in listable if a.get("video_id") and a["category"] != TV_CATEGORY]
@@ -1221,14 +1240,25 @@ def build():
         </div>"""
         # Source credit shown once, at the very end of the article only (not
         # repeated near the headline) - keeps the reader's focus on our own
-        # page and content first, attribution comes after they've read it
+        # page and content first, attribution comes after they've read it.
+        # Paid/sponsored placements get rel="sponsored" per Google's own
+        # guidance on disclosing paid links, on top of the visible label.
+        credit_rel = "sponsored noopener" if a.get("is_sponsored") else "noopener"
         source_credit_html = f"""
         <div class="source-credit-box">
           <span>המקור: {html.escape(a['source'])}</span>
-          <a href="{html.escape(a['link'])}" target="_blank" rel="noopener">לכתבה המלאה באתר המקור ←</a>
+          <a href="{html.escape(a['link'])}" target="_blank" rel="{credit_rel}">לכתבה המלאה באתר המקור ←</a>
         </div>"""
+        # Sponsored content gets an unmissable disclosure banner above the
+        # headline - required by Israeli consumer protection law and by
+        # Google's paid-content policy; the badge alone (shown in listings)
+        # isn't enough once someone is actually on the article page
+        sponsored_banner_html = ""
+        if a.get("is_sponsored"):
+            sponsored_banner_html = f'<div class="sponsored-banner">תוכן שיווקי בשיתוף {html.escape(a["source"])}</div>'
         body = f"""
         <main class="article">
+          {sponsored_banner_html}
           <span class="card-cat">{html.escape(a['category'])}</span>
           <h1>{html.escape(a['title'])}</h1>
           {dek_html}
@@ -1330,9 +1360,12 @@ def build():
         f.write(sitemap)
 
     # Google News sitemap - only articles from the last 48 hours, per spec
-    # (https://support.google.com/news/publisher-center/answer/9606224)
+    # (https://support.google.com/news/publisher-center/answer/9606224).
+    # Sponsored/paid content is explicitly excluded - Google News publisher
+    # guidelines don't consider that eligible "news" content
     news_cutoff = now.timestamp() - 48 * 3600
-    recent_articles = [a for a in articles if a["dt"] != datetime.min and a["dt"].timestamp() >= news_cutoff]
+    recent_articles = [a for a in articles
+                       if a["dt"] != datetime.min and a["dt"].timestamp() >= news_cutoff and not a.get("is_sponsored")]
     news_sitemap = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '

@@ -188,6 +188,19 @@ html.dark-mode .site-header {
   padding: 32px 24px 60px;
 }
 
+/* Unmissable disclosure - required, not decorative; sits above everything
+   else on a sponsored article page */
+.sponsored-banner {
+  background: #6b5a2e;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 10px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  display: inline-block;
+}
+
 /* Hero */
 .hero {
   position: relative;
@@ -603,12 +616,19 @@ html.dark-mode .site-header {
 }
 .badge-quick {
   right: 10px;
-  background: rgba(10,108,214,0.9);
+  background: var(--accent);
   color: #fff;
 }
 .badge-recipe {
   right: 10px;
   background: rgba(106,133,50,0.92);
+  color: #fff;
+}
+.badge-sponsored {
+  right: 10px;
+  bottom: auto;
+  top: 10px;
+  background: #6b5a2e;
   color: #fff;
 }
 .card-recipe { border-color: rgba(106,133,50,0.35); }
