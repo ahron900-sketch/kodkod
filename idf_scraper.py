@@ -8,6 +8,7 @@ import time
 import shutil
 import urllib.request
 from datetime import datetime, timedelta
+from build_site import slugify  # single source of truth for slug computation
 
 # מקורות RSS - כולם בעברית, ממוינים לקטגוריות (כל URL כאן נבדק ואומת שמחזיר כתבות)
 rss_feeds = {
@@ -365,38 +366,68 @@ def is_duplicate_of_recent(title, recent_title_word_sets):
     return False
 
 
-# Optional AI summary: a short, honestly-labeled 2-3 sentence Hebrew TL;DR
-# generated from the REAL full article text, shown as its own clearly-marked
-# box above the actual excerpt+attribution+link - never a replacement for it,
-# and never presented as if it were the original reporting. Uses Groq's
-# free-tier, OpenAI-compatible API (no SDK dependency - a plain HTTPS POST,
-# same pattern as the rest of this file's network calls). If GROQ_API_KEY
-# isn't set, or the call fails for any reason, this silently no-ops and the
-# article is still published normally, just without the summary box.
+# Deterministic junk-phrase stripping: known boilerplate/share-button/leftover
+# text that crawlers sometimes drag in alongside the real article body. A
+# fixed phrase list is used instead of asking the AI to find these, because
+# an LLM asked to "clean up junk" over a full article has to re-emit the
+# entire text to do it - risking silent truncation or drift on long articles.
+# Removing a KNOWN, finite set of phrases is something plain string matching
+# does perfectly and auditably; no reason to spend an AI call on it.
+JUNK_PHRASE_PATTERNS = [
+    r'שתפו (?:את הכתבה )?בפייסבוק', r'שתף בפייסבוק', r'שתפו בוואטסאפ',
+    r'עקבו אחרינו ב(?:פייסבוק|טוויטר|אינסטגרם)', r'הישארו מעודכנים',
+    r'להצטרפות לערוץ (?:הטלגרם|הוואטסאפ)', r'לחצו כאן למעבר לערוץ',
+    r'כתבה זו פורסמה לראשונה ב', r'תגובות\s*:?\s*\d+',
+]
+JUNK_PHRASE_RE = re.compile("|".join(JUNK_PHRASE_PATTERNS))
+
+
+def strip_known_junk_phrases(text):
+    return re.sub(r'[ \t]{2,}', ' ', JUNK_PHRASE_RE.sub('', text)).strip()
+
+
+# Optional AI enrichment: grammar/typo proofreading, junk-phrase awareness,
+# a short factual "key takeaways" bullet list, and 3-4 semantic tags/entities
+# - all derived strictly from the REAL scraped article text. None of this
+# ever replaces the real excerpt+attribution+link, and the prompt explicitly
+# forbids presenting anything as original reporting or inventing facts. Uses
+# Groq's free-tier, OpenAI-compatible API (plain HTTPS POST, no SDK). If
+# GROQ_API_KEY isn't set or the call fails for any reason, this silently
+# no-ops and the article is still published normally, just without the
+# enrichment. The AI layer NEVER decides whether an article gets published -
+# that stays fully deterministic (the filters above) - it only adds polish.
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
 GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
 GROQ_MODEL = "llama-3.3-70b-versatile"
-AI_SUMMARY_SYSTEM_PROMPT = (
-    "אתה עוזר עריכה לאתר חדשות ישראלי. תפקידך היחיד הוא לכתוב תקציר קצר "
-    "(2-3 משפטים, עברית תקנית) של הכתבה שתקבל - אך ורק על סמך העובדות "
-    "שמופיעות בטקסט עצמו, ללא הוספת פרטים, השערות, או דעות שאינם מופיעים "
-    "בו. זהו תקציר המתפרסם בנוסף לכתבה המקורית המלאה (עם ייחוס וקישור "
-    "למקור), ולא כתחליף לה - אל תנסח את התקציר כאילו הוא הכתבה עצמה או "
-    "כאילו אתה מקור הידיעה. השב אך ורק ב-JSON תקני בפורמט הבא, ללא טקסט "
-    'נוסף: {"summary": "..."}'
+AI_ENRICH_SYSTEM_PROMPT = (
+    "אתה עוזר עריכה לאתר חדשות ישראלי. תקבל כותרת וגוף כתבה אמיתית שנשאבה "
+    "ממקור חדשות. בצע שלוש משימות, אך ורק על סמך העובדות שמופיעות בטקסט "
+    "עצמו - ללא הוספת פרטים, השערות, או דעות שאינם מופיעים בו, וללא ניסוח "
+    "שמציג את התוצר כאילו הוא הכתבה המקורית או כאילו אתה מקור הידיעה:\n"
+    "1. cleaned_content - הטקסט המלא, מוגה: תקן שגיאות כתיב, פיסוק ותחביר "
+    "בלבד. אסור לקצר, לסכם, להשמיט קטעים, לשנות עובדות, או לנסח מחדש "
+    "משפטים באופן שמשנה את המשמעות. אם אינך יכול להחזיר את הטקסט המלא, "
+    "החזר אותו כפי שהוא ללא שינוי.\n"
+    "2. takeaways - רשימה של 3-4 משפטים קצרים (עיקרי הדברים), כל אחד עובדה "
+    "בודדת מתוך הטקסט.\n"
+    "3. tags - רשימה של 3-4 מילות מפתח סמנטיות (שמות אנשים, ארגונים, "
+    "מקומות, או נושאים ספציפיים המוזכרים בכתבה בפועל).\n"
+    'השב אך ורק ב-JSON תקני: {"cleaned_content": "...", "takeaways": '
+    '["...", "..."], "tags": ["...", "..."]}'
 )
 
 
-def generate_ai_summary(title, content):
+def enrich_article_with_ai(title, content):
     if not GROQ_API_KEY:
-        return ""
+        return {}
     try:
         payload = json.dumps({
             "model": GROQ_MODEL,
             "response_format": {"type": "json_object"},
             "temperature": 0.3,
+            "max_tokens": 4096,
             "messages": [
-                {"role": "system", "content": AI_SUMMARY_SYSTEM_PROMPT},
+                {"role": "system", "content": AI_ENRICH_SYSTEM_PROMPT},
                 {"role": "user", "content": f"כותרת: {title}\n\nגוף הכתבה:\n{content[:6000]}"},
             ],
         }).encode("utf-8")
@@ -409,22 +440,89 @@ def generate_ai_summary(title, content):
             },
             method="POST",
         )
-        with urllib.request.urlopen(req, timeout=20) as resp:
+        with urllib.request.urlopen(req, timeout=30) as resp:
             result = json.loads(resp.read().decode("utf-8"))
         raw = result["choices"][0]["message"]["content"]
-        summary = json.loads(raw).get("summary", "").strip()
-        # frontmatter writes this as a single indented continuation line -
-        # collapse any embedded newlines so the block-scalar parser in
-        # build_site.py's parse_frontmatter (which only expects one physical
-        # line here) can't get corrupted by a multi-line model response
-        summary = re.sub(r'\s+', ' ', summary).strip()
-        return summary
+        parsed = json.loads(raw)
+
+        cleaned = re.sub(r'\s+', ' ', (parsed.get("cleaned_content") or "")).strip()
+        # safety net: an AI "proofread" that comes back a lot shorter or
+        # longer than the original almost always means truncation or
+        # unwanted rewriting, not a faithful cleanup - fall back to the
+        # original text rather than trust a suspicious result
+        if cleaned and 0.7 * len(content) <= len(cleaned) <= 1.3 * len(content):
+            content_out = cleaned
+        else:
+            content_out = content
+
+        # each item forced single-line for the same frontmatter-safety reason
+        # as the summary field used to be - see the note further down where
+        # these get written into the file
+        takeaways = [re.sub(r'\s+', ' ', str(t)).strip() for t in (parsed.get("takeaways") or [])]
+        takeaways = [t for t in takeaways if t][:4]
+        tags = [re.sub(r'\s+', ' ', str(t)).strip().strip(',') for t in (parsed.get("tags") or [])]
+        tags = [t for t in tags if t and ',' not in t][:4]
+
+        return {"content": content_out, "takeaways": takeaways, "tags": tags}
     except Exception as e:
-        print(f"תקציר AI נכשל (מדלג, הכתבה עדיין תתפרסם): {e}")
-        return ""
+        print(f"העשרת AI נכשלה (מדלג, הכתבה עדיין תתפרסם): {e}")
+        return {}
 
 
-def save_article(title, link, content, image_url, source_name, category, video_id="", recent_titles=None):
+# Internal linking engine: every article's AI-extracted tags get recorded
+# here (tag -> the article that introduced it), so the NEXT new article that
+# mentions the same tag automatically gets a link back to it. Runs once per
+# newly-scraped article, entirely at scrape time - the resulting links are
+# baked into the static markdown file itself, so there's no client-side JS
+# or per-page-load cost involved at all.
+TAGS_INDEX_PATH = os.path.join("data", "tags_index.json")
+MAX_AUTO_LINKS_PER_ARTICLE = 3
+MIN_TAG_LEN_FOR_LINKING = 3
+
+
+def load_tags_index():
+    try:
+        with open(TAGS_INDEX_PATH, encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+
+def save_tags_index(index):
+    os.makedirs(os.path.dirname(TAGS_INDEX_PATH), exist_ok=True)
+    with open(TAGS_INDEX_PATH, "w", encoding="utf-8") as f:
+        json.dump(index, f, ensure_ascii=False, indent=2)
+
+
+def auto_link_internal_tags(content, tags_index):
+    candidates = []
+    for tag, info in tags_index.items():
+        if len(tag) < MIN_TAG_LEN_FOR_LINKING:
+            continue
+        idx = content.find(tag)
+        if idx == -1:
+            continue
+        candidates.append((idx, idx + len(tag), tag, info["slug"]))
+    if not candidates:
+        return content
+
+    candidates.sort(key=lambda c: c[0])
+    chosen, last_end = [], -1
+    for start, end, tag, slug in candidates:
+        if start < last_end:
+            continue  # overlaps an already-chosen match - skip it
+        chosen.append((start, end, tag, slug))
+        last_end = end
+        if len(chosen) >= MAX_AUTO_LINKS_PER_ARTICLE:
+            break
+
+    # rebuild right-to-left so earlier (still-pending) match offsets stay valid
+    for start, end, tag, slug in sorted(chosen, key=lambda c: -c[0]):
+        content = content[:start] + f"[{tag}](/article/{slug}.html)" + content[end:]
+    return content
+
+
+def save_article(title, link, content, image_url, source_name, category, video_id="", recent_titles=None, tags_index=None):
     filename = f"{sanitize_filename(title)}.md"
     exists = any(os.path.exists(os.path.join(d, filename)) for d in [LIVE_DIR, PENDING_DIR, ARCHIVE_DIR])
     if exists:
@@ -477,6 +575,8 @@ def save_article(title, link, content, image_url, source_name, category, video_i
         print(f"נפסל (לא נמצאה כתבה מלאה, רק תקציר קצר מדי): {title}")
         return
 
+    content = strip_known_junk_phrases(content)
+
     if is_gibberish_or_broken(content):
         print(f"נפסל (תוכן שבור/גיבריש/קישורים שיוריים): {title}")
         return
@@ -487,19 +587,49 @@ def save_article(title, link, content, image_url, source_name, category, video_i
         print(f"נפסל (תוכן ממומן חשוד - זוהה בגוף הכתבה): {title}")
         return
 
-    ai_summary = generate_ai_summary(title, content)
-    if ai_summary:
+    enrichment = enrich_article_with_ai(title, content)
+    if enrichment:
         time.sleep(2)  # free-tier rate-limit safety margin between Groq calls
+        content = enrichment.get("content", content)
+    takeaways = enrichment.get("takeaways", [])
+    tags = enrichment.get("tags", [])
+
+    if tags_index is not None:
+        content = auto_link_internal_tags(content, tags_index)
 
     date_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    _write_article_file(filename, title, date_str, source_name, image_url, link, category, content, ai_summary=ai_summary)
+    _write_article_file(filename, title, date_str, source_name, image_url, link, category, content,
+                         takeaways=takeaways, tags=tags)
     if recent_titles is not None:
         recent_titles.append(normalize_title_words(title))
+    if tags_index is not None and tags:
+        # best-effort slug prediction (mirrors build_site.py's own slugify);
+        # a rare title-collision could shift the real slug by a "-1" suffix
+        # at build time, in which case this specific link would go stale -
+        # low-severity, and not worth the complexity of resolving it exactly
+        slug_guess = slugify(title, sanitize_filename(title))
+        for tag in tags:
+            tags_index[tag] = {"slug": slug_guess, "title": title}
 
 
-def _write_article_file(filename, title, date_str, source_name, image_url, link, category, content, video_id="", ai_summary=""):
+def _write_article_file(filename, title, date_str, source_name, image_url, link, category, content,
+                         video_id="", takeaways=None, tags=None):
     video_line = f'\nvideo_id: "{video_id}"' if video_id else ""
-    ai_summary_line = f'\nai_summary: >-\n  {ai_summary}' if ai_summary else ""
+
+    # Each takeaway is written as its own indented continuation line (what
+    # the >- block-scalar parser in build_site.py actually expects), prefixed
+    # with "•" so the parser's space-joined result can be re-split back into
+    # a list on the read side without needing to change that shared parser.
+    takeaways_line = ""
+    if takeaways:
+        block = "\n".join(f"  • {t.replace(chr(8226), '')}" for t in takeaways)
+        takeaways_line = f"\nai_takeaways: >-\n{block}"
+
+    tags_line = ""
+    if tags:
+        joined = ", ".join(t.replace('"', "'").replace(",", "") for t in tags)
+        tags_line = f'\nai_tags: "{joined}"'
+
     md_content = f"""---
 title: >-
   {title}
@@ -507,7 +637,7 @@ date: "{date_str}"
 source: "{source_name}"
 image: "{image_url}"
 link: "{link}"
-category: "{category}"{video_line}{ai_summary_line}
+category: "{category}"{video_line}{takeaways_line}{tags_line}
 ---
 
 {content}
@@ -519,10 +649,37 @@ category: "{category}"{video_line}{ai_summary_line}
     print(f"נשמר: {title}")
 
 
+GOOGLE_TRENDS_RSS_URL = "https://trends.google.com/trending/rss?geo=IL"
+
+
+def fetch_trending_keywords():
+    """Real, currently-working Google Trends RSS endpoint for Israel (the
+    older trends/trendingsearches/daily/rss path Google used to publish is
+    gone - verified by hand before wiring this up, not assumed). Used only
+    to reorder processing within THIS run so a trending story is more likely
+    to get published even if the run gets cut short partway through - never
+    to alter headlines or stuff keywords into anything (see notes on those
+    two ideas in the project write-up: both are real Google spam-policy
+    risks, not implemented here)."""
+    try:
+        feed = feedparser.parse(GOOGLE_TRENDS_RSS_URL)
+        keywords = [e.get('title', '').strip().lower() for e in feed.entries if e.get('title')]
+        return [k for k in keywords if k]
+    except Exception as e:
+        print(f"שגיאה בשאיבת טרנדים (מדלג, לא משפיע על תפקוד הבוט): {e}")
+        return []
+
+
 def fetch_news():
     manage_archive()
     recent_titles = load_recent_titles()
+    tags_index = load_tags_index()
+    trending_keywords = fetch_trending_keywords()
     print(f"נטענו {len(recent_titles)} כותרות מ-{DUPLICATE_LOOKBACK_HOURS} השעות האחרונות לבדיקת כפילויות")
+    print(f"נטען אינדקס תגיות עם {len(tags_index)} תגיות לקישור פנימי אוטומטי")
+    print(f"נטענו {len(trending_keywords)} מגמות חמות מגוגל טרנדס לתעדוף עיבוד")
+
+    candidates = []
 
     for source_name, (url, category) in rss_feeds.items():
         print(f"מתחיל שאיבה מ-{source_name}...")
@@ -537,7 +694,10 @@ def fetch_news():
             link = entry.get('link', '')
             content = clean_html(entry.get('description', '') or entry.get('summary', ''))
             image_url = extract_image(entry)
-            save_article(title, link, content, image_url, source_name, category, recent_titles=recent_titles)
+            candidates.append({
+                "title": title, "link": link, "content": content, "image_url": image_url,
+                "source_name": source_name, "category": category, "video_id": "",
+            })
 
     for channel_id, (source_name, category) in youtube_channels.items():
         feed_url = f"https://www.youtube.com/feeds/videos.xml?channel_id={channel_id}"
@@ -554,7 +714,27 @@ def fetch_news():
             video_id = entry.get('yt_videoid', '')
             content = clean_html(entry.get('summary', ''))
             image_url = extract_image(entry)
-            save_article(title, link, content, image_url, source_name, category, video_id=video_id, recent_titles=recent_titles)
+            candidates.append({
+                "title": title, "link": link, "content": content, "image_url": image_url,
+                "source_name": source_name, "category": category, "video_id": video_id,
+            })
+
+    def is_trending(candidate):
+        title_lower = candidate["title"].lower()
+        return any(kw in title_lower for kw in trending_keywords)
+
+    # stable sort: trending-matched candidates first, original order preserved
+    # within each group (across ALL sources, not just per-feed)
+    candidates.sort(key=lambda c: 0 if is_trending(c) else 1)
+    trending_count = sum(1 for c in candidates if is_trending(c))
+    if trending_count:
+        print(f"{trending_count} כתבות תואמות מגמה חמה - יעובדו ראשונות")
+
+    for c in candidates:
+        save_article(c["title"], c["link"], c["content"], c["image_url"], c["source_name"], c["category"],
+                     video_id=c["video_id"], recent_titles=recent_titles, tags_index=tags_index)
+
+    save_tags_index(tags_index)
 
 
 if __name__ == "__main__":

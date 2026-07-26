@@ -85,6 +85,12 @@ def load_articles():
         except Exception:
             dt = datetime.min
         slug = slugify(title, os.path.splitext(os.path.basename(path))[0])
+        # ai_takeaways is written as "• point one • point two ..." (each
+        # physical line in the frontmatter block-scalar prefixed with "•"),
+        # so re-splitting on that character recovers the original list
+        ai_takeaways = [t.strip() for t in data.get("ai_takeaways", "").split("•") if t.strip()]
+        ai_tags = [t.strip() for t in data.get("ai_tags", "").split(",") if t.strip()]
+
         articles.append({
             "title": title,
             "date": date_str,
@@ -98,7 +104,8 @@ def load_articles():
             "slug": slug,
             "dek": extract_dek(body),
             "is_quick": len(body) < 500 and not data.get("video_id"),
-            "ai_summary": data.get("ai_summary", ""),
+            "ai_takeaways": ai_takeaways,
+            "ai_tags": ai_tags,
         })
     articles.sort(key=lambda a: a["dt"], reverse=True)
     seen = {}
@@ -370,7 +377,10 @@ def cat_nav(categories, active=None):
     return "".join(links)
 
 
-MD_LINK_RE = re.compile(r'\[([^\]]+)\]\((https?://[^\s)]+)\)')
+# Matches both external (https?://) links and internal relative (/article/..)
+# links - the latter used by the auto internal-linking engine in
+# idf_scraper.py, which writes plain [text](/article/slug.html) markdown
+MD_LINK_RE = re.compile(r'\[([^\]]+)\]\(((?:https?://|/)[^\s)]+)\)')
 
 
 def render_body(body_text):
@@ -382,7 +392,10 @@ def render_body(body_text):
         escaped = html.escape(line)
 
         def repl(m):
-            return f'<a href="{html.escape(m.group(2))}" target="_blank" rel="noopener">{m.group(1)}</a>'
+            text, url = m.group(1), m.group(2)
+            if url.startswith("/"):
+                return f'<a href="{html.escape(url)}">{text}</a>'
+            return f'<a href="{html.escape(url)}" target="_blank" rel="noopener">{text}</a>'
 
         linked = MD_LINK_RE.sub(repl, escaped)
         paragraphs.append(f"<p>{linked}</p>")
@@ -536,8 +549,8 @@ PRIVACY_BODY = """
   <h2>טפסים ויצירת קשר</h2>
   <p>כאשר אתם ממלאים טופס באתר (יצירת קשר, פרסום, או דיווח על סקופ), הפרטים שאתם מזינים - שם, אימייל, ותוכן הפנייה - נשלחים באמצעות שירות חיצוני בשם <strong>Formspree</strong>, המעבד את הטופס ומעביר אותו אלינו במייל. Formspree הוא צד שלישי, ומדיניות הפרטיות שלו חלה על עיבוד הנתונים בצדו. איננו משתמשים במידע זה למטרה כלשהי מעבר למענה לפנייתכם.</p>
 
-  <h2>תקציר AI בכתבות</h2>
-  <p>חלק מהכתבות באתר עשויות לכלול תיבת "תקציר AI" מעל הכתבה עצמה - תקציר קצר שנוצר אוטומטית על סמך טקסט הכתבה המקורית בלבד, באמצעות שירות בינה מלאכותית חיצוני (Groq). תהליך זה שולח את טקסט הכתבה (לא מידע אישי של המבקרים באתר) לעיבוד אצל הספק החיצוני. התקציר מתפרסם בנוסף לכתבה המלאה עם ייחוס וקישור למקור, ולעולם לא במקומה.</p>
+  <h2>עיבוד AI בכתבות</h2>
+  <p>חלק מהכתבות באתר עשויות לכלול תיבת "עיקרי הדברים - AI" (תמצית של 3-4 נקודות עובדתיות) ותגיות נושא, מעל הכתבה עצמה - הכל נוצר אוטומטית על סמך טקסט הכתבה המקורית בלבד, באמצעות שירות בינה מלאכותית חיצוני (Groq). אותו תהליך עשוי גם לתקן שגיאות כתיב ופיסוק בטקסט הכתבה, מבלי לשנות עובדות או משמעות. תהליך זה שולח את טקסט הכתבה (לא מידע אישי של המבקרים באתר) לעיבוד אצל הספק החיצוני. התוצרים מתפרסמים בנוסף לכתבה המלאה עם ייחוס וקישור למקור, ולעולם לא במקומה.</p>
 
   <h2>עוגיות וכלי מעקב</h2>
   <p>קודקוד אינו משתמש בעוגיות מעקב (tracking cookies), פיקסלים פרסומיים, או כלי אנליטיקה חיצוניים כלשהם, נכון לכתיבת מדיניות זו. מיקומי הפרסומת המוצגים באתר הם תוכן הדגמה בלבד ואינם טוענים סקריפטים של רשת פרסום חיצונית.</p>
@@ -560,7 +573,7 @@ TERMS_BODY = """
   <p class="lead">השימוש באתר קודקוד כפוף לתנאים המפורטים להלן. גלישה באתר מהווה הסכמה לתנאים אלה.</p>
 
   <h2>אופי האתר</h2>
-  <p>קודקוד הוא אגרגטור חדשות אוטומטי. האתר אוסף ומציג מבזקים ממקורות חדשות קיימים בישראל, עם ייחוס וקישור מלא למקור המקורי של כל כתבה. קודקוד אינו כותב, עורך, או אחראי לתוכן הכתבות המקוריות, ואינו טוען לבעלות עליהן. זכויות היוצרים בתוכן הכתבות שייכות למקור המקורי שלהן בלבד. חלק מהכתבות עשויות לכלול, בנוסף, תיבת "תקציר AI" המסומנת בבירור - תקציר קצר שנוצר אוטומטית מטקסט הכתבה המקורית, המתפרסם לצד הכתבה המלאה ולא במקומה.</p>
+  <p>קודקוד הוא אגרגטור חדשות אוטומטי. האתר אוסף ומציג מבזקים ממקורות חדשות קיימים בישראל, עם ייחוס וקישור מלא למקור המקורי של כל כתבה. קודקוד אינו כותב, עורך, או אחראי לתוכן הכתבות המקוריות, ואינו טוען לבעלות עליהן. זכויות היוצרים בתוכן הכתבות שייכות למקור המקורי שלהן בלבד. חלק מהכתבות עשויות לכלול, בנוסף, תיבת "עיקרי הדברים - AI" ותגיות נושא, המסומנות בבירור - נוצרות אוטומטית מטקסט הכתבה המקורית, ומתפרסמות לצד הכתבה המלאה ולא במקומה.</p>
 
   <h2>שימוש הוגן</h2>
   <p>הצגת קטעי כתבות עם ייחוס וקישור למקור נעשית במסגרת שימוש הוגן ומקובל באגרגציית חדשות. כל כתבה כוללת קישור ברור לכתבה המלאה באתר המקור, וקודקוד ממליץ לקוראים לבקר באתר המקור לקריאה מלאה ולתמיכה בעיתונות המקורית.</p>
@@ -651,7 +664,8 @@ def article_structured_data(a, canonical):
         "@context": "https://schema.org",
         "@type": "NewsArticle",
         "headline": a["title"],
-        "description": a.get("dek", "") or a["title"],
+        "description": (" ".join(a["ai_takeaways"][:2]) if a.get("ai_takeaways")
+                         else a.get("dek", "") or a["title"]),
         "datePublished": published,
         "dateModified": published,
         "articleSection": a["category"],
@@ -662,8 +676,15 @@ def article_structured_data(a, canonical):
             "name": SITE_NAME,
             "url": SITE_URL + "/",
         },
+        # mainEntityOfPage stays our OWN canonical URL, not the source's -
+        # this page is the NewsArticle entity being described; pointing it
+        # at the third-party source would be both spec-incorrect (that
+        # property means "the page that most represents this entity") and
+        # would undercut our own attribution model, not reinforce it
         "mainEntityOfPage": {"@type": "WebPage", "@id": canonical},
     }
+    if a.get("ai_tags"):
+        data["keywords"] = ", ".join(a["ai_tags"])
     if a["image"]:
         data["image"] = [a["image"]]
     breadcrumb = {
@@ -1015,16 +1036,26 @@ def build():
 
         dek_html = f'<p class="article-dek">{html.escape(a["dek"])}</p>' if a.get("dek") else ""
 
-        # Optional, honestly-labeled AI summary (see idf_scraper.py's
-        # generate_ai_summary) - sits above the real excerpt, never replaces
-        # it; only present when a GROQ_API_KEY was configured for the scraper
+        # Optional, honestly-labeled AI-generated key takeaways (see
+        # idf_scraper.py's enrich_article_with_ai) - sits above the real
+        # excerpt, never replaces it; only present when a GROQ_API_KEY was
+        # configured for the scraper
         ai_summary_html = ""
-        if a.get("ai_summary"):
+        if a.get("ai_takeaways"):
+            points_html = "".join(f"<li>{html.escape(p)}</li>" for p in a["ai_takeaways"])
             ai_summary_html = f"""
           <div class="ai-summary-box">
-            <span class="ai-summary-label">תקציר AI</span>
-            <p>{html.escape(a['ai_summary'])}</p>
+            <span class="ai-summary-label">עיקרי הדברים - AI</span>
+            <ul>{points_html}</ul>
           </div>"""
+
+        tags_html = ""
+        if a.get("ai_tags"):
+            tag_chips = "".join(
+                f'<a class="tag-chip" href="/search.html?q={html.escape(t)}">{html.escape(t)}</a>'
+                for t in a["ai_tags"]
+            )
+            tags_html = f'<div class="tag-chips">{tag_chips}</div>'
 
         body_html_full = render_body(a["body"])
         is_long = len(a["body"]) > ARTICLE_PREVIEW_CHARS
@@ -1086,25 +1117,33 @@ def build():
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="10.6" x2="15.4" y2="6.4"/><line x1="8.6" y1="13.4" x2="15.4" y2="17.6"/></svg>
             <span>שיתוף</span>
           </button>
-          <a class="source-link-icon" href="{html.escape(a['link'])}" target="_blank" rel="noopener" title="קרא את הכתבה המלאה במקור">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          </a>
+        </div>"""
+        # Source credit shown once, at the very end of the article only (not
+        # repeated near the headline) - keeps the reader's focus on our own
+        # page and content first, attribution comes after they've read it
+        source_credit_html = f"""
+        <div class="source-credit-box">
+          <span>המקור: {html.escape(a['source'])}</span>
+          <a href="{html.escape(a['link'])}" target="_blank" rel="noopener">לכתבה המלאה באתר המקור ←</a>
         </div>"""
         body = f"""
         <main class="article">
           <span class="card-cat">{html.escape(a['category'])}</span>
           <h1>{html.escape(a['title'])}</h1>
           {dek_html}
-          <div class="article-meta">{html.escape(a['source'])} · {html.escape(a['date'])}</div>
+          <div class="article-meta">{html.escape(a['date'])}</div>
           {media_html}
           {ai_summary_html}
+          {tags_html}
           {body_content}
+          {source_credit_html}
           {engagement_bar}
         </main>
         {ad_slot_html()}
         {related_html}
         {view_tracker}"""
-        description = re.sub(r'<[^>]+>', '', body_html_full)[:160].strip()
+        description = (" ".join(a["ai_takeaways"][:2]) if a.get("ai_takeaways")
+                        else re.sub(r'<[^>]+>', '', body_html_full))[:160].strip()
         write_page(os.path.join(OUTPUT_DIR, "article", f"{a['slug']}.html"), a["title"],
                    description or a["title"], categories, a["category"], body, ticker_text,
                    canonical=canonical, og_type="article", og_image=a["image"],

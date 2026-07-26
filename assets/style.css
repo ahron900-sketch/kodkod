@@ -1,25 +1,25 @@
 :root {
-  --accent: #0a6cd6;
+  --accent: #c1592f;
   --accent-ink: #ffffff;
-  --ink: #16171a;
-  --ink-soft: #666a73;
-  --bg: #f6f7f9;
+  --ink: #211a15;
+  --ink-soft: #736358;
+  --bg: #faf7f3;
   --surface: #ffffff;
-  --surface-2: #f0f1f4;
-  --border: rgba(0,0,0,0.08);
-  --shadow: 0 1px 2px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
-  --shadow-lg: 0 4px 12px rgba(0,0,0,0.06), 0 20px 48px rgba(0,0,0,0.10);
+  --surface-2: #f5efe8;
+  --border: rgba(60,40,20,0.09);
+  --shadow: 0 1px 2px rgba(60,30,10,0.05), 0 8px 24px rgba(60,30,10,0.07);
+  --shadow-lg: 0 4px 12px rgba(60,30,10,0.07), 0 20px 48px rgba(60,30,10,0.12);
   --radius: 16px;
   --radius-sm: 10px;
 }
 
 html.dark-mode {
-  --ink: #f0f1f4;
-  --ink-soft: #a3a7b0;
-  --bg: #0d0e10;
-  --surface: #18191c;
-  --surface-2: #1f2124;
-  --border: rgba(255,255,255,0.08);
+  --ink: #f3efe9;
+  --ink-soft: #ab9f93;
+  --bg: #14100d;
+  --surface: #1e1815;
+  --surface-2: #26201b;
+  --border: rgba(255,240,220,0.08);
   --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 8px 24px rgba(0,0,0,0.4);
   --shadow-lg: 0 4px 12px rgba(0,0,0,0.5), 0 20px 48px rgba(0,0,0,0.6);
 }
@@ -639,15 +639,17 @@ html.dark-mode .site-header {
   margin-bottom: 20px;
 }
 
-/* Optional AI-generated summary - deliberately styled as a distinct,
-   clearly-labeled box so it reads as an add-on, never mistaken for the
-   original reporting that follows it */
+/* Optional AI-generated "key takeaways" - deliberately styled as a distinct,
+   clearly-labeled, scannable box so it reads as an add-on, never mistaken
+   for the original reporting that follows it */
 .ai-summary-box {
-  background: var(--surface-2);
-  border-inline-start: 3px solid var(--accent);
-  border-radius: 8px;
-  padding: 14px 16px;
-  margin: 4px 0 24px;
+  background: linear-gradient(135deg, var(--surface-2), var(--surface));
+  border: 1px solid var(--border);
+  border-inline-start: 4px solid var(--accent);
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin: 4px 0 20px;
+  box-shadow: var(--shadow);
 }
 .ai-summary-label {
   display: inline-block;
@@ -656,14 +658,68 @@ html.dark-mode .site-header {
   color: var(--accent);
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  margin-bottom: 6px;
+  margin-bottom: 10px;
 }
-.ai-summary-box p {
+.ai-summary-box ul {
   margin: 0;
-  font-size: 0.95rem;
-  color: var(--ink);
-  line-height: 1.6;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
 }
+.ai-summary-box li {
+  position: relative;
+  padding-inline-start: 24px;
+  font-size: 0.97rem;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.55;
+}
+.ai-summary-box li::before {
+  content: "\2713";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0;
+  color: var(--accent);
+  font-weight: 800;
+}
+
+.tag-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 24px;
+}
+.tag-chip {
+  display: inline-block;
+  padding: 6px 14px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.tag-chip:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+.source-credit-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 16px 18px;
+  margin: 24px 0;
+  background: var(--surface-2);
+  border-radius: 10px;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+.source-credit-box a { color: var(--accent); font-weight: 700; text-decoration: none; }
+.source-credit-box a:hover { text-decoration: underline; }
 
 .article-img {
   width: 100%;
@@ -811,24 +867,6 @@ html.dark-mode .site-header {
   background: rgba(224,36,94,0.08);
 }
 .like-btn.liked svg { fill: #e0245e; }
-
-.source-link-icon {
-  margin-right: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1px solid var(--border);
-  color: var(--ink-soft);
-  transition: all 0.2s ease;
-}
-.source-link-icon:hover {
-  background: var(--accent);
-  color: #fff;
-  border-color: var(--accent);
-}
 
 .related-section {
   max-width: 1120px;

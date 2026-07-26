@@ -30,8 +30,8 @@ jobs:
         run: |
           git config --global user.name "News-Bot"
           git config --global user.email "bot@kodkodnews.co.il"
-          mkdir -p content/news
-          git add content/
+          mkdir -p content/news data
+          git add content/ data/
           git commit -m "עדכון חדשות: $(date)" || exit 0
           git pull --rebase origin main
           git push origin main
