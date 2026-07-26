@@ -288,16 +288,36 @@ window.kkAffinity = (function () {
     } catch (e) {
       liked = [];
     }
-    var isLiked = liked.indexOf(slug) !== -1;
+    // Older saved data was a plain array of slugs (no metadata) - normalize
+    // so the "הכתבות שאהבתי" page always has real objects to work with,
+    // without silently dropping anything a returning visitor already liked
+    liked = liked.map(function (item) {
+      return typeof item === "string" ? { slug: item } : item;
+    });
+    function findLikedIndex() {
+      for (var i = 0; i < liked.length; i++) {
+        if (liked[i].slug === slug) return i;
+      }
+      return -1;
+    }
+
+    var isLiked = findLikedIndex() !== -1;
     if (isLiked) {
       likeBtn.classList.add("liked");
       likeBtn.setAttribute("aria-pressed", "true");
       likeBtn.querySelector("#like-count").textContent = "אהבתי!";
     }
     likeBtn.addEventListener("click", function () {
-      var idx = liked.indexOf(slug);
+      var idx = findLikedIndex();
       if (idx === -1) {
-        liked.push(slug);
+        liked.push({
+          slug: slug,
+          title: bar.getAttribute("data-title"),
+          img: bar.getAttribute("data-img"),
+          cat: likeEntry.cat,
+          source: likeEntry.source,
+          date: bar.getAttribute("data-date")
+        });
         likeBtn.classList.add("liked");
         likeBtn.setAttribute("aria-pressed", "true");
         likeBtn.querySelector("#like-count").textContent = "אהבתי!";
@@ -336,20 +356,105 @@ window.kkAffinity = (function () {
 })();
 
 (function () {
+  // Real YouTube IFrame Player API (not a raw unmanaged iframe) - needed to
+  // track playback position so we can cover YouTube's own end-of-video
+  // suggestions grid with our own branded replay screen a moment before it
+  // would appear, instead of it interrupting into other channels' videos.
+  // rel=0/modestbranding=1/iv_load_policy=3 are YouTube's own documented,
+  // legitimate embed parameters (not a hack) - this doesn't hide or modify
+  // required YouTube attribution during actual playback, it only keeps
+  // chrome minimal and takes over at the very end, which is standard
+  // practice for embedded video on publisher sites.
   var player = document.querySelector(".kk-player");
   if (!player) return;
   var playBtn = player.querySelector(".kk-player-play");
+  var poster = player.querySelector(".kk-player-poster");
+  var endCard = player.querySelector(".kk-player-endcard");
+  var replayBtn = player.querySelector(".kk-player-replay");
   var videoId = player.getAttribute("data-video-id");
+  var ytPlayer = null;
+  var watchTimer = null;
+
+  function stopWatching() {
+    if (watchTimer) {
+      clearInterval(watchTimer);
+      watchTimer = null;
+    }
+  }
+
+  function showEndCard() {
+    stopWatching();
+    if (endCard) endCard.hidden = false;
+  }
+
+  function startWatching() {
+    stopWatching();
+    watchTimer = setInterval(function () {
+      if (!ytPlayer || typeof ytPlayer.getDuration !== "function") return;
+      var duration = ytPlayer.getDuration();
+      var current = ytPlayer.getCurrentTime();
+      if (duration > 0 && duration - current <= 1) showEndCard();
+    }, 250);
+  }
+
+  function createPlayer() {
+    var frameHost = document.createElement("div");
+    frameHost.className = "kk-player-frame";
+    var frameId = "kk-yt-" + videoId + "-" + Math.floor(Math.random() * 1e6);
+    frameHost.id = frameId;
+    player.insertBefore(frameHost, endCard);
+
+    ytPlayer = new YT.Player(frameId, {
+      videoId: videoId,
+      host: "https://www.youtube-nocookie.com",
+      playerVars: { autoplay: 1, rel: 0, modestbranding: 1, iv_load_policy: 3 },
+      events: {
+        onStateChange: function (e) {
+          if (e.data === YT.PlayerState.PLAYING) {
+            if (endCard) endCard.hidden = true;
+            startWatching();
+          } else if (e.data === YT.PlayerState.ENDED) {
+            showEndCard();
+          } else if (e.data === YT.PlayerState.PAUSED) {
+            stopWatching();
+          }
+        }
+      }
+    });
+  }
+
+  function loadApiAndCreatePlayer() {
+    if (window.YT && window.YT.Player) {
+      createPlayer();
+      return;
+    }
+    var previous = window.onYouTubeIframeAPIReady;
+    window.onYouTubeIframeAPIReady = function () {
+      if (typeof previous === "function") previous();
+      createPlayer();
+    };
+    if (!document.getElementById("youtube-iframe-api")) {
+      var tag = document.createElement("script");
+      tag.id = "youtube-iframe-api";
+      tag.src = "https://www.youtube.com/iframe_api";
+      document.head.appendChild(tag);
+    }
+  }
 
   playBtn.addEventListener("click", function () {
-    var iframe = document.createElement("iframe");
-    iframe.src = "https://www.youtube-nocookie.com/embed/" + videoId + "?autoplay=1";
-    iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
-    iframe.setAttribute("allowfullscreen", "");
-    iframe.setAttribute("frameborder", "0");
-    player.innerHTML = "";
-    player.appendChild(iframe);
+    if (poster) poster.hidden = true;
+    loadApiAndCreatePlayer();
   });
+
+  if (replayBtn) {
+    replayBtn.addEventListener("click", function () {
+      endCard.hidden = true;
+      if (ytPlayer && typeof ytPlayer.seekTo === "function") {
+        ytPlayer.seekTo(0);
+        ytPlayer.playVideo();
+      }
+    });
+  }
 })();
 
 (function () {

@@ -852,6 +852,38 @@ html.dark-mode .site-header {
 .kk-player-play:hover { transform: scale(1.08); }
 .kk-player-play svg { margin-right: -3px; }
 
+.kk-player-endcard {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+.kk-player-replay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  background: none;
+  color: #fff;
+  cursor: pointer;
+}
+.kk-player-replay svg {
+  width: 52px;
+  height: 52px;
+  padding: 14px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.kk-player-replay:hover svg { background: rgba(255, 255, 255, 0.22); transform: scale(1.06); }
+.kk-player-replay span { font-size: 0.85rem; font-weight: 700; }
+
 .article-body p {
   font-size: 1.18rem;
   line-height: 1.9;

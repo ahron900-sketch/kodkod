@@ -900,8 +900,14 @@ def build():
     # a time, auto-rotated client-side every 2s (assets/search.js). The pool
     # itself only changes when the site rebuilds (every 2h via deploy.yml),
     # since it's just the 5 freshest qualifying articles at build time.
+    # TV/live-broadcast clips carry their own network's on-air branding
+    # baked into the footage itself (not something we can strip) - excluded
+    # from the two most prominent placements so a competing channel's own
+    # bug isn't the first thing on the page; they still show normally on
+    # their own /tv.html page and in their category grid, credited as usual.
     HERO_SLIDE_COUNT = 5
-    hero_candidates = [a for a in listable if a["category"] != RECIPE_CATEGORY and not a.get("quick_image")]
+    hero_candidates = [a for a in listable
+                       if a["category"] not in (RECIPE_CATEGORY, TV_CATEGORY) and not a.get("quick_image")]
     hero_html = ""
     rest = listable
     if hero_candidates:
@@ -935,7 +941,8 @@ def build():
     # Bento/mosaic module: one large tile + a stack of smaller ones, instead
     # of dropping straight into a uniform grid right under the hero
     bento_candidates = pick_diverse(
-        [a for a in rest if a["category"] != RECIPE_CATEGORY and not a.get("quick_image")], 5, max_per_category=2)
+        [a for a in rest if a["category"] not in (RECIPE_CATEGORY, TV_CATEGORY) and not a.get("quick_image")],
+        5, max_per_category=2)
     bento_html = ""
     if len(bento_candidates) >= 3:
         big, *small = bento_candidates
@@ -1148,6 +1155,13 @@ def build():
                   <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
                 </button>
               </div>
+              <div class="kk-player-endcard" hidden>
+                <span class="kk-player-brand">קודקוד פלייר</span>
+                <button class="kk-player-replay" aria-label="נגן שוב">
+                  <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+                  <span>נגן שוב</span>
+                </button>
+              </div>
             </div>"""
         elif a["image"]:
             media_html = f'<img src="{html.escape(a["image"])}" class="article-img" loading="eager" onerror="this.src=\'{PLACEHOLDER_IMG}\'">'
@@ -1228,7 +1242,7 @@ def build():
         }})();
         </script>"""
         engagement_bar = f"""
-        <div class="engagement-bar" data-slug="{html.escape(a['slug'])}" data-cat="{html.escape(a['category'])}" data-source="{html.escape(a['source'])}" data-type="{content_type_of(a)}">
+        <div class="engagement-bar" data-slug="{html.escape(a['slug'])}" data-cat="{html.escape(a['category'])}" data-source="{html.escape(a['source'])}" data-type="{content_type_of(a)}" data-title="{html.escape(a['title'])}" data-img="{html.escape(a['image'] or PLACEHOLDER_IMG)}" data-date="{html.escape(a['date'])}">
           <button class="like-btn" id="like-btn" aria-pressed="false">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
             <span id="like-count">אהבתי</span>
