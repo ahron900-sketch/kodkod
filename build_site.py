@@ -143,7 +143,7 @@ PAGE_HEAD = """<!DOCTYPE html>
 <meta property="og:site_name" content="{site_name}">
 {og_image_tag}
 <meta name="twitter:card" content="summary_large_image">
-<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="robots" content="{robots_content}">
 <link rel="icon" href="/favicon.png">
 <link rel="sitemap" type="application/xml" href="/sitemap.xml">
 <link rel="alternate" type="application/rss+xml" title="{site_name} - כל הכתבות" href="{site_url}/rss.xml">
@@ -188,21 +188,60 @@ PAGE_FOOT = """
   </div>
 </div>
 <div class="a11y-widget" id="a11y-widget">
-  <button class="a11y-toggle" id="a11y-toggle" aria-label="אפשרויות נגישות" aria-expanded="false">
+  <button class="a11y-toggle" id="a11y-toggle" aria-label="פתח אפשרויות נגישות" aria-expanded="false" aria-controls="a11y-drawer">
     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="4" r="2"/><path d="M19 7h-6.5L10 4H5a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h2l1.5 2L7 20h3l1.7-7h.6L14 20h3l-2.5-9L17 9h2a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
   </button>
-  <div class="a11y-panel" id="a11y-panel" hidden>
-    <button data-a11y="font-inc">הגדל גופן</button>
-    <button data-a11y="font-dec">הקטן גופן</button>
-    <button data-a11y="contrast">ניגודיות גבוהה</button>
-    <button data-a11y="stop-motion">עצירת אנימציות</button>
-    <button data-a11y="reset">איפוס</button>
+</div>
+<div class="a11y-drawer" id="a11y-drawer" hidden>
+  <div class="a11y-drawer-head">
+    <h2>נגישות</h2>
+    <button class="a11y-close" id="a11y-close" aria-label="סגור נגישות">&times;</button>
   </div>
+
+  <div class="a11y-group">
+    <h3>טקסט</h3>
+    <div class="a11y-row">
+      <button class="a11y-step-btn" data-a11y="font-dec" aria-label="הקטן גופן">א-</button>
+      <button class="a11y-step-btn" data-a11y="font-inc" aria-label="הגדל גופן">א+</button>
+    </div>
+    <button class="a11y-toggle-btn" data-a11y="line-height">ריווח שורות מוגדל</button>
+    <button class="a11y-toggle-btn" data-a11y="letter-spacing">ריווח אותיות מוגדל</button>
+    <button class="a11y-toggle-btn" data-a11y="readable-font">גופן קריא</button>
+  </div>
+
+  <div class="a11y-group">
+    <h3>תצוגה</h3>
+    <button class="a11y-toggle-btn" data-a11y="contrast">ניגודיות גבוהה</button>
+    <button class="a11y-toggle-btn" data-a11y="invert">היפוך צבעים</button>
+    <button class="a11y-toggle-btn" data-a11y="grayscale">גווני אפור</button>
+    <button class="a11y-toggle-btn" data-a11y="underline-links">הדגשת קישורים</button>
+    <button class="a11y-toggle-btn" data-a11y="big-cursor">סמן עכבר מוגדל</button>
+    <button class="a11y-toggle-btn" data-a11y="stop-motion">עצירת אנימציות</button>
+  </div>
+
+  <div class="a11y-group">
+    <h3>כלים</h3>
+    <button class="a11y-toggle-btn" data-a11y="reading-guide">סרגל קריאה</button>
+    <button class="a11y-toggle-btn" id="a11y-read-aloud" data-a11y="read-aloud">הקראת הכתבה</button>
+  </div>
+
+  <button class="a11y-reset-btn" data-a11y="reset">איפוס כל ההגדרות</button>
 </div>
 <script src="/assets/search.js"></script>
 </body>
 </html>
 """
+
+
+def content_type_of(a):
+    """One of video/quick/standard - a coarse content-style signal used by
+    the client-side affinity engine (assets/search.js) to learn which style
+    of article a visitor tends to engage with, alongside category/source."""
+    if a.get("video_id"):
+        return "video"
+    if a.get("is_quick") and a["category"] != RECIPE_CATEGORY:
+        return "quick"
+    return "standard"
 
 
 def render_card(a):
@@ -213,7 +252,7 @@ def render_card(a):
     recipe_badge = '<span class="badge badge-recipe">מתכון</span>' if is_recipe else ""
     card_cls = "card card-recipe" if is_recipe else "card"
     return f"""
-    <a class="{card_cls}" href="/article/{a['slug']}.html" data-slug="{html.escape(a['slug'])}" data-title="{html.escape(a['title'])}" data-img="{html.escape(img)}" data-cat="{html.escape(a['category'])}">
+    <a class="{card_cls}" href="/article/{a['slug']}.html" data-slug="{html.escape(a['slug'])}" data-title="{html.escape(a['title'])}" data-img="{html.escape(img)}" data-cat="{html.escape(a['category'])}" data-source="{html.escape(a['source'])}" data-type="{content_type_of(a)}">
       <div class="card-img-wrap">
         <img class="card-img" src="{html.escape(img)}" alt="{html.escape(a['title'])}" loading="lazy" onerror="this.src='{PLACEHOLDER_IMG}'">
         {video_badge}{quick_badge}{recipe_badge}
@@ -351,13 +390,14 @@ def render_body(body_text):
 
 def write_page(path, title, description, categories, active_cat, body_html,
                ticker_text, canonical=None, og_type="website", og_image="", structured_data="",
-               category_rss_url=None):
+               category_rss_url=None, noindex=False):
     canonical = canonical or SITE_URL + "/"
     og_image_tag = f'<meta property="og:image" content="{html.escape(og_image)}">' if og_image else ""
     extra_rss_link = ""
     if category_rss_url:
         extra_rss_link = (f'<link rel="alternate" type="application/rss+xml" '
                            f'title="{html.escape(active_cat)} - {SITE_NAME}" href="{html.escape(category_rss_url)}">')
+    robots_content = "noindex, follow" if noindex else "index, follow, max-image-preview:large"
     full = PAGE_HEAD.format(
         title=html.escape(title),
         description=html.escape(description),
@@ -369,6 +409,7 @@ def write_page(path, title, description, categories, active_cat, body_html,
         cat_links=cat_nav(categories, active_cat),
         structured_data=structured_data,
         extra_rss_link=extra_rss_link,
+        robots_content=robots_content,
     )
     full = full.replace("<header class=\"site-header\">",
                          f'<div class="ticker"><div class="ticker-move">{html.escape(ticker_text)}</div></div>\n<header class="site-header">')
@@ -485,10 +526,11 @@ PRIVACY_BODY = """
   <ul>
     <li><strong>כתבות שנצפו לאחרונה:</strong> רשימת הכתבות שקראתם, כדי להציג לכם אותן בעמוד הבית.</li>
     <li><strong>כתבות שסימנתם "אהבתי":</strong> נשמר מקומית כדי להציג את הסימון בביקור הבא.</li>
-    <li><strong>העדפת מצב תצוגה:</strong> ניגודיות, גודל טקסט ועצירת אנימציות, אם שיניתם דרך רכיב הנגישות.</li>
+    <li><strong>העדפות תוכן:</strong> ספירה מקומית ומצטברת של הקטגוריות, המקורות וסוגי התוכן (וידאו/בקצרה/רגיל) שבהם צפיתם או שאהבתם, המשמשת להתאמת סדר הכתבות המוצגות לכם. אינה כוללת שום זיהוי אישי, ואינה יוצאת מהדפדפן שלכם.</li>
+    <li><strong>העדפות נגישות:</strong> כל שינוי שביצעתם דרך מגירת הנגישות (גודל גופן, ניגודיות, ריווח, גופן קריא, היפוך צבעים ועוד).</li>
     <li><strong>בחירת ההסכמה שלכם למדיניות זו.</strong></li>
   </ul>
-  <p>מידע זה <strong>אינו</strong> נשלח לשרת כלשהו, אינו משותף עם צד שלישי, ואינו מזהה אתכם אישית. הוא קיים רק במכשיר שלכם, ואתם יכולים למחוק אותו בכל עת דרך הגדרות הדפדפן.</p>
+  <p>מידע זה <strong>אינו</strong> נשלח לשרת כלשהו, אינו משותף עם צד שלישי, ואינו מזהה אתכם אישית. הוא קיים רק במכשיר שלכם, ואתם יכולים למחוק אותו בכל עת דרך הגדרות הדפדפן, או על-ידי לחיצה על "דחייה" בבאנר העוגיות.</p>
 
   <h2>טפסים ויצירת קשר</h2>
   <p>כאשר אתם ממלאים טופס באתר (יצירת קשר, פרסום, או דיווח על סקופ), הפרטים שאתם מזינים - שם, אימייל, ותוכן הפנייה - נשלחים באמצעות שירות חיצוני בשם <strong>Formspree</strong>, המעבד את הטופס ומעביר אותו אלינו במייל. Formspree הוא צד שלישי, ומדיניות הפרטיות שלו חלה על עיבוד הנתונים בצדו. איננו משתמשים במידע זה למטרה כלשהי מעבר למענה לפנייתכם.</p>
@@ -541,7 +583,7 @@ ACCESSIBILITY_BODY = """
 
   <h2>אמצעי הנגישות באתר</h2>
   <ul>
-    <li><strong>רכיב נגישות:</strong> בכל עמוד קיים כפתור צף המאפשר הגדלת/הקטנת גופן, מעבר לניגודיות גבוהה, ועצירת אנימציות ואפקטי גלילה.</li>
+    <li><strong>רכיב נגישות:</strong> בכל עמוד קיים כפתור צף שפותח מגירת נגישות מלאה - הגדלת/הקטנת גופן, ריווח שורות ואותיות מוגדל, גופן קריא, ניגודיות גבוהה, היפוך צבעים, גווני אפור, הדגשת קישורים, סמן עכבר מוגדל, סרגל קריאה עוקב עכבר, עצירת אנימציות, והקראת כתבות בקול (באמצעות מנוע הקראה מובנה של הדפדפן) - עם אפשרות איפוס מלאה.</li>
     <li><strong>ניווט מקלדת:</strong> ניתן לנווט בין כל הקישורים, הכפתורים והשדות באתר באמצעות מקש Tab בלבד.</li>
     <li><strong>טקסט חלופי לתמונות:</strong> תמונות הכתבות באתר כוללות תיאור טקסטואלי חלופי (alt) המאפשר לתוכנות הקראה להנגיש את התוכן.</li>
     <li><strong>מבנה סמנטי:</strong> האתר בנוי עם כותרות היררכיות (H1-H3) ותגיות HTML סמנטיות, לתמיכה בקוראי מסך.</li>
@@ -855,7 +897,8 @@ def build():
                    f"חדשות {c} - {SITE_NAME}", f"כל הכתבות בקטגוריית {c} - עדכונים שוטפים מהאתר החדשותי קודקוד",
                    categories, c, body, ticker_text, canonical=cat_url,
                    structured_data=category_structured_data(c, cat_url, c_all_articles),
-                   category_rss_url=cat_rss_url)
+                   category_rss_url=cat_rss_url,
+                   noindex=not c_all_articles)
         write_rss_feed(os.path.join(OUTPUT_DIR, "rss", f"{slugify(c, c)}.xml"), cat_rss_url,
                         f"{c} - {SITE_NAME}", f"עדכוני {c} מקודקוד", c_all_articles)
 
@@ -1010,7 +1053,7 @@ def build():
           try {{
             if (localStorage.getItem('kk_cookie_consent') === 'declined') return;
             var key = 'kk_recent';
-            var entry = {{slug: {json.dumps(a['slug'], ensure_ascii=False)}, title: {json.dumps(a['title'], ensure_ascii=False)}, img: {json.dumps(a['image'] or PLACEHOLDER_IMG, ensure_ascii=False)}, cat: {json.dumps(a['category'], ensure_ascii=False)}}};
+            var entry = {{slug: {json.dumps(a['slug'], ensure_ascii=False)}, title: {json.dumps(a['title'], ensure_ascii=False)}, img: {json.dumps(a['image'] or PLACEHOLDER_IMG, ensure_ascii=False)}, cat: {json.dumps(a['category'], ensure_ascii=False)}, source: {json.dumps(a['source'], ensure_ascii=False)}, type: {json.dumps(content_type_of(a), ensure_ascii=False)}}};
             var list = JSON.parse(localStorage.getItem(key) || '[]');
             list = list.filter(function(x) {{ return x.slug !== entry.slug; }});
             list.unshift(entry);
@@ -1019,7 +1062,7 @@ def build():
         }})();
         </script>"""
         engagement_bar = f"""
-        <div class="engagement-bar" data-slug="{html.escape(a['slug'])}">
+        <div class="engagement-bar" data-slug="{html.escape(a['slug'])}" data-cat="{html.escape(a['category'])}" data-source="{html.escape(a['source'])}" data-type="{content_type_of(a)}">
           <button class="like-btn" id="like-btn" aria-pressed="false">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
             <span id="like-count">אהבתי</span>
@@ -1051,10 +1094,13 @@ def build():
                    canonical=canonical, og_type="article", og_image=a["image"],
                    structured_data=article_structured_data(a, canonical))
 
-    # Search page
+    # Search page - noindex: results are rendered client-side per query, so
+    # the static page itself is a thin, empty shell with no unique content
+    # for Google to index (the same reasoning real news sites apply to
+    # on-site search results pages)
     body = '<main class="grid"><h1 class="page-title">תוצאות חיפוש</h1><div id="search-results" class="grid-inner"></div></main>'
     write_page(os.path.join(OUTPUT_DIR, "search.html"), f"חיפוש - {SITE_NAME}", "חיפוש חדשות באתר קודקוד",
-               categories, None, body, ticker_text, canonical=f"{SITE_URL}/search.html")
+               categories, None, body, ticker_text, canonical=f"{SITE_URL}/search.html", noindex=True)
 
     # Static pages
     about_schema = {

@@ -220,7 +220,10 @@ def manage_archive():
                     except Exception:
                         pass
 
-MIN_CONTENT_LEN = 400
+# ~900 Hebrew characters is roughly 150+ words - a real floor against thin
+# content (Google's own spam policy flags auto-generated/scraped pages that
+# don't clear a meaningful length), not just "long enough to bother keeping"
+MIN_CONTENT_LEN = 900
 
 # Sponsored/advertorial content filter - strict by design: any hint of paid
 # promotion, in the title, URL, or body, rejects the article outright. When
@@ -401,15 +404,18 @@ def save_article(title, link, content, image_url, source_name, category, video_i
         print(f"נפסל (אין תמונה איכותית): {title}")
         return
 
-    # Filter 2: need the full article body, not just a short RSS teaser -
-    # if the full-text fetch fails, this article is rejected rather than
-    # saved with a stub/snippet
-    if len(content) < MIN_CONTENT_LEN:
-        full_text = fetch_full_article_text(link, MIN_CONTENT_LEN)
-        if not full_text:
-            print(f"נפסל (לא נמצאה כתבה מלאה, רק תקציר): {title}")
-            return
+    # Filter 2: need the full article body, not just a short RSS teaser.
+    # Always attempt the real full-text fetch first (an RSS teaser is
+    # rarely as complete as the actual article, even when it happens to
+    # clear MIN_CONTENT_LEN on its own) - only fall back to the teaser if
+    # the fetch fails and the teaser itself is substantial; otherwise the
+    # article is rejected rather than saved with a stub/snippet.
+    full_text = fetch_full_article_text(link, MIN_CONTENT_LEN)
+    if full_text:
         content = full_text
+    elif len(content) < MIN_CONTENT_LEN:
+        print(f"נפסל (לא נמצאה כתבה מלאה, רק תקציר קצר מדי): {title}")
+        return
 
     if is_gibberish_or_broken(content):
         print(f"נפסל (תוכן שבור/גיבריש/קישורים שיוריים): {title}")

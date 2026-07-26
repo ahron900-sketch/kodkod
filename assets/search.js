@@ -1,3 +1,38 @@
+// Honest, client-side-only "style learning": a running tally of which
+// categories/sources/content-types this visitor engages with, kept entirely
+// in localStorage (never transmitted anywhere). Views count once each;
+// likes count extra, since liking is a much stronger preference signal than
+// just viewing. Used later in this file to re-rank homepage/category
+// sections and cards - never to change what's actually published.
+window.kkAffinity = (function () {
+  var KEY = "kk_affinity";
+  function consented() {
+    try { return localStorage.getItem("kk_cookie_consent") !== "declined"; } catch (e) { return false; }
+  }
+  function load() {
+    try { return JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { return {}; }
+  }
+  function save(data) {
+    try { localStorage.setItem(KEY, JSON.stringify(data)); } catch (e) {}
+  }
+  function bump(data, bucket, key, delta) {
+    if (!key) return;
+    if (!data[bucket]) data[bucket] = {};
+    data[bucket][key] = (data[bucket][key] || 0) + delta;
+  }
+  return {
+    get: load,
+    recordEntry: function (entry, delta) {
+      if (!entry || !consented()) return;
+      var data = load();
+      bump(data, "cats", entry.cat, delta);
+      bump(data, "sources", entry.source, delta);
+      bump(data, "types", entry.type, delta);
+      save(data);
+    }
+  };
+})();
+
 (function () {
   const toggle = document.getElementById("search-toggle");
   const drawer = document.getElementById("search-drawer");
@@ -147,6 +182,12 @@
   if (!bar) return;
 
   var slug = bar.getAttribute("data-slug");
+  var likeEntry = {
+    cat: bar.getAttribute("data-cat"),
+    source: bar.getAttribute("data-source"),
+    type: bar.getAttribute("data-type")
+  };
+  var LIKE_AFFINITY_WEIGHT = 2;
 
   if (likeBtn) {
     var likeKey = "kk_liked";
@@ -169,11 +210,13 @@
         likeBtn.classList.add("liked");
         likeBtn.setAttribute("aria-pressed", "true");
         likeBtn.querySelector("#like-count").textContent = "אהבתי!";
+        if (window.kkAffinity) window.kkAffinity.recordEntry(likeEntry, LIKE_AFFINITY_WEIGHT);
       } else {
         liked.splice(idx, 1);
         likeBtn.classList.remove("liked");
         likeBtn.setAttribute("aria-pressed", "false");
         likeBtn.querySelector("#like-count").textContent = "אהבתי";
+        if (window.kkAffinity) window.kkAffinity.recordEntry(likeEntry, -LIKE_AFFINITY_WEIGHT);
       }
       try {
         if (localStorage.getItem("kk_cookie_consent") !== "declined") {
@@ -305,6 +348,8 @@
         // honor the choice immediately - clear anything already stored
         localStorage.removeItem("kk_recent");
         localStorage.removeItem("kk_liked");
+        localStorage.removeItem("kk_affinity");
+        localStorage.removeItem("kk_affinity_last_slug");
       } catch (e) {}
       banner.hidden = true;
     });
@@ -312,9 +357,10 @@
 })();
 
 (function () {
-  var toggle = document.getElementById("a11y-toggle");
-  var panel = document.getElementById("a11y-panel");
-  if (!toggle || !panel) return;
+  var toggleBtn = document.getElementById("a11y-toggle");
+  var drawer = document.getElementById("a11y-drawer");
+  var closeBtn = document.getElementById("a11y-close");
+  if (!toggleBtn || !drawer) return;
 
   var STORAGE_KEY = "kk_a11y";
   var root = document.documentElement;
@@ -322,92 +368,233 @@
   var MIN_SIZE = 14;
   var MAX_SIZE = 24;
 
+  var CLASS_MAP = {
+    lineHeight: "a11y-line-height",
+    letterSpacing: "a11y-letter-spacing",
+    readableFont: "a11y-readable-font",
+    contrast: "a11y-contrast",
+    invert: "a11y-invert",
+    grayscale: "a11y-grayscale",
+    underlineLinks: "a11y-underline-links",
+    bigCursor: "a11y-big-cursor",
+    stopMotion: "a11y-stop-motion",
+    readingGuide: "a11y-reading-guide"
+  };
+  var ACTION_MAP = {
+    "line-height": "lineHeight",
+    "letter-spacing": "letterSpacing",
+    "readable-font": "readableFont",
+    "contrast": "contrast",
+    "invert": "invert",
+    "grayscale": "grayscale",
+    "underline-links": "underlineLinks",
+    "big-cursor": "bigCursor",
+    "stop-motion": "stopMotion",
+    "reading-guide": "readingGuide"
+  };
+
   function loadState() {
-    try {
-      return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
-    } catch (e) {
-      return {};
-    }
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); }
+    catch (e) { return {}; }
   }
   function saveState(state) {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
   }
   function applyState(state) {
-    root.classList.toggle("a11y-contrast", !!state.contrast);
-    root.classList.toggle("a11y-stop-motion", !!state.stopMotion);
-    if (state.fontSize) {
-      root.style.fontSize = state.fontSize + "px";
-    } else {
-      root.style.fontSize = "";
-    }
+    Object.keys(CLASS_MAP).forEach(function (key) {
+      root.classList.toggle(CLASS_MAP[key], !!state[key]);
+    });
+    root.style.fontSize = state.fontSize ? state.fontSize + "px" : "";
+    drawer.querySelectorAll("button[data-a11y]").forEach(function (btn) {
+      var key = ACTION_MAP[btn.getAttribute("data-a11y")];
+      if (key) btn.classList.toggle("active", !!state[key]);
+    });
   }
 
   var state = loadState();
   applyState(state);
 
-  toggle.addEventListener("click", function () {
-    var isHidden = panel.hidden;
-    panel.hidden = !isHidden;
-    toggle.setAttribute("aria-expanded", String(isHidden));
+  function openDrawer() {
+    drawer.hidden = false;
+    requestAnimationFrame(function () { drawer.classList.add("open"); });
+    toggleBtn.setAttribute("aria-expanded", "true");
+  }
+  function closeDrawer() {
+    drawer.classList.remove("open");
+    toggleBtn.setAttribute("aria-expanded", "false");
+    setTimeout(function () { drawer.hidden = true; }, 300);
+  }
+  toggleBtn.addEventListener("click", function () {
+    if (drawer.classList.contains("open")) closeDrawer();
+    else openDrawer();
   });
-
+  if (closeBtn) closeBtn.addEventListener("click", closeDrawer);
   document.addEventListener("click", function (e) {
-    if (!panel.hidden && !panel.contains(e.target) && e.target !== toggle) {
-      panel.hidden = true;
-      toggle.setAttribute("aria-expanded", "false");
+    if (drawer.classList.contains("open") && !drawer.contains(e.target) && !toggleBtn.contains(e.target)) {
+      closeDrawer();
     }
   });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && drawer.classList.contains("open")) closeDrawer();
+  });
 
-  panel.querySelectorAll("button[data-a11y]").forEach(function (btn) {
+  drawer.querySelectorAll("button[data-a11y]").forEach(function (btn) {
+    var action = btn.getAttribute("data-a11y");
+    if (action === "read-aloud") return; // has its own handler below
     btn.addEventListener("click", function () {
-      var action = btn.getAttribute("data-a11y");
-      var current = getComputedStyle(root).fontSize;
-      var currentSize = parseFloat(current) || 17;
-      if (action === "font-inc") {
-        state.fontSize = Math.min(MAX_SIZE, currentSize + FONT_STEP);
-      } else if (action === "font-dec") {
-        state.fontSize = Math.max(MIN_SIZE, currentSize - FONT_STEP);
-      } else if (action === "contrast") {
-        state.contrast = !state.contrast;
-      } else if (action === "stop-motion") {
-        state.stopMotion = !state.stopMotion;
+      if (action === "font-inc" || action === "font-dec") {
+        var currentSize = parseFloat(getComputedStyle(root).fontSize) || 17;
+        state.fontSize = action === "font-inc"
+          ? Math.min(MAX_SIZE, currentSize + FONT_STEP)
+          : Math.max(MIN_SIZE, currentSize - FONT_STEP);
       } else if (action === "reset") {
         state = {};
+      } else if (ACTION_MAP[action]) {
+        var key = ACTION_MAP[action];
+        state[key] = !state[key];
       }
       applyState(state);
       saveState(state);
     });
   });
+
+  // Reading guide: translucent bar that follows the cursor vertically,
+  // only active while the toggle is on (checked on every mousemove so
+  // turning it off/on doesn't need attaching/detaching the listener)
+  var guideBar = document.createElement("div");
+  guideBar.className = "a11y-reading-guide-bar";
+  document.body.appendChild(guideBar);
+  document.addEventListener("mousemove", function (e) {
+    if (root.classList.contains("a11y-reading-guide")) {
+      guideBar.style.top = (e.clientY - 20) + "px";
+    }
+  });
+
+  // Read-aloud: native browser speech synthesis (window.speechSynthesis) -
+  // no external service, no API key, works entirely offline once the page
+  // has loaded. Reads the current article's title + body, if present.
+  var readAloudBtn = document.getElementById("a11y-read-aloud");
+  if (readAloudBtn) {
+    if (!("speechSynthesis" in window)) {
+      readAloudBtn.disabled = true;
+      readAloudBtn.textContent = "הקראה לא נתמכת בדפדפן זה";
+    } else {
+      var speaking = false;
+      readAloudBtn.addEventListener("click", function () {
+        if (speaking) {
+          window.speechSynthesis.cancel();
+          speaking = false;
+          readAloudBtn.textContent = "הקראת הכתבה";
+          readAloudBtn.classList.remove("active");
+          return;
+        }
+        var titleEl = document.querySelector("main.article h1");
+        var bodyEls = document.querySelectorAll("main.article .article-body");
+        if (!titleEl && !bodyEls.length) {
+          var original = readAloudBtn.textContent;
+          readAloudBtn.textContent = "אין כתבה להקראה בעמוד זה";
+          setTimeout(function () { readAloudBtn.textContent = original; }, 2500);
+          return;
+        }
+        var text = (titleEl ? titleEl.textContent + ". " : "") +
+          Array.prototype.map.call(bodyEls, function (el) { return el.textContent; }).join(" ");
+        var utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = "he-IL";
+        utterance.onend = function () {
+          speaking = false;
+          readAloudBtn.textContent = "הקראת הכתבה";
+          readAloudBtn.classList.remove("active");
+        };
+        window.speechSynthesis.cancel();
+        window.speechSynthesis.speak(utterance);
+        speaking = true;
+        readAloudBtn.textContent = "עצור הקראה";
+        readAloudBtn.classList.add("active");
+      });
+    }
+  }
 })();
 
 (function () {
-  // Honest, real personalization: reorders this visitor's own homepage
-  // category sections based on their own local reading history
-  // (kk_recent, saved to their browser only). Never leaves the browser,
-  // never touches the scraper/server side, and only runs if the visitor
-  // hasn't declined local storage.
-  var wrap = document.getElementById("personalized-sections");
-  if (!wrap) return;
+  // The article view_tracker script (runs earlier, inline, on article pages)
+  // already pushed this page's article to the front of kk_recent - pick it
+  // up here and count it once towards the running kk_affinity tally. Guarded
+  // by a "last recorded slug" marker so re-rendering/reloading the same
+  // article page doesn't count the same view twice.
+  if (!window.kkAffinity) return;
   try {
     if (localStorage.getItem("kk_cookie_consent") === "declined") return;
     var recent = JSON.parse(localStorage.getItem("kk_recent") || "[]");
     if (!recent.length) return;
-    var counts = {};
-    recent.forEach(function (item) {
-      if (item.cat) counts[item.cat] = (counts[item.cat] || 0) + 1;
-    });
+    var latest = recent[0];
+    var MARKER_KEY = "kk_affinity_last_slug";
+    if (latest.slug && latest.slug !== localStorage.getItem(MARKER_KEY)) {
+      window.kkAffinity.recordEntry(latest, 1);
+      localStorage.setItem(MARKER_KEY, latest.slug);
+    }
+  } catch (e) {}
+})();
+
+(function () {
+  // Honest, real personalization: reorders this visitor's own homepage
+  // category sections based on their own local affinity tally (kk_affinity,
+  // built from views + likes, saved to their browser only). Never leaves
+  // the browser, never touches the scraper/server side.
+  var wrap = document.getElementById("personalized-sections");
+  if (!wrap || !window.kkAffinity) return;
+  try {
+    if (localStorage.getItem("kk_cookie_consent") === "declined") return;
+    var catCounts = (window.kkAffinity.get().cats) || {};
+    if (!Object.keys(catCounts).length) return;
     var sections = Array.from(wrap.querySelectorAll(".cat-section-wrap"));
     if (sections.length < 2) return;
     sections.sort(function (a, b) {
-      var ac = counts[a.getAttribute("data-category")] || 0;
-      var bc = counts[b.getAttribute("data-category")] || 0;
+      var ac = catCounts[a.getAttribute("data-category")] || 0;
+      var bc = catCounts[b.getAttribute("data-category")] || 0;
       return bc - ac;
     });
     var hasPreference = sections.some(function (s) {
-      return (counts[s.getAttribute("data-category")] || 0) > 0;
+      return (catCounts[s.getAttribute("data-category")] || 0) > 0;
     });
     if (hasPreference) {
       sections.forEach(function (s) { wrap.appendChild(s); });
     }
+  } catch (e) {}
+})();
+
+(function () {
+  // Same idea, one level finer: within any card grid on the site (a
+  // category section, a full category-listing page, etc), nudge cards from
+  // sources/content-types this visitor tends to engage with towards the
+  // front - without touching grids where there's no real preference signal,
+  // so browsing stays in normal chronological order by default.
+  if (!window.kkAffinity) return;
+  try {
+    if (localStorage.getItem("kk_cookie_consent") === "declined") return;
+    var affinity = window.kkAffinity.get();
+    var sourceScores = affinity.sources || {};
+    var typeScores = affinity.types || {};
+    if (!Object.keys(sourceScores).length && !Object.keys(typeScores).length) return;
+
+    function scoreOf(card) {
+      var src = card.getAttribute("data-source") || "";
+      var type = card.getAttribute("data-type") || "";
+      return (sourceScores[src] || 0) + (typeScores[type] || 0);
+    }
+
+    document.querySelectorAll(".grid-inner").forEach(function (grid) {
+      var cards = Array.prototype.filter.call(grid.children, function (el) {
+        return el.classList.contains("card");
+      });
+      if (cards.length < 2) return;
+      var withScores = cards.map(function (c, i) { return { el: c, score: scoreOf(c), i: i }; });
+      var hasPreference = withScores.some(function (w) { return w.score > 0; });
+      if (!hasPreference) return;
+      withScores.sort(function (a, b) {
+        if (b.score !== a.score) return b.score - a.score;
+        return a.i - b.i; // stable: keep original (chronological) order among ties
+      });
+      withScores.forEach(function (w) { grid.appendChild(w.el); });
+    });
   } catch (e) {}
 })();
