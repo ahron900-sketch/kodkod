@@ -130,6 +130,70 @@ def fetch_og_image(link):
     return upgrade_image_quality(m.group(1)) if m else ""
 
 
+JPEG_SOF_MARKERS = frozenset({0xC0, 0xC1, 0xC2, 0xC3, 0xC5, 0xC6, 0xC7, 0xC9, 0xCA, 0xCB, 0xCD, 0xCE, 0xCF})
+
+
+def get_image_dimensions(image_bytes):
+    """Best-effort (width, height) for JPEG/PNG from just the first chunk of
+    bytes - no imaging library needed. Returns None on anything unexpected
+    (truncated data, unrecognized format); callers must treat that as
+    "couldn't tell" rather than "bad", never blocking an article just
+    because its image couldn't be parsed this way."""
+    if not image_bytes:
+        return None
+    try:
+        if image_bytes[:8] == b'\x89PNG\r\n\x1a\n':
+            width = int.from_bytes(image_bytes[16:20], 'big')
+            height = int.from_bytes(image_bytes[20:24], 'big')
+            return (width, height) if width and height else None
+        if image_bytes[:2] == b'\xff\xd8':
+            i, n = 2, len(image_bytes)
+            while i < n - 9:
+                if image_bytes[i] != 0xFF:
+                    i += 1
+                    continue
+                marker = image_bytes[i + 1]
+                if marker in (0xD8, 0xD9) or 0xD0 <= marker <= 0xD7:
+                    i += 2
+                    continue
+                seg_len = int.from_bytes(image_bytes[i + 2:i + 4], 'big')
+                if marker in JPEG_SOF_MARKERS:
+                    height = int.from_bytes(image_bytes[i + 5:i + 7], 'big')
+                    width = int.from_bytes(image_bytes[i + 7:i + 9], 'big')
+                    return (width, height) if width and height else None
+                i += 2 + seg_len
+    except Exception:
+        return None
+    return None
+
+
+# Anything wider or taller than this reads as a banner/strip crop, not a
+# normal editorial photo - such images get routed to the compact "quick"
+# card style instead of the large hero/bento treatment they'd otherwise get
+BAD_ASPECT_MAX = 2.4
+BAD_ASPECT_MIN = 0.42
+
+
+def is_bad_image_aspect(image_url):
+    if not image_url:
+        return False
+    try:
+        req = urllib.request.Request(
+            image_url,
+            headers={"User-Agent": "Mozilla/5.0 (compatible; KodkodBot/1.0)", "Range": "bytes=0-131071"},
+        )
+        with urllib.request.urlopen(req, timeout=6) as resp:
+            chunk = resp.read(131_072)
+    except Exception:
+        return False
+    dims = get_image_dimensions(chunk)
+    if not dims:
+        return False
+    width, height = dims
+    ratio = width / height
+    return ratio > BAD_ASPECT_MAX or ratio < BAD_ASPECT_MIN
+
+
 ARTICLE_TAG_RE = re.compile(r'<article[^>]*>(.*?)</article>', re.DOTALL | re.IGNORECASE)
 # common WordPress/CMS content-wrapper class names, tried when there's no <article> tag.
 # We don't try to precisely match the closing </div> (nesting makes that unreliable with
@@ -562,6 +626,12 @@ def save_article(title, link, content, image_url, source_name, category, video_i
         print(f"נפסל (אין תמונה איכותית): {title}")
         return
 
+    # A banner/strip-shaped image (not a normal photo) doesn't get rejected
+    # outright - it's downgraded to the compact "quick" card style instead
+    # of the large hero/bento treatment, similar to how a short news-in-brief
+    # item is handled
+    quick_image = is_bad_image_aspect(image_url)
+
     # Filter 2: need the full article body, not just a short RSS teaser.
     # Always attempt the real full-text fetch first (an RSS teaser is
     # rarely as complete as the actual article, even when it happens to
@@ -599,7 +669,7 @@ def save_article(title, link, content, image_url, source_name, category, video_i
 
     date_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     _write_article_file(filename, title, date_str, source_name, image_url, link, category, content,
-                         takeaways=takeaways, tags=tags)
+                         takeaways=takeaways, tags=tags, quick_image=quick_image)
     if recent_titles is not None:
         recent_titles.append(normalize_title_words(title))
     if tags_index is not None and tags:
@@ -613,7 +683,7 @@ def save_article(title, link, content, image_url, source_name, category, video_i
 
 
 def _write_article_file(filename, title, date_str, source_name, image_url, link, category, content,
-                         video_id="", takeaways=None, tags=None):
+                         video_id="", takeaways=None, tags=None, quick_image=False):
     video_line = f'\nvideo_id: "{video_id}"' if video_id else ""
 
     # Each takeaway is written as its own indented continuation line (what
@@ -630,6 +700,8 @@ def _write_article_file(filename, title, date_str, source_name, image_url, link,
         joined = ", ".join(t.replace('"', "'").replace(",", "") for t in tags)
         tags_line = f'\nai_tags: "{joined}"'
 
+    quick_image_line = '\nquick_image: "1"' if quick_image else ""
+
     md_content = f"""---
 title: >-
   {title}
@@ -637,7 +709,7 @@ date: "{date_str}"
 source: "{source_name}"
 image: "{image_url}"
 link: "{link}"
-category: "{category}"{video_line}{takeaways_line}{tags_line}
+category: "{category}"{video_line}{takeaways_line}{tags_line}{quick_image_line}
 ---
 
 {content}

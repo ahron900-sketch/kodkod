@@ -176,6 +176,97 @@ window.kkAffinity = (function () {
 })();
 
 (function () {
+  // Infinite scroll on category pages: the static HTML already has the
+  // first ~100 articles; further batches are read from the site's existing
+  // search-index.json (already generated for the search feature - reused
+  // here instead of building separate per-category pagination files) and
+  // fetched only once the visitor actually scrolls near the bottom.
+  var grid = document.getElementById("category-grid");
+  var sentinel = document.getElementById("load-more-sentinel");
+  if (!grid || !sentinel) return;
+
+  var category = grid.getAttribute("data-category");
+  var shown = parseInt(grid.getAttribute("data-shown-count"), 10) || 0;
+  var PAGE_SIZE = 24;
+  var PLACEHOLDER = "/assets/placeholder.svg";
+  var categoryArticles = null;
+  var loading = false;
+  var exhausted = false;
+
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function cardHtml(a) {
+    var img = a.image || PLACEHOLDER;
+    var videoBadge = a.video ? '<span class="badge badge-video">וידאו</span>' : "";
+    return (
+      '<a class="card" href="/article/' + a.slug + '.html" data-slug="' + escapeHtml(a.slug) +
+      '" data-cat="' + escapeHtml(a.category) + '" data-source="' + escapeHtml(a.source) + '">' +
+      '<div class="card-img-wrap">' +
+      '<img class="card-img" src="' + escapeHtml(img) + '" alt="" loading="lazy" onerror="this.src=\'' + PLACEHOLDER + '\'">' +
+      videoBadge +
+      '</div>' +
+      '<div class="card-body">' +
+      '<span class="card-cat">' + escapeHtml(a.category) + '</span>' +
+      '<h3>' + escapeHtml(a.title) + '</h3>' +
+      '<span class="card-meta">' + escapeHtml(a.source) + ' · ' + escapeHtml(a.date.slice(0, 10)) + '</span>' +
+      '</div></a>'
+    );
+  }
+
+  function finishLoad() {
+    loading = false;
+    sentinel.hidden = true;
+  }
+
+  function loadNextPage() {
+    if (loading || exhausted) return;
+    loading = true;
+    sentinel.hidden = false;
+
+    var ready = categoryArticles
+      ? Promise.resolve(categoryArticles)
+      : fetch("/assets/search-index.json")
+          .then(function (r) { return r.json(); })
+          .then(function (data) {
+            categoryArticles = data
+              .filter(function (a) { return a.category === category; })
+              .sort(function (a, b) { return a.date < b.date ? 1 : -1; });
+            return categoryArticles;
+          });
+
+    ready.then(function (list) {
+      var next = list.slice(shown, shown + PAGE_SIZE);
+      if (!next.length) {
+        exhausted = true;
+        observer.disconnect();
+        finishLoad();
+        return;
+      }
+      grid.insertAdjacentHTML("beforeend", next.map(cardHtml).join(""));
+      shown += next.length;
+      if (shown >= list.length) {
+        exhausted = true;
+        observer.disconnect();
+      }
+      finishLoad();
+    }).catch(function () {
+      finishLoad();
+    });
+  }
+
+  var observer = new IntersectionObserver(function (entries) {
+    if (entries[0].isIntersecting) loadNextPage();
+  }, { rootMargin: "600px 0px" });
+  observer.observe(sentinel);
+})();
+
+(function () {
   var bar = document.querySelector(".engagement-bar");
   var likeBtn = document.getElementById("like-btn");
   var shareBtn = document.getElementById("share-btn");

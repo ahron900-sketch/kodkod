@@ -47,6 +47,11 @@ if GISCUS_CATEGORY_ID:
         </section>"""
 
 ARTICLE_PREVIEW_CHARS = 900
+
+# Populated once per build() run (needs real article/category data, so it
+# can't be a plain literal like the constants above) - safe empty default in
+# case anything ever imports this module without calling build() first
+FOOTER_PROMO_HTML = ""
 WP_BOILERPLATE_RE = re.compile(r'^The post .* appeared first on .*\.?$')
 RECIPE_CATEGORY = "בישול ומתכונים"
 TV_CATEGORY = "טלוויזיה ושידורים חיים"
@@ -123,6 +128,7 @@ def load_articles():
         # so re-splitting on that character recovers the original list
         ai_takeaways = [t.strip() for t in data.get("ai_takeaways", "").split("•") if t.strip()]
         ai_tags = [t.strip() for t in data.get("ai_tags", "").split(",") if t.strip()]
+        quick_image = data.get("quick_image") == "1"
 
         articles.append({
             "title": title,
@@ -136,7 +142,8 @@ def load_articles():
             "body": body,
             "slug": slug,
             "dek": extract_dek(body),
-            "is_quick": len(body) < 500 and not data.get("video_id"),
+            "is_quick": (len(body) < 500 and not data.get("video_id")) or quick_image,
+            "quick_image": quick_image,
             "ai_takeaways": ai_takeaways,
             "ai_tags": ai_tags,
         })
@@ -210,6 +217,7 @@ PAGE_HEAD = """<!DOCTYPE html>
 """
 
 PAGE_FOOT = """
+{footer_promo}
 <footer class="site-footer">
   <nav class="footer-nav">
     <a href="/about.html">אודות</a>
@@ -395,8 +403,11 @@ MAGAZINE_ICON_SVG = '<svg viewBox="0 0 24 24" width="15" height="15" fill="none"
 
 
 def cat_nav(categories, active=None):
+    # recipes are lifestyle/feature content, not news - keep them last in
+    # the nav rather than wherever they happen to fall alphabetically
+    ordered = sorted(categories, key=lambda c: (c == RECIPE_CATEGORY, c))
     links = ['<a href="/" class="{}">כל החדשות</a>'.format("active" if active is None else "")]
-    for c in categories:
+    for c in ordered:
         if c == TV_CATEGORY:
             continue
         cls = "active" if c == active else ""
@@ -466,7 +477,7 @@ def write_page(path, title, description, categories, active_cat, body_html,
   <div class="page-shell-content">{body_html}</div>
   <aside class="side-rail side-rail-left">{ad_slot_html(compact=True)}</aside>
 </div>"""
-    full += page_shell + PAGE_FOOT.format(year=datetime.now().year)
+    full += page_shell + PAGE_FOOT.format(year=datetime.now().year, footer_promo=FOOTER_PROMO_HTML)
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         f.write(full)
@@ -801,6 +812,51 @@ def homepage_structured_data(articles=None):
     return "".join(parts)
 
 
+def pick_diverse(articles, count, max_per_category):
+    """Picks up to `count` articles from a date-sorted list, capping how many
+    can share the same category - so a burst of scraped articles from one
+    feed/category (e.g. a run of car-review posts) can't crowd out every
+    other category in the homepage's mixed sections. Still prioritizes
+    recency: only skips an article for exceeding its category's cap, never
+    for any other reason. Falls back to filling remaining slots from
+    whatever's left over (even past the cap) rather than coming up short."""
+    picked, leftover, cat_counts = [], [], {}
+    for a in articles:
+        if len(picked) >= count:
+            break
+        cat = a["category"]
+        if cat_counts.get(cat, 0) < max_per_category:
+            picked.append(a)
+            cat_counts[cat] = cat_counts.get(cat, 0) + 1
+        else:
+            leftover.append(a)
+    if len(picked) < count:
+        picked.extend(leftover[:count - len(picked)])
+    return picked
+
+
+def build_footer_promo_html(categories, recent_articles):
+    cat_links = "".join(
+        f'<a href="/category/{slugify(c, c)}.html">{html.escape(c)}</a>'
+        for c in sorted(categories, key=lambda c: (c == RECIPE_CATEGORY, c)) if c != TV_CATEGORY
+    )
+    article_links = "".join(
+        f'<a href="/article/{a["slug"]}.html">{html.escape(a["title"])}</a>'
+        for a in recent_articles[:16]
+    )
+    return f"""
+    <div class="footer-promo">
+      <div class="footer-promo-col">
+        <h3>קטגוריות</h3>
+        {cat_links}
+      </div>
+      <div class="footer-promo-col">
+        <h3>כתבות אחרונות</h3>
+        {article_links}
+      </div>
+    </div>"""
+
+
 def build():
     if os.path.exists(OUTPUT_DIR):
         shutil.rmtree(OUTPUT_DIR)
@@ -814,6 +870,9 @@ def build():
     ticker_articles = [a for a in articles if a["category"] != RECIPE_CATEGORY]
     ticker_text = "   •   ".join(a["title"] for a in ticker_articles[:12]) or "מערכת קודקוד - חדשות ומבזקים מהארץ ומהעולם"
 
+    global FOOTER_PROMO_HTML
+    FOOTER_PROMO_HTML = build_footer_promo_html(categories, ticker_articles)
+
     # Articles without a real image are never shown in listings (hero, cards,
     # quick strip, related) - only their own article page still renders for
     # anyone who has the direct link. video_id counts as "has visuals".
@@ -824,11 +883,11 @@ def build():
     # itself only changes when the site rebuilds (every 2h via deploy.yml),
     # since it's just the 5 freshest qualifying articles at build time.
     HERO_SLIDE_COUNT = 5
-    hero_candidates = [a for a in listable if a["category"] != RECIPE_CATEGORY]
+    hero_candidates = [a for a in listable if a["category"] != RECIPE_CATEGORY and not a.get("quick_image")]
     hero_html = ""
     rest = listable
     if hero_candidates:
-        hero_slides = hero_candidates[:HERO_SLIDE_COUNT]
+        hero_slides = pick_diverse(hero_candidates, HERO_SLIDE_COUNT, max_per_category=1)
         slides_html = []
         dots_html = []
         for i, hero in enumerate(hero_slides):
@@ -857,7 +916,8 @@ def build():
 
     # Bento/mosaic module: one large tile + a stack of smaller ones, instead
     # of dropping straight into a uniform grid right under the hero
-    bento_candidates = [a for a in rest if a["category"] != RECIPE_CATEGORY][:5]
+    bento_candidates = pick_diverse(
+        [a for a in rest if a["category"] != RECIPE_CATEGORY and not a.get("quick_image")], 5, max_per_category=2)
     bento_html = ""
     if len(bento_candidates) >= 3:
         big, *small = bento_candidates
@@ -883,7 +943,7 @@ def build():
           <div class="bento-small-stack">{small_items}</div>
         </section>"""
 
-    quick_articles = [a for a in rest if a.get("is_quick")][:8]
+    quick_articles = pick_diverse([a for a in rest if a.get("is_quick")], 8, max_per_category=2)
     quick_html = ""
     if quick_articles:
         quick_cards = "".join(render_quick_card(a) for a in quick_articles)
@@ -900,9 +960,11 @@ def build():
         </section>"""
 
     # per-category sections: 9 articles each + a "view all" link to the category page
-    # (TV_CATEGORY gets its own dedicated /tv.html instead, see below)
+    # (TV_CATEGORY gets its own dedicated /tv.html instead, see below).
+    # Recipes are lifestyle content, not news - shown last, not wherever it
+    # happens to fall alphabetically
     category_sections = []
-    for c in categories:
+    for c in sorted(categories, key=lambda c: (c == RECIPE_CATEGORY, c)):
         if c == TV_CATEGORY:
             continue
         c_articles = [a for a in rest if a["category"] == c][:9]
@@ -951,7 +1013,10 @@ def build():
             <option value="oldest">הישנות ביותר</option>
           </select>
         </div>"""
-        body = f'<main class="grid"><h1 class="page-title">{html.escape(c)}</h1>{sort_bar}<div class="grid-inner" id="category-grid">{cards}</div></main>'
+        body = f"""<main class="grid"><h1 class="page-title">{html.escape(c)}</h1>{sort_bar}
+        <div class="grid-inner" id="category-grid" data-category="{html.escape(c)}" data-shown-count="{len(c_articles)}">{cards}</div>
+        <div class="load-more-sentinel" id="load-more-sentinel" hidden><span class="load-more-spinner"></span>טוען עוד כתבות...</div>
+        </main>"""
         cat_url = f"{SITE_URL}/category/{slugify(c, c)}.html"
         cat_rss_url = f"{SITE_URL}/rss/{slugify(c, c)}.xml"
         write_page(os.path.join(OUTPUT_DIR, "category", f"{slugify(c, c)}.html"),

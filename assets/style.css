@@ -345,6 +345,25 @@ html.dark-mode .site-header {
   font-size: 0.88rem;
 }
 
+.load-more-sentinel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 32px 0 8px;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+.load-more-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: load-more-spin 0.7s linear infinite;
+}
+@keyframes load-more-spin { to { transform: rotate(360deg); } }
+
 .section-title {
   font-size: 1.4rem;
   font-weight: 800;
@@ -951,6 +970,35 @@ html.dark-mode .site-header {
 .contact-form button:hover { opacity: 0.88; }
 
 /* Footer */
+.footer-promo {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 40px 24px 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+.footer-promo-col h3 {
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--ink-soft);
+  margin: 0 0 12px;
+}
+.footer-promo-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.footer-promo-col a {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  text-decoration: none;
+  line-height: 1.4;
+}
+.footer-promo-col a:hover { color: var(--accent); text-decoration: underline; }
+
 .site-footer {
   text-align: center;
   padding: 40px 24px;
@@ -1190,6 +1238,7 @@ html.dark-mode .site-header {
   .site-header { padding: 10px 16px; flex-wrap: wrap; }
   .categories { order: 3; width: 100%; overflow-x: auto; flex-wrap: nowrap; }
   .logo { font-size: 1.2rem; }
+  .footer-promo { grid-template-columns: 1fr; gap: 24px; }
   .hero { flex-direction: column; }
   .hero-img-wrap { flex: none; height: 220px; }
   .hero-text { padding: 18px; }
