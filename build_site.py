@@ -194,13 +194,19 @@ def load_articles():
         ai_tags = [t.strip() for t in data.get("ai_tags", "").split(",") if t.strip()]
         quick_image = data.get("quick_image") == "1"
         is_sponsored = data.get("sponsored") == "1"
+        # detect_tv_watermark() in idf_scraper.py already flagged this once,
+        # at scrape time, via a real vision check - not re-checked here.
+        # A flagged thumbnail is swapped for the placeholder everywhere
+        # (article page, cards, tv.html), not just hidden from hero/bento.
+        has_watermark = data.get("has_watermark") == "1"
+        image = PLACEHOLDER_IMG if has_watermark else data.get("image", "")
 
         articles.append({
             "title": title,
             "date": date_str,
             "dt": dt,
             "source": data.get("source", ""),
-            "image": data.get("image", ""),
+            "image": image,
             "link": data.get("link", ""),
             "category": data.get("category", "חדשות"),
             "video_id": data.get("video_id", ""),
@@ -212,6 +218,7 @@ def load_articles():
             "ai_takeaways": ai_takeaways,
             "ai_tags": ai_tags,
             "is_sponsored": is_sponsored,
+            "has_watermark": has_watermark,
         })
     articles.sort(key=lambda a: a["dt"], reverse=True)
     seen = {}
@@ -977,13 +984,19 @@ def build():
     # itself only changes when the site rebuilds (every 2h via deploy.yml),
     # since it's just the 5 freshest qualifying articles at build time.
     # TV/live-broadcast clips carry their own network's on-air branding
-    # baked into the footage itself (not something we can strip) - excluded
-    # from the two most prominent placements so a competing channel's own
-    # bug isn't the first thing on the page; they still show normally on
-    # their own /tv.html page and in their category grid, credited as usual.
+    # A TV thumbnail whose vision check (idf_scraper.py's detect_tv_watermark)
+    # actually found an on-screen channel bug/logo has its image swapped for
+    # a placeholder in load_articles() - such an article is excluded from
+    # these two most prominent placements too, so a placeholder graphic
+    # isn't the first thing on the page. TV articles whose thumbnail came
+    # back clean keep their real image and are eligible like anything else;
+    # they all still show normally on their own /tv.html page and category
+    # grid, credited as usual.
     HERO_SLIDE_COUNT = 5
     hero_candidates = [a for a in listable
-                       if a["category"] not in (RECIPE_CATEGORY, TV_CATEGORY) and not a.get("quick_image")]
+                       if a["category"] != RECIPE_CATEGORY
+                       and not (a["category"] == TV_CATEGORY and a.get("has_watermark"))
+                       and not a.get("quick_image")]
     hero_html = ""
     rest = listable
     if hero_candidates:
@@ -1017,7 +1030,9 @@ def build():
     # Bento/mosaic module: one large tile + a stack of smaller ones, instead
     # of dropping straight into a uniform grid right under the hero
     bento_candidates = pick_diverse(
-        [a for a in rest if a["category"] not in (RECIPE_CATEGORY, TV_CATEGORY) and not a.get("quick_image")],
+        [a for a in rest if a["category"] != RECIPE_CATEGORY
+         and not (a["category"] == TV_CATEGORY and a.get("has_watermark"))
+         and not a.get("quick_image")],
         5, max_per_category=2)
     bento_html = ""
     if len(bento_candidates) >= 3:
@@ -1047,20 +1062,26 @@ def build():
     quick_articles = pick_diverse([a for a in rest if a.get("is_quick")], 20, max_per_category=3)
     quick_html = ""
     if quick_articles:
-        quick_visible = quick_articles[:6]
-        quick_cards = "".join(render_quick_card(a) for a in quick_visible)
-        # extra items beyond what's rendered feed the auto-rotating carousel
-        # in search.js (one card swaps in/out every few seconds) - passed as
-        # a data attribute so no second request is needed for it.
-        quick_playlist = [{
-            "slug": a["slug"], "title": a["title"], "source": a["source"],
-            "date": a["date"][:10], "category": a["category"],
-        } for a in quick_articles]
-        quick_playlist_json = html.escape(json.dumps(quick_playlist, ensure_ascii=False))
+        # rendered twice back-to-back so the CSS marquee (assets/style.css,
+        # .quick-strip-track) can loop by shifting exactly one copy's width
+        # (translateX 0 -> +shift) and land on an identical frame - a pure-CSS
+        # continuous scroll, no JS swap/replace logic needed
+        quick_cards_once = "".join(render_quick_card(a) for a in quick_articles)
+        n = len(quick_articles)
+        # exact pixel width of one copy INCLUDING the connecting gap to the
+        # next copy - card width + gap are fixed in CSS (.quick-card is
+        # flex:0 0 240px, .quick-strip-track gap is 14px), and since the flex
+        # gap applies uniformly between every adjacent pair (including at
+        # the copy1/copy2 boundary), one copy "owns" exactly n gaps, not
+        # n-1 - using n-1 here left a 14px seam every loop
+        quick_shift_px = n * (240 + 14)
+        quick_duration = max(30, round(n * 3.6))
         quick_html = f"""
         <section class="quick-section reveal">
           <h2 class="section-title">בקצרה</h2>
-          <div class="quick-strip" id="quick-strip" data-playlist="{quick_playlist_json}" data-shown="{len(quick_visible)}">{quick_cards}</div>
+          <div class="quick-strip">
+            <div class="quick-strip-track" style="animation-duration:{quick_duration}s;--quick-shift:{quick_shift_px}px">{quick_cards_once}<div class="quick-strip-dup" aria-hidden="true">{quick_cards_once}</div></div>
+          </div>
         </section>"""
 
     recently_viewed_html = """

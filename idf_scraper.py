@@ -463,6 +463,7 @@ def strip_known_junk_phrases(text):
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
 GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
 GROQ_MODEL = "llama-3.3-70b-versatile"
+GROQ_VISION_MODEL = "qwen/qwen3.6-27b"
 AI_ENRICH_SYSTEM_PROMPT = (
     "אתה עוזר עריכה לאתר חדשות ישראלי. תקבל כותרת וגוף כתבה אמיתית שנשאבה "
     "ממקור חדשות. בצע שלוש משימות, אך ורק על סמך העובדות שמופיעות בטקסט "
@@ -531,6 +532,58 @@ def enrich_article_with_ai(title, content):
     except Exception as e:
         print(f"העשרת AI נכשלה (מדלג, הכתבה עדיין תתפרסם): {e}")
         return {}
+
+
+# Real per-image vision check (Groq's hosted qwen/qwen3.6-27b, confirmed
+# vision-capable and JSON-mode compatible via console.groq.com/docs/vision)
+# for whether a TV/live-broadcast video's thumbnail visibly shows a channel
+# logo, on-screen "bug", or lower-third graphic - replaces a blanket
+# "hide all TV articles" rule with a per-thumbnail decision, so a clean
+# establishing shot still gets to use its real image while a shot that
+# actually shows a competing channel's branding gets swapped for the site's
+# own placeholder instead. Fails open (assumes no watermark) on any error,
+# same non-blocking philosophy as enrich_article_with_ai above - a failed
+# check never blocks publishing, it just skips the extra precision.
+def detect_tv_watermark(image_url):
+    if not GROQ_API_KEY or not image_url:
+        return False
+    try:
+        payload = json.dumps({
+            "model": GROQ_VISION_MODEL,
+            "response_format": {"type": "json_object"},
+            "temperature": 0,
+            "max_tokens": 100,
+            "messages": [{
+                "role": "user",
+                "content": [
+                    {"type": "text", "text": (
+                        "בתמונה הזו - תמונת תצוגה מקדימה של סרטון חדשות - "
+                        "האם נראה בבירור סמל/לוגו של ערוץ טלוויזיה, 'באג' "
+                        "תחנה (סמל שקוף בפינת המסך), כתובית תחתונה עם שם "
+                        "התחנה, או כל גרפיקת שידור אחרת שמזהה במפורש מאיזו "
+                        'תחנה זה הגיע? השב אך ורק ב-JSON תקני: '
+                        '{"has_watermark": true} או {"has_watermark": false}'
+                    )},
+                    {"type": "image_url", "image_url": {"url": image_url}},
+                ],
+            }],
+        }).encode("utf-8")
+        req = urllib.request.Request(
+            GROQ_API_URL,
+            data=payload,
+            headers={
+                "Authorization": f"Bearer {GROQ_API_KEY}",
+                "Content-Type": "application/json",
+            },
+            method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=20) as resp:
+            result = json.loads(resp.read().decode("utf-8"))
+        parsed = json.loads(result["choices"][0]["message"]["content"])
+        return bool(parsed.get("has_watermark"))
+    except Exception as e:
+        print(f"זיהוי סימני מים נכשל (מדלג, מניח שאין): {e}")
+        return False
 
 
 # Internal linking engine: every article's AI-extracted tags get recorded
@@ -611,8 +664,13 @@ def save_article(title, link, content, image_url, source_name, category, video_i
         video_category = "טלוויזיה ושידורים חיים" if is_live_broadcast(title) else category
         if not image_url:
             image_url = f"https://i.ytimg.com/vi/{video_id}/hqdefault.jpg"
+        has_watermark = False
+        if video_category == "טלוויזיה ושידורים חיים":
+            has_watermark = detect_tv_watermark(image_url)
+            time.sleep(1)  # brief pacing between Groq calls, same margin as the text enrichment call
         date_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        _write_article_file(filename, title, date_str, source_name, image_url, link, video_category, content, video_id)
+        _write_article_file(filename, title, date_str, source_name, image_url, link, video_category, content, video_id,
+                             has_watermark=has_watermark)
         if recent_titles is not None:
             recent_titles.append(normalize_title_words(title))
         return
@@ -683,7 +741,7 @@ def save_article(title, link, content, image_url, source_name, category, video_i
 
 
 def _write_article_file(filename, title, date_str, source_name, image_url, link, category, content,
-                         video_id="", takeaways=None, tags=None, quick_image=False):
+                         video_id="", takeaways=None, tags=None, quick_image=False, has_watermark=False):
     video_line = f'\nvideo_id: "{video_id}"' if video_id else ""
 
     # Each takeaway is written as its own indented continuation line (what
@@ -701,6 +759,7 @@ def _write_article_file(filename, title, date_str, source_name, image_url, link,
         tags_line = f'\nai_tags: "{joined}"'
 
     quick_image_line = '\nquick_image: "1"' if quick_image else ""
+    has_watermark_line = '\nhas_watermark: "1"' if has_watermark else ""
 
     md_content = f"""---
 title: >-
@@ -709,7 +768,7 @@ date: "{date_str}"
 source: "{source_name}"
 image: "{image_url}"
 link: "{link}"
-category: "{category}"{video_line}{takeaways_line}{tags_line}{quick_image_line}
+category: "{category}"{video_line}{takeaways_line}{tags_line}{quick_image_line}{has_watermark_line}
 ---
 
 {content}

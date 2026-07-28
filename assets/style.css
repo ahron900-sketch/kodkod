@@ -555,18 +555,31 @@ html.dark-mode .site-header {
 .ad-slot-compact:hover .ad-cta { background: #fff; }
 
 .quick-strip {
+  overflow: hidden;
+  position: relative;
+  -webkit-mask-image: linear-gradient(to left, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%);
+  mask-image: linear-gradient(to left, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%);
+}
+.quick-strip-track {
   display: flex;
   gap: 14px;
-  overflow-x: auto;
-  padding-bottom: 8px;
-  scroll-snap-type: x proximity;
+  width: max-content;
+  animation-name: quick-scroll;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }
-.quick-strip::-webkit-scrollbar { height: 6px; }
-.quick-strip::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+.quick-strip-dup { display: contents; }
+.quick-strip:hover .quick-strip-track { animation-play-state: paused; }
+@keyframes quick-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(var(--quick-shift, 50%)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .quick-strip-track { animation: none; }
+}
 
 .quick-card {
   flex: 0 0 240px;
-  scroll-snap-align: start;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
@@ -1223,7 +1236,7 @@ html.dark-mode .site-header {
    a 2x2 grid of the next 4 beside it, on the left */
 .cat-lead-layout {
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
+  grid-template-columns: 1fr 1.6fr;
   gap: 20px;
   align-items: stretch;
 }
@@ -1232,7 +1245,7 @@ html.dark-mode .site-header {
   display: block;
   border-radius: var(--radius);
   overflow: hidden;
-  min-height: 320px;
+  min-height: 240px;
   background: var(--surface-2);
   box-shadow: var(--shadow-lg);
 }
@@ -1262,6 +1275,18 @@ html.dark-mode .site-header {
 @media (max-width: 900px) {
   .bento-section { grid-template-columns: 1fr; }
   .bento-big { min-height: 260px; }
+  .cat-lead-layout { grid-template-columns: 1fr; }
+  .cat-lead-main { min-height: 260px; }
+}
+
+/* Tablet: the category pill row doesn't fit on one line below ~1100px but
+   there's still plenty of width for a normal (non-mobile) header layout -
+   so only the nav itself becomes a horizontal-scroll strip on its own row,
+   the same pattern the phone breakpoint below already uses, without
+   pulling in the phone-only font-size/logo tweaks that don't apply here. */
+@media (max-width: 1024px) {
+  .site-header { flex-wrap: wrap; }
+  .categories { order: 3; width: 100%; overflow-x: auto; flex-wrap: nowrap; }
 }
 
 /* Magazine */
@@ -1384,7 +1409,7 @@ html.dark-mode .site-header {
   .logo { font-size: 1.2rem; }
   .footer-promo { grid-template-columns: 1fr; gap: 24px; }
   .cat-lead-layout { grid-template-columns: 1fr; }
-  .cat-lead-main { min-height: 240px; }
+  .cat-lead-main { min-height: 200px; }
   .weather-bar { flex-wrap: wrap; gap: 6px; }
   .hero { flex-direction: column; }
   .hero-img-wrap { flex: none; height: 220px; }
