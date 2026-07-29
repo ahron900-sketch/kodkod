@@ -5,7 +5,7 @@ date: "2026-07-12 09:27:23"
 source: "i24NEWS עברית"
 image: "https://i2.ytimg.com/vi/Ycv2GHvg5kQ/hqdefault.jpg"
 link: "https://www.youtube.com/shorts/Ycv2GHvg5kQ"
-category: "חדשות"
+category: "טלוויזיה ושידורים חיים"
 video_id: "Ycv2GHvg5kQ"
 ---
 

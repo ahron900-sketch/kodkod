@@ -660,8 +660,12 @@ def save_article(title, link, content, image_url, source_name, category, video_i
     # own visual - the video itself). Live broadcasts / full episodes are
     # kept, but routed to their own category instead of the regular news
     # video feed, so they land on a separate page rather than being lost.
+    # i24NEWS specifically is a hard rule (owner directive): never shown in
+    # regular article listings, only reachable via the TV menu/section -
+    # every i24 video is routed there regardless of the live-broadcast check.
     if video_id:
-        video_category = "טלוויזיה ושידורים חיים" if is_live_broadcast(title) else category
+        is_i24 = source_name == "i24NEWS עברית"
+        video_category = "טלוויזיה ושידורים חיים" if (is_i24 or is_live_broadcast(title)) else category
         if not image_url:
             image_url = f"https://i.ytimg.com/vi/{video_id}/hqdefault.jpg"
         has_watermark = False

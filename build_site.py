@@ -956,7 +956,8 @@ def build():
 
     articles = load_articles()
     categories = sorted({a["category"] for a in articles})
-    ticker_articles = [a for a in articles if a["category"] != RECIPE_CATEGORY]
+    ticker_articles = [a for a in articles
+                       if a["category"] != RECIPE_CATEGORY and a["source"] != "i24NEWS עברית"]
     ticker_text = "   •   ".join(a["title"] for a in ticker_articles[:12]) or "מערכת קודקוד - חדשות ומבזקים מהארץ ומהעולם"
 
     global FOOTER_PROMO_HTML
@@ -996,6 +997,7 @@ def build():
     hero_candidates = [a for a in listable
                        if a["category"] != RECIPE_CATEGORY
                        and not (a["category"] == TV_CATEGORY and a.get("has_watermark"))
+                       and a["source"] != "i24NEWS עברית"
                        and not a.get("quick_image")]
     hero_html = ""
     rest = listable
@@ -1032,6 +1034,7 @@ def build():
     bento_candidates = pick_diverse(
         [a for a in rest if a["category"] != RECIPE_CATEGORY
          and not (a["category"] == TV_CATEGORY and a.get("has_watermark"))
+         and a["source"] != "i24NEWS עברית"
          and not a.get("quick_image")],
         5, max_per_category=2)
     bento_html = ""
@@ -1142,7 +1145,8 @@ def build():
     write_page(os.path.join(OUTPUT_DIR, "index.html"), SITE_NAME,
                homepage_description,
                categories, None, body, ticker_text, canonical=SITE_URL + "/",
-               structured_data=homepage_structured_data(listable))
+               structured_data=homepage_structured_data(
+                   [a for a in listable if a["source"] != "i24NEWS עברית"]))
 
     write_rss_feed(os.path.join(OUTPUT_DIR, "rss.xml"), f"{SITE_URL}/rss.xml",
                    SITE_NAME, "עדכוני חדשות שוטפים מקודקוד - כל הקטגוריות במקום אחד",
@@ -1479,7 +1483,43 @@ def build():
             "description": "קודקוד הוא מרכז חדשותי דיגיטלי ישראלי המרכז מבזקים ממיטב מקורות החדשות בעברית - חדשות, כלכלה, טכנולוגיה, חרדים ובישול.",
         },
     }
-    about_structured_data = '<script type="application/ld+json">' + json.dumps(about_schema, ensure_ascii=False) + '</script>'
+    # FAQPage schema mirroring the actual visible Q&A in ABOUT_BODY above -
+    # same 3 pairs, same wording, so the schema never claims anything the
+    # page itself doesn't already say
+    faq_schema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "האם קודקוד כותב את הכתבות בעצמו?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "לא. קודקוד הוא אגרגטור - אנו אוספים ומציגים מבזקים ממקורות חדשות קיימים, עם ייחוס וקישור מלא למקור המקורי.",
+                },
+            },
+            {
+                "@type": "Question",
+                "name": "באיזו תדירות האתר מתעדכן?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "מערכת האיסוף האוטומטית שלנו רצה כל 15 דקות, מסביב לשעון.",
+                },
+            },
+            {
+                "@type": "Question",
+                "name": "איך אפשר לדווח על טעות או לשלוח משוב?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": f"אפשר לפנות בכל עת דרך עמוד יצירת הקשר, {SITE_URL}/tip-line.html.",
+                },
+            },
+        ],
+    }
+    about_structured_data = (
+        '<script type="application/ld+json">' + json.dumps(about_schema, ensure_ascii=False) + '</script>'
+        '<script type="application/ld+json">' + json.dumps(faq_schema, ensure_ascii=False) + '</script>'
+    )
     write_page(os.path.join(OUTPUT_DIR, "about.html"), f"אודות קודקוד - מי אנחנו וכיצד אנחנו עובדים | {SITE_NAME}",
                "קודקוד הוא מרכז חדשותי המרכז מבזקים ממיטב מקורות החדשות בישראל - חדשות, כלכלה, טכנולוגיה, חרדים ובישול. קראו על החזון, תחומי הסיקור והדרך בה אנחנו עובדים.",
                categories, None, ABOUT_BODY, ticker_text, canonical=f"{SITE_URL}/about.html", structured_data=about_structured_data)
@@ -1567,13 +1607,59 @@ def build():
     with open(os.path.join(OUTPUT_DIR, "news-sitemap.xml"), "w", encoding="utf-8") as f:
         f.write(news_sitemap)
 
-    # robots.txt
+    # robots.txt - "User-agent: *" already allows everything, but AI search
+    # bots are named explicitly too (owner directive: maximize citation by
+    # every search + AI engine) since some GEO audits check for explicit
+    # mentions, not just wildcard coverage, as a readiness signal
+    ai_bots = [
+        "GPTBot", "OAI-SearchBot", "ChatGPT-User",       # OpenAI
+        "PerplexityBot", "Perplexity-User",              # Perplexity
+        "ClaudeBot", "anthropic-ai", "Claude-Web",        # Anthropic
+        "Google-Extended",                                # Gemini/Bard training
+        "CCBot",                                          # Common Crawl (many trainers)
+        "MistralAI-User",                                 # Le Chat
+        "Meta-ExternalAgent",                             # Meta AI
+        "Bingbot", "Applebot",
+    ]
+    robots_lines = ["User-agent: *", "Allow: /", ""]
+    for bot in ai_bots:
+        robots_lines += [f"User-agent: {bot}", "Allow: /", ""]
+    robots_lines += [f"Sitemap: {SITE_URL}/sitemap.xml", f"Sitemap: {SITE_URL}/news-sitemap.xml"]
     with open(os.path.join(OUTPUT_DIR, "robots.txt"), "w", encoding="utf-8") as f:
-        f.write(
-            f"User-agent: *\nAllow: /\n"
-            f"Sitemap: {SITE_URL}/sitemap.xml\n"
-            f"Sitemap: {SITE_URL}/news-sitemap.xml\n"
+        f.write("\n".join(robots_lines) + "\n")
+
+    # llms.txt / llms-full.txt - an emerging (advisory, not a ranking signal)
+    # convention AI crawlers/agents use as a structured index instead of
+    # guessing from HTML; kept short/factual, no marketing language
+    top_categories = [c for c in categories if c != TV_CATEGORY]
+    llms_txt = f"""# {SITE_NAME}
+
+> {SITE_NAME} הוא אתר חדשות ישראלי המצטט ומקשר בחזרה למקורות המקוריים - חדשות, כלכלה, טכנולוגיה, ספורט, בריאות, תרבות, רכב ועוד.
+
+כל כתבה מציגה תקציר/ציטוט עם קרדיט וקישור למקור המקורי - {SITE_NAME} אינו טוען לבעלות על התוכן המצוטט.
+
+## עמודים מרכזיים
+
+{chr(10).join(f"- [{c}]({SITE_URL}/category/{slugify(c, c)}.html)" for c in top_categories)}
+- [אודות]({SITE_URL}/about.html)
+- [כל הכתבות (sitemap)]({SITE_URL}/sitemap.xml)
+- [עדכוני RSS]({SITE_URL}/rss.xml)
+"""
+    with open(os.path.join(OUTPUT_DIR, "llms.txt"), "w", encoding="utf-8") as f:
+        f.write(llms_txt)
+
+    llms_full_lines = [f"# {SITE_NAME} - אינדקס מלא\n"]
+    for a in listable[:500]:
+        if a["source"] == "i24NEWS עברית":
+            continue
+        llms_full_lines.append(
+            f"## {a['title']}\n"
+            f"מקור: {a['source']} | קטגוריה: {a['category']} | תאריך: {a['date'][:10]}\n"
+            f"{a.get('dek', '')}\n"
+            f"קישור: {SITE_URL}/article/{a['slug']}.html\n"
         )
+    with open(os.path.join(OUTPUT_DIR, "llms-full.txt"), "w", encoding="utf-8") as f:
+        f.write("\n".join(llms_full_lines))
 
     print(f"נבנה אתר עם {len(articles)} כתבות ב-{len(categories)} קטגוריות.")
 
