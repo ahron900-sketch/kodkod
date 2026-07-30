@@ -600,6 +600,37 @@ window.kkAffinity = (function () {
 })();
 
 (function () {
+  // ad-slot rotation - same crossfade technique as the hero carousel just
+  // above, just slower (ads carry more text to actually read than a
+  // headline) and independently instantiated per slot, since a page can
+  // have several (between category sections, inside articles, side rails)
+  var ROTATE_MS = 6000;
+  document.querySelectorAll(".ad-slot").forEach(function (slot) {
+    var slides = slot.querySelectorAll(".ad-slide");
+    if (slides.length < 2) return;
+    var current = 0;
+    Array.prototype.forEach.call(slides, function (s, i) {
+      if (s.classList.contains("active")) current = i;
+    });
+    var timer = null;
+    function showSlide(index) {
+      Array.prototype.forEach.call(slides, function (s, i) { s.classList.toggle("active", i === index); });
+      current = index;
+    }
+    function start() {
+      timer = setInterval(function () { showSlide((current + 1) % slides.length); }, ROTATE_MS);
+    }
+    function stop() {
+      if (timer) clearInterval(timer);
+      timer = null;
+    }
+    slot.addEventListener("mouseenter", stop);
+    slot.addEventListener("mouseleave", start);
+    start();
+  });
+})();
+
+(function () {
   var els = document.querySelectorAll(".reveal");
   if (!els.length) return;
   if (!("IntersectionObserver" in window)) {

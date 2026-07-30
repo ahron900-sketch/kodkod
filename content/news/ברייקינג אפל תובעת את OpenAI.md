@@ -26,6 +26,4 @@ category: "טכנולוגיה"
 
 בכיר ב-OpenAI הגיב לדבר התביעה ברשת X וטען: "אין לנו שום עניין בסודות המסחריים של חברות אחרות. אנחנו ממוקדים בבניית טכנולוגיות חדשניות שיעשירו אנשים בכל מקום".
 
-Our statement in response to this suit: We have no interest in other companies' trade secrets. We remain focused on building innovative technology that empowers people everywhere. https://t.co/lIxGW6hyz5 — Drew Pusateri (@drewpusateri) July 10, 2026 התביעה מגיעה בתזמון מעניין, וזאת לאחר דיווחים על כך ש-OpenAI מתכננת לתבוע בעצמה את אפל בעקבות אכזבה משיתוף הפעולה בין שתי החברות ששילבו את ChatGPT ב-Siri. אם התביעה אכן תגיע לבית המשפט, היא צפויה לחשוף לא מעט מידע עסיסי על מה שקורה מאחורי הקלעים בין שתי החברות מהמעניינות בעולם הטכנולוגיה. לכתב התביעה המלא
-
 [קרא את הכתבה המלאה במקור](https://www.geektime.co.il/apple-sues-openai-over-stealing-trade-secrets/)

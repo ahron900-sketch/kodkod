@@ -480,6 +480,35 @@ JUNK_PHRASE_PATTERNS = [
 ]
 JUNK_PHRASE_RE = re.compile("|".join(JUNK_PHRASE_PATTERNS))
 
+# No raw links are ever allowed inside a published article body - the only
+# link we show is the single, explicit "read the full article at the source"
+# line _write_article_file appends itself. Scraped content sometimes drags in
+# whole lines of promotional/tracking links instead (social-media handles, app
+# download shorteners, channel homepage) - especially YouTube video
+# descriptions, which are often *entirely* this kind of boilerplate with no
+# real synopsis at all. Any full line containing a URL is dropped outright.
+URL_IN_LINE_RE = re.compile(r'https?://\S+|bit\.ly/\S+|goo\.gl/\S+')
+
+
+def strip_link_lines(text):
+    if not text:
+        return text
+    lines = [ln for ln in text.splitlines() if not URL_IN_LINE_RE.search(ln)]
+    cleaned = "\n".join(lines)
+    return re.sub(r'\n{3,}', '\n\n', cleaned).strip()
+
+
+# A video's YouTube description is frequently just channel-handle/social-link
+# boilerplate (see strip_link_lines above) with zero real synopsis of the
+# story. Once link-lines are stripped, what's left has to clear this low bar
+# - low because a real one-line video caption is naturally much shorter than
+# a full article - or the video is rejected outright rather than published
+# with a content-free stub. This is the "fully clean it or don't publish"
+# rule applied to video/social-sourced items: since there's no real text left
+# to clean, and we never fabricate a synopsis via AI (risk of inventing
+# facts), reject is the only honest option.
+MIN_VIDEO_CONTENT_LEN = 30
+
 
 def strip_known_junk_phrases(text):
     return re.sub(r'[ \t]{2,}', ' ', JUNK_PHRASE_RE.sub('', text)).strip()
@@ -746,10 +775,19 @@ def save_article(title, link, content, image_url, source_name, category, video_i
         video_category = "טלוויזיה ושידורים חיים" if (is_i24 or is_live_broadcast(title)) else category
         if not image_url:
             image_url = f"https://i.ytimg.com/vi/{video_id}/hqdefault.jpg"
-        has_watermark = False
-        if video_category == "טלוויזיה ושידורים חיים":
-            has_watermark = detect_tv_watermark(image_url)
-            time.sleep(1)  # brief pacing between Groq calls, same margin as the text enrichment call
+        image_chunk = _fetch_image_chunk(image_url)
+        if is_low_quality_image(image_chunk):
+            print(f"נפסל (וידאו - תמונה לא נטענת/איכות נמוכה מדי): {title}")
+            return
+        content = strip_link_lines(strip_known_junk_phrases(content))
+        if len(content) < MIN_VIDEO_CONTENT_LEN:
+            print(f"נפסל (וידאו - אין תיאור אמיתי, רק קישורים/בוילרפלייט): {title}")
+            return
+        # Checked for every video regardless of category - not just TV/live
+        # broadcasts - a station bug/logo baked into the thumbnail is exactly
+        # as unwanted on a regular news clip as it is on a live broadcast one.
+        has_watermark = detect_tv_watermark(image_url)
+        time.sleep(1)  # brief pacing between Groq calls, same margin as the text enrichment call
         date_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         _write_article_file(filename, title, date_str, source_name, image_url, link, video_category, content, video_id,
                              has_watermark=has_watermark)
@@ -793,7 +831,7 @@ def save_article(title, link, content, image_url, source_name, category, video_i
         print(f"נפסל (לא נמצאה כתבה מלאה, רק תקציר קצר מדי): {title}")
         return
 
-    content = strip_known_junk_phrases(content)
+    content = strip_link_lines(strip_known_junk_phrases(content))
 
     if is_gibberish_or_broken(content):
         print(f"נפסל (תוכן שבור/גיבריש/קישורים שיוריים): {title}")

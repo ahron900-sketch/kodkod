@@ -32,6 +32,10 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Stagger the scheduled rebuild
+        if: github.event_name == 'schedule'
+        run: sleep $((RANDOM % 1800))
+
       - name: Build static site
         run: |
           python build_site.py

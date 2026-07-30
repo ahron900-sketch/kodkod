@@ -120,6 +120,31 @@ WP_BOILERPLATE_RE = re.compile(r'^The post .* appeared first on .*\.?$')
 RECIPE_CATEGORY = "בישול ומתכונים"
 TV_CATEGORY = "טלוויזיה ושידורים חיים"
 
+# Editorial-desk byline shown on every article - an honest description of how
+# the site is actually organized (real content desks by topic), not invented
+# named "reporters" with fabricated photos/credentials attached to bot-written
+# text. This is the same kind of attribution many real wire/aggregator outlets
+# use ("Reuters Staff", "Times of Israel Staff") - it tells readers and search
+# engines the content has real editorial structure without claiming a specific
+# human wrote it when none did.
+DESK_BY_CATEGORY = {
+    "חדשות": "מדור חדשות",
+    "ספורט": "מדור ספורט",
+    "כלכלה": "מדור כלכלה",
+    "טכנולוגיה": "מדור טכנולוגיה",
+    "בריאות": "מדור בריאות",
+    "רכב": "מדור רכב",
+    "תרבות ובידור": "מדור תרבות ובידור",
+    RECIPE_CATEGORY: "מדור אוכל ומתכונים",
+    "חרדים": "מדור חברה חרדית",
+    TV_CATEGORY: "מדור תקשורת",
+}
+
+
+def byline_for(category):
+    desk = DESK_BY_CATEGORY.get(category)
+    return f"מערכת קודקוד | {desk}" if desk else "מערכת קודקוד"
+
 
 def extract_dek(body_text, max_len=180):
     """First real sentence of the body, used as a subtitle under the headline."""
@@ -437,62 +462,70 @@ MOCK_ADS = [
         "href": f"/article/{slugify('ספרד אלופת העולם 2026: ניצחון דרמטי 1:0 על ארגנטינה בגמר היסטורי', 'מונדיאל-2026-גמר')}.html",
     },
     {
-        "cls": "ad-fin",
-        "img": "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=900&q=70",
-        "eyebrow": "מומלץ עבורך",
-        "title": "תיק השקעות חכם ב-90 שניות",
-        "body": "השוואת קרנות מדד בעמלות הנמוכות בישראל",
-        "cta": "להשוואה חינם",
-    },
-    {
-        "cls": "ad-travel",
-        "img": "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=900&q=70",
-        "eyebrow": "דיל השבוע",
-        "title": "טיסות ישירות לאירופה",
-        "body": "החל מ-₪899 בכרטיס הלוך ושוב, מקומות אחרונים",
-        "cta": "לצפייה בדילים",
-    },
-    {
-        "cls": "ad-tech",
-        "img": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=900&q=70",
-        "eyebrow": "חדש בישראל",
-        "title": "אוזניות ביטול רעשים דור חדש",
-        "body": "עד 40 שעות סוללה, משלוח חינם עד הבית",
-        "cta": "לרכישה עכשיו",
-    },
-    {
-        "cls": "ad-food",
-        "img": "https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?w=900&q=70",
-        "eyebrow": "פינוק לשבת",
-        "title": "ארגז ירקות טרי מהחקלאי",
-        "body": "מגיע ישר מהשדה עד הדלת, ללא תיווך",
-        "cta": "להזמנה השבוע",
+        # the only actual "ad" slot content right now - a real, live house-ad
+        # promoting the (genuinely free, first-come) ad space itself, not a
+        # placeholder standing in for a paying advertiser. Deliberately no
+        # stock photo - the animated gradient + floating icons (own CSS
+        # class ad-promo-self) carry the whole creative.
+        "cls": "ad-promo-self",
+        "img": "",
+        "eyebrow": "רוצים לפרסם כאן?",
+        "title": "הפרסומת שלכם יכולה להיות כאן - ופעם הזאת זה חינם",
+        "body": "שלחו לנו חומר פרסומי מוכן, ומחר הוא באוויר. בלי טפסים מסובכים, בלי התחייבות.",
+        "cta": "לשליחת הפרסומת",
+        "href": "/advertise.html",
     },
 ]
 
 _ad_counter = {"i": 0}
 
+# the self-promo house-ad gets a handful of small floating icons drifting
+# around the creative - part of the requested "busy/eye-catching" energetic
+# treatment, not present on the plain content-recommendation slide. Position
+# assigned inline per-icon (not via CSS nth-child) so the placement doesn't
+# silently break if the surrounding markup is ever reordered.
+AD_PROMO_ICONS = [
+    ("📢", "top:14%; left:8%; animation-delay:0s;"),
+    ("✨", "top:62%; left:4%; font-size:1.1rem; animation-delay:0.8s;"),
+    ("🚀", "top:18%; right:10%; animation-delay:1.6s;"),
+    ("🎯", "top:66%; right:6%; font-size:1.15rem; animation-delay:2.4s;"),
+]
+
 
 def ad_slot_html(compact=False):
-    ad = MOCK_ADS[_ad_counter["i"] % len(MOCK_ADS)]
+    # each call embeds every MOCK_ADS entry as its own crossfade slide
+    # (assets/search.js rotates .active between them client-side, same
+    # crossfade technique as the homepage hero) - _ad_counter only picks
+    # which slide starts active, so multiple slots on one page don't all
+    # open on the same creative
+    start = _ad_counter["i"] % len(MOCK_ADS)
     _ad_counter["i"] += 1
     size_cls = "ad-slot-compact" if compact else ""
-    # slots that point at a real internal article (e.g. the results banner)
-    # get wrapped in an actual link instead of staying purely decorative
-    tag, tag_attrs, close_tag = "div", "", "div"
-    if ad.get("href"):
-        tag, tag_attrs, close_tag = "a", f' href="{html.escape(ad["href"])}"', "a"
-    return f"""<{tag} class="ad-slot {ad['cls']} {size_cls}"{tag_attrs}>
-      <div class="ad-slot-bg" style="background-image:url('{html.escape(ad['img'])}')"></div>
-      <div class="ad-slot-shine"></div>
-      <span class="ad-tag">{'מומלץ' if ad.get('href') else 'פרסומת'}</span>
-      <div class="ad-creative">
-        <span class="ad-eyebrow">{html.escape(ad['eyebrow'])}</span>
-        <h4 class="ad-title">{html.escape(ad['title'])}</h4>
-        <p class="ad-body">{html.escape(ad['body'])}</p>
-        <span class="ad-cta">{html.escape(ad['cta'])}</span>
-      </div>
-    </{close_tag}>"""
+
+    slides = []
+    for i, ad in enumerate(MOCK_ADS):
+        active_cls = " active" if i == start else ""
+        bg_style = f" style=\"background-image:url('{html.escape(ad['img'])}')\"" if ad.get("img") else ""
+        icons_html = "".join(
+            f'<span class="ad-promo-icon" style="{pos}">{icon}</span>' for icon, pos in AD_PROMO_ICONS
+        ) if ad["cls"] == "ad-promo-self" else ""
+        badge_html = '<span class="ad-promo-badge">חינם!</span>' if ad["cls"] == "ad-promo-self" else ""
+        slides.append(f"""
+      <a class="ad-slide {ad['cls']}{active_cls}" href="{html.escape(ad.get('href', '#'))}" data-index="{i}">
+        <div class="ad-slot-bg"{bg_style}></div>
+        <div class="ad-slot-shine"></div>
+        {icons_html}
+        <span class="ad-tag">{'מומלץ' if ad['cls'] != 'ad-promo-self' else 'פרסומת'}</span>
+        {badge_html}
+        <div class="ad-creative">
+          <span class="ad-eyebrow">{html.escape(ad['eyebrow'])}</span>
+          <h4 class="ad-title">{html.escape(ad['title'])}</h4>
+          <p class="ad-body">{html.escape(ad['body'])}</p>
+          <span class="ad-cta">{html.escape(ad['cta'])}</span>
+        </div>
+      </a>""")
+
+    return f'<div class="ad-slot {size_cls}">{"".join(slides)}</div>'
 
 
 
@@ -632,7 +665,7 @@ ABOUT_BODY = """
 ADVERTISE_BODY = f"""
 <main class="static-page">
   <h1>פרסמו <span>אצלנו</span></h1>
-  <p class="lead">קודקוד חדשות מגיע לקהל קוראים רחב ומגוון. מעוניינים לפרסם באתר? צרו קשר ונחזור אליכם בהקדם עם פרטים על מיקומי הפרסום וההיקפים הזמינים.</p>
+  <p class="lead">קודקוד חדשות מגיע לקהל קוראים רחב ומגוון. הפעם זה באמת חינם: שלחו לנו חומר פרסומי מוכן, ומחר הוא באוויר - ללא עלות, ללא התחייבות מעבר לשבוע הראשון.</p>
 
   <h2>מיקומי פרסום באתר</h2>
   <ul>
@@ -641,17 +674,28 @@ ADVERTISE_BODY = f"""
     <li><strong>בתוך הכתבה:</strong> מיקום פרסומת בסיום כל כתבה, לפני אזור "עוד בנושא".</li>
   </ul>
 
+  <h2>מה אנחנו צריכים מכם</h2>
+  <p>חשוב: <strong>אנחנו לא עורכים או יוצרים את הפרסומת עבורכם</strong> - רק אם החומר מגיע מוכן בדיוק כפי שצריך, פשוט מעלים אותו. אנא הכינו מראש:</p>
+  <ul>
+    <li><strong>תמונת רקע:</strong> תמונה רחבה (יחס אורך-רוחב נוח: בסביבות 3:1 עד 16:9), קובץ JPG/PNG/WebP.</li>
+    <li><strong>טקסט הפרסומת:</strong> כותרת קצרה (עד כ-60 תווים), שורת תיאור (עד כ-90 תווים), וטקסט לכפתור הקריאה לפעולה (למשל "לרכישה", "לפרטים נוספים").</li>
+    <li><strong>קישור יעד:</strong> לאן הפרסומת תוביל בלחיצה.</li>
+  </ul>
+  <p>שלחו את כל זה (קובץ התמונה, או קישור אליה) יחד עם הטקסטים בטופס למטה. משך ההופעה: <strong>שבוע אחד לפחות</strong>, ללא התחייבות ליותר מכך מהצד שלנו.</p>
+
   <h2>השאירו פרטים</h2>
   <form class="contact-form" action="{TIP_FORM_ACTION}" method="POST">
-    <input type="text" name="name" placeholder="שם מלא / חברה" required>
+    <input type="text" name="name" placeholder="שם מלא / חברה / חברת פרסום" required>
     <input type="email" name="email" placeholder="אימייל לחזרה" required>
-    <textarea name="message" rows="5" placeholder="ספרו לנו על הקמפיין שלכם..." required></textarea>
+    <input type="text" name="creative_link" placeholder="קישור לתמונה/לחומר הפרסומי (אם קיים)">
+    <textarea name="message" rows="5" placeholder="כותרת, תיאור, טקסט כפתור, וקישור היעד - כפי שפורט למעלה..." required></textarea>
     <label class="consent-checkbox">
       <input type="checkbox" name="privacy_consent" value="yes" required>
       <span>קראתי ואני מסכים/ה ל<a href="/privacy.html" target="_blank">מדיניות הפרטיות</a> - הפרטים ישמשו ליצירת קשר בלבד</span>
     </label>
-    <button type="submit">שלח בקשה</button>
+    <button type="submit">שליחה לאישור</button>
   </form>
+  <p style="font-size:0.85rem;color:var(--ink-soft);margin-top:10px;">הבקשה תישלח לאישור ידני - נחזור אליכם ברגע שהפרסומת עולה לאוויר.</p>
 </main>"""
 
 TIP_LINE_BODY = f"""
@@ -1060,7 +1104,7 @@ def build():
     hero_candidates = [a for a in listable
                        if is_fresh(a)
                        and a["category"] not in (RECIPE_CATEGORY, "בריאות")
-                       and not (a["category"] == TV_CATEGORY and a.get("has_watermark"))
+                       and not a.get("has_watermark")
                        and a["source"] != "i24NEWS עברית"
                        and not a.get("quick_image")]
     hero_html = ""
@@ -1098,7 +1142,7 @@ def build():
     bento_candidates = pick_diverse(
         [a for a in rest if is_fresh(a)
          and a["category"] not in (RECIPE_CATEGORY, "בריאות")
-         and not (a["category"] == TV_CATEGORY and a.get("has_watermark"))
+         and not a.get("has_watermark")
          and a["source"] != "i24NEWS עברית"
          and not a.get("quick_image")],
         5, max_per_category=2)
@@ -1487,7 +1531,7 @@ def build():
           <span class="card-cat">{html.escape(a['category'])}</span>
           <h1>{html.escape(a['title'])}</h1>
           {dek_html}
-          <div class="article-meta">{html.escape(a['date'])}</div>
+          <div class="article-meta"><span class="article-byline">{html.escape(byline_for(a['category']))}</span> · {html.escape(a['date'])}</div>
           {media_html}
           {ai_summary_html}
           {tags_html}

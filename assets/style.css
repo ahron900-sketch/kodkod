@@ -525,9 +525,26 @@ html.dark-mode .site-header {
   border-radius: var(--radius-sm);
   overflow: hidden;
   box-shadow: var(--shadow);
+}
+/* crossfade rotation between every ad-slide inside a slot - same technique
+   as the homepage hero carousel (assets/search.js swaps .active) */
+.ad-slide {
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
 }
+.ad-slide.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  z-index: 1;
+}
+.ad-slot-compact .ad-slide { align-items: flex-end; }
 .ad-tag {
   position: absolute;
   top: 10px;
@@ -602,10 +619,68 @@ html.dark-mode .site-header {
   z-index: 1;
   mix-blend-mode: multiply;
 }
-.ad-fin::before { background: linear-gradient(120deg, rgba(15,32,39,0.85), rgba(44,83,100,0.55)); }
-.ad-travel::before { background: linear-gradient(120deg, rgba(30,60,114,0.85), rgba(79,172,254,0.5)); }
-.ad-tech::before { background: linear-gradient(120deg, rgba(20,20,22,0.88), rgba(10,108,214,0.55)); }
-.ad-food::before { background: linear-gradient(120deg, rgba(22,34,42,0.85), rgba(106,133,50,0.5)); }
+/* ad-promo-self has no photo at all - an animated gradient carries the
+   whole background instead, see further down */
+.ad-promo-self .ad-slot-bg {
+  background: linear-gradient(120deg, var(--accent), #ff9d4d, #7c5cff, var(--accent));
+  background-size: 300% 300%;
+  animation: ad-promo-gradient 7s ease infinite;
+}
+@keyframes ad-promo-gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.ad-promo-icon {
+  position: absolute;
+  z-index: 1;
+  font-size: 1.4rem;
+  opacity: 0.85;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.25));
+  animation: ad-promo-float 4.5s ease-in-out infinite;
+}
+@keyframes ad-promo-float {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50% { transform: translateY(-10px) rotate(6deg); }
+}
+.ad-promo-badge {
+  position: absolute;
+  z-index: 2;
+  top: 12px;
+  right: 12px;
+  background: #fff;
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 5px 11px;
+  border-radius: 100px;
+  box-shadow: var(--shadow);
+  transform: rotate(-6deg);
+  animation: ad-promo-badge-pulse 1.8s ease-in-out infinite;
+}
+@keyframes ad-promo-badge-pulse {
+  0%, 100% { transform: rotate(-6deg) scale(1); }
+  50% { transform: rotate(-6deg) scale(1.12); }
+}
+.ad-promo-self .ad-title {
+  background: linear-gradient(90deg, #fff, #ffe9c4, #fff);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: ad-promo-shimmer 3s linear infinite;
+}
+@keyframes ad-promo-shimmer {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+.ad-promo-self .ad-cta {
+  animation: ad-promo-cta-pulse 1.6s ease-in-out infinite;
+}
+@keyframes ad-promo-cta-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.45); }
+  50% { box-shadow: 0 0 0 8px rgba(255,255,255,0); }
+}
 
 /* Diagonal shine sweep - a subtle "premium ad" cue that repeats periodically */
 .ad-slot-shine {
@@ -800,6 +875,10 @@ html.dark-mode .site-header {
   color: var(--ink-soft);
   font-size: 0.92rem;
   margin-bottom: 20px;
+}
+.article-byline {
+  color: var(--accent);
+  font-weight: 700;
 }
 
 /* Optional AI-generated "key takeaways" - deliberately styled as a distinct,
@@ -1071,11 +1150,12 @@ html.dark-mode .site-header {
 .share-menu {
   position: absolute;
   top: calc(100% + 8px);
-  right: 0;
+  inset-inline-end: 0;
   z-index: 10;
   display: flex;
   flex-direction: column;
   min-width: 160px;
+  max-width: calc(100vw - 32px);
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
@@ -1488,6 +1568,7 @@ html.dark-mode .site-header {
   .bento-big { min-height: 260px; }
   .cat-lead-layout { grid-template-columns: 1fr; }
   .cat-lead-main { min-height: 260px; }
+  .cat-lead-grid { grid-template-columns: 1fr; }
 }
 
 /* Tablet: the category pill row doesn't fit on one line below ~1100px but
