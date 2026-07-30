@@ -192,6 +192,101 @@ html.dark-mode .site-header {
   cursor: pointer;
 }
 
+/* categories-toggle/drawer: the horizontal-scroll .categories strip hides
+   most categories off-screen with no visual hint there's more - this is a
+   "see everything" shortcut, shown on top of it (not instead of it) on
+   narrower screens where that strip can't fit them all in view. */
+.categories-toggle {
+  display: none;
+  flex-shrink: 0;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--ink);
+  border-radius: 8px;
+  width: 38px;
+  height: 38px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.categories-toggle:hover { background: var(--border); }
+.categories-drawer {
+  max-height: 0;
+  overflow: hidden;
+  background: var(--surface);
+  border-bottom: 1px solid transparent;
+  transition: max-height 0.3s ease, border-color 0.3s ease;
+}
+.categories-drawer.open {
+  max-height: 70vh;
+  overflow-y: auto;
+  border-bottom-color: var(--border);
+}
+.categories-drawer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 14px 24px 20px;
+}
+.categories-drawer-grid a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 14px;
+  min-height: 48px;
+  border-radius: 10px;
+  background: var(--surface-2);
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 0.92rem;
+  text-align: center;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.categories-drawer-grid a:hover, .categories-drawer-grid a.active {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* mobile-only bottom tab bar - thumb-reach access to the 4 most-used
+   destinations, each a full 48px+ tap target (the horizontal category
+   pills above are ~34px tall, short of the 44-48px minimum recommended
+   touch-target size) */
+.mobile-tab-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 150;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 6px 4px calc(6px + env(safe-area-inset-bottom, 0px));
+  align-items: center;
+  justify-content: space-around;
+}
+.mobile-tab-bar a, .mobile-tab-bar button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  flex: 1;
+  min-height: 48px;
+  padding: 6px 2px;
+  border: none;
+  background: none;
+  color: var(--ink-soft);
+  font-family: inherit;
+  font-size: 0.66rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.mobile-tab-bar a.active, .mobile-tab-bar a:hover { color: var(--accent); }
+
 /* Layout */
 .grid, .static-page {
   max-width: 1120px;
@@ -1383,6 +1478,7 @@ html.dark-mode .site-header {
 @media (max-width: 1024px) {
   .site-header { flex-wrap: wrap; }
   .categories { order: 3; width: 100%; overflow-x: auto; flex-wrap: nowrap; }
+  .categories-toggle { display: flex; }
 }
 
 /* Magazine */
@@ -1515,6 +1611,8 @@ html.dark-mode .site-header {
   .cat-section-head { flex-direction: column; align-items: flex-start; gap: 8px; }
   .magazine-cover { height: 240px; }
   .magazine-cover-overlay h1 { font-size: 1.4rem; }
+  .mobile-tab-bar { display: flex; }
+  body { padding-bottom: 60px; }
 }
 
 /* Cookie consent banner */

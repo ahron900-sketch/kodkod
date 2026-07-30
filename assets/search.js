@@ -34,33 +34,63 @@ window.kkAffinity = (function () {
 })();
 
 (function () {
-  const toggle = document.getElementById("search-toggle");
-  const drawer = document.getElementById("search-drawer");
-  if (toggle && drawer) {
-    function closeDrawer() {
-      drawer.classList.remove("open");
-      toggle.setAttribute("aria-expanded", "false");
-    }
-    function openDrawer() {
-      drawer.classList.add("open");
-      toggle.setAttribute("aria-expanded", "true");
-      const input = document.getElementById("search-drawer-input");
-      if (input) input.focus();
-    }
-    toggle.addEventListener("click", function (e) {
-      e.stopPropagation();
-      if (drawer.classList.contains("open")) closeDrawer();
-      else openDrawer();
-    });
-    document.addEventListener("click", function (e) {
-      if (drawer.classList.contains("open") && !drawer.contains(e.target) && e.target !== toggle) {
-        closeDrawer();
-      }
-    });
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") closeDrawer();
+  // Two header drawers (search, categories) - sharing one open/close
+  // helper so opening either one closes the other, instead of both being
+  // open and stacked at once. The bottom tab bar's own buttons drive these
+  // same toggles rather than duplicating the logic.
+  const panels = [
+    { toggle: document.getElementById("search-toggle"), drawer: document.getElementById("search-drawer"), focusId: "search-drawer-input" },
+    { toggle: document.getElementById("categories-toggle"), drawer: document.getElementById("categories-drawer"), focusId: null },
+  ].filter(function (p) { return p.toggle && p.drawer; });
+
+  function closeAll(except) {
+    panels.forEach(function (p) {
+      if (p === except) return;
+      p.drawer.classList.remove("open");
+      p.toggle.setAttribute("aria-expanded", "false");
     });
   }
+
+  panels.forEach(function (p) {
+    function isOpen() { return p.drawer.classList.contains("open"); }
+    function open() {
+      closeAll(p);
+      p.drawer.classList.add("open");
+      p.toggle.setAttribute("aria-expanded", "true");
+      if (p.focusId) {
+        const input = document.getElementById(p.focusId);
+        if (input) input.focus();
+      }
+    }
+    function close() {
+      p.drawer.classList.remove("open");
+      p.toggle.setAttribute("aria-expanded", "false");
+    }
+    p.toggle.addEventListener("click", function (e) {
+      e.stopPropagation();
+      if (isOpen()) close(); else open();
+    });
+    p.open = open; // exposed so the tab bar buttons below can reuse it
+  });
+
+  document.addEventListener("click", function (e) {
+    panels.forEach(function (p) {
+      if (p.drawer.classList.contains("open") && !p.drawer.contains(e.target) && e.target !== p.toggle && !p.toggle.contains(e.target)) {
+        p.drawer.classList.remove("open");
+        p.toggle.setAttribute("aria-expanded", "false");
+      }
+    });
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closeAll(null);
+  });
+
+  const tabSearch = document.getElementById("tab-search-toggle");
+  const tabCategories = document.getElementById("tab-categories-toggle");
+  const searchPanel = panels.filter(function (p) { return p.toggle.id === "search-toggle"; })[0];
+  const categoriesPanel = panels.filter(function (p) { return p.toggle.id === "categories-toggle"; })[0];
+  if (tabSearch && searchPanel) tabSearch.addEventListener("click", function (e) { e.stopPropagation(); searchPanel.open(); });
+  if (tabCategories && categoriesPanel) tabCategories.addEventListener("click", function (e) { e.stopPropagation(); categoriesPanel.open(); });
 })();
 
 (function () {

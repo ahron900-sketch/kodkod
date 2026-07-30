@@ -278,6 +278,9 @@ PAGE_HEAD = """<!DOCTYPE html>
 <header class="site-header">
   <a href="/" class="logo">קודקוד <span>חדשות</span></a>
   <nav class="categories">{cat_links}</nav>
+  <button class="categories-toggle" id="categories-toggle" aria-label="כל הקטגוריות" aria-expanded="false">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+  </button>
   <button class="search-toggle" id="search-toggle" aria-label="חיפוש" aria-expanded="false">
     <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
   </button>
@@ -288,6 +291,27 @@ PAGE_HEAD = """<!DOCTYPE html>
     <button type="submit">חיפוש</button>
   </form>
 </div>
+<div class="categories-drawer" id="categories-drawer">
+  <nav class="categories-drawer-grid">{cat_links}</nav>
+</div>
+<nav class="mobile-tab-bar">
+  <a href="/">
+    <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v10h14V10"/></svg>
+    <span>בית</span>
+  </a>
+  <button type="button" id="tab-categories-toggle">
+    <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+    <span>קטגוריות</span>
+  </button>
+  <button type="button" id="tab-search-toggle">
+    <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <span>חיפוש</span>
+  </button>
+  <a href="/tv.html">
+    {video_icon_svg}
+    <span>טלוויזיה</span>
+  </a>
+</nav>
 """
 
 PAGE_FOOT = """
@@ -543,6 +567,7 @@ def write_page(path, title, description, categories, active_cat, body_html,
         structured_data=structured_data,
         extra_rss_link=extra_rss_link,
         robots_content=robots_content,
+        video_icon_svg=VIDEO_ICON_SVG,
     )
     full = full.replace("<header class=\"site-header\">",
                          f'{WEATHER_BAR_HTML}\n<div class="ticker"><div class="ticker-move">{html.escape(ticker_text)}</div></div>\n<header class="site-header">')
