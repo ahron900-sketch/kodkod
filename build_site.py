@@ -68,18 +68,32 @@ WEATHER_CITIES = [
 HEBREW_WEEKDAYS = ["יום שני", "יום שלישי", "יום רביעי", "יום חמישי", "יום שישי", "יום שבת", "יום ראשון"]
 HEBREW_MONTHS = ["ינואר", "פברואר", "מרץ", "אפריל", "מאי", "יוני",
                  "יולי", "אוגוסט", "ספטמבר", "אוקטובר", "נובמבר", "דצמבר"]
-# Standard WMO weather codes (open-meteo's own documented scheme)
+# Standard WMO weather codes (open-meteo's own documented scheme) - mapped
+# to icon keys, never colorful emoji (site-wide rule: monochrome
+# stroke-based SVGs only, same idiom as every other icon on the site)
 WEATHER_CODE_MAP = {
-    0: ("בהיר", "☀️"), 1: ("בהיר בעיקר", "🌤️"), 2: ("מעונן חלקית", "⛅"), 3: ("מעונן", "☁️"),
-    45: ("ערפילי", "🌫️"), 48: ("ערפילי", "🌫️"),
-    51: ("טפטוף קל", "🌦️"), 53: ("טפטוף", "🌦️"), 55: ("טפטוף חזק", "🌦️"),
-    56: ("טפטוף קפוא", "🌧️"), 57: ("טפטוף קפוא חזק", "🌧️"),
-    61: ("גשם קל", "🌧️"), 63: ("גשם", "🌧️"), 65: ("גשם חזק", "🌧️"),
-    66: ("גשם קפוא", "🌧️"), 67: ("גשם קפוא חזק", "🌧️"),
-    71: ("שלג קל", "❄️"), 73: ("שלג", "❄️"), 75: ("שלג כבד", "❄️"), 77: ("גרגירי שלג", "❄️"),
-    80: ("ממטרים קלים", "🌦️"), 81: ("ממטרים", "🌦️"), 82: ("ממטרים חזקים", "🌦️"),
-    85: ("ממטרי שלג קלים", "🌨️"), 86: ("ממטרי שלג", "🌨️"),
-    95: ("סופת רעמים", "⛈️"), 96: ("סופת רעמים עם ברד", "⛈️"), 99: ("סופת רעמים עם ברד כבד", "⛈️"),
+    0: ("בהיר", "sun"), 1: ("בהיר בעיקר", "sun"), 2: ("מעונן חלקית", "partly-cloudy"), 3: ("מעונן", "cloud"),
+    45: ("ערפילי", "fog"), 48: ("ערפילי", "fog"),
+    51: ("טפטוף קל", "drizzle"), 53: ("טפטוף", "drizzle"), 55: ("טפטוף חזק", "drizzle"),
+    56: ("טפטוף קפוא", "rain"), 57: ("טפטוף קפוא חזק", "rain"),
+    61: ("גשם קל", "rain"), 63: ("גשם", "rain"), 65: ("גשם חזק", "rain"),
+    66: ("גשם קפוא", "rain"), 67: ("גשם קפוא חזק", "rain"),
+    71: ("שלג קל", "snow"), 73: ("שלג", "snow"), 75: ("שלג כבד", "snow"), 77: ("גרגירי שלג", "snow"),
+    80: ("ממטרים קלים", "drizzle"), 81: ("ממטרים", "drizzle"), 82: ("ממטרים חזקים", "rain"),
+    85: ("ממטרי שלג קלים", "snow"), 86: ("ממטרי שלג", "snow"),
+    95: ("סופת רעמים", "storm"), 96: ("סופת רעמים עם ברד", "storm"), 99: ("סופת רעמים עם ברד כבד", "storm"),
+}
+
+_SVG_OPEN = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">'
+WEATHER_ICONS = {
+    "sun": _SVG_OPEN + '<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>',
+    "partly-cloudy": _SVG_OPEN + '<circle cx="8" cy="9" r="3.2"/><path d="M8 3.5v1.5M3.5 9H5M11.5 6.5l-1 1M4.5 5.5l1 1"/><path d="M9 20h7a3.5 3.5 0 0 0 .4-6.98A5 5 0 0 0 7 12.5"/></svg>',
+    "cloud": _SVG_OPEN + '<path d="M6 19h11a4 4 0 0 0 .5-7.97A6 6 0 0 0 6 12.2 4 4 0 0 0 6 19Z"/></svg>',
+    "fog": _SVG_OPEN + '<path d="M6 15h11a4 4 0 0 0 .5-7.97A6 6 0 0 0 6 8.2 4 4 0 0 0 6 15Z"/><path d="M4 19h16M4 22h11"/></svg>',
+    "drizzle": _SVG_OPEN + '<path d="M6 13h11a4 4 0 0 0 .5-7.97A6 6 0 0 0 6 6.2 4 4 0 0 0 6 13Z"/><path d="M9 17.5v2M13 17.5v2M17 17.5v2"/></svg>',
+    "rain": _SVG_OPEN + '<path d="M6 13h11a4 4 0 0 0 .5-7.97A6 6 0 0 0 6 6.2 4 4 0 0 0 6 13Z"/><path d="M8 17l-1.5 4M13 17l-1.5 4M18 17l-1.5 4"/></svg>',
+    "snow": _SVG_OPEN + '<path d="M6 12h11a4 4 0 0 0 .5-7.97A6 6 0 0 0 6 5.2 4 4 0 0 0 6 12Z"/><path d="M8 17v4M8 17.5l-1.7 1M8 17.5l1.7 1M8 20.5l-1.7-1M8 20.5l1.7-1M16 17v4M16 17.5l-1.7 1M16 17.5l1.7 1M16 20.5l-1.7-1M16 20.5l1.7-1"/></svg>',
+    "storm": _SVG_OPEN + '<path d="M6 12h11a4 4 0 0 0 .5-7.97A6 6 0 0 0 6 5.2 4 4 0 0 0 6 12Z"/><path d="m13 15-3 5h3l-2 4"/></svg>',
 }
 
 
@@ -90,7 +104,7 @@ def hebrew_date_str(dt):
 
 
 def weather_desc(code):
-    return WEATHER_CODE_MAP.get(code, ("", "🌡️"))
+    return WEATHER_CODE_MAP.get(code, ("", "cloud"))
 
 
 def fetch_weather():
@@ -104,12 +118,12 @@ def fetch_weather():
             with urllib.request.urlopen(url, timeout=8) as resp:
                 data = json.loads(resp.read().decode("utf-8"))
             current = data.get("current", {})
-            desc, emoji = weather_desc(current.get("weather_code"))
+            desc, icon_key = weather_desc(current.get("weather_code"))
             results.append({
                 "name": name,
                 "temp": current.get("temperature_2m"),
                 "desc": desc,
-                "emoji": emoji,
+                "icon": WEATHER_ICONS.get(icon_key, WEATHER_ICONS["cloud"]),
                 "daily": data.get("daily", {}),
             })
         except Exception as e:
@@ -497,11 +511,21 @@ _ad_counter = {"i": 0}
 # treatment, not present on the plain content-recommendation slide. Position
 # assigned inline per-icon (not via CSS nth-child) so the placement doesn't
 # silently break if the surrounding markup is ever reordered.
+def _icon_svg(inner, size=22):
+    return (f'<svg viewBox="0 0 24 24" width="{size}" height="{size}" fill="none" '
+            f'stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{inner}</svg>')
+
+
+ICON_MEGAPHONE = _icon_svg('<path d="M3 11v2a2 2 0 0 0 2 2h1l1 5h2l-1-5h1l9 4V6l-9 4H6a2 2 0 0 0-2 2Z"/><path d="M19 9.5a3 3 0 0 1 0 5"/>')
+ICON_SPARKLE = _icon_svg('<path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/>', size=18)
+ICON_ROCKET = _icon_svg('<path d="M12 2c2.5 2 4 5.5 4 9 0 2-.7 3.8-1.5 5.3L12 19l-2.5-2.7C8.7 14.8 8 13 8 11c0-3.5 1.5-7 4-9Z"/><circle cx="12" cy="10" r="1.6"/><path d="M9 16.5 6 20M15 16.5l3 3.5M10 19l-1 3M14 19l1 3"/>')
+ICON_TARGET = _icon_svg('<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/>', size=19)
+
 AD_PROMO_ICONS = [
-    ("📢", "top:14%; left:8%; animation-delay:0s;"),
-    ("✨", "top:62%; left:4%; font-size:1.1rem; animation-delay:0.8s;"),
-    ("🚀", "top:18%; right:10%; animation-delay:1.6s;"),
-    ("🎯", "top:66%; right:6%; font-size:1.15rem; animation-delay:2.4s;"),
+    (ICON_MEGAPHONE, "top:14%; left:8%; animation-delay:0s;"),
+    (ICON_SPARKLE, "top:62%; left:4%; animation-delay:0.8s;"),
+    (ICON_ROCKET, "top:18%; right:10%; animation-delay:1.6s;"),
+    (ICON_TARGET, "top:66%; right:6%; animation-delay:2.4s;"),
 ]
 
 
@@ -691,29 +715,78 @@ ABOUT_BODY = """
   <p>יש לכם משוב, תיקון, סקופ, או שאלה? אתם מוזמנים <a href="/tip-line.html">לשלוח לנו הודעה</a>. מעוניינים לפרסם אצלנו? מוזמנים לבקר ב<a href="/advertise.html">עמוד הפרסום</a>.</p>
 </main>"""
 
+ICON_PIN = _icon_svg('<path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.4"/>', size=26)
+ICON_TAG = _icon_svg('<path d="M20 12.5 12.5 20a1.5 1.5 0 0 1-2.1 0L4 13.6a1.5 1.5 0 0 1 0-2.1L11.5 4H18a2 2 0 0 1 2 2v6.5Z"/><circle cx="15.5" cy="8.5" r="1.2"/>', size=26)
+ICON_BOLT = _icon_svg('<path d="M13 3 5 13.5h5.5L11 21l8-10.5h-5.5L13 3Z"/>', size=26)
+ICON_PALETTE = _icon_svg('<path d="M12 3a9 9 0 1 0 0 18c1.2 0 2-1 2-2 0-.6-.2-1-.5-1.4-.3-.3-.5-.7-.5-1.1 0-1 .8-1.5 1.8-1.5H17a4 4 0 0 0 4-4c0-4.4-4-8-9-8Z"/><circle cx="7.5" cy="10.5" r="1.1"/><circle cx="10.5" cy="7" r="1.1"/><circle cx="15" cy="7.5" r="1.1"/><circle cx="17" cy="11" r="1.1"/>', size=26)
+ICON_PERSON = _icon_svg('<circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6"/>', size=30)
+ICON_MAIL = _icon_svg('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/>', size=30)
+ICON_CHECK = _icon_svg('<circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.5 2.5L16 9"/>', size=30)
+
+ADVERTISE_INFO_CARDS = [
+    (ICON_PIN, "איפה זה מופיע", "באנר בעמוד הבית, בין מקטעי הקטגוריות, בסיום כל כתבה, ובצדי העמוד בדסקטופ."),
+    (ICON_TAG, "המחיר", "הפעם זה באמת חינם - ללא עלות, שבוע אחד לפחות, ללא התחייבות מעבר לכך."),
+    (ICON_BOLT, "התהליך", "שולחים חומר מוכן בטופס למטה, עובר אישור ידני, ובדרך כלל עולה לאוויר תוך יום."),
+    (ICON_PALETTE, "מה שאנחנו לא עושים", "אנחנו לא עורכים או יוצרים את הפרסומת - רק מעלים חומר שמגיע מוכן בדיוק כפי שצריך."),
+]
+
+ADVERTISE_FAQ = [
+    ("איזה פורמט תמונה אתם צריכים?",
+     "תמונה או GIF ביחס אורך-רוחב נוח - בסביבות 3:1 עד 16:9 לבאנרים אופקיים, ו-1:2 (לדוגמה 300x600 פיקסלים) לבאנרים אנכיים בצדי העמוד. קובץ JPG, PNG, WebP או GIF."),
+    ("אתם עורכים או מעצבים את הפרסומת בשבילי?",
+     "לא. אנחנו מעלים בדיוק את מה שנשלח - חומר צריך להגיע מוכן, כולל כל הטקסט (כותרת, תיאור, טקסט כפתור) וקישור היעד."),
+    ("כמה זמן לוקח עד שהפרסומת עולה לאוויר?",
+     "הבקשה עוברת בדיקה ואישור ידני מצידנו - במרבית המקרים תוך יום מרגע שהחומר מגיע מוכן ותקין."),
+    ("יש עלות כלשהי?",
+     "לא, כרגע זה באמת חינם. אין תשלום, ואין התחייבות מעבר לשבוע ההופעה הראשון."),
+    ("יש התחייבות ארוכת טווח?",
+     "לא - שבוע אחד הוא משך ההופעה המינימלי, ואין מחויבות שלנו להארכה מעבר לכך."),
+    ("איפה בדיוק הפרסומת תוצג?",
+     "תלוי בסוג הבאנר שנשלח: אופקי - בעמוד הבית ובין קטגוריות; אנכי - בצדי העמוד בתצוגת דסקטופ רחבה."),
+]
+
+
+def _advertise_faq_html():
+    items = []
+    for q, a in ADVERTISE_FAQ:
+        items.append(f"""
+    <details class="faq-item">
+      <summary>{html.escape(q)}<span class="faq-toggle">+</span></summary>
+      <p>{html.escape(a)}</p>
+    </details>""")
+    return "".join(items)
+
+
+def _advertise_info_cards_html():
+    cards = []
+    for icon, title, desc in ADVERTISE_INFO_CARDS:
+        cards.append(f"""
+    <div class="advertise-info-card">
+      <span class="advertise-info-icon">{icon}</span>
+      <h3>{html.escape(title)}</h3>
+      <p>{html.escape(desc)}</p>
+    </div>""")
+    return "".join(cards)
+
+
 ADVERTISE_BODY = f"""
-<main class="static-page">
-  <h1>פרסמו <span>אצלנו</span></h1>
-  <p class="lead">קודקוד חדשות מגיע לקהל קוראים רחב ומגוון. הפעם זה באמת חינם: שלחו לנו חומר פרסומי מוכן, ומחר הוא באוויר - ללא עלות, ללא התחייבות מעבר לשבוע הראשון.</p>
+<main class="static-page advertise-page">
+  <section class="advertise-hero">
+    <h1>פרסמו <span>אצלנו</span></h1>
+    <p class="lead">קודקוד חדשות מגיע לקהל קוראים רחב ומגוון. הפעם זה באמת חינם: שלחו לנו חומר פרסומי מוכן, ומחר הוא באוויר.</p>
+  </section>
 
-  <h2>מיקומי פרסום באתר</h2>
-  <ul>
-    <li><strong>באנר עמוד הבית:</strong> מתחת לכתבה הראשית, נצפה על ידי כל מבקר.</li>
-    <li><strong>בין קטגוריות:</strong> באנרים בין מקטעי הקטגוריות השונות בעמוד הבית.</li>
-    <li><strong>בתוך הכתבה:</strong> מיקום פרסומת בסיום כל כתבה, לפני אזור "עוד בנושא".</li>
-  </ul>
+  <section class="advertise-info-grid">{_advertise_info_cards_html()}
+  </section>
 
-  <h2>מה אנחנו צריכים מכם</h2>
-  <p>חשוב: <strong>אנחנו לא עורכים או יוצרים את הפרסומת עבורכם</strong> - רק אם החומר מגיע מוכן בדיוק כפי שצריך, פשוט מעלים אותו. אנא הכינו מראש:</p>
-  <ul>
-    <li><strong>תמונת רקע:</strong> תמונה רחבה (יחס אורך-רוחב נוח: בסביבות 3:1 עד 16:9), קובץ JPG/PNG/WebP.</li>
-    <li><strong>טקסט הפרסומת:</strong> כותרת קצרה (עד כ-60 תווים), שורת תיאור (עד כ-90 תווים), וטקסט לכפתור הקריאה לפעולה (למשל "לרכישה", "לפרטים נוספים").</li>
-    <li><strong>קישור יעד:</strong> לאן הפרסומת תוביל בלחיצה.</li>
-  </ul>
-  <p>שלחו את כל זה (קובץ התמונה, או קישור אליה) יחד עם הטקסטים בטופס למטה. משך ההופעה: <strong>שבוע אחד לפחות</strong>, ללא התחייבות ליותר מכך מהצד שלנו.</p>
+  <section class="advertise-faq">
+    <h2>שאלות <span>ותשובות</span></h2>
+    {_advertise_faq_html()}
+  </section>
 
-  <h2>השאירו פרטים</h2>
-  <div class="ad-wizard-card">
+  <section class="advertise-wizard-section">
+    <h2>השאירו <span>פרטים</span></h2>
+    <div class="ad-wizard-card">
     <div class="ad-wizard-progress">
       <span class="ad-wizard-dot active" data-dot="0"></span>
       <span class="ad-wizard-dot" data-dot="1"></span>
@@ -722,14 +795,14 @@ ADVERTISE_BODY = f"""
     </div>
     <form class="contact-form ad-wizard-form" action="{TIP_FORM_ACTION}" method="POST">
       <div class="ad-wizard-step active" data-step="0">
-        <span class="ad-wizard-icon">👋</span>
+        <span class="ad-wizard-icon">{ICON_PERSON}</span>
         <h3>קודם כל, מי אתם?</h3>
         <p class="ad-wizard-hint">שם מלא, שם חברה, או שם חברת הפרסום</p>
         <input type="text" name="name" placeholder="השם שלכם" required>
         <div class="ad-wizard-nav"><button type="button" class="ad-wizard-next">הבא ←</button></div>
       </div>
       <div class="ad-wizard-step" data-step="1">
-        <span class="ad-wizard-icon">✉️</span>
+        <span class="ad-wizard-icon">{ICON_MAIL}</span>
         <h3>איך נחזור אליכם?</h3>
         <p class="ad-wizard-hint">נשתמש בזה רק כדי לאשר ולתאם את ההעלאה</p>
         <input type="email" name="email" placeholder="אימייל" required>
@@ -739,7 +812,7 @@ ADVERTISE_BODY = f"""
         </div>
       </div>
       <div class="ad-wizard-step" data-step="2">
-        <span class="ad-wizard-icon">🎨</span>
+        <span class="ad-wizard-icon">{ICON_PALETTE}</span>
         <h3>פרטי הפרסומת</h3>
         <p class="ad-wizard-hint">קישור לתמונה המוכנה, ופירוט הכותרת/תיאור/טקסט כפתור/קישור יעד</p>
         <input type="text" name="creative_link" placeholder="קישור לתמונה/לחומר הפרסומי (אם קיים)">
@@ -750,7 +823,7 @@ ADVERTISE_BODY = f"""
         </div>
       </div>
       <div class="ad-wizard-step" data-step="3">
-        <span class="ad-wizard-icon">✅</span>
+        <span class="ad-wizard-icon">{ICON_CHECK}</span>
         <h3>כמעט סיימנו</h3>
         <p class="ad-wizard-hint">הבקשה תישלח לאישור ידני - נחזור אליכם ברגע שהפרסומת עולה לאוויר</p>
         <label class="consent-checkbox">
@@ -764,6 +837,7 @@ ADVERTISE_BODY = f"""
       </div>
     </form>
   </div>
+  </section>
 </main>"""
 
 TIP_LINE_BODY = f"""
@@ -1133,7 +1207,7 @@ def build():
         WEATHER_BAR_HTML = (
             '<a class="weather-bar" href="/weather.html">'
             f'<span class="weather-date">{html.escape(hebrew_date_str(datetime.now()))}</span>'
-            f'<span class="weather-now">{main_city["emoji"]} {html.escape(main_city["name"])} '
+            f'<span class="weather-now">{main_city["icon"]} {html.escape(main_city["name"])} '
             f'{round(main_city["temp"]) if main_city["temp"] is not None else "-"}°</span>'
             '</a>'
         )
@@ -1641,18 +1715,18 @@ def build():
             for i in range(len(days)):
                 d = datetime.strptime(days[i], "%Y-%m-%d")
                 day_name = HEBREW_WEEKDAYS[d.weekday()]
-                _, day_emoji = weather_desc(codes[i] if i < len(codes) else None)
+                _, day_icon_key = weather_desc(codes[i] if i < len(codes) else None)
                 day_rows.append(f"""
                 <div class="weather-day">
                   <span class="weather-day-name">{html.escape(day_name)}</span>
-                  <span class="weather-day-emoji">{day_emoji}</span>
+                  <span class="weather-day-icon">{WEATHER_ICONS.get(day_icon_key, WEATHER_ICONS["cloud"])}</span>
                   <span class="weather-day-temps">{round(highs[i])}° / {round(lows[i])}°</span>
                 </div>""")
             city_cards.append(f"""
             <div class="weather-city-card">
               <h2>{html.escape(city['name'])}</h2>
               <div class="weather-current">
-                <span class="weather-current-emoji">{city['emoji']}</span>
+                <span class="weather-current-icon">{city['icon']}</span>
                 <span class="weather-current-temp">{round(city['temp']) if city['temp'] is not None else '-'}°</span>
                 <span class="weather-current-desc">{html.escape(city['desc'])}</span>
               </div>

@@ -444,7 +444,11 @@ html.dark-mode .site-header {
   .side-rail .ad-slot {
     position: sticky;
     top: 90px;
-    height: 500px;
+    /* matches the supplied creative's real 300x600 (1:2) aspect ratio
+       exactly, at this box's 200px width - avoids the cover-fit crop that
+       made the previous 500px height (2.5:1) mismatch look like the
+       image was spilling past its edges */
+    height: 400px;
     margin: 32px 0 0;
     writing-mode: initial;
   }
@@ -634,7 +638,7 @@ html.dark-mode .site-header {
 .ad-promo-icon {
   position: absolute;
   z-index: 1;
-  font-size: 1.4rem;
+  color: #fff;
   opacity: 0.85;
   filter: drop-shadow(0 2px 6px rgba(0,0,0,0.25));
   animation: ad-promo-float 4.5s ease-in-out infinite;
@@ -701,6 +705,9 @@ html.dark-mode .site-header {
 }
 
 .ad-slot-compact .ad-slot-bg { animation-duration: 18s; }
+/* the supplied side-banner creative is already a full animated GIF - the
+   extra glass-shine sweep on top of it read as too busy/glitchy */
+.ad-side-banner .ad-slot-shine { display: none; }
 .ad-slot-compact {
   align-items: flex-end;
 }
@@ -1271,7 +1278,8 @@ html.dark-mode .site-header {
   padding-bottom: 16px;
   border-bottom: 1px solid var(--border);
 }
-.weather-current-emoji { font-size: 2rem; }
+.weather-current-icon { display: inline-flex; color: var(--accent); }
+.weather-current-icon svg { width: 32px; height: 32px; }
 .weather-current-temp { font-size: 2rem; font-weight: 800; }
 .weather-current-desc { color: var(--ink-soft); font-size: 0.95rem; }
 .weather-forecast { display: flex; flex-direction: column; gap: 6px; }
@@ -1283,7 +1291,8 @@ html.dark-mode .site-header {
   padding: 4px 0;
 }
 .weather-day-name { color: var(--ink-soft); flex: 1; }
-.weather-day-emoji { flex: 0 0 30px; text-align: center; }
+.weather-day-icon { flex: 0 0 30px; display: flex; justify-content: center; color: var(--ink-soft); }
+.weather-day-icon svg { width: 18px; height: 18px; }
 .weather-day-temps { font-weight: 700; }
 
 .comments-section {
@@ -1303,6 +1312,7 @@ html.dark-mode .site-header {
   letter-spacing: -0.01em;
 }
 .static-page h1 span { color: var(--accent); }
+.advertise-faq h2 span, .advertise-wizard-section h2 span { color: var(--accent); }
 .static-page .lead {
   font-size: 1.2rem;
   color: var(--ink-soft);
@@ -1404,7 +1414,7 @@ html.dark-mode .site-header {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
-.ad-wizard-icon { font-size: 2rem; line-height: 1; }
+.ad-wizard-icon { display: flex; justify-content: center; color: var(--accent); }
 .ad-wizard-step h3 { margin: 0; font-size: 1.15rem; font-weight: 800; }
 .ad-wizard-hint { margin: -6px 0 4px; font-size: 0.85rem; color: var(--ink-soft); }
 .ad-wizard-step .consent-checkbox { text-align: right; }
@@ -1419,6 +1429,78 @@ html.dark-mode .site-header {
   color: var(--ink) !important;
   border: 1px solid var(--border) !important;
 }
+
+/* Advertise page: hero + info cards + FAQ accordion, ahead of the wizard */
+.advertise-hero {
+  max-width: 720px;
+  margin: 0 auto 8px;
+  text-align: center;
+}
+.advertise-hero h1 { font-size: 2.6rem; }
+.advertise-hero .lead { font-size: 1.25rem; margin: 0 auto; }
+.advertise-info-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin: 40px 0;
+}
+.advertise-info-card {
+  padding: 26px 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.advertise-info-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.advertise-info-icon { display: flex; justify-content: center; color: var(--accent); margin-bottom: 14px; }
+.advertise-info-card h3 { margin: 0 0 8px; font-size: 1.05rem; font-weight: 800; }
+.advertise-info-card p { margin: 0; font-size: 0.9rem; color: var(--ink-soft); line-height: 1.6; }
+@media (max-width: 900px) { .advertise-info-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .advertise-info-grid { grid-template-columns: 1fr; } }
+
+.advertise-faq {
+  max-width: 720px;
+  margin: 48px auto;
+}
+.advertise-faq h2 { text-align: center; font-size: 1.6rem; }
+.faq-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.faq-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-toggle {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--surface-2);
+  color: var(--accent);
+  font-weight: 800;
+  transition: transform 0.2s ease;
+}
+.faq-item[open] .faq-toggle { transform: rotate(45deg); }
+.faq-item p { margin: 0; padding: 0 20px 18px; color: var(--ink-soft); line-height: 1.7; }
+
+.advertise-wizard-section { text-align: center; }
+.advertise-wizard-section h2 { font-size: 1.6rem; }
+.advertise-wizard-section .ad-wizard-card { text-align: initial; margin-inline: auto; }
 .form-error-msg { color: #c0392b; font-size: 0.85rem; margin: 4px 0 0; }
 .form-thanks {
   max-width: 480px;
