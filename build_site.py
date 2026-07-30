@@ -5,7 +5,7 @@ import glob
 import html
 import shutil
 import urllib.request
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from email.utils import format_datetime
 
 CONTENT_DIR = "content/news"
@@ -1044,9 +1044,22 @@ def build():
     # back clean keep their real image and are eligible like anything else;
     # they all still show normally on their own /tv.html page and category
     # grid, credited as usual.
+    # owner directive: the homepage's prominent slots (hero, bento, and each
+    # category's own lead) only ever show today-or-yesterday's articles -
+    # older content still exists on its category/archive pages, it just
+    # doesn't get to occupy the front page's real estate. Also: the hero
+    # specifically is meant to read as urgent/important news, not lifestyle
+    # content - recipes were already excluded, health joins that exclusion.
+    today = datetime.now().date()
+    yesterday = today - timedelta(days=1)
+
+    def is_fresh(a):
+        return a["dt"] != datetime.min and a["dt"].date() in (today, yesterday)
+
     HERO_SLIDE_COUNT = 5
     hero_candidates = [a for a in listable
-                       if a["category"] != RECIPE_CATEGORY
+                       if is_fresh(a)
+                       and a["category"] not in (RECIPE_CATEGORY, "בריאות")
                        and not (a["category"] == TV_CATEGORY and a.get("has_watermark"))
                        and a["source"] != "i24NEWS עברית"
                        and not a.get("quick_image")]
@@ -1083,7 +1096,8 @@ def build():
     # Bento/mosaic module: one large tile + a stack of smaller ones, instead
     # of dropping straight into a uniform grid right under the hero
     bento_candidates = pick_diverse(
-        [a for a in rest if a["category"] != RECIPE_CATEGORY
+        [a for a in rest if is_fresh(a)
+         and a["category"] not in (RECIPE_CATEGORY, "בריאות")
          and not (a["category"] == TV_CATEGORY and a.get("has_watermark"))
          and a["source"] != "i24NEWS עברית"
          and not a.get("quick_image")],
@@ -1113,7 +1127,7 @@ def build():
           <div class="bento-small-stack">{small_items}</div>
         </section>"""
 
-    quick_articles = pick_diverse([a for a in rest if a.get("is_quick")], 20, max_per_category=3)
+    quick_articles = pick_diverse([a for a in rest if a.get("is_quick") and is_fresh(a)], 20, max_per_category=3)
     quick_html = ""
     if quick_articles:
         # rendered twice back-to-back so the CSS marquee (assets/style.css,
@@ -1154,7 +1168,7 @@ def build():
     for c in sorted(categories, key=lambda c: (c == RECIPE_CATEGORY, c)):
         if c == TV_CATEGORY:
             continue
-        c_articles = [a for a in rest if a["category"] == c][:5]
+        c_articles = [a for a in rest if a["category"] == c and is_fresh(a)][:5]
         if not c_articles:
             continue
         cat_url = f"/category/{slugify(c, c)}.html"

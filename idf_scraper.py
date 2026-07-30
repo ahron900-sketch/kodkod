@@ -173,25 +173,58 @@ def get_image_dimensions(image_bytes):
 BAD_ASPECT_MAX = 2.4
 BAD_ASPECT_MIN = 0.42
 
+# Below this in either dimension reads as a thumbnail/tracking-pixel/broken
+# placeholder, not a real editorial photo - genuinely rejected, not just
+# downgraded like the aspect-ratio check above
+MIN_IMAGE_WIDTH = 200
+MIN_IMAGE_HEIGHT = 150
 
-def is_bad_image_aspect(image_url):
+
+def _fetch_image_chunk(image_url):
+    """Real bytes from the image URL (first 128KB, enough for any format's
+    dimension header) - shared by the aspect-ratio downgrade check and the
+    hard quality-reject gate below, so a bad/slow image source only costs
+    one request per article, not two. Returns None on any failure (network
+    error, timeout, non-2xx) - a genuinely unreachable image, not "couldn't
+    parse the bytes we got"."""
     if not image_url:
-        return False
+        return None
     try:
         req = urllib.request.Request(
             image_url,
             headers={"User-Agent": "Mozilla/5.0 (compatible; KodkodBot/1.0)", "Range": "bytes=0-131071"},
         )
         with urllib.request.urlopen(req, timeout=6) as resp:
-            chunk = resp.read(131_072)
+            return resp.read(131_072)
     except Exception:
-        return False
-    dims = get_image_dimensions(chunk)
+        return None
+
+
+def is_bad_image_aspect(chunk):
+    dims = get_image_dimensions(chunk) if chunk else None
     if not dims:
         return False
     width, height = dims
     ratio = width / height
     return ratio > BAD_ASPECT_MAX or ratio < BAD_ASPECT_MIN
+
+
+def is_low_quality_image(chunk):
+    """True only when we can positively confirm a problem - never for a
+    format get_image_dimensions() doesn't parse (WebP/AVIF are common on
+    Israeli news sites and would otherwise get wrongly rejected). A real,
+    non-trivial byte response with no parseable header is given the
+    benefit of the doubt, same fail-open philosophy as the rest of this
+    file; only a genuinely-measured too-small image is rejected."""
+    if not chunk:
+        return True  # image URL didn't resolve to anything at all
+    if len(chunk) < 800:
+        return True  # a real photo is never this few bytes - tracking pixel/broken stub
+    dims = get_image_dimensions(chunk)
+    if not dims:
+        return False
+    width, height = dims
+    return width < MIN_IMAGE_WIDTH or height < MIN_IMAGE_HEIGHT
 
 
 ARTICLE_TAG_RE = re.compile(r'<article[^>]*>(.*?)</article>', re.DOTALL | re.IGNORECASE)
@@ -725,20 +758,27 @@ def save_article(title, link, content, image_url, source_name, category, video_i
         notify_telegram(title, source_name, video_category, slugify(title, sanitize_filename(title)))
         return
 
-    # Filter 1: a real image is mandatory - try the RSS image first, then
-    # the article page's og:image; no image at all means the article is
-    # rejected outright, not just hidden from listings
+    # Filter 1: a real, reachable, non-trivial image is mandatory - try the
+    # RSS image first, then the article page's og:image. Previously this
+    # only checked that a URL *string* existed, never that it actually
+    # resolved to real image bytes - a dead link or a tracking-pixel-sized
+    # stub would still pass and publish. Now the image is genuinely
+    # fetched once and verified before the article is allowed through.
     if not image_url:
         image_url = fetch_og_image(link)
     if not image_url:
         print(f"נפסל (אין תמונה איכותית): {title}")
+        return
+    image_chunk = _fetch_image_chunk(image_url)
+    if is_low_quality_image(image_chunk):
+        print(f"נפסל (תמונה לא נטענת/איכות נמוכה מדי): {title}")
         return
 
     # A banner/strip-shaped image (not a normal photo) doesn't get rejected
     # outright - it's downgraded to the compact "quick" card style instead
     # of the large hero/bento treatment, similar to how a short news-in-brief
     # item is handled
-    quick_image = is_bad_image_aspect(image_url)
+    quick_image = is_bad_image_aspect(image_chunk)
 
     # Filter 2: need the full article body, not just a short RSS teaser.
     # Always attempt the real full-text fetch first (an RSS teaser is

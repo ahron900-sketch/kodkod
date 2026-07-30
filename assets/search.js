@@ -535,7 +535,16 @@ window.kkAffinity = (function () {
     }
   }
 
+  // guards against a second overlapping player even if the poster's
+  // hidden state is ever wrong for some other unforeseen reason - the
+  // CSS fix above should already prevent a re-click, this is a second,
+  // independent line of defense against ever creating two YT.Player
+  // instances in the same container (the actual symptom reported: video
+  // "running twice")
+  var started = false;
   playBtn.addEventListener("click", function () {
+    if (started) return;
+    started = true;
     if (poster) poster.hidden = true;
     loadApiAndCreatePlayer();
   });
@@ -887,4 +896,52 @@ window.kkAffinity = (function () {
       withScores.forEach(function (w) { grid.appendChild(w.el); });
     });
   } catch (e) {}
+})();
+
+(function () {
+  // Formspree forms (report/tip-line/advertise contact) default to a full
+  // page navigation to Formspree's own thank-you page on submit. Accept:
+  // application/json tells Formspree to respond with JSON instead of
+  // redirecting, so the submission can stay on the same page - the form
+  // is replaced in place with a short thank-you message instead of
+  // navigating away (per Formspree's own documented AJAX pattern:
+  // https://help.formspree.io/hc/en-us/articles/360013470814).
+  var forms = document.querySelectorAll(".contact-form, .report-form");
+  forms.forEach(function (form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var submitBtn = form.querySelector("button[type=submit]");
+      var originalLabel = submitBtn ? submitBtn.textContent : "";
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = "שולח...";
+      }
+      var existingError = form.querySelector(".form-error-msg");
+      if (existingError) existingError.remove();
+
+      fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      }).then(function (response) {
+        if (response.ok) {
+          var thanks = document.createElement("div");
+          thanks.className = "form-thanks";
+          thanks.innerHTML = "<strong>תודה!</strong><span>הפנייה נשלחה בהצלחה, נחזור אליכם בהקדם.</span>";
+          form.replaceWith(thanks);
+        } else {
+          throw new Error("submit failed");
+        }
+      }).catch(function () {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalLabel;
+        }
+        var errorMsg = document.createElement("p");
+        errorMsg.className = "form-error-msg";
+        errorMsg.textContent = "משהו השתבש - אפשר לנסות שוב?";
+        form.appendChild(errorMsg);
+      });
+    });
+  });
 })();

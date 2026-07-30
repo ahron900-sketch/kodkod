@@ -938,6 +938,11 @@ html.dark-mode .site-header {
   justify-content: center;
   cursor: pointer;
 }
+/* same bug as .kk-player-endcard had: unconditional display:flex above
+   beats the browser's own [hidden] default, so poster.hidden=true in the
+   click handler had no visual effect - the play button stayed clickable,
+   and a second click created a second overlapping YT.Player instance */
+.kk-player-poster[hidden] { display: none; }
 .kk-player-poster::before {
   content: "";
   position: absolute;
@@ -1276,6 +1281,21 @@ html.dark-mode .site-header {
   transition: opacity 0.2s ease;
 }
 .contact-form button:hover { opacity: 0.88; }
+.contact-form button:disabled, .report-form button:disabled { opacity: 0.6; cursor: default; }
+.form-error-msg { color: #c0392b; font-size: 0.85rem; margin: 4px 0 0; }
+.form-thanks {
+  max-width: 480px;
+  margin-top: 28px;
+  padding: 20px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.form-thanks strong { color: var(--accent); font-size: 1.1rem; }
+.report-form .form-thanks { max-width: none; margin-top: 0; padding: 14px; }
 
 /* Footer */
 .footer-promo {
