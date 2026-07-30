@@ -437,17 +437,16 @@ html.dark-mode .site-header {
 .side-rail {
   display: none;
   flex-shrink: 0;
-  width: 200px;
+  /* IAB standard "Half Page Ad" unit - 300x600 - the professional-site
+     standard for a vertical side placement */
+  width: 300px;
 }
-@media (min-width: 1500px) {
+@media (min-width: 1800px) {
   .side-rail { display: block; }
   .side-rail .ad-slot {
     position: sticky;
     top: 90px;
-    /* slightly taller than the creative's exact 300x600 (1:2) ratio would
-       give at this width (400px) - a small deliberate stretch per request,
-       cover-fit crops the tiny excess rather than leaving empty space */
-    height: 440px;
+    height: 600px;
     margin: 32px 0 0;
     writing-mode: initial;
   }
@@ -529,15 +528,11 @@ html.dark-mode .site-header {
   overflow: hidden;
   box-shadow: var(--shadow);
 }
-/* a pure-image ad (no title/body text to stretch the box) never grows past
-   min-height on its own, so a wide creative like the 1200x400 (3:1) center
-   banner was getting cover-fit into a box far thinner than its own aspect
-   ratio and cropped down to a sliver - locking a ratio fixes that. Width is
-   now set (900px); height reduced further than the image's native 3:1 by
-   going to 4:1 (900px -> 225px instead of 300px) - cover-fit crops a bit
-   more of the image's own vertical extent, a deliberate tradeoff for a
-   shorter box at this fixed width. */
-.ad-slot:has(.ad-center-banner) { aspect-ratio: 4 / 1; min-height: 0; max-width: 900px; }
+/* IAB standard "Billboard" ad unit - 970x250 - the professional-site
+   standard for a large horizontal in-content placement. A pure-image ad
+   (no title/body text) never grows past min-height on its own, so the
+   exact ratio has to be locked here rather than left to the content. */
+.ad-slot:has(.ad-center-banner) { aspect-ratio: 970 / 250; min-height: 0; max-width: 970px; }
 /* crossfade rotation between every ad-slide inside a slot - same technique
    as the homepage hero carousel (assets/search.js swaps .active) */
 .ad-slide {
