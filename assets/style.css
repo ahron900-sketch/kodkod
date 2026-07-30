@@ -444,11 +444,10 @@ html.dark-mode .site-header {
   .side-rail .ad-slot {
     position: sticky;
     top: 90px;
-    /* matches the supplied creative's real 300x600 (1:2) aspect ratio
-       exactly, at this box's 200px width - avoids the cover-fit crop that
-       made the previous 500px height (2.5:1) mismatch look like the
-       image was spilling past its edges */
-    height: 400px;
+    /* slightly taller than the creative's exact 300x600 (1:2) ratio would
+       give at this width (400px) - a small deliberate stretch per request,
+       cover-fit crops the tiny excess rather than leaving empty space */
+    height: 440px;
     margin: 32px 0 0;
     writing-mode: initial;
   }
