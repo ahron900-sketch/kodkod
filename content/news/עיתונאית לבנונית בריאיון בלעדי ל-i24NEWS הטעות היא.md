@@ -9,6 +9,6 @@ category: "טלוויזיה ושידורים חיים"
 video_id: "i4JwjNenx1o"
 ---
 
-עדכונים שוטפים בערוץ הוואטסאפ של i24NEWS
+
 
 [קרא את הכתבה המלאה במקור](https://www.youtube.com/shorts/i4JwjNenx1o)

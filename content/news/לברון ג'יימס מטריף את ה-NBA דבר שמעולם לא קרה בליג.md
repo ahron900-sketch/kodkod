@@ -8,8 +8,6 @@ link: "https://sports.walla.co.il/item/3856702"
 category: "ספורט"
 ---
 
-עודכן לאחרונה: 28.7.2026 / 9:50
-
 ההגעה של לברון ג'יימס לפילדלפיה משגעת את העיר, ואת הליגה כולה. "זה ללא ספק משנה את כללי המשחק", אומר כתב ESPN שאמס צ'ארניה, "אני חושב שזה מציב את פילדלפיה בעמדה שבה היא מן הסתם תקבל המון משחקים בטלוויזיה הארצית, כנראה הכי הרבה בליגה, הכי הרבה חשיפה. היא הופכת לקבוצת שהיא ה-סיפור, הכי מסקרנת ב-NBA, בגלל ג'יילן בראון ובגלל לברון ג'יימס. צירוף שני השחקנים האלה - שני שחקנים שבעבר שזכו בתואר MVP של סדרת הגמר - למועדון אחד במהלך פגרת הקיץ, זה דבר שמעולם לא קרה בתולדות ה-NBA.
 
 החלטה שתכניס לעיר מאות מיליוני דולרים/צילום מסך, שימוש לפי סעיף 27א לחוק זכויות יוצריםShams Charania on the impact of LeBron James joining the Sixers:"There's no doubt it's a complete game changer. I think it sets Philadelphia up to be obviously they're gonna get a ton of national TV games probably the most in the league, the most exposure, they become the most… pic.twitter.com/RbzQdsBujF

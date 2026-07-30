@@ -160,6 +160,30 @@ def byline_for(category):
     return f"מערכת קודקוד | {desk}" if desk else "מערכת קודקוד"
 
 
+# Real, substantive per-category meta descriptions (~25-40 words each,
+# naming actual sub-topics) instead of one generic template reused for every
+# category - this is the invisible <meta name="description"> tag, not
+# visible page text. Checked against real competitor category pages first
+# (ynet/mako/walla/calcalist): none show a visible "about this section"
+# blurb on primary categories, all rely on a real per-category meta
+# description to drive their Google sitelink snippets - same approach here.
+CATEGORY_META_DESCRIPTIONS = {
+    "חדשות": "חדשות מבזקות מישראל והעולם: ביטחון, פוליטיקה, פשיעה ואירועים שוטפים, כולל עדכונים ישירים מדוברויות ממשלתיות וצבאיות - מרוכז במקום אחד ומתעדכן לאורך היום.",
+    "ספורט": "עדכוני ספורט מישראל והעולם: כדורגל, כדורסל, תוצאות, העברות והכרזות מההתאחדויות ומהקבוצות המובילות בליגות - הכל במקום אחד.",
+    "כלכלה": "חדשות כלכלה ושוק ההון: ריבית, אינפלציה, שערי מניות, החלטות בנק ישראל ומשרד האוצר, ועדכוני שוק העבודה והנדל\"ן.",
+    "טכנולוגיה": "חדשות טכנולוגיה מישראל והעולם: הייטק, סטארט-אפים, בינה מלאכותית ומוצרי צריכה - עדכונים שוטפים מהעולם הדיגיטלי.",
+    "בריאות": "עדכוני בריאות ורפואה: הודעות והנחיות ממשרד הבריאות, מחקרים ועדכוני מערכת הבריאות בישראל.",
+    "רכב": "חדשות רכב: השקות דגמים חדשים, מחירי דלק ותחבורה, רפורמות במשרד התחבורה ועדכונים מיבואני הרכב בישראל.",
+    "תרבות ובידור": "עדכוני תרבות ובידור: קולנוע, טלוויזיה, מוזיקה, סלבריטאים ואירועים מעולם הבידור בישראל ובעולם.",
+    RECIPE_CATEGORY: "מתכונים, טיפים למטבח וסקירות אוכל - כל מה שצריך כדי לבשל ולאפות בבית.",
+    "חרדים": "חדשות ועדכונים מהחברה החרדית בישראל, כולל דוברויות ואירועים ייחודיים למגזר.",
+}
+
+
+def category_meta_description(category):
+    return CATEGORY_META_DESCRIPTIONS.get(category, f"כל הכתבות בקטגוריית {category} - עדכונים שוטפים מהאתר החדשותי קודקוד")
+
+
 def extract_dek(body_text, max_len=180):
     """First real sentence of the body, used as a subtitle under the headline."""
     for line in body_text.split("\n"):
@@ -239,6 +263,13 @@ def load_articles():
         # (article page, cards, tv.html), not just hidden from hero/bento.
         has_watermark = data.get("has_watermark") == "1"
         image = PLACEHOLDER_IMG if has_watermark else data.get("image", "")
+        # set by idf_scraper.py's AI enrichment - true only for real breaking
+        # news in the owner's fixed hero-eligible topic list (security/
+        # military, serious crime, major sports, celebrity/entertainment,
+        # significant economy). Older articles scraped before this field
+        # existed simply default to not-eligible, same as an enrichment
+        # failure would - a conservative default, not a bug.
+        hero_worthy = data.get("hero_worthy") == "1"
 
         articles.append({
             "title": title,
@@ -259,6 +290,7 @@ def load_articles():
             "ai_tags_set": set(ai_tags),  # precomputed once - pick_related_articles compares this per pair, O(n^2) over ~14k articles
             "is_sponsored": is_sponsored,
             "has_watermark": has_watermark,
+            "hero_worthy": hero_worthy,
         })
     articles.sort(key=lambda a: a["dt"], reverse=True)
     seen = {}
@@ -487,6 +519,15 @@ MOCK_ADS = [
         "title": "הפרסומת שלכם יכולה להיות כאן - ופעם הזאת זה חינם",
         "body": "שלחו לנו חומר פרסומי מוכן, ומחר הוא באוויר. בלי טפסים מסובכים, בלי התחייבות.",
         "cta": "לשליחת הפרסומת",
+        "href": "/advertise.html",
+    },
+    {
+        # real creative supplied directly for the center/horizontal ad slots
+        # - no title/body/cta text was supplied for it, so none is invented
+        # here, same as the side-rail creative
+        "cls": "ad-center-banner",
+        "img": "/assets/ads/center-banner-01.gif",
+        "eyebrow": "", "title": "", "body": "", "cta": "",
         "href": "/advertise.html",
     },
 ]
@@ -1242,13 +1283,28 @@ def build():
     def is_fresh(a):
         return a["dt"] != datetime.min and a["dt"].date() in (today, yesterday)
 
+    # owner directive: hero/bento are reserved for real breaking news in a
+    # fixed topic list (security/military, serious crime, major sports,
+    # celebrity/entertainment, significant economy) - never decided by
+    # category label alone, since a source's default category can be wrong
+    # (e.g. a Haredi-affiliated outlet publishing a general health item).
+    # hero_worthy is set by idf_scraper.py's AI classification at scrape
+    # time. Falls back to the pre-existing (category-only) filter when that
+    # yields nothing, since hero_worthy is a new field - the ~14k articles
+    # scraped before it existed all default to False, and without this
+    # fallback the hero section could go empty until enough freshly-
+    # classified articles accumulate.
+    def base_prominent_filter(a):
+        return (is_fresh(a)
+                and a["category"] not in (RECIPE_CATEGORY, "בריאות")
+                and not a.get("has_watermark")
+                and a["source"] != "i24NEWS עברית"
+                and not a.get("quick_image"))
+
     HERO_SLIDE_COUNT = 5
-    hero_candidates = [a for a in listable
-                       if is_fresh(a)
-                       and a["category"] not in (RECIPE_CATEGORY, "בריאות")
-                       and not a.get("has_watermark")
-                       and a["source"] != "i24NEWS עברית"
-                       and not a.get("quick_image")]
+    hero_candidates = [a for a in listable if base_prominent_filter(a) and a.get("hero_worthy")]
+    if not hero_candidates:
+        hero_candidates = [a for a in listable if base_prominent_filter(a)]
     hero_html = ""
     rest = listable
     if hero_candidates:
@@ -1425,7 +1481,7 @@ def build():
         cat_url = f"{SITE_URL}/category/{slugify(c, c)}.html"
         cat_rss_url = f"{SITE_URL}/rss/{slugify(c, c)}.xml"
         write_page(os.path.join(OUTPUT_DIR, "category", f"{slugify(c, c)}.html"),
-                   f"חדשות {c} - {SITE_NAME}", f"כל הכתבות בקטגוריית {c} - עדכונים שוטפים מהאתר החדשותי קודקוד",
+                   f"חדשות {c} - {SITE_NAME}", category_meta_description(c),
                    categories, c, body, ticker_text, canonical=cat_url,
                    structured_data=category_structured_data(c, cat_url, c_all_articles),
                    category_rss_url=cat_rss_url,

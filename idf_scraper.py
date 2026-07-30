@@ -296,6 +296,7 @@ DIV_PARAGRAPH_RE = re.compile(
 )
 TAG_STRIP_RE = re.compile(r'<[^>]+>')
 SCRIPT_STYLE_RE = re.compile(r'<(script|style)\b[^>]*>.*?</\1>', re.DOTALL | re.IGNORECASE)
+FIGCAPTION_RE = re.compile(r'<figcaption\b[^>]*>.*?</figcaption>', re.DOTALL | re.IGNORECASE)
 CONTENT_SLICE_SIZE = 20_000
 
 # words that show up in nav/cookie/menu junk but essentially never in real article prose -
@@ -332,6 +333,13 @@ def fetch_full_article_text(link, min_len_needed):
     if not scope:
         return ""
     scope = SCRIPT_STYLE_RE.sub("", scope)
+    # photo/video captions (e.g. Walla's <figcaption><span class="media-
+    # description">...</span><span class="slash-between">/</span><span
+    # class="media-credit">...</span></figcaption>, confirmed by fetching a
+    # real article page) are never article prose - stripped entirely before
+    # paragraph extraction, instead of leaking in as "caption/creditNEXT
+    # SENTENCE" glued with zero separator
+    scope = FIGCAPTION_RE.sub("", scope)
     raw_paragraphs = PARAGRAPH_RE.findall(scope)
     if not raw_paragraphs:
         raw_paragraphs = DIV_PARAGRAPH_RE.findall(scope)
@@ -340,7 +348,14 @@ def fetch_full_article_text(link, min_len_needed):
     for p in raw_paragraphs:
         if SCRIPT_LEAK_RE.search(p):
             continue
-        text = TAG_STRIP_RE.sub("", p).strip()
+        # some sources (Walla and others) put an entire multi-line article
+        # inside ONE <p> and separate lines with <br> rather than real <p>
+        # tags - stripping those to "" like every other tag glues the
+        # surrounding sentences together with zero separator ("...לוד.במשך
+        # תקופה..."). Block-boundary tags need to become whitespace first,
+        # everything else can still just disappear.
+        text = re.sub(r'<br\s*/?>|</p>|</div>|</li>|</h[1-6]>', ' ', p, flags=re.IGNORECASE)
+        text = TAG_STRIP_RE.sub("", text).strip()
         text = re.sub(r'\s+', ' ', text)
         text = html.unescape(text)
         text = CAPTION_SPLIT_RE.sub("", text).strip()
@@ -527,6 +542,41 @@ JUNK_PHRASE_PATTERNS = [
     r'עקבו אחרינו ב(?:פייסבוק|טוויטר|אינסטגרם)', r'הישארו מעודכנים',
     r'להצטרפות לערוץ (?:הטלגרם|הוואטסאפ)', r'לחצו כאן למעבר לערוץ',
     r'כתבה זו פורסמה לראשונה ב', r'תגובות\s*:?\s*\d+',
+    # Walla (and others) leave their own "last updated" page-metadata line
+    # inside the scraped body text - not part of the actual article prose
+    r'עודכן לאחרונה\s*:\s*\d{1,2}\.\d{1,2}\.\d{4}\s*/\s*\d{1,2}:\d{2}',
+    # Confirmed recurring native-ad/cross-promo/widget boilerplate (found by
+    # frequency-counting standalone lines across the whole corpus - each of
+    # these repeats across dozens to hundreds of otherwise-unrelated
+    # articles, unlike genuine reporting text which never repeats verbatim
+    # like this) - never real article content, always safe to remove
+    r'עדכונים שוטפים בערוץ הוואטסאפ של i24NEWS',
+    r'לצפייה בכתבות וניהול הנושאים, יש ללחוץ על כפתור בסרגל העליון',
+    r'השאלון שיעשה לכם סדר\s*-\s*מי המפלגה שהכי מתאימה לעמדות שלכם\??',
+    r'סקירת המסחר: דיווחים שוטפים, מגמות, מדדים, שערי מניות, אג"ח, מט"ח וסחורות והמלצות אנליסטים',
+    r'רנו קפצ.ר החדשה: קטנה במידות, גדולה באופי',
+    r'עקבו אחרינו באינסטגרם\s*:\s*/\s*i24news_he',
+    r'הלוואה לחינוך: איך להשקיע בעתיד הילדים בלי להיכנס לסחרור כלכלי\??',
+    r'3 מנויים ב-75 שקלים וגם חודש חינם! וואלה מובייל חוסכת המון',
+    r'מתוך המהדורה המרכזית, ערוץ 15 בשלט',
+    r'המסחר חוזר לצעירים: בנק הפועלים מקל על הצעד הראשון ומציג מהלך חדש בשוק ההון',
+    r'רוצים להנות מאינטרנט מהיר וחבילת טלווזיה בזול\? זה אפשרי!',
+    r'הצטרפו לוואלה [Ff]iber ושדרגו את חווית הגלישה והטלוויזיה בזול!',
+    r'המהפכה של וואלה Fiber שתחסוך לכם בעלויות הטלוויזיה והאינטרנט',
+    r'הצטרפו לוואלה פייבר ותהנו מאינטרנט וטלוויזיה במחיר שלא הכרתם',
+    r'עוברים עכשיו לוואלה מובייל ונהנים מ-3 מנויים ב-\s*75 שקלים',
+    r'חווית גלישה וטלוויזיה איכותית בזול\? עכשיו זה אפשרי!',
+    r'איזו תוכנית לתואר שני במנהל עסקים מציעה הכי הרבה קורסי בחירה\??',
+    r'איך נראה עתיד ההשקעות בנדל"ן: להצליח בשוק משתנה בעידן של חוסר ודאות',
+    r'שוקלים לקחת הלוואה אך מפחדים\? המדריך לצעדים פיננסים חכמים',
+    r'נלחמים ביוקר הנדל"ן: כך תוסיפו לבית חדר ביום אחד',
+    r'גיל המעבר: התקופה שמגיעה בלי הוראות הפעלה',
+    r'הצלחה אמיתית: שביעות רצון של למעלה מ-?94% בטיפולי הרזיה',
+    r"האזינו ל[^:\n]{0,70}ב'קול חי':?",
+    r'מוזמנים לבקר באתר שלנו:?',
+    r'עקבו אחרינו גם בפלטפורמות הנוספות שלנו',
+    r'מתוך מגזין השבת, ערוץ 15 בשלט',
+    r'קאר ניוז ליווי וייעוץ בתהליכי רכישת רכב, קנייה ומכירה, ופתרונות מימון\.\s*[\d\-]+',
 ]
 JUNK_PHRASE_RE = re.compile("|".join(JUNK_PHRASE_PATTERNS))
 
@@ -585,11 +635,21 @@ GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
 # GROQ_VISION_MODEL's watermark detection above).
 GROQ_MODEL = "qwen/qwen3.6-27b"
 GROQ_VISION_MODEL = "qwen/qwen3.6-27b"
+# The site's fixed category set (must match build_site.py's DESK_BY_CATEGORY/
+# category pages exactly - not TV_CATEGORY, which is assigned separately by
+# the video/live-broadcast branch, never by this general RSS path)
+VALID_CATEGORIES = [
+    "חדשות", "ספורט", "כלכלה", "טכנולוגיה", "בריאות", "רכב",
+    "תרבות ובידור", "בישול ומתכונים", "חרדים",
+]
+
 AI_ENRICH_SYSTEM_PROMPT = (
     "אתה עוזר עריכה לאתר חדשות ישראלי. תקבל כותרת וגוף כתבה אמיתית שנשאבה "
-    "ממקור חדשות. בצע שלוש משימות, אך ורק על סמך העובדות שמופיעות בטקסט "
-    "עצמו - ללא הוספת פרטים, השערות, או דעות שאינם מופיעים בו, וללא ניסוח "
-    "שמציג את התוצר כאילו הוא הכתבה המקורית או כאילו אתה מקור הידיעה:\n"
+    "ממקור חדשות (הקטגוריה המוצעת נקבעת כרגע לפי המקור עצמו, ולכן עלולה "
+    "להיות שגויה אם המקור מפרסם גם תוכן שאינו בנושא הרגיל שלו). בצע חמש "
+    "משימות, אך ורק על סמך העובדות שמופיעות בטקסט עצמו - ללא הוספת פרטים, "
+    "השערות, או דעות שאינם מופיעים בו, וללא ניסוח שמציג את התוצר כאילו הוא "
+    "הכתבה המקורית או כאילו אתה מקור הידיעה:\n"
     "1. cleaned_content - הטקסט המלא, מוגה: תקן שגיאות כתיב, פיסוק ותחביר "
     "בלבד. אסור לקצר, לסכם, להשמיט קטעים, לשנות עובדות, או לנסח מחדש "
     "משפטים באופן שמשנה את המשמעות. אם אינך יכול להחזיר את הטקסט המלא, "
@@ -598,8 +658,18 @@ AI_ENRICH_SYSTEM_PROMPT = (
     "בודדת מתוך הטקסט.\n"
     "3. tags - רשימה של 3-4 מילות מפתח סמנטיות (שמות אנשים, ארגונים, "
     "מקומות, או נושאים ספציפיים המוזכרים בכתבה בפועל).\n"
+    "4. verified_category - הקטגוריה שהכי מתאימה לתוכן בפועל, מהרשימה "
+    "הסגורה הבאה בדיוק: " + ", ".join(VALID_CATEGORIES) + ". לדוגמה: כתבה "
+    "על סקר תחלואה של משרד הבריאות ששייכת קטגורית מקור 'חרדים' רק בגלל "
+    "שהמקור הוא אתר חרדי - שייכת בפועל ל'בריאות'.\n"
+    "5. hero_worthy - true אך ורק אם זו ידיעת חדשות מבזקת אמיתית באחד "
+    "מהנושאים הבאים: ביטחון/צבא, פשע חמור (רצח, טרור, פיגוע), ספורט "
+    "משמעותי, סלבריטאים/תרבות ובידור, או כלכלה משמעותית. false בכל מקרה "
+    "אחר (כולל בריאות, מתכונים, רכב, טכנולוגיה, ותוכן חדשותי כללי/שגרתי "
+    "שאינו מבזק אמיתי).\n"
     'השב אך ורק ב-JSON תקני: {"cleaned_content": "...", "takeaways": '
-    '["...", "..."], "tags": ["...", "..."]}'
+    '["...", "..."], "tags": ["...", "..."], "verified_category": "...", '
+    '"hero_worthy": false}'
 )
 
 
@@ -649,7 +719,15 @@ def enrich_article_with_ai(title, content):
         tags = [re.sub(r'\s+', ' ', str(t)).strip().strip(',') for t in (parsed.get("tags") or [])]
         tags = [t for t in tags if t and ',' not in t][:4]
 
-        return {"content": content_out, "takeaways": takeaways, "tags": tags}
+        verified_category = parsed.get("verified_category")
+        if verified_category not in VALID_CATEGORIES:
+            verified_category = None
+        hero_worthy = bool(parsed.get("hero_worthy") is True)
+
+        return {
+            "content": content_out, "takeaways": takeaways, "tags": tags,
+            "verified_category": verified_category, "hero_worthy": hero_worthy,
+        }
     except Exception as e:
         print(f"העשרת AI נכשלה (מדלג, הכתבה עדיין תתפרסם): {e}")
         return {}
@@ -778,8 +856,13 @@ VIDEO_ENRICH_SYSTEM_PROMPT = (
     "4. insufficient_content - true אם התיאור הגולמי כה דל שאין ממנו מספיק "
     "מידע עובדתי אמיתי לבנות כותרת ותקציר משמעותיים (למשל רק לינקים "
     "לרשתות חברתיות, או תאריך בלבד) - false אחרת. "
+    "5. hero_worthy - true אך ורק אם זו ידיעת חדשות מבזקת אמיתית באחד "
+    "מהנושאים הבאים: ביטחון/צבא, פשע חמור (רצח, טרור, פיגוע), ספורט "
+    "משמעותי (תוצאה/העברה/הכרזה משמעותית, לא אימון או תוכן שגרתי), "
+    "סלבריטאים/תרבות ובידור, או כלכלה משמעותית. false בכל מקרה אחר. "
     'השב אך ורק ב-JSON תקני: {"headline": "...", "synopsis": "...", '
-    '"is_promotional": false, "insufficient_content": false}'
+    '"is_promotional": false, "insufficient_content": false, '
+    '"hero_worthy": false}'
 )
 
 
@@ -819,7 +902,7 @@ def enrich_video_with_ai(title, content, source_name):
         synopsis = re.sub(r'\s+', ' ', str(parsed.get("synopsis") or "")).strip()
         if not headline or not synopsis:
             return None
-        return {"title": headline, "content": synopsis}
+        return {"title": headline, "content": synopsis, "hero_worthy": bool(parsed.get("hero_worthy") is True)}
     except Exception as e:
         # fails CLOSED (unlike enrich_article_with_ai) - a video whose raw
         # title/description we can't verify or rewrite must not publish
@@ -913,6 +996,7 @@ def save_article(title, link, content, image_url, source_name, category, video_i
             return
         final_title = enrichment["title"]
         final_content = enrichment["content"]
+        hero_worthy = enrichment.get("hero_worthy", False)
 
         # Checked for every video regardless of category - not just TV/live
         # broadcasts - a station bug/logo baked into the thumbnail is exactly
@@ -921,7 +1005,7 @@ def save_article(title, link, content, image_url, source_name, category, video_i
         time.sleep(1)  # brief pacing between Groq calls, same margin as the text enrichment call
         date_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         _write_article_file(filename, final_title, date_str, source_name, image_url, link, video_category,
-                             final_content, video_id, has_watermark=has_watermark)
+                             final_content, video_id, has_watermark=has_watermark, hero_worthy=hero_worthy)
         if recent_titles is not None:
             recent_titles.append(normalize_title_words(final_title))
         notify_telegram(final_title, source_name, video_category, slugify(final_title, sanitize_filename(final_title)))
@@ -980,13 +1064,26 @@ def save_article(title, link, content, image_url, source_name, category, video_i
         content = enrichment.get("content", content)
     takeaways = enrichment.get("takeaways", [])
     tags = enrichment.get("tags", [])
+    # a source's mapped category is a default, not a guarantee - e.g. a
+    # Haredi-affiliated source occasionally publishing a general public-
+    # health item is really a בריאות story, not a חרדים one. Only overridden
+    # when the AI is confident enough to name one of the site's real
+    # categories; otherwise the source-based default stands unchanged.
+    category = enrichment.get("verified_category") or category
+    # owner directive: the homepage's most prominent slots (hero/bento) are
+    # reserved for real breaking news in a fixed set of topics - security/
+    # military, serious crime, major sports, celebrity/entertainment, or
+    # significant economic news - never decided by category label alone.
+    # Defaults to False (not eligible) when enrichment isn't available,
+    # same conservative default as any other AI-only signal on this path.
+    hero_worthy = enrichment.get("hero_worthy", False)
 
     if tags_index is not None:
         content = auto_link_internal_tags(content, tags_index)
 
     date_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     _write_article_file(filename, title, date_str, source_name, image_url, link, category, content,
-                         takeaways=takeaways, tags=tags, quick_image=quick_image)
+                         takeaways=takeaways, tags=tags, quick_image=quick_image, hero_worthy=hero_worthy)
     if recent_titles is not None:
         recent_titles.append(normalize_title_words(title))
     # best-effort slug prediction (mirrors build_site.py's own slugify); a
@@ -1001,7 +1098,8 @@ def save_article(title, link, content, image_url, source_name, category, video_i
 
 
 def _write_article_file(filename, title, date_str, source_name, image_url, link, category, content,
-                         video_id="", takeaways=None, tags=None, quick_image=False, has_watermark=False):
+                         video_id="", takeaways=None, tags=None, quick_image=False, has_watermark=False,
+                         hero_worthy=False):
     video_line = f'\nvideo_id: "{video_id}"' if video_id else ""
 
     # Each takeaway is written as its own indented continuation line (what
@@ -1020,6 +1118,7 @@ def _write_article_file(filename, title, date_str, source_name, image_url, link,
 
     quick_image_line = '\nquick_image: "1"' if quick_image else ""
     has_watermark_line = '\nhas_watermark: "1"' if has_watermark else ""
+    hero_worthy_line = '\nhero_worthy: "1"' if hero_worthy else ""
 
     md_content = f"""---
 title: >-
@@ -1028,7 +1127,7 @@ date: "{date_str}"
 source: "{source_name}"
 image: "{image_url}"
 link: "{link}"
-category: "{category}"{video_line}{takeaways_line}{tags_line}{quick_image_line}{has_watermark_line}
+category: "{category}"{video_line}{takeaways_line}{tags_line}{quick_image_line}{has_watermark_line}{hero_worthy_line}
 ---
 
 {content}
