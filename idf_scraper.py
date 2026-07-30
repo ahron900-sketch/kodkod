@@ -464,7 +464,14 @@ def strip_known_junk_phrases(text):
 # that stays fully deterministic (the filters above) - it only adds polish.
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
 GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
-GROQ_MODEL = "llama-3.3-70b-versatile"
+# llama-3.3-70b-versatile was deprecated by Groq on 2026-06-17 - every
+# enrichment call since then silently failed and returned {} via the
+# fail-open except-block below, meaning no takeaways/tags/proofreading
+# actually ran for ~6 weeks despite articles still publishing normally.
+# qwen/qwen3.6-27b is Groq's own recommended migration target for this
+# exact model, and is already verified working on this account (used for
+# GROQ_VISION_MODEL's watermark detection above).
+GROQ_MODEL = "qwen/qwen3.6-27b"
 GROQ_VISION_MODEL = "qwen/qwen3.6-27b"
 AI_ENRICH_SYSTEM_PROMPT = (
     "אתה עוזר עריכה לאתר חדשות ישראלי. תקבל כותרת וגוף כתבה אמיתית שנשאבה "
