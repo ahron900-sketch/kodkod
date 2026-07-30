@@ -762,6 +762,73 @@ def load_tags_index():
         return {}
 
 
+VIDEO_ENRICH_SYSTEM_PROMPT = (
+    "אתה עוזר עריכה לאתר חדשות ישראלי. תקבל כותרת גולמית ותיאור גולמי של "
+    "סרטון מערוץ יוטיוב רשמי (דוברות ממשלתית/צבאית, קבוצת ספורט, וכו') - "
+    "לא כתבה שכתב עיתונאי. הכותרת עשויה להיות לא מתארת (למשל תאריך גרידא), "
+    "או בשפה שאינה עברית. המשימה שלך: "
+    "1. headline - כותרת עברית תקנית, קצרה, אמיתית ומתארת בפועל את תוכן "
+    "הסרטון, אך ורק על סמך העובדות שמופיעות בכותרת/תיאור הגולמיים - אם "
+    "המקור באנגלית, תרגם ותנסח בעברית; לעולם אל תמציא פרט שלא מופיע במקור. "
+    "2. synopsis - פסקה קצרה (2-4 משפטים) בעברית תקנית שמסבירה מה רואים "
+    "בסרטון, מבוססת אך ורק על העובדות שבתיאור הגולמי. "
+    "3. is_promotional - true אם זהו בעיקרו תוכן פרסומי/שיווקי/מיתוגי (למשל "
+    "השקת מוצר, שיתוף פעולה עם מותג מסחרי, קמפיין פרסומי קליל) ולא ידיעה "
+    "חדשותית אמיתית - false אחרת. "
+    "4. insufficient_content - true אם התיאור הגולמי כה דל שאין ממנו מספיק "
+    "מידע עובדתי אמיתי לבנות כותרת ותקציר משמעותיים (למשל רק לינקים "
+    "לרשתות חברתיות, או תאריך בלבד) - false אחרת. "
+    'השב אך ורק ב-JSON תקני: {"headline": "...", "synopsis": "...", '
+    '"is_promotional": false, "insufficient_content": false}'
+)
+
+
+def enrich_video_with_ai(title, content, source_name):
+    if not GROQ_API_KEY:
+        return None
+    try:
+        payload = json.dumps({
+            "model": GROQ_MODEL,
+            "response_format": {"type": "json_object"},
+            "temperature": 0.3,
+            "max_tokens": 1024,
+            "messages": [
+                {"role": "system", "content": VIDEO_ENRICH_SYSTEM_PROMPT},
+                {"role": "user", "content": (
+                    f"ערוץ מקור: {source_name}\nכותרת גולמית: {title}\n\n"
+                    f"תיאור גולמי:\n{content[:2000]}"
+                )},
+            ],
+        }).encode("utf-8")
+        req = urllib.request.Request(
+            GROQ_API_URL,
+            data=payload,
+            headers={
+                "Authorization": f"Bearer {GROQ_API_KEY}",
+                "Content-Type": "application/json",
+            },
+            method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            result = json.loads(resp.read().decode("utf-8"))
+        parsed = json.loads(result["choices"][0]["message"]["content"])
+
+        if parsed.get("insufficient_content") or parsed.get("is_promotional"):
+            return None
+        headline = re.sub(r'\s+', ' ', str(parsed.get("headline") or "")).strip()
+        synopsis = re.sub(r'\s+', ' ', str(parsed.get("synopsis") or "")).strip()
+        if not headline or not synopsis:
+            return None
+        return {"title": headline, "content": synopsis}
+    except Exception as e:
+        # fails CLOSED (unlike enrich_article_with_ai) - a video whose raw
+        # title/description we can't verify or rewrite must not publish
+        # as-is per the owner's explicit rule that every primary-source item
+        # goes through the bot's rewrite, never a raw embed
+        print(f"נפסל (וידאו - העשרת AI נכשלה, לא מפרסמים גולמי): {e}")
+        return None
+
+
 def save_tags_index(index):
     os.makedirs(os.path.dirname(TAGS_INDEX_PATH), exist_ok=True)
     with open(TAGS_INDEX_PATH, "w", encoding="utf-8") as f:
@@ -833,17 +900,31 @@ def save_article(title, link, content, image_url, source_name, category, video_i
         if len(content) < MIN_VIDEO_CONTENT_LEN:
             print(f"נפסל (וידאו - אין תיאור אמיתי, רק קישורים/בוילרפלייט): {title}")
             return
+
+        # A video's raw title/description is whatever the uploader typed -
+        # not a journalist's headline - and is frequently non-Hebrew, a bare
+        # date, or otherwise not something the site can publish as-is. Every
+        # primary-source video is rewritten through the same bot editing
+        # pass a regular article gets (real Hebrew headline, real synopsis),
+        # never just an embed with the raw scraped title (owner directive).
+        enrichment = enrich_video_with_ai(title, content, source_name)
+        if not enrichment:
+            print(f"נפסל (וידאו - נכשל בשכתוב/לא חדשותי מספיק): {title}")
+            return
+        final_title = enrichment["title"]
+        final_content = enrichment["content"]
+
         # Checked for every video regardless of category - not just TV/live
         # broadcasts - a station bug/logo baked into the thumbnail is exactly
         # as unwanted on a regular news clip as it is on a live broadcast one.
         has_watermark = detect_tv_watermark(image_url)
         time.sleep(1)  # brief pacing between Groq calls, same margin as the text enrichment call
         date_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        _write_article_file(filename, title, date_str, source_name, image_url, link, video_category, content, video_id,
-                             has_watermark=has_watermark)
+        _write_article_file(filename, final_title, date_str, source_name, image_url, link, video_category,
+                             final_content, video_id, has_watermark=has_watermark)
         if recent_titles is not None:
-            recent_titles.append(normalize_title_words(title))
-        notify_telegram(title, source_name, video_category, slugify(title, sanitize_filename(title)))
+            recent_titles.append(normalize_title_words(final_title))
+        notify_telegram(final_title, source_name, video_category, slugify(final_title, sanitize_filename(final_title)))
         return
 
     # Filter 1: a real, reachable, non-trivial image is mandatory - try the
