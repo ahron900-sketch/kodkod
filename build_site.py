@@ -495,36 +495,11 @@ def render_quick_card(a):
 
 PLACEHOLDER_IMG = "/assets/placeholder.svg"
 
-# Mock ad creatives - purely visual placeholders (no real network/tracking) so
-# the layout demos like a live site rather than empty dashed boxes.
+# Center/horizontal ad slots - only the creative the owner actually supplied,
+# per explicit instruction to remove every other placeholder/house ad from
+# rotation. No title/body/cta text was supplied for it, so none is invented.
 MOCK_ADS = [
     {
-        "cls": "ad-sport",
-        "img": "https://a.espncdn.com/combiner/i?img=%2Fphoto%2F2026%2F0719%2Fr1691457_1296x729_16%2D9.jpg",
-        "eyebrow": "תוצאות מונדיאל 2026",
-        "title": "ספרד אלופת העולם! ניצחון דרמטי 1:0 על ארגנטינה",
-        "body": "השער המכריע של פרננד טורס בדקה ה-106 - כל הפרטים על הגמר ההיסטורי",
-        "cta": "לכתבה המלאה",
-        "href": f"/article/{slugify('ספרד אלופת העולם 2026: ניצחון דרמטי 1:0 על ארגנטינה בגמר היסטורי', 'מונדיאל-2026-גמר')}.html",
-    },
-    {
-        # the only actual "ad" slot content right now - a real, live house-ad
-        # promoting the (genuinely free, first-come) ad space itself, not a
-        # placeholder standing in for a paying advertiser. Deliberately no
-        # stock photo - the animated gradient + floating icons (own CSS
-        # class ad-promo-self) carry the whole creative.
-        "cls": "ad-promo-self",
-        "img": "",
-        "eyebrow": "רוצים לפרסם כאן?",
-        "title": "הפרסומת שלכם יכולה להיות כאן - ופעם הזאת זה חינם",
-        "body": "שלחו לנו חומר פרסומי מוכן, ומחר הוא באוויר. בלי טפסים מסובכים, בלי התחייבות.",
-        "cta": "לשליחת הפרסומת",
-        "href": "/advertise.html",
-    },
-    {
-        # real creative supplied directly for the center/horizontal ad slots
-        # - no title/body/cta text was supplied for it, so none is invented
-        # here, same as the side-rail creative
         "cls": "ad-center-banner",
         "img": "/assets/ads/center-banner-01.gif",
         "eyebrow": "", "title": "", "body": "", "cta": "",

@@ -529,6 +529,11 @@ html.dark-mode .site-header {
   overflow: hidden;
   box-shadow: var(--shadow);
 }
+/* a pure-image ad (no title/body text to stretch the box) never grows past
+   min-height on its own, so a wide creative like the 1200x400 (3:1) center
+   banner was getting cover-fit into a box far thinner than its own aspect
+   ratio and cropped down to a sliver - locking the real ratio fixes it */
+.ad-slot:has(.ad-center-banner) { aspect-ratio: 3 / 1; min-height: 0; }
 /* crossfade rotation between every ad-slide inside a slot - same technique
    as the homepage hero carousel (assets/search.js swaps .active) */
 .ad-slide {
