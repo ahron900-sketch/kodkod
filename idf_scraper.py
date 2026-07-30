@@ -286,10 +286,12 @@ def manage_archive():
                     except Exception:
                         pass
 
-# ~900 Hebrew characters is roughly 150+ words - a real floor against thin
-# content (Google's own spam policy flags auto-generated/scraped pages that
-# don't clear a meaningful length), not just "long enough to bother keeping"
-MIN_CONTENT_LEN = 900
+# ~2400 Hebrew characters is roughly 400+ words (same ~6 chars/word ratio
+# this file always used) - owner directive: raised from 900 (~150 words)
+# since that floor was letting real thin-content through; Google's own spam
+# policy flags auto-generated/scraped pages that don't clear a meaningful
+# length, not just "long enough to bother keeping"
+MIN_CONTENT_LEN = 2400
 
 # Sponsored/advertorial content filter - strict by design: any hint of paid
 # promotion, in the title, URL, or body, rejects the article outright. When

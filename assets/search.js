@@ -338,19 +338,83 @@ window.kkAffinity = (function () {
   }
 
   if (shareBtn) {
+    // mobile with a native share sheet: use it directly, no menu needed.
+    // everywhere else (most desktop browsers don't implement
+    // navigator.share): a small menu with WhatsApp/email/Facebook instead
+    // of silently falling back to clipboard-copy only.
+    var shareMenu = null;
+    function buildShareMenu() {
+      var title = shareBtn.getAttribute("data-title");
+      var url = shareBtn.getAttribute("data-url");
+      var menu = document.createElement("div");
+      menu.className = "share-menu";
+      menu.hidden = true;
+
+      var items = [
+        {
+          label: "וואטסאפ",
+          href: "https://wa.me/?text=" + encodeURIComponent(title + " " + url),
+        },
+        {
+          label: "אימייל",
+          href: "mailto:?subject=" + encodeURIComponent(title) + "&body=" + encodeURIComponent(url),
+        },
+        {
+          label: "פייסבוק",
+          href: "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(url),
+        },
+      ];
+      items.forEach(function (item) {
+        var a = document.createElement("a");
+        a.className = "share-menu-item";
+        a.href = item.href;
+        a.target = "_blank";
+        a.rel = "noopener";
+        a.textContent = item.label;
+        menu.appendChild(a);
+      });
+
+      var copyBtn = document.createElement("button");
+      copyBtn.type = "button";
+      copyBtn.className = "share-menu-item";
+      copyBtn.textContent = "העתקת קישור";
+      copyBtn.addEventListener("click", function () {
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(url).then(function () {
+            copyBtn.textContent = "הועתק!";
+            setTimeout(function () { copyBtn.textContent = "העתקת קישור"; }, 1800);
+          });
+        }
+      });
+      menu.appendChild(copyBtn);
+
+      // wrap the button so the menu (a sibling, not a child - a <button>
+      // can't validly contain nested <a>/<button> elements) has a
+      // position:relative ancestor to anchor to, instead of drifting to
+      // whatever the nearest positioned ancestor further up happens to be
+      var wrap = document.createElement("div");
+      wrap.className = "share-wrap";
+      shareBtn.parentNode.insertBefore(wrap, shareBtn);
+      wrap.appendChild(shareBtn);
+      wrap.appendChild(menu);
+      return menu;
+    }
+
+    document.addEventListener("click", function (e) {
+      if (shareMenu && !shareMenu.hidden && e.target !== shareBtn && !shareBtn.contains(e.target) && !shareMenu.contains(e.target)) {
+        shareMenu.hidden = true;
+      }
+    });
+
     shareBtn.addEventListener("click", function () {
       var title = shareBtn.getAttribute("data-title");
       var url = shareBtn.getAttribute("data-url");
       if (navigator.share) {
         navigator.share({ title: title, url: url }).catch(function () {});
-      } else if (navigator.clipboard) {
-        navigator.clipboard.writeText(url).then(function () {
-          var span = shareBtn.querySelector("span");
-          var original = span.textContent;
-          span.textContent = "הועתק!";
-          setTimeout(function () { span.textContent = original; }, 1800);
-        });
+        return;
       }
+      if (!shareMenu) shareMenu = buildShareMenu();
+      shareMenu.hidden = !shareMenu.hidden;
     });
   }
 })();

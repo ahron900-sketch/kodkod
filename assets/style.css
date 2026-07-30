@@ -892,6 +892,12 @@ html.dark-mode .site-header {
   justify-content: center;
   gap: 18px;
 }
+/* the unconditional display:flex above beats the browser's own [hidden]
+   default (author styles always outrank UA defaults, regardless of source
+   order or the JS toggling endCard.hidden) - without this override the
+   endcard sat on top of the play button at all times, silently blocking
+   every click on it */
+.kk-player-endcard[hidden] { display: none; }
 .kk-player-replay {
   display: flex;
   flex-direction: column;
@@ -961,6 +967,38 @@ html.dark-mode .site-header {
   transition: all 0.2s ease;
 }
 .like-btn:hover, .share-btn:hover { background: var(--surface-2); }
+.share-wrap { position: relative; display: inline-flex; }
+.share-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  padding: 6px;
+  gap: 2px;
+}
+.share-menu-item {
+  display: block;
+  padding: 9px 12px;
+  border-radius: 8px;
+  border: none;
+  background: none;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-align: right;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.share-menu-item:hover { background: var(--surface-2); }
 .like-btn.liked {
   color: #e0245e;
   border-color: #e0245e;

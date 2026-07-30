@@ -1570,6 +1570,11 @@ def build():
     for u in static_urls + category_urls + magazine_urls:
         sitemap += f"  <url><loc>{u}</loc><lastmod>{lastmod_today}</lastmod></url>\n"
     for a in articles:
+        # sponsored articles carry no NewsArticle schema and aren't real
+        # editorial content - keep the sitemap consistent with the RSS
+        # feeds/news-sitemap, which already exclude them the same way
+        if a.get("is_sponsored"):
+            continue
         loc = f"{SITE_URL}/article/{a['slug']}.html"
         lastmod = (a["dt"] if a["dt"] != datetime.min else now).strftime("%Y-%m-%d")
         image_tag = f"<image:image><image:loc>{html.escape(a['image'])}</image:loc></image:image>" if a["image"] else ""
