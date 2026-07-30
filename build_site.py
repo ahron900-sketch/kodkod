@@ -477,6 +477,19 @@ MOCK_ADS = [
     },
 ]
 
+# Side-rail (both sides of the page) shows only this creative - a real
+# paid/house placement the owner supplied directly, not part of the normal
+# MOCK_ADS rotation. No title/body/cta text was supplied for it, so none is
+# invented here - it's rendered as a pure clickable image.
+SIDE_RAIL_ADS = [
+    {
+        "cls": "ad-side-banner",
+        "img": "/assets/ads/side-banner-01.gif",
+        "eyebrow": "", "title": "", "body": "", "cta": "",
+        "href": "/advertise.html",
+    },
+]
+
 _ad_counter = {"i": 0}
 
 # the self-promo house-ad gets a handful of small floating icons drifting
@@ -492,37 +505,53 @@ AD_PROMO_ICONS = [
 ]
 
 
-def ad_slot_html(compact=False):
-    # each call embeds every MOCK_ADS entry as its own crossfade slide
+def ad_slot_html(compact=False, ads=None, lazy_viewport=False):
+    # each call embeds every ad entry as its own crossfade slide
     # (assets/search.js rotates .active between them client-side, same
     # crossfade technique as the homepage hero) - _ad_counter only picks
     # which slide starts active, so multiple slots on one page don't all
     # open on the same creative
-    start = _ad_counter["i"] % len(MOCK_ADS)
+    ads = ads if ads is not None else MOCK_ADS
+    start = _ad_counter["i"] % len(ads)
     _ad_counter["i"] += 1
     size_cls = "ad-slot-compact" if compact else ""
 
     slides = []
-    for i, ad in enumerate(MOCK_ADS):
+    for i, ad in enumerate(ads):
         active_cls = " active" if i == start else ""
-        bg_style = f" style=\"background-image:url('{html.escape(ad['img'])}')\"" if ad.get("img") else ""
+        # side-rail slots are display:none below 1500px viewport width, but a
+        # plain CSS background-image still gets fetched by every visitor
+        # regardless - deferring it to JS gated on the same media query means
+        # mobile visitors (the majority of this site's traffic) never
+        # download it at all
+        if ad.get("img") and lazy_viewport:
+            bg_style = f" data-bg-lazy=\"{html.escape(ad['img'])}\""
+        elif ad.get("img"):
+            bg_style = f" style=\"background-image:url('{html.escape(ad['img'])}')\""
+        else:
+            bg_style = ""
         icons_html = "".join(
             f'<span class="ad-promo-icon" style="{pos}">{icon}</span>' for icon, pos in AD_PROMO_ICONS
         ) if ad["cls"] == "ad-promo-self" else ""
         badge_html = '<span class="ad-promo-badge">חינם!</span>' if ad["cls"] == "ad-promo-self" else ""
-        slides.append(f"""
-      <a class="ad-slide {ad['cls']}{active_cls}" href="{html.escape(ad.get('href', '#'))}" data-index="{i}">
-        <div class="ad-slot-bg"{bg_style}></div>
-        <div class="ad-slot-shine"></div>
-        {icons_html}
-        <span class="ad-tag">{'מומלץ' if ad['cls'] != 'ad-promo-self' else 'פרסומת'}</span>
-        {badge_html}
+        # a pure-image creative (no title supplied) skips the text overlay
+        # entirely instead of rendering empty eyebrow/title/body/cta spans
+        creative_html = "" if not ad.get("title") else f"""
         <div class="ad-creative">
           <span class="ad-eyebrow">{html.escape(ad['eyebrow'])}</span>
           <h4 class="ad-title">{html.escape(ad['title'])}</h4>
           <p class="ad-body">{html.escape(ad['body'])}</p>
           <span class="ad-cta">{html.escape(ad['cta'])}</span>
-        </div>
+        </div>"""
+        tag_html = "" if not ad.get("title") else f'<span class="ad-tag">{"מומלץ" if ad["cls"] != "ad-promo-self" else "פרסומת"}</span>'
+        slides.append(f"""
+      <a class="ad-slide {ad['cls']}{active_cls}" href="{html.escape(ad.get('href', '#'))}" data-index="{i}">
+        <div class="ad-slot-bg"{bg_style}></div>
+        <div class="ad-slot-shine"></div>
+        {icons_html}
+        {tag_html}
+        {badge_html}
+        {creative_html}
       </a>""")
 
     return f'<div class="ad-slot {size_cls}">{"".join(slides)}</div>'
@@ -606,9 +635,9 @@ def write_page(path, title, description, categories, active_cat, body_html,
                          f'{WEATHER_BAR_HTML}\n<div class="ticker"><div class="ticker-move">{html.escape(ticker_text)}</div></div>\n<header class="site-header">')
     page_shell = f"""
 <div class="page-shell">
-  <aside class="side-rail side-rail-right">{ad_slot_html(compact=True)}</aside>
+  <aside class="side-rail side-rail-right">{ad_slot_html(compact=True, ads=SIDE_RAIL_ADS, lazy_viewport=True)}</aside>
   <div class="page-shell-content">{body_html}</div>
-  <aside class="side-rail side-rail-left">{ad_slot_html(compact=True)}</aside>
+  <aside class="side-rail side-rail-left">{ad_slot_html(compact=True, ads=SIDE_RAIL_ADS, lazy_viewport=True)}</aside>
 </div>"""
     full += page_shell + PAGE_FOOT.format(year=datetime.now().year, footer_promo=FOOTER_PROMO_HTML)
     os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -684,18 +713,57 @@ ADVERTISE_BODY = f"""
   <p>שלחו את כל זה (קובץ התמונה, או קישור אליה) יחד עם הטקסטים בטופס למטה. משך ההופעה: <strong>שבוע אחד לפחות</strong>, ללא התחייבות ליותר מכך מהצד שלנו.</p>
 
   <h2>השאירו פרטים</h2>
-  <form class="contact-form" action="{TIP_FORM_ACTION}" method="POST">
-    <input type="text" name="name" placeholder="שם מלא / חברה / חברת פרסום" required>
-    <input type="email" name="email" placeholder="אימייל לחזרה" required>
-    <input type="text" name="creative_link" placeholder="קישור לתמונה/לחומר הפרסומי (אם קיים)">
-    <textarea name="message" rows="5" placeholder="כותרת, תיאור, טקסט כפתור, וקישור היעד - כפי שפורט למעלה..." required></textarea>
-    <label class="consent-checkbox">
-      <input type="checkbox" name="privacy_consent" value="yes" required>
-      <span>קראתי ואני מסכים/ה ל<a href="/privacy.html" target="_blank">מדיניות הפרטיות</a> - הפרטים ישמשו ליצירת קשר בלבד</span>
-    </label>
-    <button type="submit">שליחה לאישור</button>
-  </form>
-  <p style="font-size:0.85rem;color:var(--ink-soft);margin-top:10px;">הבקשה תישלח לאישור ידני - נחזור אליכם ברגע שהפרסומת עולה לאוויר.</p>
+  <div class="ad-wizard-card">
+    <div class="ad-wizard-progress">
+      <span class="ad-wizard-dot active" data-dot="0"></span>
+      <span class="ad-wizard-dot" data-dot="1"></span>
+      <span class="ad-wizard-dot" data-dot="2"></span>
+      <span class="ad-wizard-dot" data-dot="3"></span>
+    </div>
+    <form class="contact-form ad-wizard-form" action="{TIP_FORM_ACTION}" method="POST">
+      <div class="ad-wizard-step active" data-step="0">
+        <span class="ad-wizard-icon">👋</span>
+        <h3>קודם כל, מי אתם?</h3>
+        <p class="ad-wizard-hint">שם מלא, שם חברה, או שם חברת הפרסום</p>
+        <input type="text" name="name" placeholder="השם שלכם" required>
+        <div class="ad-wizard-nav"><button type="button" class="ad-wizard-next">הבא ←</button></div>
+      </div>
+      <div class="ad-wizard-step" data-step="1">
+        <span class="ad-wizard-icon">✉️</span>
+        <h3>איך נחזור אליכם?</h3>
+        <p class="ad-wizard-hint">נשתמש בזה רק כדי לאשר ולתאם את ההעלאה</p>
+        <input type="email" name="email" placeholder="אימייל" required>
+        <div class="ad-wizard-nav">
+          <button type="button" class="ad-wizard-back">→ הקודם</button>
+          <button type="button" class="ad-wizard-next">הבא ←</button>
+        </div>
+      </div>
+      <div class="ad-wizard-step" data-step="2">
+        <span class="ad-wizard-icon">🎨</span>
+        <h3>פרטי הפרסומת</h3>
+        <p class="ad-wizard-hint">קישור לתמונה המוכנה, ופירוט הכותרת/תיאור/טקסט כפתור/קישור יעד</p>
+        <input type="text" name="creative_link" placeholder="קישור לתמונה/לחומר הפרסומי (אם קיים)">
+        <textarea name="message" rows="5" placeholder="כותרת, תיאור, טקסט כפתור, וקישור היעד - כפי שפורט למעלה..." required></textarea>
+        <div class="ad-wizard-nav">
+          <button type="button" class="ad-wizard-back">→ הקודם</button>
+          <button type="button" class="ad-wizard-next">הבא ←</button>
+        </div>
+      </div>
+      <div class="ad-wizard-step" data-step="3">
+        <span class="ad-wizard-icon">✅</span>
+        <h3>כמעט סיימנו</h3>
+        <p class="ad-wizard-hint">הבקשה תישלח לאישור ידני - נחזור אליכם ברגע שהפרסומת עולה לאוויר</p>
+        <label class="consent-checkbox">
+          <input type="checkbox" name="privacy_consent" value="yes" required>
+          <span>קראתי ואני מסכים/ה ל<a href="/privacy.html" target="_blank">מדיניות הפרטיות</a> - הפרטים ישמשו ליצירת קשר בלבד</span>
+        </label>
+        <div class="ad-wizard-nav">
+          <button type="button" class="ad-wizard-back">→ הקודם</button>
+          <button type="submit">שליחה לאישור</button>
+        </div>
+      </div>
+    </form>
+  </div>
 </main>"""
 
 TIP_LINE_BODY = f"""

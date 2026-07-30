@@ -600,6 +600,24 @@ window.kkAffinity = (function () {
 })();
 
 (function () {
+  // side-rail ad backgrounds are only ever shown at >=1500px viewport width
+  // (see .side-rail's media query in style.css) - loading them via a plain
+  // CSS background-image would still cost every visitor the download even
+  // when the element is display:none, so the URL is deferred here and only
+  // ever applied once the same width condition actually matches
+  var wideViewport = window.matchMedia("(min-width: 1500px)");
+  function applyLazyAdBackgrounds() {
+    if (!wideViewport.matches) return;
+    document.querySelectorAll(".ad-slot-bg[data-bg-lazy]").forEach(function (el) {
+      el.style.backgroundImage = "url('" + el.getAttribute("data-bg-lazy") + "')";
+      el.removeAttribute("data-bg-lazy");
+    });
+  }
+  applyLazyAdBackgrounds();
+  wideViewport.addEventListener("change", applyLazyAdBackgrounds);
+})();
+
+(function () {
   // ad-slot rotation - same crossfade technique as the hero carousel just
   // above, just slower (ads carry more text to actually read than a
   // headline) and independently instantiated per slot, since a page can
@@ -927,6 +945,63 @@ window.kkAffinity = (function () {
       withScores.forEach(function (w) { grid.appendChild(w.el); });
     });
   } catch (e) {}
+})();
+
+(function () {
+  // Advertise-page wizard: one step visible at a time, "הבא"/"הקודם" swap
+  // which .ad-wizard-step carries the .active class rather than the form
+  // growing into one long scroll. All steps' fields stay in the same real
+  // <form> the whole time (just hidden), so the final submit still sends
+  // every field together - the generic Formspree-AJAX handler below picks
+  // up the actual submit event with no changes needed.
+  document.querySelectorAll(".ad-wizard-form").forEach(function (form) {
+    var steps = Array.prototype.slice.call(form.querySelectorAll(".ad-wizard-step"));
+    var card = form.closest(".ad-wizard-card");
+    var dots = card ? Array.prototype.slice.call(card.querySelectorAll(".ad-wizard-dot")) : [];
+    var current = 0;
+
+    function showStep(index) {
+      steps.forEach(function (s, i) { s.classList.toggle("active", i === index); });
+      dots.forEach(function (d, i) {
+        d.classList.toggle("active", i === index);
+        d.classList.toggle("done", i < index);
+      });
+      var firstField = steps[index].querySelector("input, textarea");
+      if (firstField) firstField.focus();
+      current = index;
+    }
+
+    function currentStepValid() {
+      var fields = steps[current].querySelectorAll("input, textarea");
+      for (var i = 0; i < fields.length; i++) {
+        if (!fields[i].checkValidity()) {
+          fields[i].reportValidity();
+          return false;
+        }
+      }
+      return true;
+    }
+
+    form.querySelectorAll(".ad-wizard-next").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        if (currentStepValid() && current < steps.length - 1) showStep(current + 1);
+      });
+    });
+    form.querySelectorAll(".ad-wizard-back").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        if (current > 0) showStep(current - 1);
+      });
+    });
+    // Enter key inside a step field should advance to the next step instead
+    // of silently submitting the whole (partially-hidden) form early
+    form.addEventListener("keydown", function (e) {
+      if (e.key !== "Enter" || e.target.tagName === "TEXTAREA") return;
+      if (current < steps.length - 1) {
+        e.preventDefault();
+        if (currentStepValid()) showStep(current + 1);
+      }
+    });
+  });
 })();
 
 (function () {

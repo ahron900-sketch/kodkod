@@ -1362,6 +1362,63 @@ html.dark-mode .site-header {
 }
 .contact-form button:hover { opacity: 0.88; }
 .contact-form button:disabled, .report-form button:disabled { opacity: 0.6; cursor: default; }
+
+/* Advertise-page multi-step wizard: one step visible at a time inside a
+   single card, a fresh box replacing the previous one rather than a long
+   scrolling form - each step's fields stay in the DOM (display:none, not
+   removed) so the underlying <form> still submits every field together */
+.ad-wizard-card {
+  max-width: 480px;
+  margin: 28px 0 0;
+  padding: 32px 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-lg);
+}
+.ad-wizard-progress {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.ad-wizard-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+.ad-wizard-dot.active { background: var(--accent); transform: scale(1.3); }
+.ad-wizard-dot.done { background: var(--accent); opacity: 0.5; }
+.ad-wizard-form { max-width: none; margin-top: 0; }
+.ad-wizard-step {
+  display: none;
+  flex-direction: column;
+  gap: 14px;
+  text-align: center;
+  animation: ad-wizard-in 0.35s ease;
+}
+.ad-wizard-step.active { display: flex; }
+@keyframes ad-wizard-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.ad-wizard-icon { font-size: 2rem; line-height: 1; }
+.ad-wizard-step h3 { margin: 0; font-size: 1.15rem; font-weight: 800; }
+.ad-wizard-hint { margin: -6px 0 4px; font-size: 0.85rem; color: var(--ink-soft); }
+.ad-wizard-step .consent-checkbox { text-align: right; }
+.ad-wizard-nav {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+.ad-wizard-nav button { flex: 1; }
+.ad-wizard-back {
+  background: var(--surface-2) !important;
+  color: var(--ink) !important;
+  border: 1px solid var(--border) !important;
+}
 .form-error-msg { color: #c0392b; font-size: 0.85rem; margin: 4px 0 0; }
 .form-thanks {
   max-width: 480px;
