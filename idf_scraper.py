@@ -45,10 +45,29 @@ rss_feeds = {
     # תרבות ובידור
     "וואלה תרבות": ("https://rss.walla.co.il/feed/4?type=main", "תרבות ובידור"),
     "מאקו תרבות": ("https://rcs.mako.co.il/rss/c7a987610879a310VgnVCM2000002a0c10acRCRD.xml", "תרבות ובידור"),
+    "מאקו סלבס": ("https://rcs.mako.co.il/rss/46bbe76404864110VgnVCM1000004801000aRCRD.xml", "תרבות ובידור"),
 
     # רכב
     "וואלה רכב": ("https://rss.walla.co.il/feed/31?type=main", "רכב"),
+    "גלובס רכב ותחבורה": ("https://www.globes.co.il/webservice/rss/rssfeeder.asmx/FeederNode?iID=3220", "רכב"),
+
+    # ספורט (בנוסף לוואלה ספורט הקיים)
+    "ONE": ("https://www.one.co.il/rss", "ספורט"),
+
+    # טכנולוגיה (בנוסף ל-Geektime הקיים, שנראה חסום כרגע - ראו הערה למעלה)
+    "גלובס טכנולוגיה": ("https://www.globes.co.il/webservice/rss/rssfeeder.asmx/FeederNode?iID=594", "טכנולוגיה"),
+    "Techtime": ("https://techtime.co.il/feed/", "טכנולוגיה"),
 }
+
+# מקורות שנבדקו ונפסלו במחקר המקורות (2026-07-30) - לא להוסיף שוב בלי סיבה טובה:
+# - מאקו רכב: robots.txt חוסם במפורש (Disallow: /cars-)
+# - כיכר השבת: התנאים שלהם אוסרים במפורש העתקה/סריקה אוטומטית, גם שהפיד עצמו עובד
+# - Calcalist, בחדרי חרדים (מקור קיים, חסום עכשיו), כאן חרדי: מחזירים 403 לבקשות אוטומטיות
+# - Ynet תחום טכנולוגיה: לא קיים בכלל, ותנאי ה-RSS הכלליים של ynet מגבילים לשימוש
+#   פרטי-לא-מסחרי בלבד - הבוט כבר משתמש ב-ynet (חדשות + יוטיוב) מלפני המחקר הזה;
+#   שיקול משפטי שדורש החלטה של הבעלים, לא הוספה נוספת חד-צדדית בינתיים
+# - יבואני רכב (טויוטה/קיה) יש להם עמודי חדשות רשמיים אמיתיים אך בלי RSS - ידרוש
+#   פונקציית סריקת HTML נפרדת, לא מומש עדיין
 
 # ערוצי יוטיוב - נשאבים כווידאו דרך YouTube RSS (אין צורך במפתח API)
 # הוסף כאן channel_id אמיתיים (נמצא ב-view-source של דף הערוץ, tag <meta itemprop="channelId">)
@@ -57,6 +76,11 @@ youtube_channels = {
     "UCvQmPpU20hw1Trss_CVwaew": ("חדשות 13", "חדשות"),
     "UCpSSzrovhI4fA2PQNItecUA": ("ynet", "חדשות"),
     "UCisowXt5wZkp2sR3rFh9lnQ": ("i24NEWS עברית", "חדשות"),
+    # ערוצי דוברות רשמיים - הודעות ציבוריות שנועדו מלכתחילה לתפוצה תקשורתית
+    "UCjBj9fgK60mlAH-nvtSOojg": ("דובר צה\"ל", "חדשות"),
+    "UCrwyHUb4iIrpknhP6MTvnww": ("דוברות המשטרה", "חדשות"),
+    "UCKTHc_HFDiAiOr0vE_Imj5g": ("משרד הבריאות", "בריאות"),
+    "UCyXf5cz6E9IIL40aivg7tOw": ("ספורט 5", "ספורט"),
 }
 
 LIVE_DIR = "content/news"
