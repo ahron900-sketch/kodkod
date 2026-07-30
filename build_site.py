@@ -503,7 +503,7 @@ MOCK_ADS = [
         "cls": "ad-center-banner",
         "img": "/assets/ads/center-banner-01.gif",
         "eyebrow": "", "title": "", "body": "", "cta": "",
-        "href": "/advertise.html",
+        "href": "https://veto-app.base44.app/",
     },
 ]
 
@@ -584,8 +584,15 @@ def ad_slot_html(compact=False, ads=None, lazy_viewport=False):
           <span class="ad-cta">{html.escape(ad['cta'])}</span>
         </div>"""
         tag_html = "" if not ad.get("title") else f'<span class="ad-tag">{"מומלץ" if ad["cls"] != "ad-promo-self" else "פרסומת"}</span>'
+        ad_href = ad.get("href", "#")
+        # a real paid advertiser link (external URL) opens in a new tab and
+        # is marked rel="sponsored" per Google's own guidance for paid
+        # links, same treatment already used for the article source-credit
+        # link when is_sponsored is set - internal links (e.g. /advertise.
+        # html) keep the plain same-tab behavior
+        ext_attrs = ' target="_blank" rel="sponsored noopener"' if ad_href.startswith("http") else ""
         slides.append(f"""
-      <a class="ad-slide {ad['cls']}{active_cls}" href="{html.escape(ad.get('href', '#'))}" data-index="{i}">
+      <a class="ad-slide {ad['cls']}{active_cls}" href="{html.escape(ad_href)}"{ext_attrs} data-index="{i}">
         <div class="ad-slot-bg"{bg_style}></div>
         <div class="ad-slot-shine"></div>
         {icons_html}
