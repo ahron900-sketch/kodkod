@@ -8,7 +8,7 @@ import time
 import shutil
 import urllib.request
 from datetime import datetime, timedelta
-from build_site import slugify  # single source of truth for slug computation
+from build_site import slugify, SITE_URL  # single source of truth for slug computation
 
 # מקורות RSS - כולם בעברית, ממוינים לקטגוריות (כל URL כאן נבדק ואומת שמחזיר כתבות)
 rss_feeds = {
@@ -588,6 +588,42 @@ def detect_tv_watermark(image_url):
         return False
 
 
+# Cross-posts newly-published articles to קודקוד's OWN official Telegram
+# channel - not third-party groups/channels we don't control, which would
+# be spam/ToS territory on Telegram's side and wouldn't legitimately help
+# SEO anyway. Opt-in via env vars (same fail-open pattern as GROQ_API_KEY
+# above): silently no-ops until TELEGRAM_BOT_TOKEN/TELEGRAM_CHANNEL_ID are
+# set as repo secrets. Owner setup: create a channel, add @BotFather's bot
+# to it as admin, get the bot token from BotFather and the channel's
+# @username or numeric chat_id.
+TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
+TELEGRAM_CHANNEL_ID = os.environ.get("TELEGRAM_CHANNEL_ID", "")
+
+
+def notify_telegram(title, source_name, category, slug_guess):
+    if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHANNEL_ID:
+        return
+    if category == "טלוויזיה ושידורים חיים":  # iron rule: i24/TV content stays out of every other surface too
+        return
+    try:
+        article_url = f"{SITE_URL}/article/{slug_guess}.html"
+        text = f"{title}\n\nמקור: {source_name}\n{article_url}"
+        payload = json.dumps({
+            "chat_id": TELEGRAM_CHANNEL_ID,
+            "text": text,
+            "disable_web_page_preview": False,
+        }).encode("utf-8")
+        req = urllib.request.Request(
+            f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage",
+            data=payload,
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        urllib.request.urlopen(req, timeout=10)
+    except Exception as e:
+        print(f"שיתוף לטלגרם נכשל (מדלג, הכתבה עדיין פורסמה): {e}")
+
+
 # Internal linking engine: every article's AI-extracted tags get recorded
 # here (tag -> the article that introduced it), so the NEXT new article that
 # mentions the same tag automatically gets a link back to it. Runs once per
@@ -679,6 +715,7 @@ def save_article(title, link, content, image_url, source_name, category, video_i
                              has_watermark=has_watermark)
         if recent_titles is not None:
             recent_titles.append(normalize_title_words(title))
+        notify_telegram(title, source_name, video_category, slugify(title, sanitize_filename(title)))
         return
 
     # Filter 1: a real image is mandatory - try the RSS image first, then
@@ -736,14 +773,15 @@ def save_article(title, link, content, image_url, source_name, category, video_i
                          takeaways=takeaways, tags=tags, quick_image=quick_image)
     if recent_titles is not None:
         recent_titles.append(normalize_title_words(title))
+    # best-effort slug prediction (mirrors build_site.py's own slugify); a
+    # rare title-collision could shift the real slug by a "-1" suffix at
+    # build time, in which case this specific link would go stale -
+    # low-severity, and not worth the complexity of resolving it exactly
+    slug_guess = slugify(title, sanitize_filename(title))
     if tags_index is not None and tags:
-        # best-effort slug prediction (mirrors build_site.py's own slugify);
-        # a rare title-collision could shift the real slug by a "-1" suffix
-        # at build time, in which case this specific link would go stale -
-        # low-severity, and not worth the complexity of resolving it exactly
-        slug_guess = slugify(title, sanitize_filename(title))
         for tag in tags:
             tags_index[tag] = {"slug": slug_guess, "title": title}
+    notify_telegram(title, source_name, category, slug_guess)
 
 
 def _write_article_file(filename, title, date_str, source_name, image_url, link, category, content,

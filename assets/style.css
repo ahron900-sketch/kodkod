@@ -999,6 +999,64 @@ html.dark-mode .site-header {
   transition: background 0.15s ease;
 }
 .share-menu-item:hover { background: var(--surface-2); }
+.report-details { position: relative; }
+.report-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 18px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  background: var(--surface);
+  color: var(--ink-soft);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  list-style: none;
+}
+.report-btn::-webkit-details-marker { display: none; }
+.report-btn:hover { background: var(--surface-2); }
+.report-form {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 260px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lg);
+  padding: 14px;
+}
+.report-form select, .report-form textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 0.85rem;
+  resize: vertical;
+}
+.report-form button {
+  padding: 9px;
+  border: none;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+@media (max-width: 640px) {
+  .report-form { width: 240px; right: auto; left: 0; }
+}
 .like-btn.liked {
   color: #e0245e;
   border-color: #e0245e;

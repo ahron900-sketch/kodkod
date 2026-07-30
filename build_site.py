@@ -1380,6 +1380,24 @@ def build():
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="10.6" x2="15.4" y2="6.4"/><line x1="8.6" y1="13.4" x2="15.4" y2="17.6"/></svg>
             <span>שיתוף</span>
           </button>
+          <details class="report-details">
+            <summary class="report-btn">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span>דיווח על בעיה</span>
+            </summary>
+            <form class="report-form" action="{TIP_FORM_ACTION}" method="POST">
+              <input type="hidden" name="_subject" value="דיווח על כתבה: {html.escape(a['title'])}">
+              <input type="hidden" name="article_url" value="{html.escape(canonical)}">
+              <select name="reason" required>
+                <option value="">בחרו סוג בעיה</option>
+                <option value="כתבה שבורה">כתבה שבורה (טקסט/תמונה/וידאו לא עובדים)</option>
+                <option value="תוכן כפול">תוכן כפול - כבר פורסם באתר</option>
+                <option value="אחר">אחר</option>
+              </select>
+              <textarea name="details" rows="3" placeholder="פרטים נוספים (אופציונלי)"></textarea>
+              <button type="submit">שליחת דיווח</button>
+            </form>
+          </details>
         </div>"""
         # Source credit shown once, at the very end of the article only (not
         # repeated near the headline) - keeps the reader's focus on our own

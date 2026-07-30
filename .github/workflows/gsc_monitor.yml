@@ -1,0 +1,41 @@
+name: Search Console Health Check
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * *'
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: pip install google-api-python-client google-auth
+
+      - name: Run Search Console monitor
+        env:
+          GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
+          GSC_SITE_URL: ${{ secrets.GSC_SITE_URL }}
+        run: python gsc_monitor.py
+
+      - name: Save report
+        run: |
+          if [ ! -f data/gsc_report.json ]; then
+            echo "No report produced (credentials not configured yet) - nothing to commit."
+            exit 0
+          fi
+          git config --global user.name "GSC-Monitor-Bot"
+          git config --global user.email "bot@kodkodnews.co.il"
+          git add data/gsc_report.json
+          git commit -m "עדכון דוח Search Console: $(date)" || exit 0
+          git pull --rebase origin main
+          git push origin main
