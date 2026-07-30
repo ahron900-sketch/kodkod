@@ -600,12 +600,12 @@ window.kkAffinity = (function () {
 })();
 
 (function () {
-  // side-rail ad backgrounds are only ever shown at >=1800px viewport width
+  // side-rail ad backgrounds are only ever shown at >=1500px viewport width
   // (see .side-rail's media query in style.css) - loading them via a plain
   // CSS background-image would still cost every visitor the download even
   // when the element is display:none, so the URL is deferred here and only
   // ever applied once the same width condition actually matches
-  var wideViewport = window.matchMedia("(min-width: 1800px)");
+  var wideViewport = window.matchMedia("(min-width: 1500px)");
   function applyLazyAdBackgrounds() {
     if (!wideViewport.matches) return;
     document.querySelectorAll(".ad-slot-bg[data-bg-lazy]").forEach(function (el) {

@@ -441,7 +441,7 @@ html.dark-mode .site-header {
      standard for a vertical side placement */
   width: 300px;
 }
-@media (min-width: 1800px) {
+@media (min-width: 1500px) {
   .side-rail { display: block; }
   .side-rail .ad-slot {
     position: sticky;
