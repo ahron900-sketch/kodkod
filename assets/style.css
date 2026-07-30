@@ -533,7 +533,7 @@ html.dark-mode .site-header {
    min-height on its own, so a wide creative like the 1200x400 (3:1) center
    banner was getting cover-fit into a box far thinner than its own aspect
    ratio and cropped down to a sliver - locking the real ratio fixes it */
-.ad-slot:has(.ad-center-banner) { aspect-ratio: 3 / 1; min-height: 0; }
+.ad-slot:has(.ad-center-banner) { aspect-ratio: 3 / 1; min-height: 0; max-width: 900px; }
 /* crossfade rotation between every ad-slide inside a slot - same technique
    as the homepage hero carousel (assets/search.js swaps .active) */
 .ad-slide {
