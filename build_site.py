@@ -55,6 +55,7 @@ ARTICLE_PREVIEW_CHARS = 900
 FOOTER_PROMO_HTML = ""
 WEATHER_BAR_HTML = ""
 SHABBAT_OVERLAY_HTML = ""
+SHABBAT_HEAD_SCRIPT = ""
 
 # Weather: open-meteo.com is genuinely free and keyless (no account/API key
 # of any kind, verified before wiring this up) - fetched once per build at
@@ -754,6 +755,7 @@ def write_page(path, title, description, categories, active_cat, body_html,
         robots_content=robots_content,
         video_icon_svg=VIDEO_ICON_SVG,
     )
+    full = full.replace('<meta charset="UTF-8">', f'<meta charset="UTF-8">\n{SHABBAT_HEAD_SCRIPT}')
     full = full.replace("<header class=\"site-header\">",
                          f'{WEATHER_BAR_HTML}\n<div class="ticker"><div class="ticker-move">{html.escape(ticker_text)}</div></div>\n<header class="site-header">')
     page_shell = f"""
@@ -1321,17 +1323,28 @@ def build():
     # no reload needed. Real timestamps embedded here; assets/search.js
     # does the actual comparison/timer against the visitor's own clock -
     # this only needs to run once per build (times are stable all week).
-    global SHABBAT_OVERLAY_HTML
+    global SHABBAT_OVERLAY_HTML, SHABBAT_HEAD_SCRIPT
     shabbat_close_iso, shabbat_reopen_iso = fetch_shabbat_times()
     if shabbat_close_iso and shabbat_reopen_iso:
         SHABBAT_OVERLAY_HTML = f"""
 <div id="shabbat-lockout" class="shabbat-lockout" data-close="{html.escape(shabbat_close_iso)}" data-reopen="{html.escape(shabbat_reopen_iso)}" hidden>
   <div class="shabbat-lockout-inner">
-    <img src="/assets/shabbat/closure-image.jpg" alt="שבת שלום ומבורך" class="shabbat-lockout-img" loading="lazy">
+    <img src="/assets/shabbat/closure-image.jpg" alt="שבת שלום ומבורך" class="shabbat-lockout-img">
     <p class="shabbat-lockout-reopen" id="shabbat-reopen-text"></p>
   </div>
 </div>
 <div id="shabbat-warning" class="shabbat-warning" hidden><span id="shabbat-warning-text"></span></div>"""
+        # A visitor arriving via a direct link straight to an article (not
+        # the homepage) was seeing the real page content before the lockout
+        # ever appeared - assets/search.js only runs once the whole page has
+        # loaded, at the bottom of <body>. This runs synchronously in <head>,
+        # before the browser paints anything, on every single page - no
+        # flash of real content regardless of which URL is the entry point.
+        SHABBAT_HEAD_SCRIPT = f"""<script>(function(){{
+var c={json.dumps(shabbat_close_iso)},r={json.dumps(shabbat_reopen_iso)};
+var n=Date.now(),ct=new Date(c).getTime(),rt=new Date(r).getTime();
+if(n>=ct&&n<rt)document.documentElement.className+=" kk-shabbat-locked";
+}})();</script>"""
 
     # Articles without a real image are never shown in listings (hero, cards,
     # quick strip, related) - only their own article page still renders for

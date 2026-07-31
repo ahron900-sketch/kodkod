@@ -1935,32 +1935,40 @@ html.dark-mode .site-header {
    sunset, per Hebcal, until Shabbat's end), not a dismissible banner. The
    supplied weekly image carries the greeting/mood; this only adds the
    real, dynamic reopen time the static image itself can't show. */
+/* Set synchronously in <head>, before the browser paints anything (see the
+   inline script build_site.py injects right after <meta charset>) - a
+   direct link straight to an article page was showing the real content
+   first, since the previous check only ran from assets/search.js at the
+   very end of <body>. This closes that gap regardless of entry URL. */
+html.kk-shabbat-locked body > *:not(#shabbat-lockout) { display: none !important; }
+html.kk-shabbat-locked #shabbat-lockout { display: block !important; }
+
 .shabbat-lockout {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: var(--bg, #16181c);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-}
-.shabbat-lockout-inner {
-  max-width: 560px;
-  width: 100%;
-  text-align: center;
+  background: #16181c;
 }
 .shabbat-lockout-img {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: auto;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-lg);
+  height: 100%;
+  object-fit: cover;
+}
+.shabbat-lockout-inner {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 32px 24px calc(32px + env(safe-area-inset-bottom, 0px));
+  text-align: center;
+  background: linear-gradient(transparent, rgba(0,0,0,0.75) 60%);
 }
 .shabbat-lockout-reopen {
-  margin: 20px 0 0;
-  font-size: 1.05rem;
+  margin: 0;
+  font-size: 1.15rem;
   font-weight: 700;
-  color: var(--ink);
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
 }
 .shabbat-warning {
   position: fixed;
