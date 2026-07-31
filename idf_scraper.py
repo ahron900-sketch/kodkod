@@ -1,6 +1,7 @@
 import feedparser
 import glob
 import html
+import io
 import json
 import os
 import re
@@ -9,6 +10,17 @@ import shutil
 import urllib.request
 from datetime import datetime, timedelta
 from build_site import slugify, SITE_URL  # single source of truth for slug computation
+
+# Real pixel-level image analysis (blur detection, perceptual duplicate
+# hashing) needs Pillow, which .github/workflows/idf_bot.yml now installs.
+# Guarded import so a local run without it installed still works - every
+# function using PIL below fails open (skips the check, never blocks
+# publishing) rather than crashing when this is unavailable.
+try:
+    from PIL import Image, ImageFilter
+    HAVE_PIL = True
+except ImportError:
+    HAVE_PIL = False
 
 # מקורות RSS - כולם בעברית, ממוינים לקטגוריות (כל URL כאן נבדק ואומת שמחזיר כתבות)
 rss_feeds = {
@@ -126,12 +138,24 @@ def clean_html(raw_html):
 
 def upgrade_image_quality(url):
     """Some sources' RSS gives a tiny thumbnail variant of the real image -
-    swap in the full-resolution version where we know the URL pattern."""
+    swap in a larger rendition through the same URL pattern/CDN the source
+    itself already serves, rather than guessing at a URL that might not
+    exist. Zero storage cost - the CDN generates the resize on the fly."""
     if not url:
         return url
     # mako.co.il: "..._autoOrient_a.jpg" is an ~80x60 crop; the same filename
     # without the trailing "_a" is the real, full-size image
     url = re.sub(r'(_autoOrient)_a(\.\w+)(\?.*)?$', r'\1\2', url)
+    # Cloudinary-style resize path segment, e.g. Walla's
+    # "images.wcdn.co.il/f_auto,q_auto,w_300/..." - bumps a small requested
+    # width up; only touches width (not height) since an unfamiliar CDN's
+    # exact crop/fit behavior for a two-dimension change isn't something to
+    # guess at, but requesting a wider image through the same live resize
+    # endpoint is safe and well-verified for this specific pattern
+    def _bump_cloudinary_width(m):
+        w = int(m.group(1))
+        return f"w_{1200}" if w < 600 else m.group(0)
+    url = re.sub(r'w_(\d+)', _bump_cloudinary_width, url)
     return url
 
 
@@ -275,6 +299,106 @@ def is_low_quality_image(chunk):
         return False
     width, height = dims
     return width < MIN_IMAGE_WIDTH or height < MIN_IMAGE_HEIGHT
+
+
+MAX_FULL_IMAGE_BYTES = 6_000_000
+
+
+def _fetch_full_image(image_url):
+    """Unlike _fetch_image_chunk (128KB, just enough for a dimension
+    header), blur detection and perceptual hashing need real decodable
+    pixel data - fetches the whole image, capped so a pathologically large
+    file can't stall a scrape run. Returns None on any failure, same
+    fail-open contract as the rest of this file."""
+    if not image_url:
+        return None
+    try:
+        req = urllib.request.Request(
+            image_url,
+            headers={"User-Agent": "Mozilla/5.0 (compatible; KodkodBot/1.0)"},
+        )
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            return resp.read(MAX_FULL_IMAGE_BYTES)
+    except Exception:
+        return None
+
+
+# Laplacian-style edge variance (the standard, well-known blur-detection
+# heuristic - a sharp photo has high-variance edges, a blurry/flat one
+# doesn't) - resized to a fixed size first so the threshold means the same
+# thing regardless of the source image's original resolution. Threshold is
+# a conservative starting point (only rejects clearly, badly blurry images)
+# - meant to be tuned against real results over time, not a precise science.
+BLUR_VARIANCE_THRESHOLD = 50
+
+
+def is_blurry_image(image_bytes):
+    if not HAVE_PIL or not image_bytes:
+        return False
+    try:
+        img = Image.open(io.BytesIO(image_bytes)).convert("L").resize((300, 300))
+        edges = list(img.filter(ImageFilter.FIND_EDGES).getdata())
+        mean = sum(edges) / len(edges)
+        variance = sum((p - mean) ** 2 for p in edges) / len(edges)
+        return variance < BLUR_VARIANCE_THRESHOLD
+    except Exception:
+        return False  # can't decode it here - Filter 1's own checks already gate real corruption
+
+
+# Perceptual average-hash (aHash): resize to 8x8 grayscale, threshold each
+# pixel against the mean brightness - two images that look alike (same wire
+# photo, a re-compressed/resized copy, a minor crop) end up with a small
+# Hamming distance between their hashes, unlike a byte-exact hash which
+# would only catch a literally identical file.
+IMAGE_HASH_INDEX_PATH = os.path.join("data", "image_hashes.json")
+IMAGE_DEDUPE_LOOKBACK_HOURS = 72
+IMAGE_HASH_DUPLICATE_DISTANCE = 6
+
+
+def image_ahash(image_bytes):
+    if not HAVE_PIL or not image_bytes:
+        return None
+    try:
+        img = Image.open(io.BytesIO(image_bytes)).convert("L").resize((8, 8))
+        pixels = list(img.getdata())
+        avg = sum(pixels) / len(pixels)
+        return "".join("1" if p > avg else "0" for p in pixels)
+    except Exception:
+        return None
+
+
+def hamming_distance(hash_a, hash_b):
+    if not hash_a or not hash_b or len(hash_a) != len(hash_b):
+        return 999
+    return sum(a != b for a, b in zip(hash_a, hash_b))
+
+
+def load_recent_image_hashes():
+    """Returns {hash: {"title":..., "ts": unix_time}}, pruned to the lookback
+    window - mirrors load_recent_titles()'s pattern for duplicate stories,
+    but for images reused across otherwise-unrelated articles."""
+    try:
+        with open(IMAGE_HASH_INDEX_PATH, encoding="utf-8") as f:
+            data = json.load(f)
+    except Exception:
+        return {}
+    cutoff = time.time() - IMAGE_DEDUPE_LOOKBACK_HOURS * 3600
+    return {h: v for h, v in data.items() if v.get("ts", 0) >= cutoff}
+
+
+def save_image_hashes(index):
+    os.makedirs(os.path.dirname(IMAGE_HASH_INDEX_PATH), exist_ok=True)
+    with open(IMAGE_HASH_INDEX_PATH, "w", encoding="utf-8") as f:
+        json.dump(index, f, ensure_ascii=False, indent=2)
+
+
+def find_duplicate_image(new_hash, recent_hashes):
+    if not new_hash:
+        return None
+    for h, info in recent_hashes.items():
+        if hamming_distance(new_hash, h) <= IMAGE_HASH_DUPLICATE_DISTANCE:
+            return info.get("title")
+    return None
 
 
 ARTICLE_TAG_RE = re.compile(r'<article[^>]*>(.*?)</article>', re.DOTALL | re.IGNORECASE)
@@ -946,7 +1070,7 @@ def auto_link_internal_tags(content, tags_index):
     return content
 
 
-def save_article(title, link, content, image_url, source_name, category, video_id="", recent_titles=None, tags_index=None):
+def save_article(title, link, content, image_url, source_name, category, video_id="", recent_titles=None, tags_index=None, image_hashes=None):
     filename = f"{sanitize_filename(title)}.md"
     exists = any(os.path.exists(os.path.join(d, filename)) for d in [LIVE_DIR, PENDING_DIR, ARCHIVE_DIR])
     if exists:
@@ -978,6 +1102,14 @@ def save_article(title, link, content, image_url, source_name, category, video_i
         image_chunk = _fetch_image_chunk(image_url)
         if is_low_quality_image(image_chunk):
             print(f"נפסל (וידאו - תמונה לא נטענת/איכות נמוכה מדי): {title}")
+            return
+        # duplicate-thumbnail hashing is skipped here (unlike regular
+        # articles) - many auto-generated YouTube thumbnails from the same
+        # channel legitimately look similar (same on-air graphics template),
+        # which would false-positive as "duplicate" far more than it would
+        # for real news photos
+        if is_blurry_image(_fetch_full_image(image_url)):
+            print(f"נפסל (וידאו - תמונה מטושטשת): {title}")
             return
         content = strip_link_lines(strip_known_junk_phrases(content))
         if len(content) < MIN_VIDEO_CONTENT_LEN:
@@ -1033,6 +1165,27 @@ def save_article(title, link, content, image_url, source_name, category, video_i
     # item is handled
     quick_image = is_bad_image_aspect(image_chunk)
 
+    # Real pixel-level quality checks (blur, duplicate, on-image watermark) -
+    # only run on candidates that already cleared the cheap chunk-based gates
+    # above, since each of these needs the full image and/or a Groq call.
+    full_image_bytes = _fetch_full_image(image_url)
+    if is_blurry_image(full_image_bytes):
+        print(f"נפסל (תמונה מטושטשת): {title}")
+        return
+    new_hash = image_ahash(full_image_bytes)
+    if image_hashes is not None:
+        dup_title = find_duplicate_image(new_hash, image_hashes)
+        if dup_title:
+            print(f"נפסל (תמונה כפולה - כבר שימשה בכתבה '{dup_title}'): {title}")
+            return
+    # station bug/logo baked into a regular news photo, not just video
+    # thumbnails - same real vision check, same placeholder-swap-not-reject
+    # treatment build_site.py already applies via the has_watermark flag
+    has_watermark = detect_tv_watermark(image_url)
+    time.sleep(1)  # same Groq rate-limit pacing margin used elsewhere
+    if image_hashes is not None and new_hash:
+        image_hashes[new_hash] = {"title": title, "ts": time.time()}
+
     # Filter 2: need the full article body, not just a short RSS teaser.
     # Always attempt the real full-text fetch first (an RSS teaser is
     # rarely as complete as the actual article, even when it happens to
@@ -1083,7 +1236,8 @@ def save_article(title, link, content, image_url, source_name, category, video_i
 
     date_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     _write_article_file(filename, title, date_str, source_name, image_url, link, category, content,
-                         takeaways=takeaways, tags=tags, quick_image=quick_image, hero_worthy=hero_worthy)
+                         takeaways=takeaways, tags=tags, quick_image=quick_image, hero_worthy=hero_worthy,
+                         has_watermark=has_watermark)
     if recent_titles is not None:
         recent_titles.append(normalize_title_words(title))
     # best-effort slug prediction (mirrors build_site.py's own slugify); a
@@ -1164,9 +1318,11 @@ def fetch_news():
     manage_archive()
     recent_titles = load_recent_titles()
     tags_index = load_tags_index()
+    image_hashes = load_recent_image_hashes()
     trending_keywords = fetch_trending_keywords()
     print(f"נטענו {len(recent_titles)} כותרות מ-{DUPLICATE_LOOKBACK_HOURS} השעות האחרונות לבדיקת כפילויות")
     print(f"נטען אינדקס תגיות עם {len(tags_index)} תגיות לקישור פנימי אוטומטי")
+    print(f"נטען אינדקס תמונות עם {len(image_hashes)} טביעות אצבע מ-{IMAGE_DEDUPE_LOOKBACK_HOURS} השעות האחרונות")
     print(f"נטענו {len(trending_keywords)} מגמות חמות מגוגל טרנדס לתעדוף עיבוד")
 
     candidates = []
@@ -1222,9 +1378,11 @@ def fetch_news():
 
     for c in candidates:
         save_article(c["title"], c["link"], c["content"], c["image_url"], c["source_name"], c["category"],
-                     video_id=c["video_id"], recent_titles=recent_titles, tags_index=tags_index)
+                     video_id=c["video_id"], recent_titles=recent_titles, tags_index=tags_index,
+                     image_hashes=image_hashes)
 
     save_tags_index(tags_index)
+    save_image_hashes(image_hashes)
 
 
 if __name__ == "__main__":

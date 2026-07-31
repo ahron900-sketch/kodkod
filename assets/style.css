@@ -437,9 +437,10 @@ html.dark-mode .site-header {
 .side-rail {
   display: none;
   flex-shrink: 0;
-  /* IAB standard "Half Page Ad" unit - 300x600 - the professional-site
-     standard for a vertical side placement */
-  width: 300px;
+  /* IAB standard "Wide Skyscraper" unit - 160x600 - narrower than the
+     300x600 Half Page unit, per request after comparing real competitor
+     sites' side rails */
+  width: 160px;
 }
 @media (min-width: 1500px) {
   .side-rail { display: block; }
