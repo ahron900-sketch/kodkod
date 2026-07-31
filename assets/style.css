@@ -495,6 +495,20 @@ html.dark-mode .site-header {
   font-size: 1.4rem;
   font-weight: 800;
   margin: 0 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+/* bold section-divider accent bar - every major competitor site (Kan's
+   "המגזין |", mako's underline rules) uses something stronger than plain
+   text to mark a homepage section start */
+.section-title::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 1.1em;
+  background: var(--accent);
+  border-radius: 3px;
 }
 
 .quick-section, .recent-section, .cat-section {
@@ -847,10 +861,13 @@ html.dark-mode .site-header {
 
 .card-cat {
   display: inline-block;
-  font-size: 0.75rem;
-  color: var(--accent);
+  font-size: 0.72rem;
   font-weight: 700;
   margin-bottom: 8px;
+  padding: 3px 10px;
+  border-radius: 100px;
+  /* color/background set inline per-category (build_site.py's
+     cat_chip_style) - this is just the pill shape/sizing */
 }
 
 .card h3 {
@@ -1627,7 +1644,6 @@ html.dark-mode .site-header {
   margin: 8px 0;
 }
 .bento-big-body .card-meta { color: rgba(255,255,255,0.8); }
-.bento-big-body .card-cat { color: #fff; opacity: 0.9; }
 
 .bento-small-stack {
   display: flex;

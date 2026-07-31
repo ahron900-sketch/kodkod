@@ -184,6 +184,31 @@ def category_meta_description(category):
     return CATEGORY_META_DESCRIPTIONS.get(category, f"כל הכתבות בקטגוריית {category} - עדכונים שוטפים מהאתר החדשותי קודקוד")
 
 
+# Colored category tag chips - a pattern present on every major Israeli news
+# site (mako's yellow chips, ynet's colored kickers, Walla's colored
+# eyebrows, Kan's red LIVE badge) instead of plain accent-colored text.
+# A distinct, tasteful color per category (not the site's own bronze accent,
+# which stays reserved for interactive/brand elements) so a reader can
+# recognize a category at a glance the same way they can on those sites.
+CATEGORY_COLORS = {
+    "חדשות": "#7b241c",
+    "ספורט": "#1e8449",
+    "כלכלה": "#1a5276",
+    "טכנולוגיה": "#6c3483",
+    "בריאות": "#148f77",
+    "רכב": "#616a6b",
+    "תרבות ובידור": "#a1335c",
+    RECIPE_CATEGORY: "#ca6f1e",
+    "חרדים": "#7d6608",
+    TV_CATEGORY: "#c0392b",
+}
+
+
+def cat_chip_style(category):
+    color = CATEGORY_COLORS.get(category, "#8a7355")
+    return f'style="background:{color};color:#fff;"'
+
+
 def extract_dek(body_text, max_len=180):
     """First real sentence of the body, used as a subtitle under the headline."""
     for line in body_text.split("\n"):
@@ -477,7 +502,7 @@ def render_card(a):
         {video_badge}{quick_badge}{recipe_badge}{sponsored_badge}
       </div>
       <div class="card-body">
-        <span class="card-cat">{html.escape(a['category'])}</span>
+        <span class="card-cat" {cat_chip_style(a['category'])}>{html.escape(a['category'])}</span>
         <h3>{html.escape(a['title'])}</h3>
         <span class="card-meta">{html.escape(a['source'])} · {html.escape(a['date'][:10])}</span>
       </div>
@@ -487,7 +512,7 @@ def render_card(a):
 def render_quick_card(a):
     return f"""
     <a class="quick-card" href="/article/{a['slug']}.html">
-      <span class="card-cat">{html.escape(a['category'])}</span>
+      <span class="card-cat" {cat_chip_style(a['category'])}>{html.escape(a['category'])}</span>
       <h4>{html.escape(a['title'])}</h4>
       <span class="card-meta">{html.escape(a['source'])} · {html.escape(a['date'][:10])}</span>
     </a>"""
@@ -1303,7 +1328,7 @@ def build():
               <img src="{html.escape(hero_img)}" class="hero-img" onerror="this.src='{PLACEHOLDER_IMG}'">
             </div>
             <div class="hero-text">
-              <span class="card-cat">{html.escape(hero['category'])}</span>
+              <span class="card-cat" {cat_chip_style(hero['category'])}>{html.escape(hero['category'])}</span>
               <h1>{html.escape(hero['title'])}</h1>
               {hero_dek}
               <span class="card-meta">{html.escape(hero['source'])} · {html.escape(hero['date'][:10])}</span>
@@ -1334,7 +1359,7 @@ def build():
           <a class="bento-small" href="/article/{s['slug']}.html">
             <div class="bento-small-img" style="background-image:url('{html.escape(s['image'] or PLACEHOLDER_IMG)}')"></div>
             <div class="bento-small-body">
-              <span class="card-cat">{html.escape(s['category'])}</span>
+              <span class="card-cat" {cat_chip_style(s['category'])}>{html.escape(s['category'])}</span>
               <h4>{html.escape(s['title'])}</h4>
             </div>
           </a>""" for s in small)
@@ -1343,7 +1368,7 @@ def build():
           <a class="bento-big" href="/article/{big['slug']}.html">
             <div class="bento-big-img" style="background-image:url('{html.escape(big_img)}')"></div>
             <div class="bento-big-body">
-              <span class="card-cat">{html.escape(big['category'])}</span>
+              <span class="card-cat" {cat_chip_style(big['category'])}>{html.escape(big['category'])}</span>
               <h2>{html.escape(big['title'])}</h2>
               <span class="card-meta">{html.escape(big['source'])} · {html.escape(big['date'][:10])}</span>
             </div>
@@ -1708,7 +1733,7 @@ def build():
         body = f"""
         <main class="article">
           {sponsored_banner_html}
-          <span class="card-cat">{html.escape(a['category'])}</span>
+          <span class="card-cat" {cat_chip_style(a['category'])}>{html.escape(a['category'])}</span>
           <h1>{html.escape(a['title'])}</h1>
           {dek_html}
           <div class="article-meta"><span class="article-byline">{html.escape(byline_for(a['category']))}</span> · {html.escape(a['date'])}</div>
