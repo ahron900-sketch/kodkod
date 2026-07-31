@@ -1328,8 +1328,8 @@ def build():
     if shabbat_close_iso and shabbat_reopen_iso:
         SHABBAT_OVERLAY_HTML = f"""
 <div id="shabbat-lockout" class="shabbat-lockout" data-close="{html.escape(shabbat_close_iso)}" data-reopen="{html.escape(shabbat_reopen_iso)}" hidden>
+  <img src="/assets/shabbat/closure-image.jpg" alt="שבת שלום ומבורך" class="shabbat-lockout-img">
   <div class="shabbat-lockout-inner">
-    <img src="/assets/shabbat/closure-image.jpg" alt="שבת שלום ומבורך" class="shabbat-lockout-img">
     <p class="shabbat-lockout-reopen" id="shabbat-reopen-text"></p>
   </div>
 </div>
