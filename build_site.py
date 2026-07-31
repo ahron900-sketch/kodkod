@@ -1300,10 +1300,18 @@ def build():
     # yields nothing, since hero_worthy is a new field - the ~14k articles
     # scraped before it existed all default to False, and without this
     # fallback the hero section could go empty until enough freshly-
-    # classified articles accumulate.
+    # classified articles accumulate. The fallback ALSO has to stay within
+    # the same category allowlist, though - a רכב (car review) article once
+    # made it to hero this way, since the old fallback only excluded
+    # recipes/health, not every other off-list category (cars, tech,
+    # Haredi-affiliated content, TV/live). Categories that can never contain
+    # hero-worthy content per the owner's list are excluded here too, even
+    # in the fallback path.
+    HERO_ELIGIBLE_CATEGORIES = {"חדשות", "ספורט", "כלכלה", "תרבות ובידור"}
+
     def base_prominent_filter(a):
         return (is_fresh(a)
-                and a["category"] not in (RECIPE_CATEGORY, "בריאות")
+                and a["category"] in HERO_ELIGIBLE_CATEGORIES
                 and not a.get("has_watermark")
                 and a["source"] != "i24NEWS עברית"
                 and not a.get("quick_image"))
@@ -1344,13 +1352,10 @@ def build():
 
     # Bento/mosaic module: one large tile + a stack of smaller ones, instead
     # of dropping straight into a uniform grid right under the hero
-    bento_candidates = pick_diverse(
-        [a for a in rest if is_fresh(a)
-         and a["category"] not in (RECIPE_CATEGORY, "בריאות")
-         and not a.get("has_watermark")
-         and a["source"] != "i24NEWS עברית"
-         and not a.get("quick_image")],
-        5, max_per_category=2)
+    bento_pool = [a for a in rest if base_prominent_filter(a) and a.get("hero_worthy")]
+    if not bento_pool:
+        bento_pool = [a for a in rest if base_prominent_filter(a)]
+    bento_candidates = pick_diverse(bento_pool, 5, max_per_category=2)
     bento_html = ""
     if len(bento_candidates) >= 3:
         big, *small = bento_candidates

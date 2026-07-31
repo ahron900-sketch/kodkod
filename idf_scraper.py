@@ -1097,6 +1097,12 @@ def save_article(title, link, content, image_url, source_name, category, video_i
     if video_id:
         is_i24 = source_name == "i24NEWS עברית"
         video_category = "טלוויזיה ושידורים חיים" if (is_i24 or is_live_broadcast(title)) else category
+        # YouTube's own URL scheme distinguishes a Short from a regular
+        # upload (/shorts/ID vs /watch?v=ID) - real, reliable signal (not a
+        # guess) for vertical/portrait-format social-style video content,
+        # shown in its own compact section rather than mixed into the
+        # regular video listing (owner directive: "חדשות עומדות")
+        is_short = "/shorts/" in link
         if not image_url:
             image_url = f"https://i.ytimg.com/vi/{video_id}/hqdefault.jpg"
         image_chunk = _fetch_image_chunk(image_url)
