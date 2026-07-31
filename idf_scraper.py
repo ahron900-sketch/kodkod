@@ -1143,7 +1143,8 @@ def save_article(title, link, content, image_url, source_name, category, video_i
         time.sleep(1)  # brief pacing between Groq calls, same margin as the text enrichment call
         date_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         _write_article_file(filename, final_title, date_str, source_name, image_url, link, video_category,
-                             final_content, video_id, has_watermark=has_watermark, hero_worthy=hero_worthy)
+                             final_content, video_id, has_watermark=has_watermark, hero_worthy=hero_worthy,
+                             is_short=is_short)
         if recent_titles is not None:
             recent_titles.append(normalize_title_words(final_title))
         notify_telegram(final_title, source_name, video_category, slugify(final_title, sanitize_filename(final_title)))
@@ -1259,7 +1260,7 @@ def save_article(title, link, content, image_url, source_name, category, video_i
 
 def _write_article_file(filename, title, date_str, source_name, image_url, link, category, content,
                          video_id="", takeaways=None, tags=None, quick_image=False, has_watermark=False,
-                         hero_worthy=False):
+                         hero_worthy=False, is_short=False):
     video_line = f'\nvideo_id: "{video_id}"' if video_id else ""
 
     # Each takeaway is written as its own indented continuation line (what
@@ -1279,6 +1280,7 @@ def _write_article_file(filename, title, date_str, source_name, image_url, link,
     quick_image_line = '\nquick_image: "1"' if quick_image else ""
     has_watermark_line = '\nhas_watermark: "1"' if has_watermark else ""
     hero_worthy_line = '\nhero_worthy: "1"' if hero_worthy else ""
+    is_short_line = '\nis_short: "1"' if is_short else ""
 
     md_content = f"""---
 title: >-
@@ -1287,7 +1289,7 @@ date: "{date_str}"
 source: "{source_name}"
 image: "{image_url}"
 link: "{link}"
-category: "{category}"{video_line}{takeaways_line}{tags_line}{quick_image_line}{has_watermark_line}{hero_worthy_line}
+category: "{category}"{video_line}{takeaways_line}{tags_line}{quick_image_line}{has_watermark_line}{hero_worthy_line}{is_short_line}
 ---
 
 {content}

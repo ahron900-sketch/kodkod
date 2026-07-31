@@ -295,6 +295,7 @@ def load_articles():
         # existed simply default to not-eligible, same as an enrichment
         # failure would - a conservative default, not a bug.
         hero_worthy = data.get("hero_worthy") == "1"
+        is_short = data.get("is_short") == "1"
 
         articles.append({
             "title": title,
@@ -316,6 +317,7 @@ def load_articles():
             "is_sponsored": is_sponsored,
             "has_watermark": has_watermark,
             "hero_worthy": hero_worthy,
+            "is_short": is_short,
         })
     articles.sort(key=lambda a: a["dt"], reverse=True)
     seen = {}
@@ -515,6 +517,22 @@ def render_quick_card(a):
       <span class="card-cat" {cat_chip_style(a['category'])}>{html.escape(a['category'])}</span>
       <h4>{html.escape(a['title'])}</h4>
       <span class="card-meta">{html.escape(a['source'])} · {html.escape(a['date'][:10])}</span>
+    </a>"""
+
+
+def render_short_card(a):
+    """Vertical/portrait card (9:16) for YouTube Shorts and other social-
+    style vertical video - a compact thumbnail-first treatment (title
+    overlaid directly on the image, no separate white card body) matching
+    the dedicated "Shorts" strip real Israeli news sites (e.g. Kikar
+    HaShabbat) use for this content, distinct from קודקוד's regular
+    landscape article cards."""
+    img = a["image"] or PLACEHOLDER_IMG
+    return f"""
+    <a class="short-card" href="/article/{a['slug']}.html">
+      <img class="short-card-img" src="{html.escape(img)}" alt="{html.escape(a['title'])}" loading="lazy" onerror="this.src='{PLACEHOLDER_IMG}'">
+      <span class="short-card-play">{VIDEO_ICON_SVG}</span>
+      <span class="short-card-title">{html.escape(a['title'])}</span>
     </a>"""
 
 
@@ -1406,6 +1424,20 @@ def build():
           </div>
         </section>"""
 
+    # vertical/portrait short-video strip ("חדשות עומדות") - YouTube Shorts
+    # and other social-style vertical video, detected at scrape time by
+    # idf_scraper.py via the platform's own /shorts/ URL scheme. A new
+    # field, so this naturally starts empty and fills in as new Shorts get
+    # scraped rather than needing a backfill of the existing corpus.
+    shorts_articles = pick_diverse([a for a in rest if a.get("is_short") and is_fresh(a)], 12, max_per_category=4)
+    shorts_html = ""
+    if shorts_articles:
+        shorts_html = f"""
+        <section class="shorts-section reveal">
+          <h2 class="section-title">חדשות עומדות</h2>
+          <div class="shorts-strip">{"".join(render_short_card(a) for a in shorts_articles)}</div>
+        </section>"""
+
     recently_viewed_html = """
         <section class="recent-section" id="recently-viewed-section" hidden>
           <h2 class="section-title">כתבות שקראת לאחרונה</h2>
@@ -1460,7 +1492,7 @@ def build():
     desc_categories = [c for c in categories if c != TV_CATEGORY]
     homepage_description = f"קודקוד חדשות - האתר החדשותי המהיר בישראל: {', '.join(desc_categories)} ועוד, במקום אחד"
 
-    body = f'<main class="grid">{hero_html}{bento_html}{ad_slot_html()}{quick_html}{recently_viewed_html}{categories_html}</main>'
+    body = f'<main class="grid">{hero_html}{bento_html}{ad_slot_html()}{quick_html}{shorts_html}{recently_viewed_html}{categories_html}</main>'
     write_page(os.path.join(OUTPUT_DIR, "index.html"), SITE_NAME,
                homepage_description,
                categories, None, body, ticker_text, canonical=SITE_URL + "/",
