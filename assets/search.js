@@ -1,3 +1,67 @@
+(function () {
+  // Owner directive: the site closes 10 minutes before Shabbat (real
+  // sunset-based candle-lighting time from Hebcal, computed at build time
+  // in build_site.py - never approximated here) and reopens at Shabbat's
+  // end. Runs first, before anything else, so a visitor who loads the
+  // page already inside the closed window sees the lockout immediately
+  // rather than a flash of the real site first.
+  var overlay = document.getElementById("shabbat-lockout");
+  var warning = document.getElementById("shabbat-warning");
+  if (!overlay) return;
+
+  var closeTime = new Date(overlay.getAttribute("data-close")).getTime();
+  var reopenTime = new Date(overlay.getAttribute("data-reopen")).getTime();
+  if (isNaN(closeTime) || isNaN(reopenTime)) return;
+
+  var WARNING_LEAD_MS = 15 * 60 * 1000;
+  var warningInterval = null;
+
+  function pad(n) { return n < 10 ? "0" + n : "" + n; }
+
+  function showLockout() {
+    if (warningInterval) { clearInterval(warningInterval); warningInterval = null; }
+    if (warning) warning.hidden = true;
+    var reopenDate = new Date(reopenTime);
+    var reopenTextEl = document.getElementById("shabbat-reopen-text");
+    if (reopenTextEl) {
+      reopenTextEl.textContent = "האתר ייפתח שוב במוצאי שבת בשעה " +
+        pad(reopenDate.getHours()) + ":" + pad(reopenDate.getMinutes());
+    }
+    overlay.hidden = false;
+    document.documentElement.style.overflow = "hidden";
+  }
+
+  function showWarning() {
+    if (!warning) return;
+    function updateText() {
+      var minutesLeft = Math.max(0, Math.ceil((closeTime - Date.now()) / 60000));
+      var textEl = document.getElementById("shabbat-warning-text");
+      if (textEl) textEl.textContent = "לתשומת ליבכם: האתר ייסגר בעוד " + minutesLeft + " דקות לקראת כניסת שבת";
+    }
+    updateText();
+    warning.hidden = false;
+    warningInterval = setInterval(updateText, 30000);
+  }
+
+  function tick() {
+    var now = Date.now();
+    if (now >= closeTime && now < reopenTime) {
+      showLockout();
+      return;
+    }
+    if (now >= reopenTime) return; // Shabbat already over this week
+    var msUntilClose = closeTime - now;
+    if (msUntilClose <= WARNING_LEAD_MS) {
+      showWarning();
+    } else {
+      setTimeout(showWarning, msUntilClose - WARNING_LEAD_MS);
+    }
+    setTimeout(showLockout, msUntilClose);
+  }
+
+  tick();
+})();
+
 // Honest, client-side-only "style learning": a running tally of which
 // categories/sources/content-types this visitor engages with, kept entirely
 // in localStorage (never transmitted anywhere). Views count once each;

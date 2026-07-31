@@ -54,6 +54,7 @@ ARTICLE_PREVIEW_CHARS = 900
 # case anything ever imports this module without calling build() first
 FOOTER_PROMO_HTML = ""
 WEATHER_BAR_HTML = ""
+SHABBAT_OVERLAY_HTML = ""
 
 # Weather: open-meteo.com is genuinely free and keyless (no account/API key
 # of any kind, verified before wiring this up) - fetched once per build at
@@ -130,6 +131,38 @@ def fetch_weather():
             print(f"מזג אוויר עבור {name} נכשל (מדלג): {e}")
             continue
     return results
+
+
+# Real Shabbat times from Hebcal's public REST API (hebcal.github.io/api) -
+# free, keyless, no fabricated/approximated times. b=10 requests candle-
+# lighting with a custom 10-minute-before-sunset offset (owner directive:
+# close 10 minutes before actual sunset, not the usual 18/40-minute
+# candle-lighting custom) - Hebcal computes this directly, no separate raw-
+# sunset lookup needed. M=on requests Havdalah at nightfall (tzeit
+# hakochavim) for the reopen time. Tel Aviv (same reference city already
+# used for weather) rather than Jerusalem, which overrides the offset
+# parameter with its own fixed stricter local custom.
+HEBCAL_GEONAME_ID = 293397  # Tel Aviv
+
+
+def fetch_shabbat_times():
+    try:
+        url = f"https://www.hebcal.com/shabbat?cfg=json&geonameid={HEBCAL_GEONAME_ID}&b=10&M=on&leyning=off"
+        with urllib.request.urlopen(url, timeout=8) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+        close_iso = reopen_iso = None
+        for item in data.get("items", []):
+            if item.get("category") == "candles":
+                close_iso = item.get("date")
+            elif item.get("category") == "havdalah":
+                reopen_iso = item.get("date")
+        if close_iso and reopen_iso:
+            return close_iso, reopen_iso
+    except Exception as e:
+        print(f"שאיבת זמני שבת נכשלה (מדלג, האתר לא ייסגר הפעם): {e}")
+    return None, None
+
+
 WP_BOILERPLATE_RE = re.compile(r'^The post .* appeared first on .*\.?$')
 RECIPE_CATEGORY = "בישול ומתכונים"
 TV_CATEGORY = "טלוויזיה ושידורים חיים"
@@ -729,7 +762,10 @@ def write_page(path, title, description, categories, active_cat, body_html,
   <div class="page-shell-content">{body_html}</div>
   <aside class="side-rail side-rail-left">{ad_slot_html(compact=True, ads=SIDE_RAIL_ADS, lazy_viewport=True)}</aside>
 </div>"""
-    full += page_shell + PAGE_FOOT.format(year=datetime.now().year, footer_promo=FOOTER_PROMO_HTML)
+    foot = PAGE_FOOT.format(year=datetime.now().year, footer_promo=FOOTER_PROMO_HTML)
+    if SHABBAT_OVERLAY_HTML:
+        foot = foot.replace("</body>", f"{SHABBAT_OVERLAY_HTML}\n</body>")
+    full += page_shell + foot
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         f.write(full)
@@ -1277,6 +1313,25 @@ def build():
             f'{round(main_city["temp"]) if main_city["temp"] is not None else "-"}°</span>'
             '</a>'
         )
+
+    # Owner directive: the site closes 10 minutes before Shabbat (real
+    # sunset-based time from Hebcal, not approximated) and reopens at
+    # Shabbat's end - visitors already on the site 15 minutes before
+    # closure get a warning, then the lockout triggers live via a timer,
+    # no reload needed. Real timestamps embedded here; assets/search.js
+    # does the actual comparison/timer against the visitor's own clock -
+    # this only needs to run once per build (times are stable all week).
+    global SHABBAT_OVERLAY_HTML
+    shabbat_close_iso, shabbat_reopen_iso = fetch_shabbat_times()
+    if shabbat_close_iso and shabbat_reopen_iso:
+        SHABBAT_OVERLAY_HTML = f"""
+<div id="shabbat-lockout" class="shabbat-lockout" data-close="{html.escape(shabbat_close_iso)}" data-reopen="{html.escape(shabbat_reopen_iso)}" hidden>
+  <div class="shabbat-lockout-inner">
+    <img src="/assets/shabbat/closure-image.jpg" alt="שבת שלום ומבורך" class="shabbat-lockout-img" loading="lazy">
+    <p class="shabbat-lockout-reopen" id="shabbat-reopen-text"></p>
+  </div>
+</div>
+<div id="shabbat-warning" class="shabbat-warning" hidden><span id="shabbat-warning-text"></span></div>"""
 
     # Articles without a real image are never shown in listings (hero, cards,
     # quick strip, related) - only their own article page still renders for

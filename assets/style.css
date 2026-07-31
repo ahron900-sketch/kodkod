@@ -1931,6 +1931,51 @@ html.dark-mode .site-header {
 }
 
 /* Cookie consent banner */
+/* Shabbat lockout - a genuine full-page block (10 minutes before real
+   sunset, per Hebcal, until Shabbat's end), not a dismissible banner. The
+   supplied weekly image carries the greeting/mood; this only adds the
+   real, dynamic reopen time the static image itself can't show. */
+.shabbat-lockout {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg, #16181c);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.shabbat-lockout-inner {
+  max-width: 560px;
+  width: 100%;
+  text-align: center;
+}
+.shabbat-lockout-img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+}
+.shabbat-lockout-reopen {
+  margin: 20px 0 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+.shabbat-warning {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 700;
+  background: var(--accent);
+  color: #fff;
+  text-align: center;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
 .cookie-banner {
   position: fixed;
   bottom: 0;
