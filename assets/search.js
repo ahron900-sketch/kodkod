@@ -157,42 +157,6 @@ window.kkAffinity = (function () {
 })();
 
 (function () {
-  var section = document.getElementById("recently-viewed-section");
-  var grid = document.getElementById("recently-viewed-grid");
-  if (!section || !grid) return;
-
-  var list;
-  try {
-    list = JSON.parse(localStorage.getItem("kk_recent") || "[]");
-  } catch (e) {
-    list = [];
-  }
-  if (!list.length) return;
-
-  grid.innerHTML = list
-    .map(function (a) {
-      return (
-        '<a class="card" href="/article/' + a.slug + '.html">' +
-        '<div class="card-img-wrap"><img class="card-img" src="' + escapeHtml(a.img) + '" alt="" loading="lazy"></div>' +
-        '<div class="card-body">' +
-        '<span class="card-cat">' + escapeHtml(a.cat) + "</span>" +
-        "<h3>" + escapeHtml(a.title) + "</h3>" +
-        "</div></a>"
-      );
-    })
-    .join("");
-  section.hidden = false;
-
-  function escapeHtml(str) {
-    return String(str)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
-  }
-})();
-
-(function () {
   var select = document.getElementById("sort-select");
   var grid = document.getElementById("category-grid");
   if (!select || !grid) return;
@@ -205,14 +169,15 @@ window.kkAffinity = (function () {
   });
 })();
 
-(function () {
-  // Infinite scroll on category pages: the static HTML already has the
-  // first ~100 articles; further batches are read from the site's existing
-  // search-index.json (already generated for the search feature - reused
-  // here instead of building separate per-category pagination files) and
-  // fetched only once the visitor actually scrolls near the bottom.
-  var grid = document.getElementById("category-grid");
-  var sentinel = document.getElementById("load-more-sentinel");
+// Infinite scroll, shared by category-listing pages AND an article page's
+// "related articles" section (owner directive: a related-articles section
+// that visibly ends is exactly the moment a reader leaves - so it never
+// visibly runs out within a normal session, same underlying mechanism
+// either way). The static HTML already has the first batch; further ones
+// come from the site's existing search-index.json (already generated for
+// search - reused here instead of building separate pagination files),
+// fetched only once the visitor actually scrolls near the bottom.
+function setupInfiniteGrid(grid, sentinel, excludeSlug) {
   if (!grid || !sentinel) return;
 
   var category = grid.getAttribute("data-category");
@@ -265,7 +230,7 @@ window.kkAffinity = (function () {
           .then(function (r) { return r.json(); })
           .then(function (data) {
             categoryArticles = data
-              .filter(function (a) { return a.category === category; })
+              .filter(function (a) { return a.category === category && a.slug !== excludeSlug; })
               .sort(function (a, b) { return a.date < b.date ? 1 : -1; });
             return categoryArticles;
           });
@@ -294,6 +259,13 @@ window.kkAffinity = (function () {
     if (entries[0].isIntersecting) loadNextPage();
   }, { rootMargin: "600px 0px" });
   observer.observe(sentinel);
+}
+
+setupInfiniteGrid(document.getElementById("category-grid"), document.getElementById("load-more-sentinel"));
+(function () {
+  var grid = document.getElementById("related-grid");
+  if (!grid) return;
+  setupInfiniteGrid(grid, document.getElementById("related-load-more-sentinel"), grid.getAttribute("data-exclude-slug"));
 })();
 
 (function () {

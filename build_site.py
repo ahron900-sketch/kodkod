@@ -1438,12 +1438,6 @@ def build():
           <div class="shorts-strip">{"".join(render_short_card(a) for a in shorts_articles)}</div>
         </section>"""
 
-    recently_viewed_html = """
-        <section class="recent-section" id="recently-viewed-section" hidden>
-          <h2 class="section-title">כתבות שקראת לאחרונה</h2>
-          <div class="grid-inner" id="recently-viewed-grid"></div>
-        </section>"""
-
     # per-category sections: each gets its own lead (its single freshest
     # article, prominent) + a 2x2 grid of the next 4 beside it - instead of
     # a flat uniform grid, so scrolling past each category feels like its
@@ -1492,7 +1486,7 @@ def build():
     desc_categories = [c for c in categories if c != TV_CATEGORY]
     homepage_description = f"קודקוד חדשות - האתר החדשותי המהיר בישראל: {', '.join(desc_categories)} ועוד, במקום אחד"
 
-    body = f'<main class="grid">{hero_html}{bento_html}{ad_slot_html()}{quick_html}{shorts_html}{recently_viewed_html}{categories_html}</main>'
+    body = f'<main class="grid">{hero_html}{bento_html}{ad_slot_html()}{quick_html}{shorts_html}{categories_html}</main>'
     write_page(os.path.join(OUTPUT_DIR, "index.html"), SITE_NAME,
                homepage_description,
                categories, None, body, ticker_text, canonical=SITE_URL + "/",
@@ -1695,14 +1689,20 @@ def build():
         else:
             body_content = f'<div class="article-body">{body_html_full}</div>'
 
-        related = pick_related_articles(a, listable, count=6)
+        related = pick_related_articles(a, listable, count=9)
         related_html = ""
         if related:
             related_cards = "".join(render_card(x) for x in related)
+            # continues past the initial tag-matched picks with more of this
+            # article's own category (same infinite-scroll mechanism as
+            # category pages, assets/search.js's setupInfiniteGrid) - a
+            # related-articles section that visibly ends is exactly the
+            # moment a reader has a natural reason to leave the site
             related_html = f"""
             <section class="related-section">
               <h2 class="page-title">כתבות קשורות</h2>
-              <div class="grid-inner">{related_cards}</div>
+              <div class="grid-inner" id="related-grid" data-category="{html.escape(a['category'])}" data-shown-count="{len(related)}" data-exclude-slug="{html.escape(a['slug'])}">{related_cards}</div>
+              <div class="load-more-sentinel" id="related-load-more-sentinel" hidden><span class="load-more-spinner"></span>טוען עוד כתבות...</div>
             </section>"""
 
         canonical = f"{SITE_URL}/article/{a['slug']}.html"
