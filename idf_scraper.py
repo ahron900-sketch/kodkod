@@ -768,16 +768,24 @@ VALID_CATEGORIES = [
 ]
 
 AI_ENRICH_SYSTEM_PROMPT = (
-    "אתה עוזר עריכה לאתר חדשות ישראלי. תקבל כותרת וגוף כתבה אמיתית שנשאבה "
+    "אתה עורך תוכן לאתר חדשות ישראלי. תקבל כותרת וגוף כתבה אמיתית שנשאבה "
     "ממקור חדשות (הקטגוריה המוצעת נקבעת כרגע לפי המקור עצמו, ולכן עלולה "
     "להיות שגויה אם המקור מפרסם גם תוכן שאינו בנושא הרגיל שלו). בצע חמש "
     "משימות, אך ורק על סמך העובדות שמופיעות בטקסט עצמו - ללא הוספת פרטים, "
     "השערות, או דעות שאינם מופיעים בו, וללא ניסוח שמציג את התוצר כאילו הוא "
     "הכתבה המקורית או כאילו אתה מקור הידיעה:\n"
-    "1. cleaned_content - הטקסט המלא, מוגה: תקן שגיאות כתיב, פיסוק ותחביר "
-    "בלבד. אסור לקצר, לסכם, להשמיט קטעים, לשנות עובדות, או לנסח מחדש "
-    "משפטים באופן שמשנה את המשמעות. אם אינך יכול להחזיר את הטקסט המלא, "
-    "החזר אותו כפי שהוא ללא שינוי.\n"
+    "1. rewritten_content - נסח מחדש את הכתבה במילים ובמבנה משפטים משלך, "
+    "שונים מהטקסט המקורי (לא פרפרזה מילה-במילה - ניסוח עצמאי בסגנון "
+    "חדשותי, כולל שינוי סדר משפטים/פסקאות במידת הצורך), כך שהתוכן יהיה "
+    "ייחודי ולא כמעט-זהה-מילולית למקור. זהו כלל-הברזל: חובה לשמר במדויק "
+    "את כל העובדות - שמות, תאריכים, מספרים, נתונים ומיקומים - בדיוק כפי "
+    "שהם, בלי לשנות אף אחד מהם. ציטוטים ישירים (בתוך מירכאות) חייבים "
+    "להישאר מדויקים מילה-במילה ומיוחסים לאותו דובר בדיוק - אסור לשנות, "
+    "לקצר או להמציא ציטוט. אסור בתכלית האיסור להוסיף עובדה, פרט, נתון "
+    "או משפט שאינו נובע ישירות מהטקסט המקורי. אסור לקצר משמעותית את "
+    "הכתבה או להשמיט מידע מהותי - האורך הכולל צריך להישאר דומה למקור. "
+    "אם אינך בטוח שתוכל לנסח מחדש בלי לסכן דיוק עובדתי, החזר את הטקסט "
+    "המקורי ללא שינוי במקום להמציא או לנחש.\n"
     "2. takeaways - רשימה של 3-4 משפטים קצרים (עיקרי הדברים), כל אחד עובדה "
     "בודדת מתוך הטקסט.\n"
     "3. tags - רשימה של 3-4 מילות מפתח סמנטיות (שמות אנשים, ארגונים, "
@@ -791,7 +799,7 @@ AI_ENRICH_SYSTEM_PROMPT = (
     "משמעותי, סלבריטאים/תרבות ובידור, או כלכלה משמעותית. false בכל מקרה "
     "אחר (כולל בריאות, מתכונים, רכב, טכנולוגיה, ותוכן חדשותי כללי/שגרתי "
     "שאינו מבזק אמיתי).\n"
-    'השב אך ורק ב-JSON תקני: {"cleaned_content": "...", "takeaways": '
+    'השב אך ורק ב-JSON תקני: {"rewritten_content": "...", "takeaways": '
     '["...", "..."], "tags": ["...", "..."], "verified_category": "...", '
     '"hero_worthy": false}'
 )
@@ -825,13 +833,17 @@ def enrich_article_with_ai(title, content):
         raw = result["choices"][0]["message"]["content"]
         parsed = json.loads(raw)
 
-        cleaned = re.sub(r'\s+', ' ', (parsed.get("cleaned_content") or "")).strip()
-        # safety net: an AI "proofread" that comes back a lot shorter or
-        # longer than the original almost always means truncation or
-        # unwanted rewriting, not a faithful cleanup - fall back to the
-        # original text rather than trust a suspicious result
-        if cleaned and 0.7 * len(content) <= len(cleaned) <= 1.3 * len(content):
-            content_out = cleaned
+        rewritten = re.sub(r'\s+', ' ', (parsed.get("rewritten_content") or "")).strip()
+        # safety net: compare against what the model actually saw (input is
+        # capped at 6000 chars below), not the full original - a long source
+        # article naturally makes a shorter rewrite look "truncated" if
+        # measured against the untruncated original. A rewrite that comes
+        # back far shorter or longer than what it was given almost always
+        # means truncation, garbling, or unwanted summarizing - fall back to
+        # the original text rather than trust a suspicious result.
+        source_len = len(content[:6000])
+        if rewritten and 0.6 * source_len <= len(rewritten) <= 1.5 * source_len:
+            content_out = rewritten
         else:
             content_out = content
 
