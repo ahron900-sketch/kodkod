@@ -1395,12 +1395,29 @@ if(n>=ct&&n<rt)document.documentElement.className+=" kk-shabbat-locked";
     # in the fallback path.
     HERO_ELIGIBLE_CATEGORIES = {"חדשות", "ספורט", "כלכלה", "תרבות ובידור"}
 
+    # hero_worthy (AI-classified) already excludes generic tips/guide content
+    # going forward, but most of the corpus predates that field and falls
+    # back to this filter alone - which used to accept ANY article in an
+    # eligible category, letting a generic "how to plan your pension"
+    # explainer become the homepage hero just because its category was
+    # כלכלה. This catches the same structural pattern (evergreen advice
+    # phrasing) without needing the AI field, so the fallback path doesn't
+    # keep repeating that mistake for older articles.
+    GENERIC_ADVICE_TITLE_RE = re.compile(
+        r'טיפים|מדריך ל|^איך ל|כך ת[א-ת]{2,8}ו|כך תוכלו|כך אפשר ל|\d+ דברים ש'
+        r'|^רוצים .{0,50}\?'  # "Want X? here's the thing that helps" advice-pitch
+        # hook, e.g. "רוצים גמישות ושליטה בכסף? המנגנון הפנסיוני..." - a real
+        # evergreen explainer that made it to hero via this exact fallback
+        # path before hero_worthy existed for it
+    )
+
     def base_prominent_filter(a):
         return (is_fresh(a)
                 and a["category"] in HERO_ELIGIBLE_CATEGORIES
                 and not a.get("has_watermark")
                 and a["source"] != "i24NEWS עברית"
-                and not a.get("quick_image"))
+                and not a.get("quick_image")
+                and not GENERIC_ADVICE_TITLE_RE.search(a["title"]))
 
     HERO_SLIDE_COUNT = 5
     hero_candidates = [a for a in listable if base_prominent_filter(a) and a.get("hero_worthy")]
@@ -2068,6 +2085,14 @@ if(n>=ct&&n<rt)document.documentElement.className+=" kk-shabbat-locked";
     robots_lines += [f"Sitemap: {SITE_URL}/sitemap.xml", f"Sitemap: {SITE_URL}/news-sitemap.xml"]
     with open(os.path.join(OUTPUT_DIR, "robots.txt"), "w", encoding="utf-8") as f:
         f.write("\n".join(robots_lines) + "\n")
+
+    # IndexNow key-ownership verification file - must be a static file at
+    # the site root containing exactly the key idf_scraper.py's
+    # ping_indexnow() sends with every submission. Written every build so
+    # it can never drift out of sync with the key in code.
+    INDEXNOW_KEY = "bc07a11788f80a9c2808e9a360684a3a"
+    with open(os.path.join(OUTPUT_DIR, f"{INDEXNOW_KEY}.txt"), "w", encoding="utf-8") as f:
+        f.write(INDEXNOW_KEY)
 
     # llms.txt / llms-full.txt - an emerging (advisory, not a ranking signal)
     # convention AI crawlers/agents use as a structured index instead of

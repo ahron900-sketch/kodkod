@@ -654,6 +654,55 @@ def is_duplicate_of_recent(title, recent_title_word_sets):
     return False
 
 
+MAX_SYNTHESIS_CLUSTER_SIZE = 3
+
+
+def cluster_candidates_by_story(candidates):
+    """Groups same-story candidates from DIFFERENT sources within a single
+    scrape batch, using the exact same title-similarity signal as
+    is_duplicate_of_recent (Jaccard >= DUPLICATE_SIMILARITY_THRESHOLD, >=
+    DUPLICATE_MIN_SHARED_WORDS shared significant words). Previously, when
+    2+ outlets covered the same story in one run, only the first candidate
+    processed was kept - every later one silently hit Filter 0 and was
+    discarded as "already published". Now those candidates are grouped so
+    real multi-source synthesis can run on them instead of throwing the
+    extra coverage away. Video candidates are never clustered - a video's
+    own footage is its content, not interchangeable with another outlet's
+    text coverage of the same event."""
+    text_candidates = [c for c in candidates if not c.get("video_id")]
+    video_candidates = [c for c in candidates if c.get("video_id")]
+
+    word_sets = [normalize_title_words(c["title"]) for c in text_candidates]
+    used = set()
+    clusters = []
+
+    for i, c in enumerate(text_candidates):
+        if i in used:
+            continue
+        group = [c]
+        used.add(i)
+        words_i = word_sets[i]
+        if len(words_i) >= DUPLICATE_MIN_SHARED_WORDS:
+            for j in range(i + 1, len(text_candidates)):
+                if j in used or len(group) >= MAX_SYNTHESIS_CLUSTER_SIZE:
+                    continue
+                if text_candidates[j]["source_name"] == c["source_name"]:
+                    continue  # same outlet twice isn't multi-source
+                words_j = word_sets[j]
+                if len(words_j) < DUPLICATE_MIN_SHARED_WORDS:
+                    continue
+                shared = words_i & words_j
+                union = words_i | words_j
+                if len(shared) >= DUPLICATE_MIN_SHARED_WORDS and union and \
+                        len(shared) / len(union) >= DUPLICATE_SIMILARITY_THRESHOLD:
+                    group.append(text_candidates[j])
+                    used.add(j)
+        clusters.append(group)
+
+    clusters.extend([c] for c in video_candidates)
+    return clusters
+
+
 # Deterministic junk-phrase stripping: known boilerplate/share-button/leftover
 # text that crawlers sometimes drag in alongside the real article body. A
 # fixed phrase list is used instead of asking the AI to find these, because
@@ -767,6 +816,33 @@ VALID_CATEGORIES = [
     "תרבות ובידור", "בישול ומתכונים", "חרדים",
 ]
 
+# Objective, non-AI check for whether a "rewrite" actually got reworded, or
+# just came back as the source text with a few words swapped. Trusting the
+# model's own self-report isn't enough - this measures it directly: build
+# 6-word sliding-window shingles from both texts and see what fraction of
+# the output's windows also appear verbatim in the source. A genuine
+# independent rewrite shares almost no 6-word sequences with the original
+# (near 0); a copy with light synonym-swapping still shares most of them
+# (most windows are untouched between edits) - tested against mock verbatim/
+# rewritten/lightly-edited text before relying on this in production.
+def _word_shingles(text, n=6):
+    words = re.findall(r'[\w֐-׿]+', text)
+    if len(words) < n:
+        return {tuple(words)} if words else set()
+    return {tuple(words[i:i + n]) for i in range(len(words) - n + 1)}
+
+
+REWRITE_SIMILARITY_THRESHOLD = 0.30
+
+
+def is_too_similar_to_source(output_text, source_text):
+    out_shingles = _word_shingles(output_text)
+    if not out_shingles:
+        return True  # empty output is never an acceptable rewrite
+    src_shingles = _word_shingles(source_text)
+    overlap = len(out_shingles & src_shingles) / len(out_shingles)
+    return overlap > REWRITE_SIMILARITY_THRESHOLD
+
 AI_ENRICH_SYSTEM_PROMPT = (
     "אתה עורך תוכן לאתר חדשות ישראלי. תקבל כותרת וגוף כתבה אמיתית שנשאבה "
     "ממקור חדשות (הקטגוריה המוצעת נקבעת כרגע לפי המקור עצמו, ולכן עלולה "
@@ -774,10 +850,13 @@ AI_ENRICH_SYSTEM_PROMPT = (
     "משימות, אך ורק על סמך העובדות שמופיעות בטקסט עצמו - ללא הוספת פרטים, "
     "השערות, או דעות שאינם מופיעים בו, וללא ניסוח שמציג את התוצר כאילו הוא "
     "הכתבה המקורית או כאילו אתה מקור הידיעה:\n"
-    "1. rewritten_content - נסח מחדש את הכתבה במילים ובמבנה משפטים משלך, "
-    "שונים מהטקסט המקורי (לא פרפרזה מילה-במילה - ניסוח עצמאי בסגנון "
-    "חדשותי, כולל שינוי סדר משפטים/פסקאות במידת הצורך), כך שהתוכן יהיה "
-    "ייחודי ולא כמעט-זהה-מילולית למקור. זהו כלל-הברזל: חובה לשמר במדויק "
+    "1. rewritten_content - אל תנסח מחדש משפט-אחר-משפט לפי הסדר שבמקור. "
+    "בחר נקודת כניסה וזווית ארגון שונות לגמרי מהמקור - למשל: אם המקור פותח "
+    "בהסבר מוסדי/טכני, פתח אתה במשמעות המעשית לקורא; אם המקור בנוי "
+    "כרונולוגית, ארגן אתה לפי חשיבות או לפי 'למה זה משנה'; שקול מבנה כמו "
+    "'מה קרה / מה זה אומר בפועל / מה השלב הבא' במקום לחקות את זרימת המקור. "
+    "כל העובדות חייבות להישאר אותן עובדות בדיוק - זו סינתזה מחדש של אותו "
+    "חומר גלם במבנה עצמאי, לא תוספת של מידע חדש. זהו כלל-הברזל: חובה לשמר במדויק "
     "את כל העובדות - שמות, תאריכים, מספרים, נתונים ומיקומים - בדיוק כפי "
     "שהם, בלי לשנות אף אחד מהם. ציטוטים ישירים (בתוך מירכאות) חייבים "
     "להישאר מדויקים מילה-במילה ומיוחסים לאותו דובר בדיוק - אסור לשנות, "
@@ -794,11 +873,15 @@ AI_ENRICH_SYSTEM_PROMPT = (
     "הסגורה הבאה בדיוק: " + ", ".join(VALID_CATEGORIES) + ". לדוגמה: כתבה "
     "על סקר תחלואה של משרד הבריאות ששייכת קטגורית מקור 'חרדים' רק בגלל "
     "שהמקור הוא אתר חרדי - שייכת בפועל ל'בריאות'.\n"
-    "5. hero_worthy - true אך ורק אם זו ידיעת חדשות מבזקת אמיתית באחד "
-    "מהנושאים הבאים: ביטחון/צבא, פשע חמור (רצח, טרור, פיגוע), ספורט "
-    "משמעותי, סלבריטאים/תרבות ובידור, או כלכלה משמעותית. false בכל מקרה "
-    "אחר (כולל בריאות, מתכונים, רכב, טכנולוגיה, ותוכן חדשותי כללי/שגרתי "
-    "שאינו מבזק אמיתי).\n"
+    "5. hero_worthy - true אך ורק אם זו ידיעת חדשות מבזקת אמיתית, על אירוע "
+    "קונקרטי שקרה/נחשף עכשיו, באחד מהנושאים הבאים: ביטחון/צבא, פשע חמור "
+    "(רצח, טרור, פיגוע), ספורט משמעותי, סלבריטאים/תרבות ובידור, או כלכלה "
+    "משמעותית (כמו החלטת ריבית, קריסת שוק, פיטורים המוניים - לא טיפים "
+    "כלליים). false בכל מקרה אחר, במפורש כולל: תוכן טיפים/מדריך/הסבר "
+    "כללי-לאורך-זמן (כגון 'איך לתכנן פרישה', 'כך תחסכו במס') גם אם הקטגוריה "
+    "היא כלכלה - זה תוכן ירוק-לנצח, לא ידיעה מבזקת, גם אם הכותרת מנוסחת "
+    "כשאלה או כהצעת ערך. false גם עבור בריאות, מתכונים, רכב, טכנולוגיה, "
+    "ותוכן חדשותי כללי/שגרתי שאינו מבזק אמיתי.\n"
     'השב אך ורק ב-JSON תקני: {"rewritten_content": "...", "takeaways": '
     '["...", "..."], "tags": ["...", "..."], "verified_category": "...", '
     '"hero_worthy": false}'
@@ -842,7 +925,12 @@ def enrich_article_with_ai(title, content):
         # means truncation, garbling, or unwanted summarizing - fall back to
         # the original text rather than trust a suspicious result.
         source_len = len(content[:6000])
-        if rewritten and 0.6 * source_len <= len(rewritten) <= 1.5 * source_len:
+        length_ok = rewritten and 0.6 * source_len <= len(rewritten) <= 1.5 * source_len
+        # objective check, not just a length heuristic: does the "rewrite"
+        # actually share large verbatim chunks with the source? Catches the
+        # case a pure length check misses - a right-sized output that's
+        # still mostly copied with light synonym-swapping.
+        if length_ok and not is_too_similar_to_source(rewritten, content[:6000]):
             content_out = rewritten
         else:
             content_out = content
@@ -867,6 +955,106 @@ def enrich_article_with_ai(title, content):
     except Exception as e:
         print(f"העשרת AI נכשלה (מדלג, הכתבה עדיין תתפרסם): {e}")
         return {}
+
+
+# Genuine multi-source synthesis for when cluster_candidates_by_story finds
+# the same story covered by 2-3 different approved outlets in one scrape
+# batch - real added value (the same reason wire-rewrite desks exist),
+# not a device for disguising a single source. Every fact must still trace
+# back to one of the given sources; nothing is invented to fill gaps, and
+# if the sources disagree on a detail both versions are kept rather than
+# one being picked arbitrarily.
+AI_SYNTHESIS_SYSTEM_PROMPT = (
+    "אתה עורך תוכן לאתר חדשות ישראלי. תקבל את אותו סיפור חדשותי כפי שדווח "
+    "בנפרד על ידי מספר מקורות אמיתיים (מסומנים למטה). כתוב כתבה אחת "
+    "מסונתזת שמשלבת את העובדות מכל המקורות יחד, בזווית ארגון ומבנה עצמאיים "
+    "- לא העתקה או פרפרזה של אף אחד מהמקורות בנפרד. חוקי ברזל, ללא יוצא "
+    "מן הכלל:\n"
+    "- כל עובדה בתוצר חייבת להופיע בפועל באחד המקורות הנתונים. אסור "
+    "להוסיף עובדה, פרט, נתון, הקשר או דעה שלא מופיעים באף אחד מהם.\n"
+    "- אם מקור מסוים תורם עובדה שלא מופיעה באחרים, אפשר לציין זאת בקצרה "
+    "בגוף הטקסט (למשל 'לפי דיווח נוסף...') לשקיפות כלפי הקורא.\n"
+    "- אם המקורות סותרים זה את זה בפרט כלשהו, הצג את שתי הגרסאות בנפרד "
+    "במקום לבחור אחת מהן באופן שרירותי.\n"
+    "- ציטוטים ישירים חייבים להישאר מדויקים מילה-במילה ומיוחסים לדובר "
+    "הנכון בדיוק כפי שמופיע במקור המקורי.\n"
+    "- כתוב כותרת חדשה ועצמאית, שונה מהכותרת של כל אחד מהמקורות.\n"
+    "- אורך יעד: כ-450 מילה לפחות אם יש בסיס עובדתי מספיק בין המקורות "
+    "- אל תמלא בחזרות או ניסוחים ריקים רק כדי להגיע לאורך.\n"
+    "בנוסף לכתבה עצמה, בצע: takeaways (3-4 עובדות מרכזיות), tags (3-4 "
+    "מילות מפתח), verified_category (מהרשימה הסגורה: " +
+    ", ".join(VALID_CATEGORIES) + "), ו-hero_worthy (true אך ורק אם זו "
+    "ידיעה מבזקת אמיתית בביטחון/צבא, פשע חמור, ספורט משמעותי, סלבריטאים/"
+    "תרבות ובידור, או כלכלה משמעותית (לא טיפים/מדריך כללי) - false בכל "
+    "מקרה אחר).\n"
+    'השב אך ורק ב-JSON תקני: {"title": "...", "content": "...", '
+    '"takeaways": ["...", "..."], "tags": ["...", "..."], '
+    '"verified_category": "...", "hero_worthy": false}'
+)
+
+
+def synthesize_from_sources_ai(members):
+    """members: list of {"source_name", "title", "content"} dicts, each
+    already the real full-text (not just an RSS teaser) of one outlet's
+    coverage of the same story. Returns None on any failure or if the
+    result reads as too close to any single input source - synthesis is
+    strictly better-than-single-source or the story doesn't get this
+    treatment at all, never a degraded fallback that fabricates to fill
+    gaps in the sources."""
+    if not GROQ_API_KEY:
+        return None
+    try:
+        sources_block = "\n\n".join(
+            f"--- מקור {i + 1}: {m['source_name']} ---\nכותרת: {m['title']}\n\n{m['content'][:4000]}"
+            for i, m in enumerate(members)
+        )
+        payload = json.dumps({
+            "model": GROQ_MODEL,
+            "response_format": {"type": "json_object"},
+            "temperature": 0.4,
+            "max_tokens": 4096,
+            "messages": [
+                {"role": "system", "content": AI_SYNTHESIS_SYSTEM_PROMPT},
+                {"role": "user", "content": sources_block[:11000]},
+            ],
+        }).encode("utf-8")
+        req = urllib.request.Request(
+            GROQ_API_URL, data=payload,
+            headers={"Authorization": f"Bearer {GROQ_API_KEY}", "Content-Type": "application/json"},
+            method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=45) as resp:
+            result = json.loads(resp.read().decode("utf-8"))
+        raw = result["choices"][0]["message"]["content"]
+        parsed = json.loads(raw)
+
+        title = re.sub(r'\s+', ' ', str(parsed.get("title") or "")).strip()
+        content = re.sub(r'\s+', ' ', str(parsed.get("content") or "")).strip()
+        if not title or len(content) < MIN_CONTENT_LEN:
+            return None
+        # must not be a near-copy of any single source it was built from -
+        # the whole point of clustering is to produce something none of the
+        # individual sources already are
+        for m in members:
+            if is_too_similar_to_source(content, m["content"][:4000]):
+                return None
+
+        takeaways = [re.sub(r'\s+', ' ', str(t)).strip() for t in (parsed.get("takeaways") or [])]
+        takeaways = [t for t in takeaways if t][:4]
+        tags = [re.sub(r'\s+', ' ', str(t)).strip().strip(',') for t in (parsed.get("tags") or [])]
+        tags = [t for t in tags if t and ',' not in t][:4]
+        verified_category = parsed.get("verified_category")
+        if verified_category not in VALID_CATEGORIES:
+            verified_category = None
+        hero_worthy = bool(parsed.get("hero_worthy") is True)
+
+        return {
+            "title": title, "content": content, "takeaways": takeaways, "tags": tags,
+            "verified_category": verified_category, "hero_worthy": hero_worthy,
+        }
+    except Exception as e:
+        print(f"סינתזה רב-מקורית נכשלה (מדלג, יתבצע ניסיון חד-מקורי רגיל): {e}")
+        return None
 
 
 # Real per-image vision check (Groq's hosted qwen/qwen3.6-27b, confirmed
@@ -931,6 +1119,38 @@ def detect_tv_watermark(image_url):
 # @username or numeric chat_id.
 TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
 TELEGRAM_CHANNEL_ID = os.environ.get("TELEGRAM_CHANNEL_ID", "")
+
+# IndexNow: a real, free protocol that Bing/Yandex/Seznam actually consume
+# for near-immediate crawling (Google does NOT participate in IndexNow -
+# there is no equivalent free/instant push mechanism for Google itself;
+# Google's own Indexing API is restricted by its terms to JobPosting/
+# BroadcastEvent content, not general news articles, so it isn't used
+# here). The key below just needs to match the content of a static file
+# hosted at INDEXNOW_KEY + ".txt" on the site root - build_site.py writes
+# that file every build. One key, generated once, reused for every ping.
+INDEXNOW_KEY = "bc07a11788f80a9c2808e9a360684a3a"
+INDEXNOW_ENDPOINT = "https://api.indexnow.org/indexnow"
+
+
+def ping_indexnow(slugs):
+    if not slugs:
+        return
+    try:
+        url_list = [f"{SITE_URL}/article/{slug}.html" for slug in slugs]
+        payload = json.dumps({
+            "host": SITE_URL.replace("https://", "").replace("http://", ""),
+            "key": INDEXNOW_KEY,
+            "keyLocation": f"{SITE_URL}/{INDEXNOW_KEY}.txt",
+            "urlList": url_list,
+        }).encode("utf-8")
+        req = urllib.request.Request(
+            INDEXNOW_ENDPOINT, data=payload,
+            headers={"Content-Type": "application/json; charset=utf-8"}, method="POST",
+        )
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            print(f"IndexNow: {len(url_list)} כתובות נשלחו (סטטוס {resp.status})")
+    except Exception as e:
+        print(f"IndexNow נכשל (מדלג, לא חוסם פרסום): {e}")
 
 
 def notify_telegram(title, source_name, category, slug_guess):
@@ -1082,7 +1302,7 @@ def auto_link_internal_tags(content, tags_index):
     return content
 
 
-def save_article(title, link, content, image_url, source_name, category, video_id="", recent_titles=None, tags_index=None, image_hashes=None):
+def save_article(title, link, content, image_url, source_name, category, video_id="", recent_titles=None, tags_index=None, image_hashes=None, published_slugs=None):
     filename = f"{sanitize_filename(title)}.md"
     exists = any(os.path.exists(os.path.join(d, filename)) for d in [LIVE_DIR, PENDING_DIR, ARCHIVE_DIR])
     if exists:
@@ -1159,7 +1379,10 @@ def save_article(title, link, content, image_url, source_name, category, video_i
                              is_short=is_short)
         if recent_titles is not None:
             recent_titles.append(normalize_title_words(final_title))
-        notify_telegram(final_title, source_name, video_category, slugify(final_title, sanitize_filename(final_title)))
+        video_slug = slugify(final_title, sanitize_filename(final_title))
+        if published_slugs is not None:
+            published_slugs.append(video_slug)
+        notify_telegram(final_title, source_name, video_category, video_slug)
         return
 
     # Filter 1: a real, reachable, non-trivial image is mandatory - try the
@@ -1267,7 +1490,111 @@ def save_article(title, link, content, image_url, source_name, category, video_i
     if tags_index is not None and tags:
         for tag in tags:
             tags_index[tag] = {"slug": slug_guess, "title": title}
+    if published_slugs is not None:
+        published_slugs.append(slug_guess)
     notify_telegram(title, source_name, category, slug_guess)
+
+
+def save_synthesized_article(cluster, recent_titles=None, tags_index=None, image_hashes=None, published_slugs=None):
+    """cluster: 2-3 candidates (from cluster_candidates_by_story) that are
+    the same story from different approved sources. Runs real multi-source
+    synthesis instead of publishing only the first candidate and silently
+    discarding the rest as duplicates. Falls back to the normal single-
+    source pipeline (never just drops the story) if synthesis isn't
+    possible or doesn't clear its quality bar."""
+    primary = cluster[0]
+
+    def fall_back_to_single_source():
+        save_article(primary["title"], primary["link"], primary["content"], primary["image_url"],
+                     primary["source_name"], primary["category"], recent_titles=recent_titles,
+                     tags_index=tags_index, image_hashes=image_hashes, published_slugs=published_slugs)
+
+    if recent_titles is not None and is_duplicate_of_recent(primary["title"], recent_titles):
+        print(f"נפסל (סינתזה - הסיפור כבר פורסם ממקור קודם): {primary['title']}")
+        return
+    if is_sponsored_content(primary["title"], primary["link"], primary["content"]):
+        print(f"נפסל (סינתזה - תוכן ממומן חשוד): {primary['title']}")
+        return
+
+    # need each member's real full-text, not just an RSS teaser - same
+    # reasoning as Filter 2 in save_article
+    members = []
+    for cand in cluster:
+        full_text = fetch_full_article_text(cand["link"], MIN_CONTENT_LEN)
+        text = full_text if full_text else cand["content"]
+        text = strip_link_lines(strip_known_junk_phrases(text))
+        if len(text) >= MIN_CONTENT_LEN // 2:
+            members.append({"source_name": cand["source_name"], "title": cand["title"], "content": text})
+
+    if len(members) < 2:
+        # lost enough members along the way that this isn't really
+        # multi-source anymore - don't lose the story, just publish it the
+        # normal single-source way
+        fall_back_to_single_source()
+        return
+
+    synthesis = synthesize_from_sources_ai(members)
+    if not synthesis:
+        fall_back_to_single_source()
+        return
+    if is_gibberish_or_broken(synthesis["content"]):
+        print(f"נפסל (סינתזה - תוכן שבור/גיבריש): {synthesis['title']}")
+        return
+
+    final_title = synthesis["title"]
+    filename = f"{sanitize_filename(final_title)}.md"
+    exists = any(os.path.exists(os.path.join(d, filename)) for d in [LIVE_DIR, PENDING_DIR, ARCHIVE_DIR])
+    if exists:
+        return
+
+    image_url = primary["image_url"] or fetch_og_image(primary["link"])
+    if not image_url:
+        print(f"נפסל (סינתזה - אין תמונה איכותית): {final_title}")
+        return
+    image_chunk = _fetch_image_chunk(image_url)
+    if is_low_quality_image(image_chunk):
+        print(f"נפסל (סינתזה - תמונה לא נטענת/איכות נמוכה מדי): {final_title}")
+        return
+    quick_image = is_bad_image_aspect(image_chunk)
+    full_image_bytes = _fetch_full_image(image_url)
+    if is_blurry_image(full_image_bytes):
+        print(f"נפסל (סינתזה - תמונה מטושטשת): {final_title}")
+        return
+    new_hash = image_ahash(full_image_bytes)
+    if image_hashes is not None:
+        dup_title = find_duplicate_image(new_hash, image_hashes)
+        if dup_title:
+            print(f"נפסל (סינתזה - תמונה כפולה, כבר שימשה ב-'{dup_title}'): {final_title}")
+            return
+    has_watermark = detect_tv_watermark(image_url)
+    if image_hashes is not None and new_hash:
+        image_hashes[new_hash] = {"title": final_title, "ts": time.time()}
+
+    content = synthesis["content"]
+    if tags_index is not None:
+        content = auto_link_internal_tags(content, tags_index)
+
+    source_display = " + ".join(m["source_name"] for m in members)
+    category = synthesis["verified_category"] or primary["category"]
+    date_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    _write_article_file(filename, final_title, date_str, source_display, image_url, primary["link"],
+                         category, content, takeaways=synthesis["takeaways"], tags=synthesis["tags"],
+                         quick_image=quick_image, hero_worthy=synthesis["hero_worthy"],
+                         has_watermark=has_watermark)
+
+    if recent_titles is not None:
+        # register every member's ORIGINAL title, not just the new
+        # synthesized headline - future scrape batches will see the same
+        # outlets' own headlines again, not this one
+        for m in cluster:
+            recent_titles.append(normalize_title_words(m["title"]))
+    slug_guess = slugify(final_title, sanitize_filename(final_title))
+    if tags_index is not None and synthesis["tags"]:
+        for tag in synthesis["tags"]:
+            tags_index[tag] = {"slug": slug_guess, "title": final_title}
+    if published_slugs is not None:
+        published_slugs.append(slug_guess)
+    notify_telegram(final_title, source_display, category, slug_guess)
 
 
 def _write_article_file(filename, title, date_str, source_name, image_url, link, category, content,
@@ -1396,13 +1723,30 @@ def fetch_news():
     if trending_count:
         print(f"{trending_count} כתבות תואמות מגמה חמה - יעובדו ראשונות")
 
-    for c in candidates:
-        save_article(c["title"], c["link"], c["content"], c["image_url"], c["source_name"], c["category"],
-                     video_id=c["video_id"], recent_titles=recent_titles, tags_index=tags_index,
-                     image_hashes=image_hashes)
+    # Group same-story candidates from different sources BEFORE saving -
+    # previously the second/third outlet's coverage of a story already
+    # published this run just silently hit Filter 0 ("already published")
+    # and was discarded. Clustering first means that coverage gets used for
+    # real multi-source synthesis instead of thrown away.
+    clusters = cluster_candidates_by_story(candidates)
+    multi_source_count = sum(1 for group in clusters if len(group) > 1)
+    if multi_source_count:
+        print(f"{multi_source_count} סיפורים זוהו במספר מקורות - יעברו סינתזה רב-מקורית")
+
+    published_slugs = []
+    for group in clusters:
+        if len(group) > 1:
+            save_synthesized_article(group, recent_titles=recent_titles, tags_index=tags_index,
+                                      image_hashes=image_hashes, published_slugs=published_slugs)
+        else:
+            c = group[0]
+            save_article(c["title"], c["link"], c["content"], c["image_url"], c["source_name"], c["category"],
+                         video_id=c["video_id"], recent_titles=recent_titles, tags_index=tags_index,
+                         image_hashes=image_hashes, published_slugs=published_slugs)
 
     save_tags_index(tags_index)
     save_image_hashes(image_hashes)
+    ping_indexnow(published_slugs)
 
 
 if __name__ == "__main__":
