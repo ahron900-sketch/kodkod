@@ -330,6 +330,14 @@ def load_articles():
         # failure would - a conservative default, not a bug.
         hero_worthy = data.get("hero_worthy") == "1"
         is_short = data.get("is_short") == "1"
+        # real, deliberately-short breaking-news bulletins (idf_scraper.py's
+        # MIN_BULLETIN_LEN path) - replaced an older "is_quick" heuristic
+        # (body under 500 chars, or a bad-aspect-ratio image) that stopped
+        # being able to trigger at all once MIN_CONTENT_LEN was raised to
+        # 2400 for every regular article; only quick_image's original,
+        # unrelated purpose (downgrading bad-shaped-image cards) is kept
+        # below, separate from this.
+        is_bulletin = data.get("is_bulletin") == "1"
 
         articles.append({
             "title": title,
@@ -343,7 +351,7 @@ def load_articles():
             "body": body,
             "slug": slug,
             "dek": extract_dek(body),
-            "is_quick": (len(body) < 500 and not data.get("video_id")) or quick_image,
+            "is_bulletin": is_bulletin,
             "quick_image": quick_image,
             "ai_takeaways": ai_takeaways,
             "ai_tags": ai_tags,
@@ -518,7 +526,7 @@ def content_type_of(a):
     of article a visitor tends to engage with, alongside category/source."""
     if a.get("video_id"):
         return "video"
-    if a.get("is_quick") and a["category"] != RECIPE_CATEGORY:
+    if a.get("is_bulletin") and a["category"] != RECIPE_CATEGORY:
         return "quick"
     return "standard"
 
@@ -527,7 +535,7 @@ def render_card(a):
     img = a["image"] or PLACEHOLDER_IMG
     is_recipe = a["category"] == RECIPE_CATEGORY
     video_badge = '<span class="badge badge-video">וידאו</span>' if a.get("video_id") else ""
-    quick_badge = '<span class="badge badge-quick">בקצרה</span>' if a.get("is_quick") and not a.get("video_id") and not is_recipe else ""
+    quick_badge = '<span class="badge badge-quick">מבזק</span>' if a.get("is_bulletin") and not a.get("video_id") and not is_recipe else ""
     recipe_badge = '<span class="badge badge-recipe">מתכון</span>' if is_recipe else ""
     sponsored_badge = '<span class="badge badge-sponsored">תוכן שיווקי</span>' if a.get("is_sponsored") else ""
     card_cls = "card card-recipe" if is_recipe else "card"
@@ -1484,7 +1492,7 @@ if(n>=ct&&n<rt)document.documentElement.className+=" kk-shabbat-locked";
           <div class="bento-small-stack">{small_items}</div>
         </section>"""
 
-    quick_articles = pick_diverse([a for a in rest if a.get("is_quick") and is_fresh(a)], 20, max_per_category=3)
+    quick_articles = pick_diverse([a for a in rest if a.get("is_bulletin") and is_fresh(a)], 20, max_per_category=3)
     quick_html = ""
     if quick_articles:
         # rendered twice back-to-back so the CSS marquee (assets/style.css,
@@ -1503,7 +1511,7 @@ if(n>=ct&&n<rt)document.documentElement.className+=" kk-shabbat-locked";
         quick_duration = max(30, round(n * 3.6))
         quick_html = f"""
         <section class="quick-section reveal">
-          <h2 class="section-title">בקצרה</h2>
+          <h2 class="section-title">מבזקים</h2>
           <div class="quick-strip">
             <div class="quick-strip-track" style="animation-duration:{quick_duration}s;--quick-shift:{quick_shift_px}px">{quick_cards_once}<div class="quick-strip-dup" aria-hidden="true">{quick_cards_once}</div></div>
           </div>

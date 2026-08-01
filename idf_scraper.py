@@ -439,10 +439,16 @@ SCRIPT_LEAK_RE = re.compile(r'(self\.__next_s|"@context"|\.push\(\[|application/
 CAPTION_SPLIT_RE = re.compile(r'.*?\|\s*(?:צילום|Photo|AP|Reuters|AFP|Credit)\s*:[^|]*', re.IGNORECASE)
 
 
-def fetch_full_article_text(link, min_len_needed):
+def fetch_full_article_text(link):
     """Best-effort: pull the <article> block's paragraphs from the live page
-    when the RSS summary is too short. Returns '' if it can't find enough,
-    or if what it found looks like nav/cookie-banner junk rather than prose."""
+    when the RSS summary is too short. Returns '' if it can't find real
+    prose, or if what it found looks like nav/cookie-banner junk. Does NOT
+    gate on length itself - callers decide what a given length qualifies
+    as (a full article vs. an honest short bulletin vs. too little to
+    publish at all). Previously this discarded real, genuinely-extracted
+    prose outright just for being under the full-article length floor,
+    which meant honest early/breaking coverage got thrown away instead of
+    published as what it actually was."""
     html_text = fetch_page(link)
     if not html_text:
         return ""
@@ -489,8 +495,7 @@ def fetch_full_article_text(link, min_len_needed):
                 junk_hits += 1
     if not paragraphs or junk_hits > len(paragraphs) // 3:
         return ""
-    joined = "\n\n".join(paragraphs)
-    return joined if len(joined) > min_len_needed else ""
+    return "\n\n".join(paragraphs)
 
 def manage_archive():
     now = time.time()
@@ -514,6 +519,15 @@ def manage_archive():
 # policy flags auto-generated/scraped pages that don't clear a meaningful
 # length, not just "long enough to bother keeping"
 MIN_CONTENT_LEN = 2400
+
+# Genuine breaking-news bulletins - real, early coverage of something still
+# developing, honestly short rather than padded to a length it doesn't
+# deserve yet. Previously this content was fetched successfully (real
+# prose, not junk) but discarded outright because it didn't clear
+# MIN_CONTENT_LEN - the site published nothing at all rather than an
+# honest short update. 250 chars is a real floor (a genuine sentence or
+# two of substance), not a token amount.
+MIN_BULLETIN_LEN = 250
 
 # Sponsored/advertorial content filter - strict by design: any hint of paid
 # promotion, in the title, URL, or body, rejects the article outright. When
@@ -1431,12 +1445,18 @@ def save_article(title, link, content, image_url, source_name, category, video_i
     # Filter 2: need the full article body, not just a short RSS teaser.
     # Always attempt the real full-text fetch first (an RSS teaser is
     # rarely as complete as the actual article, even when it happens to
-    # clear MIN_CONTENT_LEN on its own) - only fall back to the teaser if
-    # the fetch fails and the teaser itself is substantial; otherwise the
-    # article is rejected rather than saved with a stub/snippet.
-    full_text = fetch_full_article_text(link, MIN_CONTENT_LEN)
-    if full_text:
+    # clear MIN_CONTENT_LEN on its own). Three outcomes, not two: a real
+    # full-length fetch is a normal article; real prose that's genuinely
+    # shorter than that (early/developing coverage) is published honestly
+    # as a bulletin instead of being discarded; only actual junk/nothing
+    # gets rejected.
+    is_bulletin = False
+    full_text = fetch_full_article_text(link)
+    if full_text and len(full_text) >= MIN_CONTENT_LEN:
         content = full_text
+    elif full_text and len(full_text) >= MIN_BULLETIN_LEN:
+        content = full_text
+        is_bulletin = True
     elif len(content) < MIN_CONTENT_LEN:
         print(f"נפסל (לא נמצאה כתבה מלאה, רק תקציר קצר מדי): {title}")
         return
@@ -1479,7 +1499,7 @@ def save_article(title, link, content, image_url, source_name, category, video_i
     date_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     _write_article_file(filename, title, date_str, source_name, image_url, link, category, content,
                          takeaways=takeaways, tags=tags, quick_image=quick_image, hero_worthy=hero_worthy,
-                         has_watermark=has_watermark)
+                         has_watermark=has_watermark, is_bulletin=is_bulletin)
     if recent_titles is not None:
         recent_titles.append(normalize_title_words(title))
     # best-effort slug prediction (mirrors build_site.py's own slugify); a
@@ -1520,7 +1540,7 @@ def save_synthesized_article(cluster, recent_titles=None, tags_index=None, image
     # reasoning as Filter 2 in save_article
     members = []
     for cand in cluster:
-        full_text = fetch_full_article_text(cand["link"], MIN_CONTENT_LEN)
+        full_text = fetch_full_article_text(cand["link"])
         text = full_text if full_text else cand["content"]
         text = strip_link_lines(strip_known_junk_phrases(text))
         if len(text) >= MIN_CONTENT_LEN // 2:
@@ -1599,7 +1619,7 @@ def save_synthesized_article(cluster, recent_titles=None, tags_index=None, image
 
 def _write_article_file(filename, title, date_str, source_name, image_url, link, category, content,
                          video_id="", takeaways=None, tags=None, quick_image=False, has_watermark=False,
-                         hero_worthy=False, is_short=False):
+                         hero_worthy=False, is_short=False, is_bulletin=False):
     video_line = f'\nvideo_id: "{video_id}"' if video_id else ""
 
     # Each takeaway is written as its own indented continuation line (what
@@ -1620,6 +1640,7 @@ def _write_article_file(filename, title, date_str, source_name, image_url, link,
     has_watermark_line = '\nhas_watermark: "1"' if has_watermark else ""
     hero_worthy_line = '\nhero_worthy: "1"' if hero_worthy else ""
     is_short_line = '\nis_short: "1"' if is_short else ""
+    is_bulletin_line = '\nis_bulletin: "1"' if is_bulletin else ""
 
     md_content = f"""---
 title: >-
@@ -1628,7 +1649,7 @@ date: "{date_str}"
 source: "{source_name}"
 image: "{image_url}"
 link: "{link}"
-category: "{category}"{video_line}{takeaways_line}{tags_line}{quick_image_line}{has_watermark_line}{hero_worthy_line}{is_short_line}
+category: "{category}"{video_line}{takeaways_line}{tags_line}{quick_image_line}{has_watermark_line}{hero_worthy_line}{is_short_line}{is_bulletin_line}
 ---
 
 {content}
