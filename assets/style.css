@@ -1943,6 +1943,59 @@ html.dark-mode .site-header {
 html.kk-shabbat-locked body > *:not(#shabbat-lockout) { display: none !important; }
 html.kk-shabbat-locked #shabbat-lockout { display: block !important; }
 
+/* Owner-directed site-wide password lock - same synchronous before-paint
+   technique as the Shabbat lockout above, but unconditional and total:
+   :not(#site-lockout) hides EVERYTHING else on the page, including the
+   Shabbat overlay itself, so this always wins if both were ever active. */
+html.kk-site-locked body > *:not(#site-lockout) { display: none !important; }
+html.kk-site-locked #site-lockout { display: flex !important; }
+
+.site-lockout {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: #16181c;
+  align-items: center;
+  justify-content: center;
+}
+.site-lockout-box {
+  background: #fff;
+  border-radius: 12px;
+  padding: 32px;
+  max-width: 320px;
+  width: 90%;
+  text-align: center;
+}
+.site-lockout-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin: 0 0 16px;
+}
+.site-lockout-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 12px;
+  font-size: 1rem;
+}
+.site-lockout-submit {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+.site-lockout-error {
+  color: #c0392b;
+  margin: 10px 0 0;
+  font-size: 0.9rem;
+}
+
 .shabbat-lockout {
   position: fixed;
   inset: 0;

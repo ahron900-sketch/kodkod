@@ -57,6 +57,44 @@ WEATHER_BAR_HTML = ""
 SHABBAT_OVERLAY_HTML = ""
 SHABBAT_HEAD_SCRIPT = ""
 
+# Owner-directed site-wide password lock (unconditional - not tied to any
+# fetched/time-based state like the Shabbat lockout above). Honest limit,
+# already told to the owner: this is a static GitHub Pages site with no
+# backend, so any password check can only run in client-side JS - the
+# value is visible to anyone who reads the page source, and trivially
+# bypassed with JS disabled or a raw HTML fetch. This blocks casual
+# visitors and search crawlers seeing rendered content; it is not real
+# access control against a determined actor.
+SITE_LOCKOUT_PASSWORD = "060309"
+SITE_LOCKOUT_HEAD_SCRIPT = """<script>(function(){
+if(localStorage.getItem("kk_site_unlocked")!=="1")document.documentElement.className+=" kk-site-locked";
+})();</script>"""
+SITE_LOCKOUT_OVERLAY_HTML = f"""
+<div id="site-lockout" class="site-lockout" hidden>
+  <div class="site-lockout-box">
+    <p class="site-lockout-title">האתר סגור זמנית</p>
+    <form id="site-lockout-form" autocomplete="off">
+      <input type="password" id="site-lockout-input" class="site-lockout-input" placeholder="סיסמה" autocomplete="off">
+      <button type="submit" class="site-lockout-submit">כניסה</button>
+    </form>
+    <p class="site-lockout-error" id="site-lockout-error" hidden>סיסמה שגויה</p>
+  </div>
+</div>
+<script>(function(){{
+var form = document.getElementById("site-lockout-form");
+if (!form) return;
+form.addEventListener("submit", function(e) {{
+  e.preventDefault();
+  var val = document.getElementById("site-lockout-input").value;
+  if (val === "{SITE_LOCKOUT_PASSWORD}") {{
+    localStorage.setItem("kk_site_unlocked", "1");
+    location.reload();
+  }} else {{
+    document.getElementById("site-lockout-error").hidden = false;
+  }}
+}});
+}})();</script>"""
+
 # Weather: open-meteo.com is genuinely free and keyless (no account/API key
 # of any kind, verified before wiring this up) - fetched once per build at
 # the same 2h cadence as everything else, never client-side. Real
@@ -763,7 +801,8 @@ def write_page(path, title, description, categories, active_cat, body_html,
         robots_content=robots_content,
         video_icon_svg=VIDEO_ICON_SVG,
     )
-    full = full.replace('<meta charset="UTF-8">', f'<meta charset="UTF-8">\n{SHABBAT_HEAD_SCRIPT}')
+    full = full.replace('<meta charset="UTF-8">',
+                         f'<meta charset="UTF-8">\n{SITE_LOCKOUT_HEAD_SCRIPT}\n{SHABBAT_HEAD_SCRIPT}')
     full = full.replace("<header class=\"site-header\">",
                          f'{WEATHER_BAR_HTML}\n<div class="ticker"><div class="ticker-move">{html.escape(ticker_text)}</div></div>\n<header class="site-header">')
     page_shell = f"""
@@ -773,6 +812,7 @@ def write_page(path, title, description, categories, active_cat, body_html,
   <aside class="side-rail side-rail-left">{ad_slot_html(compact=True, ads=SIDE_RAIL_ADS, lazy_viewport=True)}</aside>
 </div>"""
     foot = PAGE_FOOT.format(year=datetime.now().year, footer_promo=FOOTER_PROMO_HTML)
+    foot = foot.replace("</body>", f"{SITE_LOCKOUT_OVERLAY_HTML}\n</body>")
     if SHABBAT_OVERLAY_HTML:
         foot = foot.replace("</body>", f"{SHABBAT_OVERLAY_HTML}\n</body>")
     full += page_shell + foot
