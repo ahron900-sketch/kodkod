@@ -22,54 +22,17 @@ try:
 except ImportError:
     HAVE_PIL = False
 
-# מקורות RSS - כולם בעברית, ממוינים לקטגוריות (כל URL כאן נבדק ואומת שמחזיר כתבות)
-rss_feeds = {
-    # חרדים
-    "אמס": ("https://www.emess.co.il/feed/", "חרדים"),
-    "כל רגע": ("https://93fm.co.il/feed/", "חרדים"),
-    "בחדרי חרדים": ("https://www.bhol.co.il/feed", "חרדים"),
-
-    # חדשות ישראל
-    "ynet": ("https://www.ynet.co.il/Integration/StoryRss2.xml", "חדשות"),
-    "וואלה חדשות": ("https://rss.walla.co.il/feed/1?type=main", "חדשות"),
-    "מאקו": ("https://www.mako.co.il/rss/news-israel.xml", "חדשות"),
-    "מעריב": ("https://www.maariv.co.il/Rss/RssFeedsAllNews", "חדשות"),
-
-    # כלכלה
-    "גלובס": ("https://www.globes.co.il/webservice/rss/rssfeeder.asmx/FeederNode?iID=585", "כלכלה"),
-
-    # טכנולוגיה
-    "Geektime": ("https://www.geektime.co.il/feed/", "טכנולוגיה"),
-
-    # בישול ומתכונים
-    "מאקו אוכל": ("https://rcs.mako.co.il/rss/food-recipes.xml", "בישול ומתכונים"),
-    "מאקו - כל האוכל": ("https://rcs.mako.co.il/rss/c7250a2610f26110VgnVCM1000005201000aRCRD.xml", "בישול ומתכונים"),
-    "וואלה אוכל": ("https://rss.walla.co.il/feed/9?type=main", "בישול ומתכונים"),
-    "Foody": ("https://www.foody.co.il/feed", "בישול ומתכונים"),
-
-    # ספורט
-    "וואלה ספורט": ("https://rss.walla.co.il/feed/3?type=main", "ספורט"),
-
-    # בריאות
-    "וואלה בריאות": ("https://rss.walla.co.il/feed/139?type=main", "בריאות"),
-    "מאקו בריאות": ("https://rcs.mako.co.il/rss/c827a3ef43336410VgnVCM2000002a0c10acRCRD.xml", "בריאות"),
-
-    # תרבות ובידור
-    "וואלה תרבות": ("https://rss.walla.co.il/feed/4?type=main", "תרבות ובידור"),
-    "מאקו תרבות": ("https://rcs.mako.co.il/rss/c7a987610879a310VgnVCM2000002a0c10acRCRD.xml", "תרבות ובידור"),
-    "מאקו סלבס": ("https://rcs.mako.co.il/rss/46bbe76404864110VgnVCM1000004801000aRCRD.xml", "תרבות ובידור"),
-
-    # רכב
-    "וואלה רכב": ("https://rss.walla.co.il/feed/31?type=main", "רכב"),
-    "גלובס רכב ותחבורה": ("https://www.globes.co.il/webservice/rss/rssfeeder.asmx/FeederNode?iID=3220", "רכב"),
-
-    # ספורט (בנוסף לוואלה ספורט הקיים)
-    "ONE": ("https://www.one.co.il/rss", "ספורט"),
-
-    # טכנולוגיה (בנוסף ל-Geektime הקיים, שנראה חסום כרגע - ראו הערה למעלה)
-    "גלובס טכנולוגיה": ("https://www.globes.co.il/webservice/rss/rssfeeder.asmx/FeederNode?iID=594", "טכנולוגיה"),
-    "Techtime": ("https://techtime.co.il/feed/", "טכנולוגיה"),
-}
+# Owner directive (2026-08-02): closed allowed-source list only, pending
+# real legal clearance - every commercial RSS feed that used to be here
+# (ynet, Walla, mako, Maariv, Globes, Geektime, Foody, ONE, Techtime, אמס,
+# כל רגע, בחדרי חרדים) is removed, not just filtered downstream. The
+# fail-closed rewrite gate shipped tonight would eventually reject most of
+# this content anyway, but leaving the feeds wired in here still means
+# needless requests to commercial sites and depends on the AI call
+# succeeding to enforce a policy that should hold regardless of Groq's
+# availability. Empty until the new gov.il/NASA/Wikipedia/etc. pipeline is
+# built against the closed source list the owner specified.
+rss_feeds = {}
 
 # מקורות שנבדקו ונפסלו במחקר המקורות (2026-07-30) - לא להוסיף שוב בלי סיבה טובה:
 # - מאקו רכב: robots.txt חוסם במפורש (Disallow: /cars-)
@@ -92,18 +55,19 @@ rss_feeds = {
 
 # ערוצי יוטיוב - נשאבים כווידאו דרך YouTube RSS (אין צורך במפתח API)
 # הוסף כאן channel_id אמיתיים (נמצא ב-view-source של דף הערוץ, tag <meta itemprop="channelId">)
+#
+# Owner directive (2026-08-02): closed allowed-source list only. Removed
+# every non-government channel that used to be here - כאן חדשות, חדשות 13,
+# ynet, i24NEWS עברית, ספורט 5, and the sports-body channels (ההתאחדות
+# לכדורגל, מכבי ת"א, הפועל ת"א, מכבי חיפה) - a public broadcaster or a
+# sports team's own footage is still someone else's copyrighted content,
+# not an official publication of the state. Only actual government
+# ministries/statutory bodies remain, matching exactly the safe-source list
+# used for the 2026-08-02 corpus archive.
 youtube_channels = {
-    "UC_HwfTAcjBESKZRJq6BTCpg": ("כאן חדשות", "חדשות"),
-    "UCvQmPpU20hw1Trss_CVwaew": ("חדשות 13", "חדשות"),
-    "UCpSSzrovhI4fA2PQNItecUA": ("ynet", "חדשות"),
-    "UCisowXt5wZkp2sR3rFh9lnQ": ("i24NEWS עברית", "חדשות"),
-    # ערוצי דוברות רשמיים - הודעות ציבוריות שנועדו מלכתחילה לתפוצה תקשורתית
     "UCjBj9fgK60mlAH-nvtSOojg": ("דובר צה\"ל", "חדשות"),
     "UCrwyHUb4iIrpknhP6MTvnww": ("דוברות המשטרה", "חדשות"),
     "UCKTHc_HFDiAiOr0vE_Imj5g": ("משרד הבריאות", "בריאות"),
-    "UCyXf5cz6E9IIL40aivg7tOw": ("ספורט 5", "ספורט"),
-
-    # דוברויות ממשלתיות נוספות - נבדקו ואומתו כפעילות עם תוכן עדכני אמיתי
     "UC4elaDPpw25TipG2U33paLA": ("הכנסת", "חדשות"),
     "UC4XJnRPZjXhgvVMhXKNSJvQ": ("משרד ראש הממשלה", "חדשות"),
     "UCMT8Bdqj1OGwmOAGCBkvh3Q": ("משרד האוצר", "כלכלה"),
@@ -113,12 +77,6 @@ youtube_channels = {
     "UCDZjiJmSjN_3x2oK3qURmIA": ("משרד התחבורה", "רכב"),
     "UCRiWtBVOhosO4B_QSSMxSbA": ("מגן דוד אדום", "חדשות"),
     "UCXnvhZNewGAIQrUKYYJNeIQ": ("שירות בתי הסוהר", "חדשות"),
-
-    # גופי ספורט רשמיים - התאחדות/קבוצות, לא מקורות שידור עם זכויות סגורות
-    "UC-5AVLhL2v04-lfbVzejRZQ": ("ההתאחדות לכדורגל בישראל", "ספורט"),
-    "UCqxNoI856R_vgs7aQolQhlg": ("מכבי תל אביב כדורסל", "ספורט"),
-    "UCWUw3MyL0wErNjk54vBY8Lw": ("הפועל תל אביב כדורגל", "ספורט"),
-    "UCDZGX5VO_QP03nhbru4PsiA": ("מכבי חיפה כדורגל", "ספורט"),
 }
 
 LIVE_DIR = "content/news"
