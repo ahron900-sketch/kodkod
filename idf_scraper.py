@@ -764,8 +764,39 @@ JUNK_PHRASE_PATTERNS = [
     r'עקבו אחרינו גם בפלטפורמות הנוספות שלנו',
     r'מתוך מגזין השבת, ערוץ 15 בשלט',
     r'קאר ניוז ליווי וייעוץ בתהליכי רכישת רכב, קנייה ומכירה, ופתרונות מימון\.\s*[\d\-]+',
+    # Two GENERAL structural patterns, not tied to one source's exact
+    # wording - found via a real article ("ההאקר הישראלי של אילון מאסק",
+    # Geektime) that alone contained four leaked-widget lines the exact-
+    # phrase patterns above would never catch, since every source phrases
+    # its own widgets differently. These match the STRUCTURE instead:
+    #
+    # 1) A photo caption that leaked in as its own plain paragraph, not
+    # wrapped in <figcaption> (FIGCAPTION_RE above only catches the HTML-
+    # tagged case) - e.g. "יוני רמון. תמונה באדיבות המצולם",
+    # "המערכת של Pi. צילום מסך", "גיא ארזי (ימין) ויוני רמון. תמונה: Rona
+    # Bar & Ofek Avshalom". Verified against a 5000-article sample (71,095
+    # lines) before relying on this: 59 matches, all genuine photo credits,
+    # zero false positives - the tight anchoring (marker within the first
+    # 80 chars of the line, short line overall) is what keeps a metaphorical
+    # use of the same word ("התמונה הכלכלית מדאיגה") from matching, since
+    # real prose using it that way doesn't look like a short standalone
+    # caption line.
+    r'^.{0,80}(תמונה\s*:|תמונה\s+באדיבות|צילום\s*:|צילום\s+מסך)\s*.{0,50}$',
+    # 2) A related-headlines teaser widget rendered as one line with 2+
+    # "●" bullet separators (e.g. "● פשיטות הרגל בגרמניה בשיא... ● החברות
+    # הגדולות חוזרות לגייס עובדים..."), confirmed on Globes across
+    # completely unrelated topics (health, tech, finance, real estate) -
+    # real Hebrew news prose essentially never uses "●" inline, so 2+ on
+    # one line is a reliable signal this is the widget, not article text.
+    r'[^\n]*●[^\n]*●[^\n]*',
+    # Source-specific widget/CTA text, found via two real articles
+    # (Globes tech, Geektime) this same night - not generalizable the way
+    # the two patterns above are, but still safe, confirmed-exact matches.
+    r'לחיצה על הנושא תוסיף אותו לרשימת "הנושאים שמעניינים אותי", שם ניתן לקרוא ולנהל את ההתראות כשמתפרסמת כתבה בנושא\.',
+    r'הצטרפו עכשיו לערוץ הטלגרם של \S+ כדי לא לפספס עוד כתבות כאלו',
+    r'תנו לזה לשקוע:[^\n]*',
 ]
-JUNK_PHRASE_RE = re.compile("|".join(JUNK_PHRASE_PATTERNS))
+JUNK_PHRASE_RE = re.compile("|".join(JUNK_PHRASE_PATTERNS), re.MULTILINE)
 
 # No raw links are ever allowed inside a published article body - the only
 # link we show is the single, explicit "read the full article at the source"
