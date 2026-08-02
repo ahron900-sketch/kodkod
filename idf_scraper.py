@@ -935,7 +935,7 @@ AI_ENRICH_SYSTEM_PROMPT = (
 
 def enrich_article_with_ai(title, content):
     if not GROQ_API_KEY:
-        return {}
+        return {"rewrite_succeeded": False}
     try:
         payload = json.dumps({
             "model": GROQ_MODEL,
@@ -975,10 +975,16 @@ def enrich_article_with_ai(title, content):
         # actually share large verbatim chunks with the source? Catches the
         # case a pure length check misses - a right-sized output that's
         # still mostly copied with light synonym-swapping.
-        if length_ok and not is_too_similar_to_source(rewritten, content[:6000]):
-            content_out = rewritten
-        else:
-            content_out = content
+        rewrite_succeeded = bool(length_ok and not is_too_similar_to_source(rewritten, content[:6000]))
+        # legal directive (2026-08-02): a rewrite that fails these checks must
+        # NEVER fall back to publishing the original scraped text - that fail-
+        # open behavior is exactly the fact pattern found to be copyright
+        # infringement in Israeli case law (Mor v. Azoulay, T.A. 26386-09-09 -
+        # a news article republished on another site without a genuine
+        # rewrite). content_out is left empty here; the caller rejects the
+        # article entirely when rewrite_succeeded is False instead of
+        # publishing anything derived from the raw source text.
+        content_out = rewritten if rewrite_succeeded else ""
 
         # each item forced single-line for the same frontmatter-safety reason
         # as the summary field used to be - see the note further down where
@@ -996,10 +1002,15 @@ def enrich_article_with_ai(title, content):
         return {
             "content": content_out, "takeaways": takeaways, "tags": tags,
             "verified_category": verified_category, "hero_worthy": hero_worthy,
+            "rewrite_succeeded": rewrite_succeeded,
         }
     except Exception as e:
-        print(f"העשרת AI נכשלה (מדלג, הכתבה עדיין תתפרסם): {e}")
-        return {}
+        # legal directive (2026-08-02): previously fell back to publishing
+        # the article anyway on any AI failure (rate limit, API outage,
+        # network error) - meaning the raw scraped text went out unrewritten.
+        # rewrite_succeeded=False here forces the caller to reject instead.
+        print(f"העשרת AI נכשלה (הכתבה תידחה - אין פרסום בלי שכתוב מאומת): {e}")
+        return {"rewrite_succeeded": False}
 
 
 # Genuine multi-source synthesis for when cluster_candidates_by_story finds
@@ -1347,7 +1358,7 @@ def auto_link_internal_tags(content, tags_index):
     return content
 
 
-def save_article(title, link, content, image_url, source_name, category, video_id="", recent_titles=None, tags_index=None, image_hashes=None, published_slugs=None):
+def save_article(title, link, content, image_url, source_name, category, video_id="", recent_titles=None, tags_index=None, image_hashes=None, published_slugs=None, author=""):
     filename = f"{sanitize_filename(title)}.md"
     exists = any(os.path.exists(os.path.join(d, filename)) for d in [LIVE_DIR, PENDING_DIR, ARCHIVE_DIR])
     if exists:
@@ -1505,9 +1516,19 @@ def save_article(title, link, content, image_url, source_name, category, video_i
         return
 
     enrichment = enrich_article_with_ai(title, content)
-    if enrichment:
+    if GROQ_API_KEY:
         time.sleep(2)  # free-tier rate-limit safety margin between Groq calls
-        content = enrichment.get("content", content)
+    # legal directive (2026-08-02): a verified original rewrite is mandatory
+    # for every article, not best-effort polish - publishing the raw scraped
+    # text (what used to happen here on any AI failure) is exactly the fact
+    # pattern found to be copyright infringement in Israeli case law. No
+    # genuine rewrite means no publish, full stop - this will publish fewer
+    # articles whenever Groq is down/rate-limited, and that is the correct
+    # tradeoff, not a regression to work around.
+    if not enrichment.get("rewrite_succeeded"):
+        print(f"נפסל (לא הופק שכתוב מקורי מאומת - אין פרסום תוכן שנשאב כלשונו): {title}")
+        return
+    content = enrichment.get("content", content)
     takeaways = enrichment.get("takeaways", [])
     tags = enrichment.get("tags", [])
     # a source's mapped category is a default, not a guarantee - e.g. a
@@ -1530,7 +1551,7 @@ def save_article(title, link, content, image_url, source_name, category, video_i
     date_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     _write_article_file(filename, title, date_str, source_name, image_url, link, category, content,
                          takeaways=takeaways, tags=tags, quick_image=quick_image, hero_worthy=hero_worthy,
-                         has_watermark=has_watermark, is_bulletin=is_bulletin)
+                         has_watermark=has_watermark, is_bulletin=is_bulletin, author=author)
     if recent_titles is not None:
         recent_titles.append(normalize_title_words(title))
     # best-effort slug prediction (mirrors build_site.py's own slugify); a
@@ -1558,7 +1579,8 @@ def save_synthesized_article(cluster, recent_titles=None, tags_index=None, image
     def fall_back_to_single_source():
         save_article(primary["title"], primary["link"], primary["content"], primary["image_url"],
                      primary["source_name"], primary["category"], recent_titles=recent_titles,
-                     tags_index=tags_index, image_hashes=image_hashes, published_slugs=published_slugs)
+                     tags_index=tags_index, image_hashes=image_hashes, published_slugs=published_slugs,
+                     author=primary.get("author", ""))
 
     if recent_titles is not None and is_duplicate_of_recent(primary["title"], recent_titles):
         print(f"נפסל (סינתזה - הסיפור כבר פורסם ממקור קודם): {primary['title']}")
@@ -1650,7 +1672,7 @@ def save_synthesized_article(cluster, recent_titles=None, tags_index=None, image
 
 def _write_article_file(filename, title, date_str, source_name, image_url, link, category, content,
                          video_id="", takeaways=None, tags=None, quick_image=False, has_watermark=False,
-                         hero_worthy=False, is_short=False, is_bulletin=False):
+                         hero_worthy=False, is_short=False, is_bulletin=False, author=""):
     video_line = f'\nvideo_id: "{video_id}"' if video_id else ""
 
     # Each takeaway is written as its own indented continuation line (what
@@ -1672,6 +1694,10 @@ def _write_article_file(filename, title, date_str, source_name, image_url, link,
     hero_worthy_line = '\nhero_worthy: "1"' if hero_worthy else ""
     is_short_line = '\nis_short: "1"' if is_short else ""
     is_bulletin_line = '\nis_bulletin: "1"' if is_bulletin else ""
+    # Individual byline credit - Israeli moral rights (זכות מוסרית) attach to
+    # the actual creator, not the publisher, so this is separate from and in
+    # addition to the "source" outlet name above, not a replacement for it.
+    author_line = f'\nauthor: "{author.replace(chr(34), chr(39))}"' if author else ""
 
     md_content = f"""---
 title: >-
@@ -1680,7 +1706,7 @@ date: "{date_str}"
 source: "{source_name}"
 image: "{image_url}"
 link: "{link}"
-category: "{category}"{video_line}{takeaways_line}{tags_line}{quick_image_line}{has_watermark_line}{hero_worthy_line}{is_short_line}{is_bulletin_line}
+category: "{category}"{video_line}{takeaways_line}{tags_line}{quick_image_line}{has_watermark_line}{hero_worthy_line}{is_short_line}{is_bulletin_line}{author_line}
 ---
 
 {content}
@@ -1739,9 +1765,17 @@ def fetch_news():
             link = entry.get('link', '')
             content = clean_html(entry.get('description', '') or entry.get('summary', ''))
             image_url = extract_image(entry)
+            # Individual byline credit, when the feed actually provides one -
+            # Israeli moral rights (זכות מוסרית) attach to the actual creator,
+            # not the publisher, so "מקור: גלובס" alone doesn't satisfy
+            # attribution when the source names an author. Confirmed via a
+            # real feed check: ynet/Walla's RSS never include this field
+            # (author stays blank for them - can't credit what isn't given),
+            # Globes' does (real names came back, e.g. "חזי שטרנליכט").
+            author = entry.get('author', '').strip()[:100]
             candidates.append({
                 "title": title, "link": link, "content": content, "image_url": image_url,
-                "source_name": source_name, "category": category, "video_id": "",
+                "source_name": source_name, "category": category, "video_id": "", "author": author,
             })
 
     for channel_id, (source_name, category) in youtube_channels.items():
@@ -1761,7 +1795,7 @@ def fetch_news():
             image_url = extract_image(entry)
             candidates.append({
                 "title": title, "link": link, "content": content, "image_url": image_url,
-                "source_name": source_name, "category": category, "video_id": video_id,
+                "source_name": source_name, "category": category, "video_id": video_id, "author": "",
             })
 
     def is_trending(candidate):
@@ -1794,7 +1828,7 @@ def fetch_news():
             c = group[0]
             save_article(c["title"], c["link"], c["content"], c["image_url"], c["source_name"], c["category"],
                          video_id=c["video_id"], recent_titles=recent_titles, tags_index=tags_index,
-                         image_hashes=image_hashes, published_slugs=published_slugs)
+                         image_hashes=image_hashes, published_slugs=published_slugs, author=c.get("author", ""))
 
     save_tags_index(tags_index)
     save_image_hashes(image_hashes)

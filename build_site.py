@@ -382,6 +382,7 @@ def load_articles():
             "date": date_str,
             "dt": dt,
             "source": data.get("source", ""),
+            "author": data.get("author", ""),
             "image": image,
             "link": data.get("link", ""),
             "category": data.get("category", "חדשות"),
@@ -1888,9 +1889,17 @@ if(n>=ct&&n<rt)document.documentElement.className+=" kk-shabbat-locked";
         # Paid/sponsored placements get rel="sponsored" per Google's own
         # guidance on disclosing paid links, on top of the visible label.
         credit_rel = "sponsored noopener" if a.get("is_sponsored") else "noopener"
+        # Individual byline, when the source's own feed provided one -
+        # separate from and in addition to crediting the outlet itself.
+        # Israeli moral rights (זכות מוסרית) attach to the actual creator,
+        # not the publisher, and "המקור: גלובס" alone doesn't satisfy that
+        # when the source names a real author (confirmed some feeds do,
+        # e.g. Globes; others like ynet/Walla never expose this field at
+        # all, so there's nothing to add for those).
+        author_credit = f" · {html.escape(a['author'])}" if a.get("author") else ""
         source_credit_html = f"""
         <div class="source-credit-box">
-          <span>המקור: {html.escape(a['source'])}</span>
+          <span>המקור: {html.escape(a['source'])}{author_credit}</span>
           <a href="{html.escape(a['link'])}" target="_blank" rel="{credit_rel}">לכתבה המלאה באתר המקור ←</a>
         </div>"""
         # Sponsored content gets an unmissable disclosure banner above the
