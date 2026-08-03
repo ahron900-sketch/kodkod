@@ -57,43 +57,12 @@ WEATHER_BAR_HTML = ""
 SHABBAT_OVERLAY_HTML = ""
 SHABBAT_HEAD_SCRIPT = ""
 
-# Owner-directed site-wide password lock (unconditional - not tied to any
-# fetched/time-based state like the Shabbat lockout above). Honest limit,
-# already told to the owner: this is a static GitHub Pages site with no
-# backend, so any password check can only run in client-side JS - the
-# value is visible to anyone who reads the page source, and trivially
-# bypassed with JS disabled or a raw HTML fetch. This blocks casual
-# visitors and search crawlers seeing rendered content; it is not real
-# access control against a determined actor.
-SITE_LOCKOUT_PASSWORD = "060309"
-SITE_LOCKOUT_HEAD_SCRIPT = """<script>(function(){
-if(localStorage.getItem("kk_site_unlocked")!=="1")document.documentElement.className+=" kk-site-locked";
-})();</script>"""
-SITE_LOCKOUT_OVERLAY_HTML = f"""
-<div id="site-lockout" class="site-lockout" hidden>
-  <div class="site-lockout-box">
-    <p class="site-lockout-title">האתר סגור זמנית</p>
-    <form id="site-lockout-form" autocomplete="off">
-      <input type="password" id="site-lockout-input" class="site-lockout-input" placeholder="סיסמה" autocomplete="off">
-      <button type="submit" class="site-lockout-submit">כניסה</button>
-    </form>
-    <p class="site-lockout-error" id="site-lockout-error" hidden>סיסמה שגויה</p>
-  </div>
-</div>
-<script>(function(){{
-var form = document.getElementById("site-lockout-form");
-if (!form) return;
-form.addEventListener("submit", function(e) {{
-  e.preventDefault();
-  var val = document.getElementById("site-lockout-input").value;
-  if (val === "{SITE_LOCKOUT_PASSWORD}") {{
-    localStorage.setItem("kk_site_unlocked", "1");
-    location.reload();
-  }} else {{
-    document.getElementById("site-lockout-error").hidden = false;
-  }}
-}});
-}})();</script>"""
+# The 2026-08-02 owner-directed site-wide password lock was removed on
+# 2026-08-03 (owner directive) after the commercial-source corpus was
+# archived and the bot's source list was restricted to official sources
+# only. Empty strings keep the injection points below as no-ops.
+SITE_LOCKOUT_HEAD_SCRIPT = ""
+SITE_LOCKOUT_OVERLAY_HTML = ""
 
 # Weather: open-meteo.com is genuinely free and keyless (no account/API key
 # of any kind, verified before wiring this up) - fetched once per build at
