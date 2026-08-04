@@ -30,9 +30,17 @@ except ImportError:
 # this content anyway, but leaving the feeds wired in here still means
 # needless requests to commercial sites and depends on the AI call
 # succeeding to enforce a policy that should hold regardless of Groq's
-# availability. Empty until the new gov.il/NASA/Wikipedia/etc. pipeline is
-# built against the closed source list the owner specified.
-rss_feeds = {}
+# availability. Only closed-list sources below.
+#
+# NASA (2026-08-03): US federal government work - public domain, no
+# copyright, explicitly on the owner's allowed list. Verified live before
+# wiring in: feed returns real items, full-text extraction works on real
+# articles (5000+ chars), og:image present on every page checked. English-
+# language source - the AI enrichment pass adapts it into a Hebrew article
+# (translation-adaptation is the rewrite, same fail-closed gate applies).
+rss_feeds = {
+    "NASA": ("https://www.nasa.gov/feed/", "טכנולוגיה"),
+}
 
 # מקורות שנבדקו ונפסלו במחקר המקורות (2026-07-30) - לא להוסיף שוב בלי סיבה טובה:
 # - מאקו רכב: robots.txt חוסם במפורש (Disallow: /cars-)
@@ -867,7 +875,13 @@ AI_ENRICH_SYSTEM_PROMPT = (
     "או משפט שאינו נובע ישירות מהטקסט המקורי. אסור לקצר משמעותית את "
     "הכתבה או להשמיט מידע מהותי - האורך הכולל צריך להישאר דומה למקור. "
     "אם אינך בטוח שתוכל לנסח מחדש בלי לסכן דיוק עובדתי, החזר את הטקסט "
-    "המקורי ללא שינוי במקום להמציא או לנחש.\n"
+    "המקורי ללא שינוי במקום להמציא או לנחש. אם טקסט המקור אינו בעברית "
+    "(למשל אנגלית), כתוב את הכתבה בעברית - תרגום-עיבוד מלא, אותם כללי "
+    "ברזל בדיוק: כל עובדה, שם, מספר וציטוט נשמרים מדויקים (ציטוט ישיר "
+    "מתורגם נאמנה ומיוחס לאותו דובר).\n"
+    "1ב. title_he - כותרת עיתונאית בעברית לכתבה. אם הכותרת המקורית "
+    "בעברית - החזר אותה כפי שהיא ללא שינוי; אם היא בשפה אחרת - כתוב "
+    "כותרת עברית חדשה הנאמנה לתוכן.\n"
     "2. takeaways - רשימה של 3-4 משפטים קצרים (עיקרי הדברים), כל אחד עובדה "
     "בודדת מתוך הטקסט.\n"
     "3. tags - רשימה של 3-4 מילות מפתח סמנטיות (שמות אנשים, ארגונים, "
@@ -885,9 +899,9 @@ AI_ENRICH_SYSTEM_PROMPT = (
     "היא כלכלה - זה תוכן ירוק-לנצח, לא ידיעה מבזקת, גם אם הכותרת מנוסחת "
     "כשאלה או כהצעת ערך. false גם עבור בריאות, מתכונים, רכב, טכנולוגיה, "
     "ותוכן חדשותי כללי/שגרתי שאינו מבזק אמיתי.\n"
-    'השב אך ורק ב-JSON תקני: {"rewritten_content": "...", "takeaways": '
-    '["...", "..."], "tags": ["...", "..."], "verified_category": "...", '
-    '"hero_worthy": false}'
+    'השב אך ורק ב-JSON תקני: {"rewritten_content": "...", "title_he": "...", '
+    '"takeaways": ["...", "..."], "tags": ["...", "..."], '
+    '"verified_category": "...", "hero_worthy": false}'
 )
 
 
@@ -957,10 +971,12 @@ def enrich_article_with_ai(title, content):
             verified_category = None
         hero_worthy = bool(parsed.get("hero_worthy") is True)
 
+        title_he = re.sub(r'\s+', ' ', str(parsed.get("title_he") or "")).strip()[:200]
+
         return {
             "content": content_out, "takeaways": takeaways, "tags": tags,
             "verified_category": verified_category, "hero_worthy": hero_worthy,
-            "rewrite_succeeded": rewrite_succeeded,
+            "rewrite_succeeded": rewrite_succeeded, "title_he": title_he,
         }
     except Exception as e:
         # legal directive (2026-08-02): previously fell back to publishing
@@ -1487,6 +1503,20 @@ def save_article(title, link, content, image_url, source_name, category, video_i
         print(f"נפסל (לא הופק שכתוב מקורי מאומת - אין פרסום תוכן שנשאב כלשונו): {title}")
         return
     content = enrichment.get("content", content)
+    # Foreign-language sources (NASA is English): the site publishes Hebrew
+    # only, so a title that isn't predominantly Hebrew is replaced by the
+    # AI's Hebrew headline. Filename/duplicate-check were computed from the
+    # original title above - recompute both for the adopted Hebrew title,
+    # since that's the identity the article will actually be saved under.
+    hebrew_chars = len(re.findall(r'[א-ת]', title))
+    if hebrew_chars < max(3, len(title) // 6) and enrichment.get("title_he"):
+        title = enrichment["title_he"]
+        filename = f"{sanitize_filename(title)}.md"
+        if any(os.path.exists(os.path.join(d, filename)) for d in [LIVE_DIR, PENDING_DIR, ARCHIVE_DIR]):
+            return
+        if recent_titles is not None and is_duplicate_of_recent(title, recent_titles):
+            print(f"נפסל (כפילות - הכותרת העברית כבר פורסמה): {title}")
+            return
     takeaways = enrichment.get("takeaways", [])
     tags = enrichment.get("tags", [])
     # a source's mapped category is a default, not a guarantee - e.g. a

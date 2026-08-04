@@ -1388,11 +1388,21 @@ if(n>=ct&&n<rt)document.documentElement.className+=" kk-shabbat-locked";
     # doesn't get to occupy the front page's real estate. Also: the hero
     # specifically is meant to read as urgent/important news, not lifestyle
     # content - recipes were already excluded, health joins that exclusion.
-    today = datetime.now().date()
-    yesterday = today - timedelta(days=1)
+    # Freshness is anchored to the newest article actually in the corpus,
+    # not the wall clock. When content flows daily these are identical
+    # (newest == today). But after the 2026-08-02 archive left a small
+    # corpus whose newest article was days old, a wall-clock anchor made
+    # every freshness-gated section (hero/bento/quick/category rows) render
+    # completely empty - a blank homepage over real, existing articles.
+    # Anchoring to the newest article means the homepage always shows the
+    # most recent content that exists, aging gracefully instead of
+    # disappearing. The window stays 2 calendar days, same as before.
+    newest_dts = [a["dt"] for a in listable if a["dt"] != datetime.min]
+    anchor = max(newest_dts).date() if newest_dts else datetime.now().date()
+    anchor_prev = anchor - timedelta(days=1)
 
     def is_fresh(a):
-        return a["dt"] != datetime.min and a["dt"].date() in (today, yesterday)
+        return a["dt"] != datetime.min and a["dt"].date() in (anchor, anchor_prev)
 
     # owner directive: hero/bento are reserved for real breaking news in a
     # fixed topic list (security/military, serious crime, major sports,
