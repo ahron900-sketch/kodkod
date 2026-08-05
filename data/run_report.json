@@ -1,0 +1,25 @@
+{
+ "items": [
+  {
+   "title": "Roman Space Telescope Plaque Install",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Louisiana Students Loft Payloads from NASA Balloon Facility in Texas",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Guinea-Bissau Tidal Waters",
+   "outcome": "text_rejected_no_verified_rewrite"
+  }
+ ],
+ "ai_errors": [
+  "article_enrich: HTTP Error 403: Forbidden",
+  "article_enrich: HTTP Error 403: Forbidden",
+  "article_enrich: HTTP Error 403: Forbidden"
+ ],
+ "finished_utc": "2026-08-05 03:38:52",
+ "summary": {
+  "text_rejected_no_verified_rewrite": 3
+ }
+}
