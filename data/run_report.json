@@ -1,15 +1,96 @@
 {
  "items": [
   {
-   "title": "NASA Provides Updates on Moon Base Cargo Landers, Tech Demonstrations",
+   "title": "Roman Space Telescope Plaque Install",
    "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Louisiana Students Loft Payloads from NASA Balloon Facility in Texas",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Guinea-Bissau Tidal Waters",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "הברחת השב\"חים סוכלה - תיעוד מפעילות מחוז ירושלים",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "נתפס: שב\"ח התחבא ברמקול בתא מטען של רכב",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "PM Netanyahu Meets US Secretary of War Hegseth",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "למה 77% ממשקי הבית בישראל לא יכולים לקנות דירה? | גלית בן נאים, סגנית בכירה לכלכלן הראשי במשרד האוצר",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "פרק 4: האישה שבשטר",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "אפשר קצת לשחרר🧘🏽",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "Live interview with Elon Musk - International Smart Mobility Summit 2026",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "لا داعي لتحويل نقل ملكية المركبة إلى أمر معقّد كالمسلسلات التركية!",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "הצצה מיוחדת - פעילות סירת הים-בולנס טיפול נמרץ של מד\"א שמצילה חיים בלב המים לכנרת",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "27 ביולי 2026",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "16 ביולי 2026",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "15 ביולי 2026",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "14 ביולי 2026",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "4 ביוני 2026",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   }
  ],
  "ai_errors": [
-  "article_enrich: HTTP Error 403: Forbidden"
+  "article_enrich: HTTP Error 403: Forbidden",
+  "article_enrich: HTTP Error 403: Forbidden",
+  "article_enrich: HTTP Error 403: Forbidden",
+  "video_enrich: HTTP Error 403: Forbidden",
+  "video_enrich: HTTP Error 403: Forbidden",
+  "video_enrich: HTTP Error 403: Forbidden",
+  "video_enrich: HTTP Error 403: Forbidden",
+  "video_enrich: HTTP Error 403: Forbidden",
+  "video_enrich: HTTP Error 403: Forbidden",
+  "video_enrich: HTTP Error 403: Forbidden",
+  "video_enrich: HTTP Error 403: Forbidden",
+  "video_enrich: HTTP Error 403: Forbidden",
+  "video_enrich: HTTP Error 403: Forbidden",
+  "video_enrich: HTTP Error 403: Forbidden",
+  "video_enrich: HTTP Error 403: Forbidden",
+  "video_enrich: HTTP Error 403: Forbidden",
+  "video_enrich: HTTP Error 403: Forbidden"
  ],
- "finished_utc": "2026-08-05 06:12:04",
+ "finished_utc": "2026-08-05 08:54:22",
  "summary": {
-  "text_rejected_no_verified_rewrite": 1
+  "text_rejected_no_verified_rewrite": 3,
+  "video_rejected_enrich_failed_or_not_newsworthy": 14
  }
 }
