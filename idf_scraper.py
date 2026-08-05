@@ -91,6 +91,31 @@ LIVE_DIR = "content/news"
 PENDING_DIR = "content/pending"
 ARCHIVE_DIR = "content/archive"
 
+# Per-run outcome report, committed to the repo by the bot workflow (data/
+# is already in its git add path). Added 2026-08-05 while diagnosing why
+# 28 consecutive Actions runs published zero articles despite sources
+# having fresh content: the rejection prints only go to Actions stdout,
+# which needs an auth token this environment doesn't have - so the exact
+# failure reasons were invisible. This makes each run's outcomes (and the
+# real exception text from failed AI calls) readable from the repo itself.
+RUN_REPORT = {"items": [], "ai_errors": []}
+
+
+def report_item(title, outcome):
+    RUN_REPORT["items"].append({"title": (title or "")[:120], "outcome": outcome})
+
+
+def save_run_report():
+    try:
+        RUN_REPORT["finished_utc"] = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
+        from collections import Counter
+        RUN_REPORT["summary"] = dict(Counter(i["outcome"] for i in RUN_REPORT["items"]))
+        os.makedirs("data", exist_ok=True)
+        with open(os.path.join("data", "run_report.json"), "w", encoding="utf-8") as f:
+            json.dump(RUN_REPORT, f, ensure_ascii=False, indent=1)
+    except Exception as e:
+        print(f"כתיבת דוח ריצה נכשלה (לא חוסם): {e}")
+
 def sanitize_filename(title):
     clean_name = re.sub(r'[\\/*?:"<>|]', "", title).strip()[:50]
     return clean_name if clean_name else "untitled"
@@ -942,7 +967,16 @@ def enrich_article_with_ai(title, content):
         # means truncation, garbling, or unwanted summarizing - fall back to
         # the original text rather than trust a suspicious result.
         source_len = len(content[:6000])
-        length_ok = rewritten and 0.6 * source_len <= len(rewritten) <= 1.5 * source_len
+        # Hebrew renders the same content in noticeably fewer characters
+        # than English (no vowels written, no capitalization, denser
+        # morphology) - a faithful Hebrew adaptation of an English source
+        # (NASA) routinely lands at 40-60% of the English char count, which
+        # the 0.6 floor built for Hebrew-to-Hebrew rewrites wrongly rejects.
+        # The floor drops to 0.35 only when the source isn't predominantly
+        # Hebrew; Hebrew-to-Hebrew keeps the original stricter bound.
+        source_is_hebrew = len(re.findall(r'[א-ת]', content[:2000])) > len(content[:2000]) // 10
+        floor = 0.6 if source_is_hebrew else 0.35
+        length_ok = rewritten and floor * source_len <= len(rewritten) <= 1.5 * source_len
         # objective check, not just a length heuristic: does the "rewrite"
         # actually share large verbatim chunks with the source? Catches the
         # case a pure length check misses - a right-sized output that's
@@ -984,6 +1018,7 @@ def enrich_article_with_ai(title, content):
         # network error) - meaning the raw scraped text went out unrewritten.
         # rewrite_succeeded=False here forces the caller to reject instead.
         print(f"העשרת AI נכשלה (הכתבה תידחה - אין פרסום בלי שכתוב מאומת): {e}")
+        RUN_REPORT["ai_errors"].append(f"article_enrich: {str(e)[:300]}")
         return {"rewrite_succeeded": False}
 
 
@@ -1295,6 +1330,7 @@ def enrich_video_with_ai(title, content, source_name):
         # as-is per the owner's explicit rule that every primary-source item
         # goes through the bot's rewrite, never a raw embed
         print(f"נפסל (וידאו - העשרת AI נכשלה, לא מפרסמים גולמי): {e}")
+        RUN_REPORT["ai_errors"].append(f"video_enrich: {str(e)[:300]}")
         return None
 
 
@@ -1393,6 +1429,7 @@ def save_article(title, link, content, image_url, source_name, category, video_i
         enrichment = enrich_video_with_ai(title, content, source_name)
         if not enrichment:
             print(f"נפסל (וידאו - נכשל בשכתוב/לא חדשותי מספיק): {title}")
+            report_item(title, "video_rejected_enrich_failed_or_not_newsworthy")
             return
         final_title = enrichment["title"]
         final_content = enrichment["content"]
@@ -1501,6 +1538,7 @@ def save_article(title, link, content, image_url, source_name, category, video_i
     # tradeoff, not a regression to work around.
     if not enrichment.get("rewrite_succeeded"):
         print(f"נפסל (לא הופק שכתוב מקורי מאומת - אין פרסום תוכן שנשאב כלשונו): {title}")
+        report_item(title, "text_rejected_no_verified_rewrite")
         return
     content = enrichment.get("content", content)
     # Foreign-language sources (NASA is English): the site publishes Hebrew
@@ -1704,6 +1742,7 @@ category: "{category}"{video_line}{takeaways_line}{tags_line}{quick_image_line}{
     with open(os.path.join(LIVE_DIR, filename), "w", encoding="utf-8") as f:
         f.write(md_content)
     print(f"נשמר: {title}")
+    report_item(title, "published")
 
 
 GOOGLE_TRENDS_RSS_URL = "https://trends.google.com/trending/rss?geo=IL"
@@ -1821,6 +1860,7 @@ def fetch_news():
     save_tags_index(tags_index)
     save_image_hashes(image_hashes)
     ping_indexnow(published_slugs)
+    save_run_report()
 
 
 if __name__ == "__main__":
