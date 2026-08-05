@@ -105,6 +105,23 @@ def report_item(title, outcome):
     RUN_REPORT["items"].append({"title": (title or "")[:120], "outcome": outcome})
 
 
+def describe_api_error(e):
+    """urllib's str(HTTPError) is only 'HTTP Error 403: Forbidden' - the
+    response BODY is where the provider says what actually went wrong, and
+    those cases need completely different fixes: a network/IP block ('Access
+    denied. Please check your network settings.'), no access to the model,
+    an invalid key, or a rate limit. Reading it makes the next run's report
+    say which one it is instead of leaving it ambiguous."""
+    detail = ""
+    try:
+        body = e.read()
+        if body:
+            detail = body.decode("utf-8", "replace")[:400]
+    except Exception:
+        pass
+    return f"{str(e)[:120]} | body: {detail}" if detail else str(e)[:300]
+
+
 def save_run_report():
     try:
         RUN_REPORT["finished_utc"] = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
@@ -1018,7 +1035,7 @@ def enrich_article_with_ai(title, content):
         # network error) - meaning the raw scraped text went out unrewritten.
         # rewrite_succeeded=False here forces the caller to reject instead.
         print(f"העשרת AI נכשלה (הכתבה תידחה - אין פרסום בלי שכתוב מאומת): {e}")
-        RUN_REPORT["ai_errors"].append(f"article_enrich: {str(e)[:300]}")
+        RUN_REPORT["ai_errors"].append(f"article_enrich: {describe_api_error(e)}")
         return {"rewrite_succeeded": False}
 
 
@@ -1330,7 +1347,7 @@ def enrich_video_with_ai(title, content, source_name):
         # as-is per the owner's explicit rule that every primary-source item
         # goes through the bot's rewrite, never a raw embed
         print(f"נפסל (וידאו - העשרת AI נכשלה, לא מפרסמים גולמי): {e}")
-        RUN_REPORT["ai_errors"].append(f"video_enrich: {str(e)[:300]}")
+        RUN_REPORT["ai_errors"].append(f"video_enrich: {describe_api_error(e)}")
         return None
 
 
