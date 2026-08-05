@@ -1736,8 +1736,6 @@ category: "{category}"{video_line}{takeaways_line}{tags_line}{quick_image_line}{
 ---
 
 {content}
-
-[קרא את הכתבה המלאה במקור]({link})
 """
     with open(os.path.join(LIVE_DIR, filename), "w", encoding="utf-8") as f:
         f.write(md_content)

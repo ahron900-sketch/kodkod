@@ -800,7 +800,7 @@ ABOUT_BODY = """
   <p>קודקוד הוקם מתוך רצון לפתור בעיה פשוטה: קוראים ישראלים שרוצים להישאר מעודכנים נאלצים לדלג בין עשרות אתרי חדשות שונים. קודקוד מרכז את המבזקים החשובים ביותר ממיטב המקורות בישראל למקום אחד, עם ממשק מהיר, נקי, וללא רעש פרסומי מציק.</p>
 
   <h2>איך אנחנו עובדים</h2>
-  <p>המערכת שלנו פועלת כאגרגטור חדשות אוטומטי: בוט ייעודי סורק מדי 15 דקות את פידי ה-RSS הרשמיים של מקורות החדשות המובילים בישראל, ומעלה את המבזקים החדשים לאתר באופן מיידי. אנו <strong>לא</strong> כותבים או עורכים את תוכן הכתבות עצמו - כל כתבה מוצגת עם ייחוס ברור למקור המקורי שלה, ובסיום כל כתבה מופיע קישור ישיר לכתבה המלאה באתר המקור. קודקוד אינו טוען לבעלות על תוכן הכתבות המקוריות.</p>
+  <p>בוט ייעודי סורק מדי 15 דקות מקורות רשמיים בלבד - ערוצי הדוברות של גופי ממשל וגופים סטטוטוריים בישראל (דובר צה"ל, דוברות המשטרה, מגן דוד אדום, הכנסת, בנק ישראל, משרדי ממשלה ועוד), וכן מקורות בנחלת הכלל כמו נאס"א. מכל פריט כזה נכתבת <strong>כתבה עברית מקורית משלנו</strong>: הניסוח והמבנה שלנו, בעוד שכל עובדה, שם, מספר וציטוט נשמרים במדויק כפי שנמסרו במקור. כתבה שאינה עוברת את בדיקת המקוריות האוטומטית שלנו פשוט אינה מתפרסמת. בתחתית כל כתבה מצוין המקור שעליו היא מבוססת.</p>
 
   <h2>תחומי סיקור</h2>
   <ul>
@@ -1028,14 +1028,14 @@ TERMS_BODY = """
   <p class="lead">השימוש באתר קודקוד כפוף לתנאים המפורטים להלן. גלישה באתר מהווה הסכמה לתנאים אלה.</p>
 
   <h2>אופי האתר</h2>
-  <p>קודקוד הוא אגרגטור חדשות אוטומטי. האתר אוסף ומציג מבזקים ממקורות חדשות קיימים בישראל, עם ייחוס וקישור מלא למקור המקורי של כל כתבה. קודקוד אינו כותב, עורך, או אחראי לתוכן הכתבות המקוריות, ואינו טוען לבעלות עליהן. זכויות היוצרים בתוכן הכתבות שייכות למקור המקורי שלהן בלבד. חלק מהכתבות עשויות לכלול, בנוסף, תיבת "עיקרי הדברים - AI" ותגיות נושא, המסומנות בבירור - נוצרות אוטומטית מטקסט הכתבה המקורית, ומתפרסמות לצד הכתבה המלאה ולא במקומה.</p>
+  <p>קודקוד מפרסם כתבות עברית מקוריות הנכתבות אוטומטית על בסיס מקורות רשמיים בלבד: הודעות ופרסומים של גופי ממשל וגופים סטטוטוריים בישראל, ומקורות בנחלת הכלל. הניסוח, המבנה והכותרת הם שלנו; העובדות, השמות, המספרים והציטוטים נשמרים במדויק כפי שנמסרו במקור, וללא הוספת פרטים שלא הופיעו בו. בתחתית כל כתבה מצוין המקור שעליו היא מבוססת. חלק מהכתבות עשויות לכלול, בנוסף, תיבת "עיקרי הדברים - AI" ותגיות נושא, המסומנות בבירור.</p>
   <p>לצד הכתבות המצוטטות, קודקוד עשוי לפרסם מדי פעם תוכן שיווקי בתשלום מטעם גורם עסקי. תוכן כזה מסומן תמיד ובבירור - הן בתג "תוכן שיווקי" בכל מקום שבו הכתבה מופיעה באתר, והן בבאנר גלוי בראש הכתבה עצמה - ואינו מוצג כתוכן עיתונאי.</p>
 
-  <h2>שימוש הוגן</h2>
-  <p>הצגת קטעי כתבות עם ייחוס וקישור למקור נעשית במסגרת שימוש הוגן ומקובל באגרגציית חדשות. כל כתבה כוללת קישור ברור לכתבה המלאה באתר המקור, וקודקוד ממליץ לקוראים לבקר באתר המקור לקריאה מלאה ולתמיכה בעיתונות המקורית.</p>
+  <h2>מקורות וייחוס</h2>
+  <p>האתר מסתמך על מקורות רשמיים ופומביים בלבד - פרסומי גופי ממשל וגופים סטטוטוריים, ותוכן בנחלת הכלל. עובדות כשלעצמן אינן מוגנות בזכויות יוצרים, והכתיבה עצמה היא מקורית ונבדקת אוטומטית לפני פרסום. בתחתית כל כתבה מצוין המקור שעליו היא מבוססת.</p>
 
-  <h2>אין אחריות לתוכן צד שלישי</h2>
-  <p>קודקוד אינו אחראי לדיוק, לעדכניות, או לאמינות התוכן המקורי המוצג באתר, שכן מדובר בתוכן שנוצר ונערך על-ידי גורמים שלישיים (מקורות החדשות). כל טענה בנוגע לתוכן כתבה יש להפנות למקור המקורי שלה.</p>
+  <h2>דיוק העובדות</h2>
+  <p>העובדות בכתבות מבוססות על מה שנמסר בפרסומים הרשמיים של המקורות, ואינן נבדקות באופן עצמאי מעבר לכך. קודקוד אינו אחראי לדיוק או לעדכניות המידע כפי שנמסר במקור. נתקלתם באי-דיוק? נשמח לדעת - ניתן לפנות אלינו דרך <a href="/tip-line.html">עמוד יצירת הקשר</a>.</p>
 
   <h2>שימוש אסור</h2>
   <p>אין להשתמש באתר לצורך פעילות בלתי חוקית, להעתיק או להפיץ מחדש את מבנה האתר או קוד המקור שלו לצרכים מסחריים ללא אישור, או לנסות לשבש את פעילות האתר.</p>
@@ -1865,9 +1865,6 @@ if(n>=ct&&n<rt)document.documentElement.className+=" kk-shabbat-locked";
         # Source credit shown once, at the very end of the article only (not
         # repeated near the headline) - keeps the reader's focus on our own
         # page and content first, attribution comes after they've read it.
-        # Paid/sponsored placements get rel="sponsored" per Google's own
-        # guidance on disclosing paid links, on top of the visible label.
-        credit_rel = "sponsored noopener" if a.get("is_sponsored") else "noopener"
         # Individual byline, when the source's own feed provided one -
         # separate from and in addition to crediting the outlet itself.
         # Israeli moral rights (זכות מוסרית) attach to the actual creator,
@@ -1876,10 +1873,18 @@ if(n>=ct&&n<rt)document.documentElement.className+=" kk-shabbat-locked";
         # e.g. Globes; others like ynet/Walla never expose this field at
         # all, so there's nothing to add for those).
         author_credit = f" · {html.escape(a['author'])}" if a.get("author") else ""
+        # Owner directive (2026-08-05): the outbound "read the full article
+        # at the source" link is removed - with the corpus now limited to
+        # official government sources and public-domain material, every
+        # article here is the bot's own Hebrew writing, not an excerpt of
+        # someone else's piece, so sending the reader away made no sense.
+        # The attribution line itself stays: it costs nothing, it's honest
+        # about where the underlying facts came from, and NASA's own media
+        # guidelines request acknowledgement even though its work is public
+        # domain.
         source_credit_html = f"""
         <div class="source-credit-box">
           <span>המקור: {html.escape(a['source'])}{author_credit}</span>
-          <a href="{html.escape(a['link'])}" target="_blank" rel="{credit_rel}">לכתבה המלאה באתר המקור ←</a>
         </div>"""
         # Sponsored content gets an unmissable disclosure banner above the
         # headline - required by Israeli consumer protection law and by
