@@ -105,6 +105,20 @@ def report_item(title, outcome):
     RUN_REPORT["items"].append({"title": (title or "")[:120], "outcome": outcome})
 
 
+# Cloudflare fronts the Groq API and rejects urllib's default
+# "Python-urllib/x.y" client signature with HTTP 403 "error code: 1010"
+# (banned by browser signature) - confirmed from a real run report, where
+# all 15 AI calls failed this way while every RSS/page fetch in this same
+# file succeeded, because those already send a real User-Agent. Every Groq
+# request must therefore carry the same UA the rest of the bot uses.
+def _groq_headers():
+    return {
+        "Authorization": f"Bearer {GROQ_API_KEY}",
+        "Content-Type": "application/json",
+        "User-Agent": "Mozilla/5.0 (compatible; KodkodBot/1.0)",
+    }
+
+
 def describe_api_error(e):
     """urllib's str(HTTPError) is only 'HTTP Error 403: Forbidden' - the
     response BODY is where the provider says what actually went wrong, and
@@ -964,10 +978,7 @@ def enrich_article_with_ai(title, content):
         req = urllib.request.Request(
             GROQ_API_URL,
             data=payload,
-            headers={
-                "Authorization": f"Bearer {GROQ_API_KEY}",
-                "Content-Type": "application/json",
-            },
+            headers=_groq_headers(),
             method="POST",
         )
         with urllib.request.urlopen(req, timeout=30) as resp:
@@ -1102,7 +1113,7 @@ def synthesize_from_sources_ai(members):
         }).encode("utf-8")
         req = urllib.request.Request(
             GROQ_API_URL, data=payload,
-            headers={"Authorization": f"Bearer {GROQ_API_KEY}", "Content-Type": "application/json"},
+            headers=_groq_headers(),
             method="POST",
         )
         with urllib.request.urlopen(req, timeout=45) as resp:
@@ -1176,10 +1187,7 @@ def detect_tv_watermark(image_url):
         req = urllib.request.Request(
             GROQ_API_URL,
             data=payload,
-            headers={
-                "Authorization": f"Bearer {GROQ_API_KEY}",
-                "Content-Type": "application/json",
-            },
+            headers=_groq_headers(),
             method="POST",
         )
         with urllib.request.urlopen(req, timeout=20) as resp:
@@ -1324,10 +1332,7 @@ def enrich_video_with_ai(title, content, source_name):
         req = urllib.request.Request(
             GROQ_API_URL,
             data=payload,
-            headers={
-                "Authorization": f"Bearer {GROQ_API_KEY}",
-                "Content-Type": "application/json",
-            },
+            headers=_groq_headers(),
             method="POST",
         )
         with urllib.request.urlopen(req, timeout=30) as resp:
