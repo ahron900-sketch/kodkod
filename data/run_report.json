@@ -1,35 +1,15 @@
 {
  "items": [
   {
-   "title": "חילוץ פעוט שננעל ברכב - אסון נמנע!",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "הברחת השב\"חים סוכלה - תיעוד מפעילות מחוז ירושלים",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "נתפס: שב\"ח התחבא ברמקול בתא מטען של רכב",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "פרק 4: האישה שבשטר",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "הצצה מיוחדת - פעילות סירת הים-בולנס טיפול נמרץ של מד\"א שמצילה חיים בלב המים לכנרת",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+   "title": "APOD: 2026 August 6 – New Sharpest Image of the Sun Uncovers Instability",
+   "outcome": "text_rejected_no_verified_rewrite"
   }
  ],
  "ai_errors": [
-  "video_enrich: HTTP Error 400: Bad Request | body: {\"error\":{\"message\":\"Failed to validate JSON. Please adjust your prompt. See 'failed_generation' for more details.\",\"type\":\"invalid_request_error\",\"code\":\"json_validate_failed\",\"failed_generation\":\"\"}}\n",
-  "video_enrich: HTTP Error 400: Bad Request | body: {\"error\":{\"message\":\"Failed to validate JSON. Please adjust your prompt. See 'failed_generation' for more details.\",\"type\":\"invalid_request_error\",\"code\":\"json_validate_failed\",\"failed_generation\":\"\"}}\n",
-  "video_enrich: HTTP Error 400: Bad Request | body: {\"error\":{\"message\":\"Failed to validate JSON. Please adjust your prompt. See 'failed_generation' for more details.\",\"type\":\"invalid_request_error\",\"code\":\"json_validate_failed\",\"failed_generation\":\"\"}}\n",
-  "video_enrich: HTTP Error 400: Bad Request | body: {\"error\":{\"message\":\"Failed to validate JSON. Please adjust your prompt. See 'failed_generation' for more details.\",\"type\":\"invalid_request_error\",\"code\":\"json_validate_failed\",\"failed_generation\":\"\"}}\n",
-  "video_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 6299, Requested 1777. Please try again in 570ms. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 2404, Requested 5833. Please try again in 1.777499999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
  ],
- "finished_utc": "2026-08-06 03:37:16",
+ "finished_utc": "2026-08-06 06:15:13",
  "summary": {
-  "video_rejected_enrich_failed_or_not_newsworthy": 5
+  "text_rejected_no_verified_rewrite": 1
  }
 }
