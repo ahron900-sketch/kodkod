@@ -1,6 +1,15 @@
 {
- "items": [],
- "ai_errors": [],
- "finished_utc": "2026-08-07 03:39:10",
- "summary": {}
+ "items": [
+  {
+   "title": "למה 77% ממשקי הבית בישראל לא יכולים לקנות דירה? | גלית בן נאים, סגנית בכירה לכלכלן הראשי במשרד האוצר",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  }
+ ],
+ "ai_errors": [
+  "video_enrich: HTTP Error 400: Bad Request | body: {\"error\":{\"message\":\"Failed to validate JSON. Please adjust your prompt. See 'failed_generation' for more details.\",\"type\":\"invalid_request_error\",\"code\":\"json_validate_failed\",\"failed_generation\":\"\"}}\n"
+ ],
+ "finished_utc": "2026-08-07 05:23:33",
+ "summary": {
+  "video_rejected_enrich_failed_or_not_newsworthy": 1
+ }
 }
