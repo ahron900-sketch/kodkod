@@ -1,15 +1,15 @@
 {
  "items": [
   {
-   "title": "למה 77% ממשקי הבית בישראל לא יכולים לקנות דירה? | גלית בן נאים, סגנית בכירה לכלכלן הראשי במשרד האוצר",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+   "title": "NASA’s Lunar Development and Test Facility Prepares Artemis Hardware for Moon",
+   "outcome": "text_rejected_no_verified_rewrite"
   }
  ],
  "ai_errors": [
-  "video_enrich: HTTP Error 400: Bad Request | body: {\"error\":{\"message\":\"Failed to validate JSON. Please adjust your prompt. See 'failed_generation' for more details.\",\"type\":\"invalid_request_error\",\"code\":\"json_validate_failed\",\"failed_generation\":\"\"}}\n"
+  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 2241, Requested 6153. Please try again in 2.955s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
  ],
- "finished_utc": "2026-08-07 05:23:33",
+ "finished_utc": "2026-08-07 06:46:56",
  "summary": {
-  "video_rejected_enrich_failed_or_not_newsworthy": 1
+  "text_rejected_no_verified_rewrite": 1
  }
 }
