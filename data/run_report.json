@@ -1,15 +1,43 @@
 {
  "items": [
   {
-   "title": "NASA’s IXPE Studies Magnetar",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "NASA’s Lunar Development and Test Facility Prepares Artemis Hardware for Moon",
-   "outcome": "text_rejected_no_verified_rewrite"
+   "title": "למה 77% ממשקי הבית בישראל לא יכולים לקנות דירה? | גלית בן נאים, סגנית בכירה לכלכלן הראשי במשרד האוצר",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "\"זה לא מקרה חדש, ואנחנו עובדים על למגר אותו - לא ניתן מקום למשחקי פז\"ם\" 🎙️ | פודקאסט צה״ל",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "חילוץ פעוט שננעל ברכב - אסון נמנע!",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "הברחת השב\"חים סוכלה - תיעוד מפעילות מחוז ירושלים",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "נתפס: שב\"ח התחבא ברמקול בתא מטען של רכב",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "עוד לפני הריאליטי - הכנסת חילקה מיליון שקלים| סקרנים? ד״ר פוקסמן עם הסיפור המלא,צפו! #הכנסת #knesset",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "דברי רה\"מ נתניהו בטקס העלאת עצמותיהם לקבורה של שמעון ורבקה הרצל ז\"ל",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "ראש הממשלה בנימין נתניהו נפגש בבקו\"ם עם מתגייסים לחיל התותחנים ולחטיבת גבעתי",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "PM Netanyahu Meets US Secretary of War Hegseth",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "פרק 4: האישה שבשטר",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -23,19 +51,75 @@
   {
    "title": "איך למלא נספח 1262 62א ישן? סרטון הסבר למילוי נספח 1262 62א ישן",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "אפשר קצת לשחרר🧘🏽",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "Live interview with Elon Musk - International Smart Mobility Summit 2026",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "لا داعي لتحويل نقل ملكية المركبة إلى أمر معقّد كالمسلسلات التركية!",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "הצצה מיוחדת - פעילות סירת הים-בולנס טיפול נמרץ של מד\"א שמצילה חיים בלב המים לכנרת",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "בלשי יחידת צור תפיסת מפוקח עבריין מין",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "27 ביולי 2026",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "16 ביולי 2026",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "15 ביולי 2026",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "14 ביולי 2026",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "4 ביוני 2026",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   }
  ],
  "ai_errors": [
-  "article_enrich: HTTP Error 400: Bad Request | body: {\"error\":{\"message\":\"Failed to validate JSON. Please adjust your prompt. See 'failed_generation' for more details.\",\"type\":\"invalid_request_error\",\"code\":\"json_validate_failed\",\"failed_generation\":\"\"}}\n",
-  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 6153, Requested 6153. Please try again in 32.295s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
   "video_enrich: HTTP Error 400: Bad Request | body: {\"error\":{\"message\":\"Failed to validate JSON. Please adjust your prompt. See 'failed_generation' for more details.\",\"type\":\"invalid_request_error\",\"code\":\"json_validate_failed\",\"failed_generation\":\"\"}}\n",
-  "video_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 6710, Requested 1886. Please try again in 4.47s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
-  "video_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 6670, Requested 2799. Please try again in 11.0175s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
-  "video_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 6624, Requested 2149. Please try again in 5.7975s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+  "video_enrich: HTTP Error 400: Bad Request | body: {\"error\":{\"message\":\"Failed to validate JSON. Please adjust your prompt. See 'failed_generation' for more details.\",\"type\":\"invalid_request_error\",\"code\":\"json_validate_failed\",\"failed_generation\":\"\"}}\n",
+  "video_enrich: HTTP Error 400: Bad Request | body: {\"error\":{\"message\":\"Failed to validate JSON. Please adjust your prompt. See 'failed_generation' for more details.\",\"type\":\"invalid_request_error\",\"code\":\"json_validate_failed\",\"failed_generation\":\"\"}}\n",
+  "video_enrich: HTTP Error 400: Bad Request | body: {\"error\":{\"message\":\"Failed to validate JSON. Please adjust your prompt. See 'failed_generation' for more details.\",\"type\":\"invalid_request_error\",\"code\":\"json_validate_failed\",\"failed_generation\":\"\"}}\n",
+  "video_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 6187, Requested 2021. Please try again in 1.559999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+  "video_enrich: HTTP Error 400: Bad Request | body: {\"error\":{\"message\":\"Failed to validate JSON. Please adjust your prompt. See 'failed_generation' for more details.\",\"type\":\"invalid_request_error\",\"code\":\"json_validate_failed\",\"failed_generation\":\"\"}}\n",
+  "video_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7561, Requested 1807. Please try again in 10.26s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+  "video_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7534, Requested 2096. Please try again in 12.225s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+  "video_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7519, Requested 1756. Please try again in 9.5625s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+  "video_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7466, Requested 1799. Please try again in 9.487499999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+  "video_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7412, Requested 1886. Please try again in 9.735s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+  "video_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7391, Requested 2799. Please try again in 16.425s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+  "video_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7361, Requested 2149. Please try again in 11.325s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+  "video_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7294, Requested 1781. Please try again in 8.0625s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+  "video_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7267, Requested 1918. Please try again in 8.8875s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+  "video_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7194, Requested 1974. Please try again in 8.76s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+  "video_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7160, Requested 1777. Please try again in 7.0275s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+  "video_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7122, Requested 1993. Please try again in 8.3625s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+  "video_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7106, Requested 1880. Please try again in 7.395s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+  "video_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7077, Requested 1898. Please try again in 7.3125s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+  "video_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7063, Requested 1920. Please try again in 7.3725s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+  "video_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7041, Requested 1852. Please try again in 6.6975s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+  "video_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 7013, Requested 1941. Please try again in 7.154999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
  ],
- "finished_utc": "2026-08-09 06:08:35",
+ "finished_utc": "2026-08-09 07:16:18",
  "summary": {
-  "text_rejected_no_verified_rewrite": 2,
-  "video_rejected_enrich_failed_or_not_newsworthy": 4
+  "video_rejected_enrich_failed_or_not_newsworthy": 23
  }
 }
