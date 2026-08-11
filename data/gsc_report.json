@@ -1,6 +1,22 @@
 {
-  "generated_at": "2026-08-10T07:01:07.910590",
+  "generated_at": "2026-08-11T06:40:47.777554",
   "low_ctr_pages": [],
-  "stuck_not_indexed": [],
+  "stuck_not_indexed": [
+    {
+      "url": "https://kodkodnews.co.il/article/נאסא בוחנת מגנטאר באמצעות לוויין ה-IXPE.html",
+      "age_hours": 70,
+      "coverage": "URL is unknown to Google"
+    },
+    {
+      "url": "https://kodkodnews.co.il/article/נאסא חוקרת מגנטר באמצעות לוויין ה-IXPE.html",
+      "age_hours": 58,
+      "coverage": "URL is unknown to Google"
+    },
+    {
+      "url": "https://kodkodnews.co.il/article/נאסא חוקרת מגנטאר באמצעות טלסקופ ה-IXPE.html",
+      "age_hours": 69,
+      "coverage": "URL is unknown to Google"
+    }
+  ],
   "sitemap_resubmitted": true
 }
