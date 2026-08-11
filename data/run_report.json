@@ -1,25 +1,15 @@
 {
  "items": [
   {
-   "title": "APOD: 2026 August 11 – Six Moons of Saturn",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Bountiful Roebuck Bay",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "APOD: 2026 August 8 – A Messier Moment for Tempel 2",
+   "title": "NASA+ Debuts on discovery+, Coming Soon to HBO Max",
    "outcome": "text_rejected_no_verified_rewrite"
   }
  ],
  "ai_errors": [
-  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 2415, Requested 5867. Please try again in 2.114999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
-  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 4518, Requested 6988. Please try again in 26.295s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
-  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 6465, Requested 5913. Please try again in 32.835s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 2300, Requested 5973. Please try again in 2.0475s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
  ],
- "finished_utc": "2026-08-11 05:35:14",
+ "finished_utc": "2026-08-11 06:36:00",
  "summary": {
-  "text_rejected_no_verified_rewrite": 3
+  "text_rejected_no_verified_rewrite": 1
  }
 }
