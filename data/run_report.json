@@ -1,6 +1,20 @@
 {
- "items": [],
- "ai_errors": [],
- "finished_utc": "2026-08-11 02:52:41",
- "summary": {}
+ "items": [
+  {
+   "title": "NASA+ Debuts on discovery+, Coming Soon to HBO Max",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA’s IXPE Studies Magnetar",
+   "outcome": "text_rejected_no_verified_rewrite"
+  }
+ ],
+ "ai_errors": [
+  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 2271, Requested 5973. Please try again in 1.83s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 3681, Requested 5686. Please try again in 10.2525s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+ ],
+ "finished_utc": "2026-08-11 04:20:28",
+ "summary": {
+  "text_rejected_no_verified_rewrite": 2
+ }
 }
