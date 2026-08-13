@@ -1,20 +1,15 @@
 {
  "items": [
   {
-   "title": "APOD: 2026 August 13 – Total Solar Eclipse Over Spain",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "NASA Upgrades Vertical Motion Simulator for Modern Mission Needs",
    "outcome": "text_rejected_no_verified_rewrite"
   }
  ],
  "ai_errors": [
-  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 2387, Requested 5843. Please try again in 1.725s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
-  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 4360, Requested 6117. Please try again in 18.5775s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 2280, Requested 6117. Please try again in 2.9775s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
  ],
- "finished_utc": "2026-08-13 04:30:02",
+ "finished_utc": "2026-08-13 06:01:57",
  "summary": {
-  "text_rejected_no_verified_rewrite": 2
+  "text_rejected_no_verified_rewrite": 1
  }
 }
