@@ -1621,7 +1621,18 @@ def save_article(title, link, content, image_url, source_name, category, video_i
         # regular video listing (owner directive: "חדשות עומדות")
         is_short = "/shorts/" in link
         if not image_url:
-            image_url = f"https://i.ytimg.com/vi/{video_id}/hqdefault.jpg"
+            # Prefer the largest thumbnail YouTube actually has. hqdefault is
+            # only 480x360, which the quality scorer marks down as small and
+            # which looks soft in the hero/bento slots; maxresdefault is
+            # 1280x720 for the same video. Not every upload has every size,
+            # so this walks down until one really returns bytes.
+            for variant in ("maxresdefault", "sddefault", "hqdefault"):
+                candidate = f"https://i.ytimg.com/vi/{video_id}/{variant}.jpg"
+                if _fetch_image_chunk(candidate):
+                    image_url = candidate
+                    break
+            else:
+                image_url = f"https://i.ytimg.com/vi/{video_id}/hqdefault.jpg"
         image_chunk = _fetch_image_chunk(image_url)
         if is_low_quality_image(image_chunk):
             print(f"נפסל (וידאו - תמונה לא נטענת/איכות נמוכה מדי): {title}")
