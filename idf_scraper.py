@@ -40,6 +40,18 @@ except ImportError:
 # (translation-adaptation is the rewrite, same fail-closed gate applies).
 rss_feeds = {
     "NASA": ("https://www.nasa.gov/feed/", "טכנולוגיה"),
+    # Added 2026-08-14 for volume - the site had ~4 new articles in a week.
+    # Every feed here was fetched and checked before being added (entry
+    # count, recency, and whether real text and an image actually come
+    # back), and every one is free to reuse:
+    #   NASA  - US federal government work, public domain (17 U.S.C. 105)
+    #   ESA   - published under CC BY-SA 3.0 IGO, attribution required,
+    #           which the article credit line already provides
+    #   EU    - Commission Decision 2011/833/EU permits reuse, including
+    #           commercial, with attribution
+    "NASA תמונת היום": ("https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss", "טכנולוגיה"),
+    "סוכנות החלל האירופית": ("https://www.esa.int/rssfeed/Our_Activities/Space_News", "טכנולוגיה"),
+    "הנציבות האירופית": ("https://ec.europa.eu/commission/presscorner/api/rss?language=en", "חדשות"),
 }
 
 # מקורות שנבדקו ונפסלו במחקר המקורות (2026-07-30) - לא להוסיף שוב בלי סיבה טובה:
@@ -1532,7 +1544,19 @@ def save_article(title, link, content, image_url, source_name, category, video_i
     elif full_text and len(full_text) >= MIN_BULLETIN_LEN:
         content = full_text
         is_bulletin = True
-    elif len(content) < MIN_CONTENT_LEN:
+    elif len(content) >= MIN_CONTENT_LEN:
+        pass  # the feed's own text is substantial enough to stand as a full article
+    elif len(content) >= MIN_BULLETIN_LEN:
+        # The feed item itself is a real but short official announcement.
+        # fetch_full_article_text() is tuned to Israeli news-site markup and
+        # returns nothing on most international/institutional sites (verified
+        # against UN/ESA/EU/NASA pages), so without this branch every such
+        # source was rejected outright no matter how real its content was -
+        # the bulletin tier existed but only a successful page-scrape could
+        # ever reach it. A genuine 250+ char official announcement publishes
+        # honestly as a bulletin instead of being thrown away.
+        is_bulletin = True
+    else:
         print(f"נפסל (לא נמצאה כתבה מלאה, רק תקציר קצר מדי): {title}")
         return
 
@@ -1810,7 +1834,19 @@ def fetch_news():
         for entry in feed.entries[:15]:
             title = entry.get('title', 'ללא כותרת').strip().replace("\n", " ")
             link = entry.get('link', '')
+            # Prefer whichever field actually carries the most text. Many
+            # feeds put a one-line teaser in description/summary but the real
+            # body in content:encoded - measured on NASA's feed, that's 354
+            # chars vs 2108, i.e. the difference between being rejected as
+            # too short and publishing as a full article.
             content = clean_html(entry.get('description', '') or entry.get('summary', ''))
+            for block in (entry.get('content') or []):
+                try:
+                    alt = clean_html(block.get('value', ''))
+                except AttributeError:
+                    continue
+                if len(alt) > len(content):
+                    content = alt
             image_url = extract_image(entry)
             # Individual byline credit, when the feed actually provides one -
             # Israeli moral rights (זכות מוסרית) attach to the actual creator,
