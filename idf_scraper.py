@@ -50,9 +50,20 @@ rss_feeds = {
     #           which the article credit line already provides
     #   EU    - Commission Decision 2011/833/EU permits reuse, including
     #           commercial, with attribution
-    "NASA תמונת היום": ("https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss", "טכנולוגיה"),
     "סוכנות החלל האירופית": ("https://www.esa.int/rssfeed/Our_Activities/Space_News", "טכנולוגיה"),
-    "הנציבות האירופית": ("https://ec.europa.eu/commission/presscorner/api/rss?language=en", "חדשות"),
+    # UN News - the highest-volume source that survives the 400-word floor:
+    # 30 items a feed, ~16 of them from the last 3 days, and full article
+    # text measured at 637-1578 words per story once the extractor stopped
+    # giving up on the first <article> stub. Real world-news coverage rather
+    # than science/space, which is what the front page was missing.
+    "חדשות האו\"ם": ("https://news.un.org/feed/subscribe/en/news/all/rss.xml", "חדשות"),
+    # Tried and removed rather than left to fail silently every run:
+    #   European Commission - pages return no extractable body (0 chars on
+    #     three separate items) and feed summaries are ~216 chars
+    #   NASA Image of the Day - photo captions, 0 of 15 items carry enough
+    #     substance for an honest 400-word article
+    # Both would be rejected by the word floor anyway, so keeping them would
+    # only mean pointless requests every 15 minutes.
 }
 
 # מקורות שנבדקו ונפסלו במחקר המקורות (2026-07-30) - לא להוסיף שוב בלי סיבה טובה:
@@ -437,6 +448,9 @@ def find_duplicate_image(new_hash, recent_hashes):
 
 
 ARTICLE_TAG_RE = re.compile(r'<article[^>]*>(.*?)</article>', re.DOTALL | re.IGNORECASE)
+# <main> is the other standard body container; institutional sites (UN, EU,
+# ESA) use it where news sites tend to use <article>.
+MAIN_TAG_RE = re.compile(r'<main[^>]*>(.*?)</main>', re.DOTALL | re.IGNORECASE)
 # common WordPress/CMS content-wrapper class names, tried when there's no <article> tag.
 # We don't try to precisely match the closing </div> (nesting makes that unreliable with
 # regex) - instead grab a generous bounded slice after the opening tag and let the
@@ -487,50 +501,69 @@ def fetch_full_article_text(link):
     html_text = fetch_page(link)
     if not html_text:
         return ""
-    scope = None
-    m = ARTICLE_TAG_RE.search(html_text)
-    if m:
-        scope = m.group(1)
-    else:
-        m2 = CONTENT_DIV_OPEN_RE.search(html_text)
-        if m2:
-            scope = html_text[m2.end():m2.end() + CONTENT_SLICE_SIZE]
-    if not scope:
-        return ""
-    scope = SCRIPT_STYLE_RE.sub("", scope)
-    # photo/video captions (e.g. Walla's <figcaption><span class="media-
-    # description">...</span><span class="slash-between">/</span><span
-    # class="media-credit">...</span></figcaption>, confirmed by fetching a
-    # real article page) are never article prose - stripped entirely before
-    # paragraph extraction, instead of leaking in as "caption/creditNEXT
-    # SENTENCE" glued with zero separator
-    scope = FIGCAPTION_RE.sub("", scope)
-    raw_paragraphs = PARAGRAPH_RE.findall(scope)
-    if not raw_paragraphs:
-        raw_paragraphs = DIV_PARAGRAPH_RE.findall(scope)
-    paragraphs = []
-    junk_hits = 0
-    for p in raw_paragraphs:
-        if SCRIPT_LEAK_RE.search(p):
-            continue
-        # some sources (Walla and others) put an entire multi-line article
-        # inside ONE <p> and separate lines with <br> rather than real <p>
-        # tags - stripping those to "" like every other tag glues the
-        # surrounding sentences together with zero separator ("...לוד.במשך
-        # תקופה..."). Block-boundary tags need to become whitespace first,
-        # everything else can still just disappear.
-        text = re.sub(r'<br\s*/?>|</p>|</div>|</li>|</h[1-6]>', ' ', p, flags=re.IGNORECASE)
-        text = TAG_STRIP_RE.sub("", text).strip()
-        text = re.sub(r'\s+', ' ', text)
-        text = html.unescape(text)
-        text = CAPTION_SPLIT_RE.sub("", text).strip()
-        if len(text) > 30:  # skip short boilerplate/caption paragraphs
-            paragraphs.append(text)
-            if JUNK_MARKERS_RE.search(text):
-                junk_hits += 1
-    if not paragraphs or junk_hits > len(paragraphs) // 3:
-        return ""
-    return "\n\n".join(paragraphs)
+
+    def prose_from(scope):
+        """Extract clean paragraphs from one candidate container, or '' if
+        what's in it reads like nav/boilerplate rather than article text."""
+        if not scope:
+            return ""
+        scope = SCRIPT_STYLE_RE.sub("", scope)
+        # photo/video captions (e.g. Walla's <figcaption><span class="media-
+        # description">...</span><span class="slash-between">/</span><span
+        # class="media-credit">...</span></figcaption>, confirmed by fetching
+        # a real article page) are never article prose - stripped entirely
+        # before paragraph extraction, instead of leaking in as
+        # "caption/creditNEXT SENTENCE" glued with zero separator
+        scope = FIGCAPTION_RE.sub("", scope)
+        raw_paragraphs = PARAGRAPH_RE.findall(scope)
+        if not raw_paragraphs:
+            raw_paragraphs = DIV_PARAGRAPH_RE.findall(scope)
+        paragraphs = []
+        junk_hits = 0
+        for p in raw_paragraphs:
+            if SCRIPT_LEAK_RE.search(p):
+                continue
+            # some sources (Walla and others) put an entire multi-line
+            # article inside ONE <p> and separate lines with <br> rather than
+            # real <p> tags - stripping those to "" like every other tag
+            # glues the surrounding sentences together with zero separator
+            # ("...לוד.במשך תקופה..."). Block-boundary tags need to become
+            # whitespace first, everything else can still just disappear.
+            text = re.sub(r'<br\s*/?>|</p>|</div>|</li>|</h[1-6]>', ' ', p, flags=re.IGNORECASE)
+            text = TAG_STRIP_RE.sub("", text).strip()
+            text = re.sub(r'\s+', ' ', text)
+            text = html.unescape(text)
+            text = CAPTION_SPLIT_RE.sub("", text).strip()
+            if len(text) > 30:  # skip short boilerplate/caption paragraphs
+                paragraphs.append(text)
+                if JUNK_MARKERS_RE.search(text):
+                    junk_hits += 1
+        if not paragraphs or junk_hits > len(paragraphs) // 3:
+            return ""
+        return "\n\n".join(paragraphs)
+
+    # Try every plausible container and keep whichever yields the most prose,
+    # instead of committing to the first <article> on the page. That old
+    # behaviour silently lost real articles: ARTICLE_TAG_RE is non-greedy, so
+    # on a page whose first <article> is a small wrapper (UN News opens with a
+    # 99-character one) it matched that stub, found no paragraphs in it, and
+    # returned "" while the actual 53-paragraph body sat further down. Sites
+    # that put the body in the first <article> are unaffected - that
+    # candidate simply wins on length.
+    candidates = [m.group(1) for m in ARTICLE_TAG_RE.finditer(html_text)]
+    candidates += [m.group(1) for m in MAIN_TAG_RE.finditer(html_text)]
+    for m in CONTENT_DIV_OPEN_RE.finditer(html_text):
+        candidates.append(html_text[m.end():m.end() + CONTENT_SLICE_SIZE])
+    # last resort: the whole document. The junk-ratio guard and the >30-char
+    # paragraph filter above are what keep nav/footer text from qualifying.
+    candidates.append(html_text)
+
+    best = ""
+    for scope in candidates:
+        got = prose_from(scope)
+        if len(got) > len(best):
+            best = got
+    return best
 
 def manage_archive():
     now = time.time()
