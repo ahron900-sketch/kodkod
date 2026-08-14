@@ -1087,3 +1087,35 @@ setupInfiniteGrid(document.getElementById("category-grid"), document.getElementB
     });
   });
 })();
+
+// Reading progress bar - article pages only. Cheap to run: one passive
+// scroll listener, all reads batched into a rAF so it never forces layout
+// mid-scroll.
+(function () {
+  var article = document.querySelector(".article-body");
+  if (!article) return;
+  var bar = document.createElement("div");
+  bar.className = "reading-progress";
+  bar.setAttribute("aria-hidden", "true");
+  var fill = document.createElement("div");
+  fill.className = "reading-progress-fill";
+  bar.appendChild(fill);
+  document.body.appendChild(bar);
+
+  var ticking = false;
+  function update() {
+    ticking = false;
+    var rect = article.getBoundingClientRect();
+    var total = rect.height - window.innerHeight;
+    if (total <= 0) { fill.style.width = "0"; return; }
+    var passed = -rect.top;
+    var pct = Math.max(0, Math.min(1, passed / total));
+    fill.style.width = (pct * 100).toFixed(1) + "%";
+  }
+  function onScroll() {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll, { passive: true });
+  update();
+})();

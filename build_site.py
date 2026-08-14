@@ -8,6 +8,8 @@ import urllib.request
 from datetime import datetime, timedelta, timezone
 from email.utils import format_datetime
 
+from kodkod_tools import seo
+
 CONTENT_DIR = "content/news"
 MAGAZINE_DIR = "content/magazine"
 OUTPUT_DIR = "public_site"
@@ -406,6 +408,8 @@ PAGE_HEAD = """<!DOCTYPE html>
 <title>{title}</title>
 <meta name="description" content="{description}">
 <link rel="canonical" href="{canonical}">
+<link rel="alternate" hreflang="he-IL" href="{canonical}">
+<link rel="alternate" hreflang="x-default" href="{canonical}">
 <meta property="og:type" content="{og_type}">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{description}">
@@ -1177,6 +1181,12 @@ def article_structured_data(a, canonical):
             {"@type": "ListItem", "position": 3, "name": a["title"], "item": canonical},
         ],
     }
+    # GEO/answer-engine signals on top of the NewsArticle the audit found
+    # already complete: speakable marks the passages written to stand alone
+    # (headline, standfirst, takeaways), and isAccessibleForFree/wordCount
+    # were the two fields it flagged as missing.
+    data = seo.with_speakable(data)
+    data = seo.with_reading_signals(data, a.get("body", ""))
     return json_ld_script(data) + json_ld_script(breadcrumb)
 
 
@@ -1610,7 +1620,13 @@ if(n>=ct&&n<rt)document.documentElement.className+=" kk-shabbat-locked";
     desc_categories = [c for c in categories if c != TV_CATEGORY]
     homepage_description = f"קודקוד חדשות - האתר החדשותי המהיר בישראל: {', '.join(desc_categories)} ועוד, במקום אחד"
 
-    body = f'<main class="grid">{hero_html}{bento_html}{ad_slot_html()}{quick_html}{shorts_html}{categories_html}</main>'
+    # An SEO audit of the live site found the homepage shipping with no
+    # <h1> at all: the only one lived inside a hero slide, so whenever the
+    # hero had nothing fresh to show, the front page had no top-level
+    # heading. This one is unconditional and visually hidden (clip-rect,
+    # not display:none, so screen readers still reach it).
+    body = (f'<main class="grid">{seo.homepage_h1(SITE_NAME)}'
+            f'{hero_html}{bento_html}{ad_slot_html()}{quick_html}{shorts_html}{categories_html}</main>')
     write_page(os.path.join(OUTPUT_DIR, "index.html"), SITE_NAME,
                homepage_description,
                categories, None, body, ticker_text, canonical=SITE_URL + "/",

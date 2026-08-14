@@ -11,6 +11,7 @@ import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta
 from build_site import slugify, SITE_URL  # single source of truth for slug computation
+from kodkod_tools import brand
 
 # Real pixel-level image analysis (blur detection, perceptual duplicate
 # hashing) needs Pillow, which .github/workflows/idf_bot.yml now installs.
@@ -1152,6 +1153,9 @@ AI_ENRICH_SYSTEM_PROMPT = (
     'השב אך ורק ב-JSON תקני: {"rewritten_content": "...", "title_he": "...", '
     '"takeaways": ["...", "..."], "tags": ["...", "..."], '
     '"verified_category": "...", "hero_worthy": false}'
+    # one source of truth for the paper's voice and its integrity rules,
+    # instead of tone instructions drifting apart across separate prompts
+    + "\n" + brand.voice_prompt()
 )
 
 
@@ -1277,6 +1281,9 @@ AI_SYNTHESIS_SYSTEM_PROMPT = (
     'השב אך ורק ב-JSON תקני: {"title": "...", "content": "...", '
     '"takeaways": ["...", "..."], "tags": ["...", "..."], '
     '"verified_category": "...", "hero_worthy": false}'
+    # one source of truth for the paper's voice and its integrity rules,
+    # instead of tone instructions drifting apart across separate prompts
+    + "\n" + brand.voice_prompt()
 )
 
 
