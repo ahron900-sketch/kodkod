@@ -636,6 +636,100 @@ ALLOWED_IMAGE_HOSTS = (
 # Must stay in sync with build_site.py's PLACEHOLDER_IMG.
 SITE_PLACEHOLDER_IMG = "/assets/placeholder.svg"
 
+COMMONS_API = "https://commons.wikimedia.org/w/api.php"
+COMMONS_USER_AGENT = (
+    "KodkodNewsBot/1.0 (https://kodkodnews.co.il/; "
+    "contact: https://kodkodnews.co.il/tip-line.html)"
+)
+# Only these count as "no credit obligation whatsoever". CC BY / CC BY-SA
+# images are free to use but require attribution and (for SA) share-alike,
+# which is exactly the kind of string the owner asked to avoid, so they are
+# skipped even though Commons offers plenty of them.
+FREE_LICENCE_MARKERS = ("public domain", "cc0", "pd-", "no restrictions")
+IMAGE_SEARCH_STOPWORDS = {
+    "the", "a", "an", "and", "or", "of", "in", "on", "at", "to", "for", "with",
+    "from", "by", "as", "is", "are", "was", "were", "be", "been", "it", "its",
+    "this", "that", "these", "those", "new", "says", "say", "said", "after",
+    "over", "into", "amid", "more", "than", "how", "why", "what", "who",
+}
+
+
+def _image_search_terms(title):
+    """Progressively broader query strings, most specific first. A headline
+    like "Colombia quake: In Cali's ruins, an 'overwhelming sense of loss'"
+    yields nothing on Commons as a 4-word phrase but matches real photos on
+    "Colombia quake" - so narrow attempts are tried first and the search
+    widens only if they come back empty."""
+    words = re.findall(r"[A-Za-z][A-Za-z-]{2,}", (title or "").replace("'", "").replace("’", ""))
+    keep = [w for w in words if w.lower() not in IMAGE_SEARCH_STOPWORDS]
+    # Deliberately no single-word fallback. It always finds *something*, and
+    # what it finds is frequently the wrong thing: "World News in Brief:
+    # Afghanistan education..." matched the ABC World News Tonight logo, and
+    # "Colombia" alone matched an unrelated history scan. A misleading photo
+    # beside a real news story is worse than the neutral placeholder, so a
+    # match has to come from a reasonably specific query or not happen.
+    variants = []
+    for n in (3, 2):
+        if len(keep) >= n:
+            candidate = " ".join(keep[:n])
+            if candidate not in variants:
+                variants.append(candidate)
+    return variants
+
+
+def find_free_commons_image(title):
+    """Look up a genuinely free (public-domain/CC0) photo on Wikimedia
+    Commons for an article that has no licence-safe image of its own.
+    Returns '' on anything unexpected - an article publishing with the
+    site's own placeholder is always preferable to guessing at rights.
+
+    Commons search works on English text, which is what the sources this
+    runs for (NASA, UN, ESA) publish, and this is called before the Hebrew
+    title replaces the original."""
+    for terms in _image_search_terms(title):
+        found = _commons_lookup(terms)
+        if found:
+            return found
+        time.sleep(1)  # Wikimedia asks automated clients to pace themselves
+    return ""
+
+
+def _commons_lookup(terms):
+    try:
+        params = {
+            "action": "query", "format": "json", "generator": "search",
+            "gsrsearch": terms, "gsrnamespace": "6", "gsrlimit": "12",
+            "prop": "imageinfo", "iiprop": "url|size|mime|extmetadata",
+            "iiurlwidth": "1200",
+        }
+        url = COMMONS_API + "?" + urllib.parse.urlencode(params)
+        # Wikimedia's user-agent policy asks automated clients to identify
+        # themselves with a contact route rather than impersonate a browser,
+        # and throttles generic browser strings harder - a plain
+        # "Mozilla/5.0 (compatible; ...)" started returning 429 within a
+        # handful of requests during testing.
+        req = urllib.request.Request(url, headers={"User-Agent": COMMONS_USER_AGENT})
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+        pages = (data.get("query") or {}).get("pages") or {}
+        for page in pages.values():
+            info = (page.get("imageinfo") or [{}])[0]
+            if info.get("mime") not in ("image/jpeg", "image/png"):
+                continue  # skips PDFs/SVGs/diagrams that search also returns
+            if info.get("width", 0) < 600:
+                continue
+            meta = info.get("extmetadata") or {}
+            licence = str((meta.get("LicenseShortName") or {}).get("value", "")).lower()
+            if not any(marker in licence for marker in FREE_LICENCE_MARKERS):
+                continue
+            candidate = info.get("thumburl") or info.get("url") or ""
+            candidate = candidate.split("?")[0]  # drop Commons' utm_* tracking params
+            if candidate and is_license_safe_image(candidate):
+                return candidate
+    except Exception as e:
+        print(f"חיפוש תמונה בויקישיתוף נכשל (מדלג): {e}")
+    return ""
+
 
 def is_license_safe_image(url):
     if not url:
@@ -1592,8 +1686,18 @@ def save_article(title, link, content, image_url, source_name, category, video_i
     # to. The site's own placeholder is known-good, so the pixel checks
     # below (quality/blur/duplicate/watermark) are skipped for it.
     if image_url and not is_license_safe_image(image_url):
-        print(f"תמונה נדחתה (זכויות לא ברורות) - הכתבה תתפרסם עם תמונת ברירת מחדל: {title}")
+        print(f"תמונה נדחתה (זכויות לא ברורות): {title}")
         image_url = ""
+    # A Wikimedia Commons lookup was built here and deliberately NOT wired
+    # in. It reliably finds public-domain images, but keyword-matching a
+    # headline to a stock photo is not accurate enough for news: measured on
+    # real UN headlines, "Colombia quake" returned a scan of the 1906 San
+    # Francisco earthquake, and "World News in Brief: Afghanistan education"
+    # returned the ABC World News Tonight logo - wrong event, wrong
+    # continent, presented as if it illustrated the story. A neutral
+    # placeholder is more honest than a confidently wrong photograph.
+    # find_free_commons_image() is kept below for a future version driven by
+    # the AI's extracted entities rather than headline keywords.
     using_own_placeholder = not image_url
     if using_own_placeholder:
         image_url = SITE_PLACEHOLDER_IMG
