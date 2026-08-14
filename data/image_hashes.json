@@ -94,5 +94,9 @@
   "0011001001110010011110000111100001111000011110000111000000100000": {
     "title": "NASA’s COFFIES Uses AI to Predict Storm-Causing Active Regions on Sun",
     "ts": 1786728511.6102815
+  },
+  "0000000000000000000000000100000011111111111111110111111001110000": {
+    "title": "Volunteer Develops Machine-Learning Tool to Identify Rare Clouds",
+    "ts": 1786732035.048391
   }
 }
