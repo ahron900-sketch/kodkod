@@ -7,6 +7,7 @@ import os
 import re
 import time
 import shutil
+import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta
 from build_site import slugify, SITE_URL  # single source of truth for slug computation
@@ -563,6 +564,55 @@ MIN_CONTENT_LEN = 2400
 # two of substance), not a token amount.
 MIN_BULLETIN_LEN = 250
 
+# Owner directive (2026-08-14): nothing publishes under 400 words of the
+# bot's own rewritten text. Enforced on the FINAL text, after the rewrite,
+# because that is the thing readers and search engines actually see.
+#
+# Deliberate consequence, not an oversight: a thin source cannot honestly
+# become a 400-word article - padding it would mean inventing facts, which
+# every other rule here exists to prevent. So thin items are now rejected
+# rather than stretched, and the bulletin tier can no longer publish on its
+# own (a 250-char announcement will not reach 400 words). This trades
+# volume for substance, which is what was asked for.
+MIN_PUBLISHED_WORDS = 400
+
+
+def word_count(text):
+    return len(re.findall(r'\S+', text or ""))
+
+
+# Owner directive (2026-08-14): images only from sources whose licence is
+# unambiguous, so no image can carry a credit/rights problem. An image is
+# used ONLY when its URL is served by one of these hosts:
+#   *.nasa.gov      - US federal work, public domain (17 U.S.C. 105)
+#   *.esa.int       - CC BY-SA 3.0 IGO, credited in the article
+#   europa.eu       - Commission Decision 2011/833/EU, reuse permitted
+#   *.wikimedia.org / *.wikipedia.org - CC/public domain
+#   i.ytimg.com     - thumbnail of the official government channel the
+#                     item itself comes from, i.e. the rights holder's
+#                     own publication of that video
+# Anything else - including any image a general news site happens to
+# expose - is dropped and the article falls back to the site's own
+# placeholder artwork rather than borrowing someone's photo.
+ALLOWED_IMAGE_HOSTS = (
+    "nasa.gov", "esa.int", "europa.eu",
+    "wikimedia.org", "wikipedia.org", "ytimg.com",
+)
+
+# The site's own artwork, used when no licence-safe image is available.
+# Must stay in sync with build_site.py's PLACEHOLDER_IMG.
+SITE_PLACEHOLDER_IMG = "/assets/placeholder.svg"
+
+
+def is_license_safe_image(url):
+    if not url:
+        return False
+    try:
+        host = urllib.parse.urlparse(url).netloc.lower().split(":")[0]
+    except Exception:
+        return False
+    return any(host == h or host.endswith("." + h) for h in ALLOWED_IMAGE_HOSTS)
+
 # Sponsored/advertorial content filter - strict by design: any hint of paid
 # promotion, in the title, URL, or body, rejects the article outright. When
 # in doubt, reject rather than risk publishing an ad as a news item.
@@ -947,6 +997,11 @@ AI_ENRICH_SYSTEM_PROMPT = (
     "(למשל אנגלית), כתוב את הכתבה בעברית - תרגום-עיבוד מלא, אותם כללי "
     "ברזל בדיוק: כל עובדה, שם, מספר וציטוט נשמרים מדויקים (ציטוט ישיר "
     "מתורגם נאמנה ומיוחס לאותו דובר).\n"
+    "אורך: שאף לכתבה של 400 מילים לפחות. הרחב אך ורק על בסיס מה שכבר "
+    "קיים במקור - פירוט מלא של הפרטים, ההקשר והנתונים שנמסרו בו. אם אין "
+    "במקור מספיק חומר עובדתי כדי להגיע לאורך הזה ביושר, כתוב כתבה קצרה "
+    "יותר - עדיף קצר ונכון. אסור בתכלית האיסור למלא באורך באמצעות "
+    "חזרות, ניסוחים ריקים, או הוספת מידע שלא הופיע במקור.\n"
     "1ב. title_he - כותרת עיתונאית בעברית לכתבה. אם הכותרת המקורית "
     "בעברית - החזר אותה כפי שהיא ללא שינוי; אם היא בשפה אחרת - כתוב "
     "כותרת עברית חדשה הנאמנה לתוכן.\n"
@@ -1136,6 +1191,9 @@ def synthesize_from_sources_ai(members):
         title = re.sub(r'\s+', ' ', str(parsed.get("title") or "")).strip()
         content = re.sub(r'\s+', ' ', str(parsed.get("content") or "")).strip()
         if not title or len(content) < MIN_CONTENT_LEN:
+            return None
+        # same 400-word floor the single-source path enforces
+        if word_count(content) < MIN_PUBLISHED_WORDS:
             return None
         # must not be a near-copy of any single source it was built from -
         # the whole point of clustering is to produce something none of the
@@ -1494,37 +1552,51 @@ def save_article(title, link, content, image_url, source_name, category, video_i
     # fetched once and verified before the article is allowed through.
     if not image_url:
         image_url = fetch_og_image(link)
-    if not image_url:
-        print(f"נפסל (אין תמונה איכותית): {title}")
-        return
-    image_chunk = _fetch_image_chunk(image_url)
-    if is_low_quality_image(image_chunk):
-        print(f"נפסל (תמונה לא נטענת/איכות נמוכה מדי): {title}")
-        return
-
-    # A banner/strip-shaped image (not a normal photo) doesn't get rejected
-    # outright - it's downgraded to the compact "quick" card style instead
-    # of the large hero/bento treatment, similar to how a short news-in-brief
-    # item is handled
-    quick_image = is_bad_image_aspect(image_chunk)
-
-    # Real pixel-level quality checks (blur, duplicate, on-image watermark) -
-    # only run on candidates that already cleared the cheap chunk-based gates
-    # above, since each of these needs the full image and/or a Groq call.
-    full_image_bytes = _fetch_full_image(image_url)
-    if is_blurry_image(full_image_bytes):
-        print(f"נפסל (תמונה מטושטשת): {title}")
-        return
-    new_hash = image_ahash(full_image_bytes)
-    if image_hashes is not None:
-        dup_title = find_duplicate_image(new_hash, image_hashes)
-        if dup_title:
-            print(f"נפסל (תמונה כפולה - כבר שימשה בכתבה '{dup_title}'): {title}")
+    # Licence gate (owner directive): an image is only used when it comes
+    # from a host whose rights are unambiguous. Anything else is dropped and
+    # the article runs with the site's own artwork instead - it still
+    # publishes, it just never borrows a photo the site has no clear right
+    # to. The site's own placeholder is known-good, so the pixel checks
+    # below (quality/blur/duplicate/watermark) are skipped for it.
+    if image_url and not is_license_safe_image(image_url):
+        print(f"תמונה נדחתה (זכויות לא ברורות) - הכתבה תתפרסם עם תמונת ברירת מחדל: {title}")
+        image_url = ""
+    using_own_placeholder = not image_url
+    if using_own_placeholder:
+        image_url = SITE_PLACEHOLDER_IMG
+        quick_image = False
+        has_watermark = False
+        new_hash = ""
+    else:
+        image_chunk = _fetch_image_chunk(image_url)
+        if is_low_quality_image(image_chunk):
+            print(f"נפסל (תמונה לא נטענת/איכות נמוכה מדי): {title}")
             return
-    # station bug/logo baked into a regular news photo, not just video
-    # thumbnails - same real vision check, same placeholder-swap-not-reject
-    # treatment build_site.py already applies via the has_watermark flag
-    has_watermark = detect_tv_watermark(image_url)
+
+        # A banner/strip-shaped image (not a normal photo) doesn't get
+        # rejected outright - it's downgraded to the compact "quick" card
+        # style instead of the large hero/bento treatment, similar to how a
+        # short news-in-brief item is handled
+        quick_image = is_bad_image_aspect(image_chunk)
+
+        # Real pixel-level quality checks (blur, duplicate, on-image
+        # watermark) - only run on candidates that already cleared the cheap
+        # chunk-based gates above, since each of these needs the full image
+        # and/or a Groq call.
+        full_image_bytes = _fetch_full_image(image_url)
+        if is_blurry_image(full_image_bytes):
+            print(f"נפסל (תמונה מטושטשת): {title}")
+            return
+        new_hash = image_ahash(full_image_bytes)
+        if image_hashes is not None:
+            dup_title = find_duplicate_image(new_hash, image_hashes)
+            if dup_title:
+                print(f"נפסל (תמונה כפולה - כבר שימשה בכתבה '{dup_title}'): {title}")
+                return
+        # station bug/logo baked into a regular news photo, not just video
+        # thumbnails - same real vision check, same placeholder-swap-not-reject
+        # treatment build_site.py already applies via the has_watermark flag
+        has_watermark = detect_tv_watermark(image_url)
     time.sleep(1)  # same Groq rate-limit pacing margin used elsewhere
     if image_hashes is not None and new_hash:
         image_hashes[new_hash] = {"title": title, "ts": time.time()}
@@ -1587,6 +1659,12 @@ def save_article(title, link, content, image_url, source_name, category, video_i
         report_item(title, "text_rejected_no_verified_rewrite")
         return
     content = enrichment.get("content", content)
+    # Owner directive: 400-word floor on the bot's own rewritten text.
+    # Checked here, on the post-rewrite content, rather than on the source.
+    if word_count(content) < MIN_PUBLISHED_WORDS:
+        print(f"נפסל (השכתוב קצר מ-{MIN_PUBLISHED_WORDS} מילים - {word_count(content)}): {title}")
+        report_item(title, "rejected_under_min_words")
+        return
     # Foreign-language sources (NASA is English): the site publishes Hebrew
     # only, so a title that isn't predominantly Hebrew is replaced by the
     # AI's Hebrew headline. Filename/duplicate-check were computed from the
