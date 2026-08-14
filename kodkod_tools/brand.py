@@ -16,23 +16,30 @@ first-hand reporting is exactly how automated news starts overclaiming.
 SITE_NAME = "קודקוד חדשות"
 TAGLINE = "חדשות ועדכונים ממקורות רשמיים"
 
-# Section desks, used for the byline line on articles.
+# Section desks, used for the byline on articles. This is the canonical
+# copy - build_site.py imports it rather than keeping its own. It briefly
+# had two competing versions ("מדור חדשות" here, "דסק חדשות" there), which
+# is precisely the drift this module exists to stop; the site's existing
+# wording is the one kept.
 DESKS = {
-    "חדשות": "דסק חדשות",
-    "כלכלה": "דסק כלכלה",
-    "ספורט": "דסק ספורט",
-    "טכנולוגיה": "דסק טכנולוגיה",
-    "בריאות": "דסק בריאות",
-    "תרבות ובידור": "דסק תרבות",
-    "רכב": "דסק רכב",
-    "חרדים": "דסק חברה",
-    "בישול ומתכונים": "דסק אוכל",
+    "חדשות": "מדור חדשות",
+    "ספורט": "מדור ספורט",
+    "כלכלה": "מדור כלכלה",
+    "טכנולוגיה": "מדור טכנולוגיה",
+    "בריאות": "מדור בריאות",
+    "רכב": "מדור רכב",
+    "תרבות ובידור": "מדור תרבות ובידור",
+    "בישול ומתכונים": "מדור אוכל ומתכונים",
+    "חרדים": "מדור חברה חרדית",
+    "טלוויזיה ושידורים חיים": "מדור תקשורת",
 }
+
+MASTHEAD = "מערכת קודקוד"
 
 
 def byline(category):
     desk = DESKS.get(category)
-    return f"מערכת {SITE_NAME.split()[0]} | {desk}" if desk else f"מערכת {SITE_NAME.split()[0]}"
+    return f"{MASTHEAD} | {desk}" if desk else MASTHEAD
 
 
 # --- editorial voice -------------------------------------------------------

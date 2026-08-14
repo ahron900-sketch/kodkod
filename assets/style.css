@@ -139,14 +139,43 @@ html.dark-mode .site-header {
   background: rgba(24,25,28,0.85);
 }
 
+/* Masthead. "קודקוד" means summit/apex, so the mark is a chevron reading
+   as a peak - drawn in CSS rather than shipped as an image file so it
+   stays crisp at any density, recolours with the theme, and costs no
+   extra request. */
 .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
   font-size: 1.35rem;
-  font-weight: 800;
+  font-weight: 900;
   color: var(--ink);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
   white-space: nowrap;
 }
-.logo span { color: var(--accent); }
+.logo-mark {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  background: var(--accent);
+  /* apex/chevron */
+  clip-path: polygon(50% 0%, 100% 100%, 74% 100%, 50% 46%, 26% 100%, 0% 100%);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.logo:hover .logo-mark { transform: translateY(-2px); }
+@media (prefers-reduced-motion: reduce) {
+  .logo-mark, .logo:hover .logo-mark { transition: none; transform: none; }
+}
+.logo-word { color: var(--ink); }
+.logo-sub {
+  color: var(--accent);
+  font-weight: 800;
+  margin-inline-start: 6px;
+  /* small-caps-like treatment: Hebrew has no case, so the secondary word
+     is differentiated by weight, colour and size instead */
+  font-size: 0.82em;
+  letter-spacing: 0.02em;
+}
 
 .categories {
   display: flex;
@@ -1034,6 +1063,21 @@ html.dark-mode .site-header {
   color: var(--ink-soft);
   font-size: 0.92rem;
   margin-bottom: 20px;
+  padding-bottom: 14px;
+  /* a hairline under the byline closes the "title block" and separates it
+     from the story - the standard newspaper device for the same job */
+  border-bottom: 1px solid var(--border);
+}
+/* masthead tick: a short accent rule above the byline, so an article page
+   reads as part of a publication rather than a floating page of text */
+.article-meta::before {
+  content: "";
+  display: block;
+  width: 34px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--accent);
+  margin-bottom: 12px;
 }
 .article-byline {
   color: var(--accent);

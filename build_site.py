@@ -8,7 +8,7 @@ import urllib.request
 from datetime import datetime, timedelta, timezone
 from email.utils import format_datetime
 
-from kodkod_tools import seo
+from kodkod_tools import brand, seo
 
 CONTENT_DIR = "content/news"
 MAGAZINE_DIR = "content/magazine"
@@ -184,23 +184,15 @@ TV_CATEGORY = "טלוויזיה ושידורים חיים"
 # use ("Reuters Staff", "Times of Israel Staff") - it tells readers and search
 # engines the content has real editorial structure without claiming a specific
 # human wrote it when none did.
-DESK_BY_CATEGORY = {
-    "חדשות": "מדור חדשות",
-    "ספורט": "מדור ספורט",
-    "כלכלה": "מדור כלכלה",
-    "טכנולוגיה": "מדור טכנולוגיה",
-    "בריאות": "מדור בריאות",
-    "רכב": "מדור רכב",
-    "תרבות ובידור": "מדור תרבות ובידור",
-    RECIPE_CATEGORY: "מדור אוכל ומתכונים",
-    "חרדים": "מדור חברה חרדית",
-    TV_CATEGORY: "מדור תקשורת",
-}
+# Desk names now live in kodkod_tools.brand (single source of truth);
+# kept as an alias so any future reference here still resolves.
+DESK_BY_CATEGORY = brand.DESKS
 
 
 def byline_for(category):
-    desk = DESK_BY_CATEGORY.get(category)
-    return f"מערכת קודקוד | {desk}" if desk else "מערכת קודקוד"
+    # delegates to kodkod_tools.brand, which is the canonical desk list -
+    # this file used to keep a second copy that had already drifted
+    return brand.byline(category)
 
 
 # Real, substantive per-category meta descriptions (~25-40 words each,
@@ -428,7 +420,10 @@ PAGE_HEAD = """<!DOCTYPE html>
 </head>
 <body>
 <header class="site-header">
-  <a href="/" class="logo">קודקוד <span>חדשות</span></a>
+  <a href="/" class="logo" aria-label="קודקוד חדשות - לעמוד הבית">
+    <span class="logo-mark" aria-hidden="true"></span>
+    <span class="logo-word">קודקוד</span><span class="logo-sub">חדשות</span>
+  </a>
   <nav class="categories">{cat_links}</nav>
   <button class="categories-toggle" id="categories-toggle" aria-label="כל הקטגוריות" aria-expanded="false">
     <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
