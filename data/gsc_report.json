@@ -1,12 +1,6 @@
 {
-  "generated_at": "2026-08-14T07:01:42.447243",
+  "generated_at": "2026-08-15T06:15:09.728318",
   "low_ctr_pages": [],
-  "stuck_not_indexed": [
-    {
-      "url": "https://kodkodnews.co.il/article/ערפילית האריה מתגלה בפירוט חדש בתצלומי טלסקופ ג'יי.html",
-      "age_hours": 57,
-      "coverage": "URL is unknown to Google"
-    }
-  ],
+  "stuck_not_indexed": [],
   "sitemap_resubmitted": true
 }
