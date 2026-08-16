@@ -1413,12 +1413,26 @@ if(n>=ct&&n<rt)document.documentElement.className+=" kk-shabbat-locked";
     # Anchoring to the newest article means the homepage always shows the
     # most recent content that exists, aging gracefully instead of
     # disappearing. The window stays 2 calendar days, same as before.
-    newest_dts = [a["dt"] for a in listable if a["dt"] != datetime.min]
-    anchor = max(newest_dts).date() if newest_dts else datetime.now().date()
-    anchor_prev = anchor - timedelta(days=1)
+    # "Fresh enough for the front page" is a RANK, not a date window.
+    #
+    # This was a two-day window, first against the wall clock and then
+    # against the newest article. Both empty the homepage the moment
+    # publishing is uneven: the live corpus is 74 articles on 30 July, 3 on
+    # 8 August and 1 on 11 August, so a two-day window anchored on the
+    # newest item admitted exactly ONE article and the front page rendered
+    # with no hero and no cards at all - over 79 perfectly good stories.
+    #
+    # Ranking by recency and taking the newest N cannot do that. The front
+    # page is always full; when publishing is heavy those N are all from
+    # today, and when it is thin they reach further back instead of
+    # showing nothing.
+    FRONT_PAGE_POOL = 60
+    _front_pool = {
+        a["slug"] for a in sorted(listable, key=lambda x: x["dt"], reverse=True)[:FRONT_PAGE_POOL]
+    }
 
     def is_fresh(a):
-        return a["dt"] != datetime.min and a["dt"].date() in (anchor, anchor_prev)
+        return a["slug"] in _front_pool
 
     # owner directive: hero/bento are reserved for real breaking news in a
     # fixed topic list (security/military, serious crime, major sports,
@@ -1577,7 +1591,11 @@ if(n>=ct&&n<rt)document.documentElement.className+=" kk-shabbat-locked";
     for c in sorted(categories, key=lambda c: (c == RECIPE_CATEGORY, c)):
         if c == TV_CATEGORY:
             continue
-        c_articles = [a for a in rest if a["category"] == c and is_fresh(a)][:5]
+        # Each section shows its OWN latest five. Gating these by the global
+        # front-page pool meant a quieter section vanished entirely whenever
+        # busier ones filled the pool - the section still has real articles,
+        # they were just outranked site-wide. `rest` is already newest-first.
+        c_articles = [a for a in rest if a["category"] == c][:5]
         if not c_articles:
             continue
         cat_url = f"/category/{slugify(c, c)}.html"
