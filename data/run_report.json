@@ -1,14 +1,6 @@
 {
  "items": [
   {
-   "title": "NASA Updates Next Steps for Commercial Swift Boost Mission",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "NASA Establishes State Hubs to Grow Technical Aerospace Workforce",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "Raising alarm over new illegal Israeli outposts, UN condemns attacks, incitement against Palestinians",
    "outcome": "text_rejected_no_verified_rewrite"
   },
@@ -67,80 +59,27 @@
   {
    "title": "Ebola outbreak becomes deadliest in DR Congo’s history",
    "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "ראש הממשלה נתניהו וראש המטה הלאומי לבינה מלאכותית אסקל בהשקת התכנית הלאומית לבינה מלאכותית",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "ראש הממשלה נתניהו, שר הבינוי והשיכון כץ ושר האוצר סמוטריץ׳ בהצהרה משותפת",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "דברי רה\"מ נתניהו בטקס העלאת עצמותיהם לקבורה של שמעון ורבקה הרצל ז\"ל",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "ראש הממשלה בנימין נתניהו נפגש בבקו\"ם עם מתגייסים לחיל התותחנים ולחטיבת גבעתי",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "PM Netanyahu Meets US Secretary of War Hegseth",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "בואו לתרום דם - זה מציל חיי אדם!",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "מתנדבת נוער מד\"א נויה מרטפל הצילה את חייו של בן דודה בן-8 שלקה בהתקף אלרגיה חריף בעזרת מזרק אפיפן",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "עמית בן ה-8 פיתח תגובה אלרגית חזקה - נויה בת דודו מתנדבת במד\"א הצילה את חייו בעזרת מזרק אפיפן",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "סכנת מוות לרכב: כך תצילו את הילד. פעולות פשוטות שיכולת לסייע למנוע את האסון הבא",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "הצצה מיוחדת - פעילות סירת הים-בולנס טיפול נמרץ של מד\"א שמצילה חיים בלב המים לכנרת",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   }
  ],
  "ai_errors": [
+  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 192884, Requested 7159. Please try again in 18.576s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
   "article_enrich: HTTP Error 400: Bad Request | body: {\"error\":{\"message\":\"Failed to validate JSON. Please adjust your prompt. See 'failed_generation' for more details.\",\"type\":\"invalid_request_error\",\"code\":\"json_validate_failed\",\"failed_generation\":\"\"}}\n",
-  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 195633, Requested 7368. Please try again in 21m36.432s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
-  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 195617, Requested 7159. Please try again in 19m59.232s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
-  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 195610, Requested 7020. Please try again in 18m56.16s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
-  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 195600, Requested 6625. Please try again in 16m1.199999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
-  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 195591, Requested 6933. Please try again in 18m10.367999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
-  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 195583, Requested 7359. Please try again in 21m10.944s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
-  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 195575, Requested 6902. Please try again in 17m50.064s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
-  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 195567, Requested 6848. Please try again in 17m23.28s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
-  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 195559, Requested 6950. Please try again in 18m3.888s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
-  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 195551, Requested 6865. Please try again in 17m23.712s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
-  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 195543, Requested 6885. Please try again in 17m28.896s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
-  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 195535, Requested 6345. Please try again in 13m32.16s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
-  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 195527, Requested 7299. Please try again in 20m20.832s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
-  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 195519, Requested 7083. Please try again in 18m44.064s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
-  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 195511, Requested 6942. Please try again in 17m39.695999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
-  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 195503, Requested 6987. Please try again in 17m55.679999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
-  "video_enrich: HTTP Error 400: Bad Request | body: {\"error\":{\"message\":\"Failed to validate JSON. Please adjust your prompt. See 'failed_generation' for more details.\",\"type\":\"invalid_request_error\",\"code\":\"json_validate_failed\",\"failed_generation\":\"\"}}\n",
-  "video_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198121, Requested 2742. Please try again in 6m12.816s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
-  "video_enrich: HTTP Error 400: Bad Request | body: {\"error\":{\"message\":\"Failed to validate JSON. Please adjust your prompt. See 'failed_generation' for more details.\",\"type\":\"invalid_request_error\",\"code\":\"json_validate_failed\",\"failed_generation\":\"\"}}\n",
-  "video_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199922, Requested 2096. Please try again in 14m31.776s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
-  "video_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199921, Requested 1756. Please try again in 12m4.464s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
-  "video_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199921, Requested 1731. Please try again in 11m53.664s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
-  "video_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199920, Requested 1802. Please try again in 12m23.904s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
-  "video_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199920, Requested 1797. Please try again in 12m21.744s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
-  "video_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199919, Requested 1804. Please try again in 12m24.335999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
-  "video_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199919, Requested 1777. Please try again in 12m12.672s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
+  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199867, Requested 6625. Please try again in 46m44.544s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199859, Requested 6933. Please try again in 48m54.144s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199851, Requested 7359. Please try again in 51m54.72s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199842, Requested 6902. Please try again in 48m33.408s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199834, Requested 6848. Please try again in 48m6.624s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199826, Requested 6950. Please try again in 48m47.232s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199818, Requested 6865. Please try again in 48m7.056s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199809, Requested 6885. Please try again in 48m11.808s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199801, Requested 6345. Please try again in 44m15.072s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199793, Requested 7299. Please try again in 51m3.743999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199785, Requested 7083. Please try again in 49m26.976s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199777, Requested 6942. Please try again in 48m22.608s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+  "article_enrich: HTTP Error 429: Too Many Requests | body: {\"error\":{\"message\":\"Rate limit reached for model `qwen/qwen3.6-27b` in organization `org_01krkg6243fzd82qya38dh17fr` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199769, Requested 6987. Please try again in 48m38.591999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n"
  ],
- "finished_utc": "2026-08-20 02:38:56",
+ "finished_utc": "2026-08-20 03:30:35",
  "summary": {
-  "text_rejected_no_verified_rewrite": 17,
-  "video_rejected_enrich_failed_or_not_newsworthy": 10
+  "text_rejected_no_verified_rewrite": 15
  }
 }
