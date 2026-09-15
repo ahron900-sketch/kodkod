@@ -1,11 +1,39 @@
 {
  "items": [
   {
+   "title": "Artemis III Crew Visits NASA Kennedy’s Vehicle Assembly Building",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA’s Webb Reveals Dynamic Panorama of Star Formation",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "NASA Kicks Off Inspiration Tour with Steelers vs. Falcons Game",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "FLEX and Sentinel-3C launch highlights",
+   "title": "Escalating conflict drives new displacement in Yemen",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Back to school in Haiti: ‘Madame, can you stop what the gangs are doing to us?’",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Ukraine: Attacks on education threaten an entire generation, UNICEF warns",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "World fears major war more than any other global risk, UN survey finds",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Gaza remains recovery points to possible war crimes, says UN rights chief",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "‘Super El Niño’ deepens hunger crisis in South Sudan – WFP",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -39,38 +67,6 @@
   {
    "title": "South Sudan: UNICEF reaches communities cut off by conflict in Jonglei state",
    "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Guterres: Old global order must change as power shifts to emerging economies",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Married at 13, pregnant and starving: Child brides of Yemen",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "‘Where do we go?’: How Israel’s ‘yellow line’ is closing in on Palestinians",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Security Council LIVE: Ambassadors mark 9/11 with counter-terrorism push on AI and drones",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "The world just had the hottest August ever",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Surge in displacement following fighting in southwest Yemen",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Terrorist propaganda is outpacing global efforts to stop it, UN report finds",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "מסע גבורה - קובי הרשטל לוחם בשריון וחובש מד\"א שנפצע קשה בעזה השתקם וחזר להתנדב במד\"א",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "\"אני שם לחייל מראה מול הפנים, ושואל - זה מה שישבור אותך?\" תזכור מי אתה | פודקאסט צה״ל",
@@ -345,6 +341,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "מסע גבורה - קובי הרשטל לוחם בשריון וחובש מד\"א שנפצע קשה בעזה השתקם וחזר להתנדב במד\"א",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "בואו לתרום דם - זה מציל חיי אדם!",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -473,7 +473,7 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-09-15 12:49:29",
+ "finished_utc": "2026-09-15 17:31:34",
  "summary": {
   "text_rejected_no_verified_rewrite": 17,
   "video_rejected_enrich_failed_or_not_newsworthy": 77
