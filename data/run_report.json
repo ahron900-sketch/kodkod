@@ -1,7 +1,55 @@
 {
  "items": [
   {
-   "title": "Purple swirls on the Red Planet",
+   "title": "NASA Celebrates Restoration of Guam Station Damaged by Typhoon Mawar",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA Watches Earth’s Weight, Finds Center of Mass",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Indonesia’s Anak Krakatau",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Curiosity Postcard Celebrates Rover’s 5,000th Day on Mars",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA Visits Schools Strengthening Florida’s Skilled Workforce",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA Astronaut Reid Wiseman to Join NFL Fans in Baltimore",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA’s Integrated Medical Model (IMM)",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Newfound ‘Baby’ Planet Smashes Record for Youngest Known World",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Faster-flowing glaciers fuel decades of polar ice loss",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "AI, climate and conflicts top Guterres’s agenda ahead of General Assembly",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Security Council LIVE: ‘Being a woman is a crime in Afghanistan,’ civil society briefer declares",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "UN report warns of reprisals against those who collaborate in defence of human rights",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Gaza: At least 20 killed in deadly building collapse, search for survivors continues",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -45,22 +93,6 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "UN agencies warn humanitarian system in Sudan ‘could collapse’",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Money sent home by migrants nearly doubles in a decade",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Highly persistent toxic waste threatens ‘many, if not all, human rights’",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Civilians bear the brunt, with deadly US strikes in Iran and thousands displaced in Yemen",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "\"אני שם לחייל מראה מול הפנים, ושואל - זה מה שישבור אותך?\" תזכור מי אתה | פודקאסט צה״ל",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -74,10 +106,6 @@
   },
   {
    "title": "מה קורה במנהרות האויב מתחת לאדמה? עם מפקד יהל״ם | פודקאסט צה״ל",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "איך מחלצים אנשים מזירות הרס? | פודקאסט צה״ל",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -149,6 +177,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "ראש הממשלה נתניהו בהנחת אבן פינה לאנדרטה לזכר חללי העדה הנוצרית",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "ראש הממשלה בנימין נתניהו: \"השגנו עוד ניצחון ענק על חיזבאללה. השמדנו את מבצר הטרור הגדול שלו.\"",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -178,10 +210,6 @@
   },
   {
    "title": "PMO Spox Doron Spielman on Newsmax: \"Every hour there is a terror attack against Jews\"",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "PMO Spokesman Doron Spielman on Newsmax: Violence in Judea and Samaria.",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -389,7 +417,14 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -468,9 +503,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-09-16 11:59:50",
+ "finished_utc": "2026-09-16 16:44:27",
  "summary": {
-  "text_rejected_no_verified_rewrite": 15,
-  "video_rejected_enrich_failed_or_not_newsworthy": 78
+  "text_rejected_no_verified_rewrite": 23,
+  "video_rejected_enrich_failed_or_not_newsworthy": 77
  }
 }
