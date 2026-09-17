@@ -1,6 +1,42 @@
 {
-  "generated_at": "2026-09-16T10:20:07.817661",
+  "generated_at": "2026-09-17T10:29:19.881172",
   "low_ctr_pages": [],
-  "stuck_not_indexed": [],
+  "stuck_not_indexed": [
+    {
+      "url": "https://kodkodnews.co.il/article/מעל 46,000 נזקקים לפינוי בתימן כפרים נטשו, בתי חול.html",
+      "age_hours": 57,
+      "coverage": "URL is unknown to Google"
+    },
+    {
+      "url": "https://kodkodnews.co.il/article/PMO Spox Doron Spielman on Sky News Britain should.html",
+      "age_hours": 62,
+      "coverage": "URL is unknown to Google"
+    },
+    {
+      "url": "https://kodkodnews.co.il/article/הלילה הדרמטי שבו נפל משטר אסד  פודקאסט צה״ל.html",
+      "age_hours": 62,
+      "coverage": "URL is unknown to Google"
+    },
+    {
+      "url": "https://kodkodnews.co.il/article/תינוק לא חגור והטלפון ביד - אכיפה באזור השפלה.html",
+      "age_hours": 59,
+      "coverage": "URL is unknown to Google"
+    },
+    {
+      "url": "https://kodkodnews.co.il/article/טורק אוטורגולציה של חברות בינה מלאכותית לא מספיקה .html",
+      "age_hours": 57,
+      "coverage": "URL is unknown to Google"
+    },
+    {
+      "url": "https://kodkodnews.co.il/article/מסכים הם חלק מהחיים שלנו, אבל הם לא החיים עצמם.html",
+      "age_hours": 62,
+      "coverage": "URL is unknown to Google"
+    },
+    {
+      "url": "https://kodkodnews.co.il/article/סוכנויות אוממם מערכת הסיוע ההומניטרי בסודן עלולה ל.html",
+      "age_hours": 57,
+      "coverage": "URL is unknown to Google"
+    }
+  ],
   "sitemap_resubmitted": true
 }
