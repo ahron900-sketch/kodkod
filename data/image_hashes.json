@@ -134,5 +134,9 @@
   "0000000000000000000000000001100000011111011111111111111111111111": {
     "title": "ESA’s FLEX mission reveals the secret glow of plants",
     "ts": 1789643379.1008654
+  },
+  "1111110001111100001111000011100000000000000000000000000000000000": {
+    "title": "Galileo's first civil authenticated position fix under spoofing conditions",
+    "ts": 1789659167.223844
   }
 }
