@@ -1,6 +1,10 @@
 {
  "items": [
   {
+   "title": "NASA Invites Media to SpaceX’s 35th Resupply Launch to Space Station",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "NASA Unveils Enterprise, the First Space Shuttle",
    "outcome": "text_rejected_no_verified_rewrite"
   },
@@ -9,7 +13,23 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Galileo's first civil authenticated position fix under spoofing conditions",
+   "title": "ESA starts next phase of IRIS² evolution through Low-LEO activities",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Anak Krakatau eruption by Sentinel-3",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "US likely committed war crimes against Iranian civilians: Independent experts",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Guterres calls for action as hate speech spreads across new platforms online",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Security Council LIVE: Syria’s transition in the spotlight",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -59,18 +79,6 @@
   {
    "title": "UNICEF says thousands of children require mental health support after Nepal floods",
    "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Escalating conflict drives new displacement in Yemen",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Back to school in Haiti: ‘Madame, can you stop what the gangs are doing to us?’",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "⁨ “יותר תשומת לב לילדי הפריפריה” | שאלנו את מאמן נבחרת ישראל בג’ודו לשעבר איזה חוק היית מחוקק #הכנסת",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "המסע שהופך אותם ל׳גדולים במדים׳ | פודקאסט צה״ל",
@@ -146,6 +154,10 @@
   },
   {
    "title": "שנה של אלפי מבקרים, סיפורים, אנשים ורגעים בלתי נשכחים - תודה שהייתם איתנו בשנה הראשונה #הכנסת",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "⁨ “יותר תשומת לב לילדי הפריפריה” | שאלנו את מאמן נבחרת ישראל בג’ודו לשעבר איזה חוק היית מחוקק #הכנסת",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -399,6 +411,9 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -478,9 +493,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-09-17 15:34:03",
+ "finished_utc": "2026-09-17 19:18:51",
  "summary": {
-  "text_rejected_no_verified_rewrite": 17,
+  "text_rejected_no_verified_rewrite": 20,
   "video_rejected_enrich_failed_or_not_newsworthy": 78
  }
 }
