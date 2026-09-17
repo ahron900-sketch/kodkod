@@ -1,19 +1,23 @@
 {
  "items": [
   {
-   "title": "Passion Meets Precision at NASA’s Flight Research Lab",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "NASA Celebrates Restoration of Guam Station Damaged by Typhoon Mawar",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "NASA Watches Earth’s Weight, Finds Center of Mass",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "Indonesia’s Anak Krakatau",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "εpsilon",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Who should set the rules for AI? The UN is pushing for a safer digital future",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "World News in Brief: Shipping alert from IMO, democracy vanishing in Nicaragua, alert over political ‘denialism’",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Repression continues in Venezuela in the face of ‘appalling’ human rights violations",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -58,18 +62,6 @@
   },
   {
    "title": "World fears major war more than any other global risk, UN survey finds",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Gaza remains recovery points to possible war crimes, says UN rights chief",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "‘Super El Niño’ deepens hunger crisis in South Sudan – WFP",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Six UN staff killed in Gaza school strike; Lebanon violations mount",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -398,8 +390,6 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -478,9 +468,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-09-16 22:25:10",
+ "finished_utc": "2026-09-17 00:48:42",
  "summary": {
-  "text_rejected_no_verified_rewrite": 18,
+  "text_rejected_no_verified_rewrite": 16,
   "video_rejected_enrich_failed_or_not_newsworthy": 77
  }
 }
