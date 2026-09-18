@@ -1,7 +1,11 @@
 {
  "items": [
   {
-   "title": "NASA Awards SpaceX Three Crew Flights to Space Station",
+   "title": "NASA Invites Media to Albania Artemis Accords Signing Ceremony",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA-JAXA XRISM Mission Sees Pulsar Gathering Companion’s ‘Wind’",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -9,7 +13,19 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "NASA Unveils Enterprise, the First Space Shuttle",
+   "title": "NASA Invites Media to SpaceX’s 35th Resupply Launch to Space Station",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Sexual violence against civilians and POW’s in Ukraine widespread and ‘abhorrent’",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Less than 4 years from development goals deadline, progress shows what’s possible",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Women and girls pay high price in DR Congo Ebola outbreak",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -58,18 +74,6 @@
   },
   {
    "title": "Who should set the rules for AI? The UN is pushing for a safer digital future",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "World News in Brief: Shipping alert from IMO, democracy vanishing in Nicaragua, alert over political ‘denialism’",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Repression continues in Venezuela in the face of ‘appalling’ human rights violations",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "AI, climate and conflicts top Guterres’s agenda ahead of General Assembly",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -408,6 +412,7 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -488,9 +493,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-09-18 17:43:04",
+ "finished_utc": "2026-09-18 19:59:56",
  "summary": {
-  "text_rejected_no_verified_rewrite": 18,
+  "text_rejected_no_verified_rewrite": 19,
   "video_rejected_enrich_failed_or_not_newsworthy": 79
  }
 }
