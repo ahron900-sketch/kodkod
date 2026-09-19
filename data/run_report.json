@@ -1,11 +1,23 @@
 {
  "items": [
   {
-   "title": "COSI Telescope Comes Together",
+   "title": "Sexual violence against civilians and POW’s in Ukraine widespread and ‘abhorrent’",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "NASA Invites Media to SpaceX’s 35th Resupply Launch to Space Station",
+   "title": "UN fact-finding mission on Iran focuses on plight of civilians",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Guterres calls for action as hate speech spreads across new platforms online",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "APOD: 2026 September 19 – A Zodiacal Night",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA Unveils Enterprise, the First Space Shuttle",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -14,10 +26,6 @@
   },
   {
    "title": "Security Council LIVE: UN peacekeeping under pressure",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Sexual violence against civilians and POW’s in Ukraine widespread and ‘abhorrent’",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -41,23 +49,11 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "New UN system platform puts millions of data points at users’ fingertips, says Guterres",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "World News in Brief: Winter aid for Gaza, West Bank; Haiti food production; migrant deaths at sea; human rights funding",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
    "title": "Gender equality woefully off track, new UN report reveals",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "UN fact-finding mission on Iran focuses on plight of civilians",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Guterres calls for action as hate speech spreads across new platforms online",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -85,11 +81,10 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-09-19 00:33:17",
+ "finished_utc": "2026-09-19 05:07:34",
  "summary": {
-  "text_rejected_no_verified_rewrite": 17
+  "text_rejected_no_verified_rewrite": 16
  }
 }
