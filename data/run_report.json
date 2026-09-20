@@ -1,11 +1,15 @@
 {
  "items": [
   {
-   "title": "NASA Unveils Enterprise, the First Space Shuttle",
+   "title": "APOD: 2026 September 20 – Analemma over the Callanish Stones",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "εpsilon",
+   "title": "COSI Telescope Comes Together",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA Invites Media to SpaceX’s 35th Resupply Launch to Space Station",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -86,10 +90,11 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-09-20 01:26:23",
+ "finished_utc": "2026-09-20 06:45:03",
  "summary": {
-  "text_rejected_no_verified_rewrite": 17
+  "text_rejected_no_verified_rewrite": 18
  }
 }
