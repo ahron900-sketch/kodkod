@@ -9,7 +9,7 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Three space companies win ESA awards for excellence and innovation",
+   "title": "Galileo's first civil authenticated position fix under spoofing conditions",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -488,7 +488,7 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-09-20 11:52:35",
+ "finished_utc": "2026-09-20 15:38:06",
  "summary": {
   "text_rejected_no_verified_rewrite": 18,
   "video_rejected_enrich_failed_or_not_newsworthy": 79
