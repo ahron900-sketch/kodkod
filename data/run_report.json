@@ -1,27 +1,43 @@
 {
  "items": [
   {
+   "title": "Risks of Decompression Sickness and Venous Thromboembolism during Spaceflight and Patent Foramen Ovale Implications",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA-Funded Research Finds Complex Life Defying Record Heat",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "NASA’s Chandra Finds Unusual Objects in Pinwheel Galaxy",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "NASA Astronaut to Answer Questions from New Hampshire Students",
+   "title": "APOD: 2026 September 22 – Chance Triple Alignment: Plane, Space Station, Sun",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "An Epic View of the Seasons",
+   "title": "UN rendered unable to fulfil its mission, Turkish President laments before world leaders",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "NASA Astronaut Reid Wiseman Attends Ravens vs. Saints Game",
+   "title": "Trump defends military action against Iran, Venezuela, and calls for rebrand of AI",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "NASA Discovery Reveals Complex Water Systems on Early Mars",
+   "title": "Diplomacy is the way to address global challenges, Brazil tells General Assembly",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "A call to boost European space exploration",
+   "title": "Time to accept ‘hard truths’ so trust can be rebuilt: General Assembly President",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Guterres: ‘Cracks have become canyons’ as world faces four tests of power",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Millions of children return to schools that still can’t provide clean water or a working toilet",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -58,30 +74,6 @@
   },
   {
    "title": "The right to development: Why equity, not charity, is a human right",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "The race to build a pandemic-proof world",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Why the UN General Assembly still matters",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "UN Crime Congress: Technology is transforming crime – and the response to it",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "‘Violence will only defer a problem’: UN Assembly President on trust, AI and lessons from the Rohingya crisis",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Security Council LIVE: UN peacekeeping under pressure",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Sexual violence against civilians and POWs in Ukraine widespread and ‘abhorrent’",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -169,6 +161,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "Repeating lies doesn't make them true",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "ראש הממשלה בנימין נתניהו בטקס מצטייני השב״כ לשנת 2025 בבית הנשיא",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -202,10 +198,6 @@
   },
   {
    "title": "ראש הממשלה נתניהו בכתר החרמון בסוריה: \"לא ניתן לשום צבא טרור להתבסס בגבולנו.\"",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "PMO Spox to GB News: Israel’s response is directed at the Labour government—not the British people",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -421,8 +413,6 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -503,9 +493,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-09-22 16:29:28",
+ "finished_utc": "2026-09-22 19:51:55",
  "summary": {
-  "text_rejected_no_verified_rewrite": 21,
+  "text_rejected_no_verified_rewrite": 19,
   "video_rejected_enrich_failed_or_not_newsworthy": 79
  }
 }
