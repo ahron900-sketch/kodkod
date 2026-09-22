@@ -1,11 +1,31 @@
 {
  "items": [
   {
+   "title": "NASA’s Chandra Finds Unusual Objects in Pinwheel Galaxy",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA Astronaut to Answer Questions from New Hampshire Students",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "An Epic View of the Seasons",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "NASA Astronaut Reid Wiseman Attends Ravens vs. Saints Game",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
    "title": "NASA Discovery Reveals Complex Water Systems on Early Mars",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "A call to boost European space exploration",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Displacement on the rise in Yemen as fighting continues",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -65,15 +85,7 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Less than 4 years from development goals deadline, progress shows what’s possible",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "PMO Spox: Absurd Labour Gov. undermines relationship with the country helping keep Brits people safe",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "PMO Spox to GB News: Israel’s response is directed at the Labour government—not the British people",
+   "title": "בחזית ההסברה - חיזוק הקשרים הבינלאומיים | הכנסת ה-25 במספרים #הכנסת #knesset #כנסת",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -133,10 +145,6 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "בחזית ההסברה - חיזוק הקשרים הבינלאומיים | הכנסת ה-25 במספרים #הכנסת #knesset #כנסת",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "בואו איתי לסיור בכנסת 🇮🇱 הייתה חוויה! תרשמו לי בתגובות מה הכי אהבתם 🙌",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -185,11 +193,19 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "PMO Spox: Absurd Labour Gov. undermines relationship with the country helping keep Brits people safe",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "Allies Stand Together in Their Time Of Need",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "ראש הממשלה נתניהו בכתר החרמון בסוריה: \"לא ניתן לשום צבא טרור להתבסס בגבולנו.\"",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "PMO Spox to GB News: Israel’s response is directed at the Labour government—not the British people",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -403,6 +419,10 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -483,9 +503,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-09-22 11:49:39",
+ "finished_utc": "2026-09-22 16:29:28",
  "summary": {
-  "text_rejected_no_verified_rewrite": 17,
+  "text_rejected_no_verified_rewrite": 21,
   "video_rejected_enrich_failed_or_not_newsworthy": 79
  }
 }
