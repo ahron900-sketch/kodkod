@@ -1,11 +1,31 @@
 {
  "items": [
   {
+   "title": "NASA Modernizes Commercial Airline Systems",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA Welcomes Croatia as Newest Artemis Accords Signatory",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "NASA Aircraft to Make Low-Altitude Research Flights Over Colorado",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Arctic Sea Ice Reaches 2026 Annual Minimum Extent",
+   "title": "Zelenskyy urges stronger pressure on Russia, warns war’s impact is spreading beyond Ukraine",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "LIVE: OpenAI and Anthropic brief Security Council amid ‘real and imminent’ threat posed by runaway AI",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "LIVE: Climate change is here - What happens next is still in our hands",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "UN’s ‘sacred covenant has been broken’, Argentina’s Milei tells General Assembly",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -53,20 +73,8 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Choose international order over ‘law of the jungle’, urges Macron",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Qatar: Absence of a regional collective security system is fuelling crisis in the Gulf",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "UN rendered unable to fulfil its mission, Turkish President laments before world leaders",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Trump defends military action against Iran, Venezuela, and calls for rebrand of AI",
-   "outcome": "text_rejected_no_verified_rewrite"
+   "title": "ראש הממשלה נתניהו בכתר החרמון בסוריה: \"לא ניתן לשום צבא טרור להתבסס בגבולנו.\"",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "המסע שהופך אותם ל׳גדולים במדים׳ | פודקאסט צה״ל",
@@ -186,10 +194,6 @@
   },
   {
    "title": "Allies Stand Together in Their Time Of Need",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "ראש הממשלה נתניהו בכתר החרמון בסוריה: \"לא ניתן לשום צבא טרור להתבסס בגבולנו.\"",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -407,6 +411,7 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -488,9 +493,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-09-23 19:52:51",
+ "finished_utc": "2026-09-23 22:47:31",
  "summary": {
-  "text_rejected_no_verified_rewrite": 17,
+  "text_rejected_no_verified_rewrite": 18,
   "video_rejected_enrich_failed_or_not_newsworthy": 80
  }
 }
