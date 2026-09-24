@@ -5,11 +5,23 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "NASA Welcomes Croatia as Newest Artemis Accords Signatory",
+   "title": "NASA Selects Far-Infrared Telescope as First in New Mission Class",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "NASA Aircraft to Make Low-Altitude Research Flights Over Colorado",
+   "title": "FFA 2026 Hyperwall Schedule",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Equality ‘ends at the doors of the Security Council’, Kenya’s Ruto tells General Assembly",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Guterres calls on countries to set clear timelines for transition away from fossil fuels",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Rohingya refugees deserve a future beyond survival, not endless displacement",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -58,18 +70,6 @@
   },
   {
    "title": "When a country goes underwater: Island States fight for their future",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "How El Niño offers a test of whether the world can adapt to a changing climate",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "‘Ask us first’: Children demand a voice on AI’s future",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "‘Time is running out’ for Israel-Palestine two-State solution",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -493,7 +493,7 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-09-23 22:47:31",
+ "finished_utc": "2026-09-24 01:12:01",
  "summary": {
   "text_rejected_no_verified_rewrite": 18,
   "video_rejected_enrich_failed_or_not_newsworthy": 80
