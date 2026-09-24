@@ -1,11 +1,39 @@
 {
  "items": [
   {
+   "title": "Practicing for Safe Landings on the Moon and Beyond",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "US-India Satellite Captures Time-lapse Video of Volcanic Eruption",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA to Study Human Health, Performance During Crew-13 Mission",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "NASA Modernizes Commercial Airline Systems",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Record participation in ESA’s Industry Space Days 2026",
+   "title": "Win a trip to ESA to witness BepiColombo arrive at Mercury",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Earth from Space: Laguna Colorada",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "A galaxy spinning out of sync",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "LIVE: World leaders tackle sea level rise, a stark marker of climate change",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "‘Peace remains only a promise’ for millions in eastern DR Congo, General Assembly hears",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -59,18 +87,6 @@
   {
    "title": "Right to development: A blueprint for unmet promises",
    "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "UN health agency calls for investment boost to save young lives from cancer",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "DR Congo Ebola outbreak toll exceeds 3,700 deaths",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "ראש הממשלה בנימין נתניהו בטקס מצטייני השב״כ לשנת 2025 בבית הנשיא",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "הרס״רים כמו שמעולם לא ראיתם | פודקאסט צה״ל",
@@ -161,7 +177,19 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "ראש הממשלה בנימין נתניהו נפגש עם ראש ממשלת יוון קיריאקוס מיצוטאקיס",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "ראש הממשלה נתניהו נוחת בארה\"ב",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "Repeating lies doesn't make them true",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "ראש הממשלה בנימין נתניהו בטקס מצטייני השב״כ לשנת 2025 בבית הנשיא",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -189,11 +217,7 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "Allies Stand Together in Their Time Of Need",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "ראש הממשלה נתניהו בכתר החרמון בסוריה: \"לא ניתן לשום צבא טרור להתבסס בגבולנו.\"",
+   "title": "איך נולדת רפורמה שתשפיע על הכיס של כולנו? חובב אלסטר ממשרד האוצר חושף הצצה ראשונה למאחורי הקלעים",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -209,6 +233,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "כך נקבעים השערים היציגים",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "מהם תפקידי בנק ישראל? חלק שני",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -221,27 +249,23 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "פרק 40: איך מנהלים מידע כלכלי בעידן ה-AI",
+   "title": "איך מנהלים מידע כלכלי בעידן ה-AI",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "פרק 20 - סדרת האינפלציה חלק 2: האינפלציה פוגשת את הבנק המרכזי",
+   "title": "סדרת האינפלציה חלק 2: האינפלציה פוגשת את הבנק המרכזי",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "פרק 19 - סדרת האינפלציה חלק1: מה שרציתם לדעת ולא העזתם לשאול",
+   "title": "סדרת האינפלציה חלק1: מה שרציתם לדעת ולא העזתם לשאול",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "פרק 39: תיק של 7 טריליון שקל",
+   "title": "תיק של 7 טריליון שקל",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "ליווי פיננסי לחיילים בקשיים - הכירו את המיזם שיסייע לאלפי חיילים",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "פרק 2 - סיפורו של השקל",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -415,6 +439,12 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -498,9 +528,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-09-24 11:49:42",
+ "finished_utc": "2026-09-24 16:41:25",
  "summary": {
-  "text_rejected_no_verified_rewrite": 17,
-  "video_rejected_enrich_failed_or_not_newsworthy": 82
+  "text_rejected_no_verified_rewrite": 22,
+  "video_rejected_enrich_failed_or_not_newsworthy": 83
  }
 }
