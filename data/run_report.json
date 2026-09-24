@@ -1,15 +1,11 @@
 {
  "items": [
   {
+   "title": "NASA’s Machines for Mars Make Beer Bubbly",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "Practicing for Safe Landings on the Moon and Beyond",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "US-India Satellite Captures Time-lapse Video of Volcanic Eruption",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "NASA to Study Human Health, Performance During Crew-13 Mission",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -17,19 +13,19 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Win a trip to ESA to witness BepiColombo arrive at Mercury",
+   "title": "FLEX and Sentinel-3C launch highlights",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Earth from Space: Laguna Colorada",
+   "title": "World News in Brief, ‘New intensity’ to Russian attacks on Ukraine, Yemen, Gaza and Colombia updates",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "A galaxy spinning out of sync",
+   "title": "Palestinian existence under threat, Abbas tells UN, warning of ‘another Nakba’",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "LIVE: World leaders tackle sea level rise, a stark marker of climate change",
+   "title": "LIVE: World leaders approve new declaration to tackle rising sea levels",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -78,14 +74,6 @@
   },
   {
    "title": "Syria begins ‘new phase of revival’, President Al-Sharaa tells General Assembly",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Security Council LIVE: World leaders debate ongoing war in Ukraine",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Right to development: A blueprint for unmet promises",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -177,6 +165,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "ראש הממשלה בנימין נתניהו נפגש עם ראש ממשלת סלובניה יאנז יאנשה",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "ראש הממשלה בנימין נתניהו נפגש עם ראש ממשלת יוון קיריאקוס מיצוטאקיס",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -210,10 +202,6 @@
   },
   {
    "title": "ראש הממשלה נתניהו בצפון",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "PMO Spox: Absurd Labour Gov. undermines relationship with the country helping keep Brits people safe",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -441,9 +429,6 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -528,9 +513,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-09-24 16:41:25",
+ "finished_utc": "2026-09-24 20:10:35",
  "summary": {
-  "text_rejected_no_verified_rewrite": 22,
+  "text_rejected_no_verified_rewrite": 19,
   "video_rejected_enrich_failed_or_not_newsworthy": 83
  }
 }
