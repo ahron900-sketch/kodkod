@@ -1,15 +1,47 @@
 {
  "items": [
   {
-   "title": "Practicing for Safe Landings on the Moon and Beyond",
+   "title": "2026-2027 DWU: Middle School Design Challenge",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "ESA and the EU partner with Museo Galileo on new exhibition",
+   "title": "TB 26-07 Aluminum Alloy 2219 Material Guidance",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Earth from Space: Venetian Lagoon",
+   "title": "World News in Brief: West Bank demolitions accelerate, urgent support for Sudan, AI hub to boost gender equality",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "‘No one speaks on behalf of Lebanon’: PM Salam asserts State authority at UN",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "‘Invest with Iraq’: PM sets out vision for new economic future",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Nepal PM urges climate justice after ‘Himalayan tsunami’ devastates country",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Africa needs its own AI solutions, not borrowed ones, says expert",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Sudan’s farmers are ready to return – private investment could get them there",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Security Council LIVE: Rising tide of forced displacement",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "LIVE: Six years on from COVID-19, is the world ready for the next pandemic?",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Yemen violence deepens concerns over child hunger crisis",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -34,42 +66,6 @@
   },
   {
    "title": "‘Rising seas are sinking futures’",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Haitians can’t wait to return home and vote in elections says Prime Minister",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "UNRWA work and mandate in ‘jeopardy’, Guterres warns",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "World News in Brief: ‘New intensity’ to Russian attacks on Ukraine, Yemen, Gaza and Colombia updates",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Palestinian existence under threat, Abbas tells UN, warning of ‘another Nakba’",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "LIVE: World leaders approve new declaration to tackle rising sea levels",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "‘Peace remains only a promise’ for millions in eastern DR Congo, General Assembly hears",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "The Takeaway: UN General Assembly debate Day 2",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Venezuela seeking rebirth after political crisis and devastating earthquakes, President tells UN",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Equality ‘ends at the doors of the Security Council’, Kenya’s Ruto tells General Assembly",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -423,7 +419,6 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -508,9 +503,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-09-25 12:18:00",
+ "finished_utc": "2026-09-25 17:27:34",
  "summary": {
-  "text_rejected_no_verified_rewrite": 18,
+  "text_rejected_no_verified_rewrite": 17,
   "video_rejected_enrich_failed_or_not_newsworthy": 83
  }
 }
