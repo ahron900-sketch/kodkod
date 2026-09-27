@@ -1,6 +1,10 @@
 {
  "items": [
   {
+   "title": "Canada urges stronger partnerships as global order faces ‘rupture’",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "Saudi Arabia warns Gulf security inseparable from global stability amid regional tensions",
    "outcome": "text_rejected_no_verified_rewrite"
   },
@@ -50,10 +54,6 @@
   },
   {
    "title": "‘Invest with Iraq’: PM sets out vision for new economic future",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Nepal PM urges climate justice after ‘Himalayan tsunami’ devastates country",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -488,7 +488,7 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-09-26 22:07:20",
+ "finished_utc": "2026-09-27 00:38:13",
  "summary": {
   "text_rejected_no_verified_rewrite": 14,
   "video_rejected_enrich_failed_or_not_newsworthy": 83
