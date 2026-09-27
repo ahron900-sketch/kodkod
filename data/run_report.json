@@ -1,7 +1,11 @@
 {
  "items": [
   {
-   "title": "Record participation in ESA’s Industry Space Days 2026",
+   "title": "Hubble Spots Chaotic Secret in Galaxy",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Win a trip to ESA to witness BepiColombo arrive at Mercury",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -59,6 +63,26 @@
   {
    "title": "‘No one speaks on behalf of Lebanon’: PM Salam asserts State authority at UN",
    "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "ראש הממשלה בנימין נתניהו נפגש עם מנהיגים ממדינות אמריקה הלטינית",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "ראש הממשלה בנימין נתניהו נפגש עם נשיא ארגנטינה חאבייר מיליי",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "ראש הממשלה בנימין נתניהו נפגש עם ראש ממשלת סלובניה יאנז יאנשה",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "ראש הממשלה בנימין נתניהו נפגש עם ראש ממשלת יוון קיריאקוס מיצוטאקיס",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "ראש הממשלה בנימין נתניהו בטקס מצטייני השב״כ לשנת 2025 בבית הנשיא",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "\"מחבל בקומה למעלה!\" - המ\"מ והקלע חוזרים ללילה הדרמטי בבינת ג'בייל | צה״ל",
@@ -157,23 +181,7 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "ראש הממשלה בנימין נתניהו נפגש עם מנהיגים ממדינות אמריקה הלטינית",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "ראש הממשלה בנימין נתניהו נפגש עם נשיא ארגנטינה חאבייר מיליי",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "PM Netanyahu's Speech at the UN General Assembly 2026",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "ראש הממשלה בנימין נתניהו נפגש עם ראש ממשלת סלובניה יאנז יאנשה",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "ראש הממשלה בנימין נתניהו נפגש עם ראש ממשלת יוון קיריאקוס מיצוטאקיס",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -182,10 +190,6 @@
   },
   {
    "title": "Repeating lies doesn't make them true",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "ראש הממשלה בנימין נתניהו בטקס מצטייני השב״כ לשנת 2025 בבית הנשיא",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -325,6 +329,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "בקריאה הראשונה באמבולנס לזכר דור רידר - נולד תינוק בכניסה לקיבוץ בארי בסיוע אביו, צביקה רידר",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "צוותי מד\"א טיפלו ב-3,322 בני אדם במהלך צום יום הכיפורים. 368 התעלפו, התייבשו וחשו ברע",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -361,10 +369,6 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "איתן שמשוביץ מורה ופראמדיק במד\"א שיוצא להציל חיים - באמצע השיעור הוא נקרא לטפל במקרי חירום",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "מצדיעים ללוחמים על ארבע",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -394,6 +398,7 @@
   }
  ],
  "ai_errors": [
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -493,9 +498,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-09-27 15:49:18",
+ "finished_utc": "2026-09-27 19:36:50",
  "summary": {
-  "text_rejected_no_verified_rewrite": 15,
+  "text_rejected_no_verified_rewrite": 16,
   "video_rejected_enrich_failed_or_not_newsworthy": 83
  }
 }
