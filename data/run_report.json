@@ -1,7 +1,27 @@
 {
  "items": [
   {
-   "title": "NASA ORBIT Challenge 2027",
+   "title": "NASA, Boeing Share Update on Commercial Starliner Development Plans",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA Armstrong Celebrates 80 Years of Flight Innovation",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA Highlights Lessons Learned From Swift Boost Mission",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA Celebrates as Artemis Accords Surpasses 75 Signatories",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Meet NASA’s Artemis II Crew During Houston Public Event",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "What You Need to Know About NASA’s SpaceX Crew-13 Mission",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -9,23 +29,31 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "APOD: 2026 September 28 – Cosmic Latte: The Average Color of the Universe",
+   "title": "Successful Earth flyby improves Juice’s course to Jupiter",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Reliable Robots: Meet Johnson’s Dexterous Robotics Team",
+   "title": "Sudan tells UN: No imposed solutions to country’s conflict",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "One geology step closer to the Moon",
+   "title": "From energy crisis to energy transition: How renewables are reshaping energy security",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "ESA and the EU partner with Museo Galileo on new exhibition",
+   "title": "World News in Brief: Refugee funding, US migration policy triggers ‘cascade’ of rights violations, world forests report,",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Earth from Space: Venetian Lagoon",
+   "title": "Security Council LIVE: Ambassadors meet as West Bank tensions rise, Gaza plan stalls",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "LIVE: World leaders take stock of global fight against racism",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "DR Congo Ebola emergency: Calls grow for urgent humanitarian access",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -59,34 +87,6 @@
   {
    "title": "The Takeaway: UN General Assembly debate Day 4",
    "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Haiti at ‘watershed moment’, Prime Minister tells UN, urging full backing for security force",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Pakistan’s Sharif warns any diversion of Indus waters will be ‘treated as an act of war’",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "UN voices grave concern as fighting spreads across northern Ethiopia",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Tuvalu urges decisive global action as rising seas threaten its future",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "World News in Brief: West Bank demolitions accelerate, urgent support for Sudan,  Haiti diplacement, AI hub to boost gen",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "‘No one speaks on behalf of Lebanon’: PM Salam asserts State authority at UN",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "עוד לפני הריאליטי - הכנסת חילקה מיליון שקלים| סקרנים? ד״ר פוקסמן עם הסיפור המלא,צפו! #הכנסת #knesset",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "\"מחבל בקומה למעלה!\" - המ\"מ והקלע חוזרים ללילה הדרמטי בבינת ג'בייל | צה״ל",
@@ -178,6 +178,10 @@
   },
   {
    "title": "⁨ “יותר תשומת לב לילדי הפריפריה” | שאלנו את מאמן נבחרת ישראל בג’ודו לשעבר איזה חוק היית מחוקק #הכנסת",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "עוד לפני הריאליטי - הכנסת חילקה מיליון שקלים| סקרנים? ד״ר פוקסמן עם הסיפור המלא,צפו! #הכנסת #knesset",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -447,6 +451,7 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -533,9 +538,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-09-28 15:17:41",
+ "finished_utc": "2026-09-28 21:21:19",
  "summary": {
-  "text_rejected_no_verified_rewrite": 21,
+  "text_rejected_no_verified_rewrite": 22,
   "video_rejected_enrich_failed_or_not_newsworthy": 85
  }
 }
