@@ -1,7 +1,11 @@
 {
  "items": [
   {
-   "title": "NASA Sets Crew-13 Launch, Docking Coverage",
+   "title": "NASA Features Exploration, Science at International Space Conference",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Crew-13 Rocket and Spacecraft at Launch Pad",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -9,7 +13,15 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
+   "title": "NSTGRO 2026",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "Under the Microscope: NASA-Made Material for Moon Manufacturing",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "World News in Brief: Deadly Myanmar strikes as Malaysia begins deportations, new emergency funding released, Gaza and We",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -69,8 +81,8 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "LIVE: World leaders take stock of global fight against racism",
-   "outcome": "text_rejected_no_verified_rewrite"
+   "title": "‘מאז פרוץ המלחמה - 114 לוחמים התאבדו’ | ועדת העבודה והרווחה #הכנסת #knesset",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "\"מחבל בקומה למעלה!\" - המ\"מ והקלע חוזרים ללילה הדרמטי בבינת ג'בייל | צה״ל",
@@ -146,10 +158,6 @@
   },
   {
    "title": "בואו איתי לסיור בכנסת 🇮🇱 הייתה חוויה! תרשמו לי בתגובות מה הכי אהבתם 🙌",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "‘מאז פרוץ המלחמה - 114 לוחמים התאבדו’ | ועדת העבודה והרווחה #הכנסת #knesset",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -432,6 +440,8 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -518,9 +528,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-09-29 19:10:55",
+ "finished_utc": "2026-09-29 22:59:51",
  "summary": {
-  "text_rejected_no_verified_rewrite": 18,
+  "text_rejected_no_verified_rewrite": 20,
   "video_rejected_enrich_failed_or_not_newsworthy": 85
  }
 }
