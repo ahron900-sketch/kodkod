@@ -1,7 +1,7 @@
 {
  "items": [
   {
-   "title": "NASA, Boeing Share Update on Commercial Starliner Development Plans",
+   "title": "October’s Night Sky Notes: Spooky Stargazing",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -9,27 +9,19 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "NASA Highlights Lessons Learned From Swift Boost Mission",
+   "title": "The Takeaway Day 6: General Debate ends with call to turn words into action",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "NASA Celebrates as Artemis Accords Surpasses 75 Signatories",
+   "title": "UN leaders renew push to defeat racism, 25 years after Durban",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Meet NASA’s Artemis II Crew During Houston Public Event",
+   "title": "DPR Korea tells UN its nuclear status is ‘irreversible’, rejects outside pressure",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "What You Need to Know About NASA’s SpaceX Crew-13 Mission",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Contractor to Civil Servant: NASA Welcomes Kristie Foster",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Successful Earth flyby improves Juice’s course to Jupiter",
+   "title": "‘Ballot must replace the bullets’, South Sudan tells General Assembly ahead of elections",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -70,22 +62,6 @@
   },
   {
    "title": "Cuba warns against ‘law of the jungle’ as Foreign Minister denounces US pressure",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Lavrov issues call for new Eurasian ‘security architecture’",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "‘Safeguard the postwar order,’ China tells UN General Assembly",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Countries adopt global blueprint to tackle fast-evolving crime in digital age",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "The Takeaway: UN General Assembly debate Day 4",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -446,12 +422,6 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -538,9 +508,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-09-28 21:21:19",
+ "finished_utc": "2026-09-29 01:10:55",
  "summary": {
-  "text_rejected_no_verified_rewrite": 22,
+  "text_rejected_no_verified_rewrite": 16,
   "video_rejected_enrich_failed_or_not_newsworthy": 85
  }
 }
