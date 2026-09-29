@@ -1,11 +1,31 @@
 {
  "items": [
   {
-   "title": "εpsilon",
+   "title": "NASA Sets Crew-13 Launch, Docking Coverage",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Galaxies in a cosmic house of mirrors",
+   "title": "NASA Opens Applications for Second Season of ORBIT Student Challenge",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Under the Microscope: NASA-Made Material for Moon Manufacturing",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Funding cuts put 8.3 million refugees at risk of losing vital assistance",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Clean your plate – to reduce food loss and waste",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "LIVE: Weighing nuclear risks amid rising tensions and war",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Security Council LIVE: DRC peace deals fail to halt fighting as Ebola deepens crisis",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -50,18 +70,6 @@
   },
   {
    "title": "LIVE: World leaders take stock of global fight against racism",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "DR Congo Ebola emergency: Calls grow for urgent humanitarian access",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "The Takeaway: UN General Assembly debate Day 5",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Canada urges stronger partnerships as global order faces ‘rupture’",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -422,6 +430,8 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -508,9 +518,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-09-29 13:50:25",
+ "finished_utc": "2026-09-29 19:10:55",
  "summary": {
-  "text_rejected_no_verified_rewrite": 16,
+  "text_rejected_no_verified_rewrite": 18,
   "video_rejected_enrich_failed_or_not_newsworthy": 85
  }
 }
