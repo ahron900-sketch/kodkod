@@ -1,11 +1,35 @@
 {
  "items": [
   {
+   "title": "NASA, International Partners Advance Work on Space Crops",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Star Trails",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "World News in Brief: Storm clouds over Gaza, deadly obstacles face Mexican women rights defenders, Latvia booze ban prov",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Could a new global panel defuse inequality’s ‘ticking time bomb’?",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Somali families face renewed violence amid worsening hunger crisis",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Homicides fall as organised crime grows more profitable – and networked",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "Malaysia: UN agency urges safeguards after refugees returned to Myanmar",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Lebanon: one in five children goes to bed hungry, says UNICEF",
+   "title": "Lebanon: One in five children goes to bed hungry, says UNICEF",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -45,20 +69,8 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "DPR Korea tells UN its nuclear status is ‘irreversible’, rejects outside pressure",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "‘Ballot must replace the bullets’, South Sudan tells General Assembly ahead of elections",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Sudan tells UN: No imposed solutions to country’s conflict",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "From energy crisis to energy transition: How renewables are reshaping energy security",
-   "outcome": "text_rejected_no_verified_rewrite"
+   "title": "ההרכב החדש של ירושלים - רשת רכבות קלות אחת!",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "\"מחבל בקומה למעלה!\" - המ\"מ והקלע חוזרים ללילה הדרמטי בבינת ג'בייל | צה״ל",
@@ -157,6 +169,14 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "רה\"מ נתניהו בנתב\"ג עם יניב חיון שפרץ לתא הטייס בטיסה מדובאי לישראל: ״אתה גיבור!״",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "רה\"מ נתניהו פוגש בנתב\"ג את יניב שפרץ לתא הטייס בטיסה מדובאי",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "ראש הממשלה בנימין נתניהו: \"אני מצדיע לגיבורים בטיסה מדובאי שגילו תושייה ואומץ לב\"",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -186,14 +206,6 @@
   },
   {
    "title": "ראש הממשלה בנימין נתניהו נפגש עם ראש ממשלת סלובניה יאנז יאנשה",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "ראש הממשלה בנימין נתניהו נפגש עם ראש ממשלת יוון קיריאקוס מיצוטאקיס",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "ראש הממשלה נתניהו נוחת בארה\"ב",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -298,10 +310,6 @@
   },
   {
    "title": "אפשר קצת לשחרר🧘🏽",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "ההרכב החדש של ירושלים - רשת רכבות קלות אחת!",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -417,6 +425,8 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -503,9 +513,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-09-30 15:08:54",
+ "finished_utc": "2026-09-30 20:02:56",
  "summary": {
-  "text_rejected_no_verified_rewrite": 15,
+  "text_rejected_no_verified_rewrite": 17,
   "video_rejected_enrich_failed_or_not_newsworthy": 85
  }
 }
