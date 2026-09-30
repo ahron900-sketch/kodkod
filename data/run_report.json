@@ -1,23 +1,11 @@
 {
  "items": [
   {
-   "title": "APOD: 2026 September 30 – Arp 78: Peculiar Galaxy in Aries",
+   "title": "Malaysia: UN agency urges safeguards after refugees returned to Myanmar",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Powerful Storms Continue to Prowl the Pacific",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "NASA Awards Orbital Safety Analysis Support Services Contract",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Science begins for Smile",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Three Earth Explorer candidates go forward",
+   "title": "Lebanon: one in five children goes to bed hungry, says UNICEF",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -71,22 +59,6 @@
   {
    "title": "From energy crisis to energy transition: How renewables are reshaping energy security",
    "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "World News in Brief: Refugee funding, US migration policy triggers ‘cascade’ of rights violations, world forests report,",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Security Council LIVE: Ambassadors meet as West Bank tensions rise, Gaza plan stalls",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "‘מאז פרוץ המלחמה - 114 לוחמים התאבדו’ | ועדת העבודה והרווחה #הכנסת #knesset",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "14 ביולי 2026",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "\"מחבל בקומה למעלה!\" - המ\"מ והקלע חוזרים ללילה הדרמטי בבינת ג'בייל | צה״ל",
@@ -165,6 +137,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "‘מאז פרוץ המלחמה - 114 לוחמים התאבדו’ | ועדת העבודה והרווחה #הכנסת #knesset",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "\"זה היה מתבקש שאגיע לכאן\"יובל ששון סוף סוף הגיע למוזיאון הכנסת! #הכנסת #knesset",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -178,6 +154,10 @@
   },
   {
    "title": "עוד לפני הריאליטי - הכנסת חילקה מיליון שקלים| סקרנים? ד״ר פוקסמן עם הסיפור המלא,צפו! #הכנסת #knesset",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "ראש הממשלה בנימין נתניהו: \"אני מצדיע לגיבורים בטיסה מדובאי שגילו תושייה ואומץ לב\"",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -214,10 +194,6 @@
   },
   {
    "title": "ראש הממשלה נתניהו נוחת בארה\"ב",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "Repeating lies doesn't make them true",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -417,16 +393,15 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "14 ביולי 2026",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "4 ביוני 2026",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   }
  ],
  "ai_errors": [
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -528,9 +503,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-09-30 08:21:35",
+ "finished_utc": "2026-09-30 15:08:54",
  "summary": {
-  "text_rejected_no_verified_rewrite": 20,
+  "text_rejected_no_verified_rewrite": 15,
   "video_rejected_enrich_failed_or_not_newsworthy": 85
  }
 }
