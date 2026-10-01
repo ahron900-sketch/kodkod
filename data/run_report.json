@@ -1,23 +1,27 @@
 {
  "items": [
   {
-   "title": "NASA’s SpaceX Crew-13 Launches to International Space Station",
+   "title": "What’s Up: October 2026 Skywatching Tips from NASA",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "NASA’s Webb Provides Crash Course on Planet-Shattering Collisions",
+   "title": "Successful Earth flyby improves Juice’s course to Jupiter",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "What happened this month at the European Space Agency? (September 2026)",
+   "title": "UN Member States weigh latest Security Council veto, this time on Iran",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "One geology step closer to the Moon",
+   "title": "No more execution attempts on Christa Pike: UN rights chief",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Earth from Space: Venetian Lagoon",
+   "title": "World News in Brief: Marshall Islands nuclear legacy, FlyDubai attack condemned, Ukraine update, breast cancer treatment",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "‘Women are not victims’: Türk calls for women to be at the heart of peace and security",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -25,7 +29,19 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Palestinians yearn for ‘a return to normal life,’ says top Middle East peace envoy",
+   "title": "Ebola response faces setback as transit centre burns down in DR Congo camp",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Palestinians yearn for ‘a return to normal life’, says top Middle East peace envoy",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Who gets to shape AI? UN debate centres on power, trust and inclusion",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "World News in Brief: Storm clouds over Gaza, deadly obstacles face Mexican women rights defenders, Latvia booze ban prov",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -34,14 +50,6 @@
   },
   {
    "title": "Lebanon: One in five children goes to bed hungry, says UNICEF",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "LIVE: Weighing nuclear risks amid rising tensions and war",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Security Council LIVE: DRC peace deals fail to halt fighting as Ebola deepens crisis",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -141,6 +149,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "ראש הממשלה בנימין נתניהו באירוע לימוד תורה לליל הושענא רבה בסימן ״גבורה״ בסוכת הכנסת",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "רה\"מ נתניהו עם גיבורי הטיסה מדובאי: \"אני אומר לאזרחי ישראל ללמוד מכם, לפקוח עיניים ולהיות ערניים.\"",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -170,10 +182,6 @@
   },
   {
    "title": "PMO Spokesman Doron Spielman on Fox News - The Fight Against Terrorism",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "רה\"מ נתניהו בנתב\"ג עם יניב חיון שפרץ לתא הטייס בטיסה מדובאי לישראל: ״אתה גיבור!״",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -393,6 +401,8 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -478,9 +488,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-10-01 17:26:05",
+ "finished_utc": "2026-10-01 21:57:40",
  "summary": {
-  "text_rejected_no_verified_rewrite": 11,
+  "text_rejected_no_verified_rewrite": 13,
   "video_rejected_enrich_failed_or_not_newsworthy": 84
  }
 }
