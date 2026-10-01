@@ -1,27 +1,31 @@
 {
  "items": [
   {
-   "title": "APOD: 2026 October 1 – Harvest Moon with Erupting Mount Etna",
+   "title": "NASA’s SpaceX Crew-13 Launches to International Space Station",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "EarthCARE’s view of volcanic plume boosts air safety",
+   "title": "NASA’s Webb Provides Crash Course on Planet-Shattering Collisions",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Who gets to shape AI? UN debate centres on power, trust and inclusion",
+   "title": "What happened this month at the European Space Agency? (September 2026)",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "World News in Brief: Storm clouds over Gaza, deadly obstacles face Mexican women rights defenders, Latvia booze ban prov",
+   "title": "One geology step closer to the Moon",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Could a new global panel defuse inequality’s ‘ticking time bomb’?",
+   "title": "Earth from Space: Venetian Lagoon",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Somali families face renewed violence amid worsening hunger crisis",
+   "title": "Nepal floods threaten jobs and livelihoods beyond disaster zone: ILO",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Palestinians yearn for ‘a return to normal life,’ says top Middle East peace envoy",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -29,23 +33,7 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Malaysia: UN agency urges safeguards after refugees returned to Myanmar",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "Lebanon: One in five children goes to bed hungry, says UNICEF",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "World News in Brief: Deadly Myanmar strikes as Malaysia begins deportations, new emergency funding released, Gaza and We",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Funding cuts put 8.3 million refugees at risk of losing vital assistance",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Clean your plate – to reduce food loss and waste",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -57,16 +45,8 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "DRC: Early access to care and oxygen decisive for Ebola patients’ survival – WHO",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Yemen escalation fuels fears of further cholera, measles spread",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "The Takeaway Day 6: General Debate ends with call to turn words into action",
-   "outcome": "text_rejected_no_verified_rewrite"
+   "title": "מה השתנה ברצועת עזה מאז 7 באוקטובר? ומה עוד נותר לעשות? | פודקאסט צה״ל",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "\"מחבל בקומה למעלה!\" - המ\"מ והקלע חוזרים ללילה הדרמטי בבינת ג'בייל | צה״ל",
@@ -78,10 +58,6 @@
   },
   {
    "title": "המסע שהופך אותם ל׳גדולים במדים׳ | פודקאסט צה״ל",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "\"אני שם לחייל מראה מול הפנים, ושואל - זה מה שישבור אותך?\" תזכור מי אתה | פודקאסט צה״ל",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -165,6 +141,22 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "רה\"מ נתניהו עם גיבורי הטיסה מדובאי: \"אני אומר לאזרחי ישראל ללמוד מכם, לפקוח עיניים ולהיות ערניים.\"",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "ראש הממשלה נתניהו במפגש עם גיבורי הטיסה מדובאי: \"כל העולם רואה את הגבורה הישראלית\"",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "PM Netanyahu on CBS:  \"A million Israelis have visited the UAE since the Abraham Accords\"",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "PM Netanyahu on CNN: \"They managed to prevent a 9/11 disaster\"",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "PM Netanyahu on CBS: From the courage aboard the FlyDubai flight to confronting Iran.",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -182,26 +174,6 @@
   },
   {
    "title": "רה\"מ נתניהו בנתב\"ג עם יניב חיון שפרץ לתא הטייס בטיסה מדובאי לישראל: ״אתה גיבור!״",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "רה\"מ נתניהו פוגש בנתב\"ג את יניב שפרץ לתא הטייס בטיסה מדובאי",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "ראש הממשלה בנימין נתניהו: \"אני מצדיע לגיבורים בטיסה מדובאי שגילו תושייה ואומץ לב\"",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "ראש הממשלה בנימין נתניהו בבסיס חיל האוויר בתל נוף",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "The Genocide Lie about Israel is the Biggest Lie of the Century.",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "The Genocide Lie about Israel is the Biggest Lie of the Century.",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -421,13 +393,6 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -513,9 +478,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-10-01 11:12:48",
+ "finished_utc": "2026-10-01 17:26:05",
  "summary": {
-  "text_rejected_no_verified_rewrite": 17,
-  "video_rejected_enrich_failed_or_not_newsworthy": 85
+  "text_rejected_no_verified_rewrite": 11,
+  "video_rejected_enrich_failed_or_not_newsworthy": 84
  }
 }
