@@ -1,11 +1,31 @@
 {
  "items": [
   {
-   "title": "APOD: 2026 October 2 – The Complete Sharpless Catalog: 313 Nebulas",
+   "title": "εpsilon",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Rains Swamp the Gandak River",
+   "title": "Beyond the airlock - Sophie Adenot's three spacewalks",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Earth from Space: Typhoon Surigae",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Jammertest pumps up the jam in Norway",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "ESA at the 77th International Astronautical Congress",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Gaza: WHO appeals for massive aid influx ahead of winter",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "‘I have not lost my dreams’: Refugee education funding cuts threaten millions",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -37,20 +57,12 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Who gets to shape AI? UN debate centres on power, trust and inclusion",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "World News in Brief: Storm clouds over Gaza, deadly obstacles face Mexican women rights defenders, Latvia booze ban prov",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "Homicides fall as organised crime grows more profitable – and networked",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Lebanon: One in five children goes to bed hungry, says UNICEF",
-   "outcome": "text_rejected_no_verified_rewrite"
+   "title": "למה 77% ממשקי הבית בישראל לא יכולים לקנות דירה? | גלית בן נאים, סגנית בכירה לכלכלן הראשי במשרד האוצר",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "מה השתנה ברצועת עזה מאז 7 באוקטובר? ומה עוד נותר לעשות? | פודקאסט צה״ל",
@@ -149,6 +161,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "ראש הממשלה בנימין נתניהו: ״המפגע עבר הקצנה אסלאמיסטית. הוא בא לרסק את המטוס על נוסעיו.\"",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "PM Netanyahu on Fox & Friends: \"This is Hollywood on steroids: ordinary civilians became superheroes",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -181,10 +197,6 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "PMO Spokesman Doron Spielman on Fox News - Flight Hijacking and Airline Safety",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "איך נולדת רפורמה שתשפיע על הכיס של כולנו? חובב אלסטר ממשרד האוצר חושף הצצה ראשונה למאחורי הקלעים",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -197,7 +209,7 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "למה 77% ממשקי הבית בישראל לא יכולים לקנות דירה? | גלית בן נאים, סגנית בכירה לכלכלן הראשי במשרד האוצר",
+   "title": "\"שאני אופיע על שטר? מה פתאום!\" - סיפורי השטרות והנשים שמופיעות על-פניהם",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -230,10 +242,6 @@
   },
   {
    "title": "תיק של 7 טריליון שקל",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "ליווי פיננסי לחיילים בקשיים - הכירו את המיזם שיסייע לאלפי חיילים",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -403,6 +411,8 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -488,9 +498,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-10-02 07:22:58",
+ "finished_utc": "2026-10-02 14:03:29",
  "summary": {
-  "text_rejected_no_verified_rewrite": 13,
+  "text_rejected_no_verified_rewrite": 15,
   "video_rejected_enrich_failed_or_not_newsworthy": 84
  }
 }
