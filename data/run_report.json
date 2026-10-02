@@ -1,23 +1,23 @@
 {
  "items": [
   {
-   "title": "εpsilon",
+   "title": "NASA’s DAVINCI Probe Can Stand the Heat",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Beyond the airlock - Sophie Adenot's three spacewalks",
+   "title": "La NASA abre solicitudes para próxima promoción de directores de vuelo",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Earth from Space: Typhoon Surigae",
+   "title": "NASA Model Wing Lights Up During First Pressure Sensitive Paint Tests",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Jammertest pumps up the jam in Norway",
+   "title": "World News in Brief: Cycle of violence continues in Haiti, seafarer deaths off Somalia, food insecurity in the Middle Ea",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "ESA at the 77th International Astronautical Congress",
+   "title": "Escalating fighting in Yemen deepens food security crisis",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -49,20 +49,8 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Ebola response faces setback as transit centre burns down in DR Congo camp",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "Palestinians yearn for ‘a return to normal life’, says top Middle East peace envoy",
    "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Homicides fall as organised crime grows more profitable – and networked",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "למה 77% ממשקי הבית בישראל לא יכולים לקנות דירה? | גלית בן נאים, סגנית בכירה לכלכלן הראשי במשרד האוצר",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "מה השתנה ברצועת עזה מאז 7 באוקטובר? ומה עוד נותר לעשות? | פודקאסט צה״ל",
@@ -206,6 +194,10 @@
   },
   {
    "title": "מההייטק למגזר הציבורי: המהלכים שרהב שלום רביבו מובילה בארץ ובעולם בסייבר ובפיננסים",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "למה 77% ממשקי הבית בישראל לא יכולים לקנות דירה? | גלית בן נאים, סגנית בכירה לכלכלן הראשי במשרד האוצר",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -411,8 +403,6 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -498,9 +488,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-10-02 14:03:29",
+ "finished_utc": "2026-10-02 19:21:20",
  "summary": {
-  "text_rejected_no_verified_rewrite": 15,
+  "text_rejected_no_verified_rewrite": 13,
   "video_rejected_enrich_failed_or_not_newsworthy": 84
  }
 }
