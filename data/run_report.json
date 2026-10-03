@@ -1,7 +1,15 @@
 {
  "items": [
   {
+   "title": "Heading Home: NASA’s SpaceX Crew-12 Concludes Station Science Mission",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "NASA’s DAVINCI Probe Can Stand the Heat",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA Model Wing Lights Up During First Pressure Sensitive Paint Tests",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -38,6 +46,10 @@
   },
   {
    "title": "‘I have not lost my dreams’: Refugee education funding cuts threaten millions",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "UN Member States weigh latest Security Council veto, this time on Iran",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -141,6 +153,14 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "PM Netanyahu talks to Captain Smit Machchhar, of the flight from Dubai,",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "ראש הממשלה בנימין נתניהו בשיחה עם הטייס ההודי מהטיסה מדובאי, קפטן סמית מאצ'הר",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "ראש הממשלה בנימין נתניהו: ״המפגע עבר הקצנה אסלאמיסטית. הוא בא לרסק את המטוס על נוסעיו.\"",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -166,14 +186,6 @@
   },
   {
    "title": "PM Netanyahu on CNN: \"They managed to prevent a 9/11 disaster\"",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "PM Netanyahu on CBS: From the courage aboard the FlyDubai flight to confronting Iran.",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "PM Netanyahu on CNN: “This wasn’t an intelligence assessment. It was intelligence.”",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -393,6 +405,9 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -478,9 +493,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-10-03 17:19:24",
+ "finished_utc": "2026-10-03 20:07:29",
  "summary": {
-  "text_rejected_no_verified_rewrite": 11,
+  "text_rejected_no_verified_rewrite": 14,
   "video_rejected_enrich_failed_or_not_newsworthy": 84
  }
 }
