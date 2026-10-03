@@ -5,6 +5,10 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
+   "title": "Uganda’s UN-supported wildlife forensics lab turns ivory seizures into convictions",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "‘Money alone won’t get us there’: UN steps up aid for 12 forgotten crises",
    "outcome": "text_rejected_no_verified_rewrite"
   },
@@ -37,15 +41,7 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "UN Member States weigh latest Security Council veto, this time on Iran",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "Nepal floods threaten jobs and livelihoods beyond disaster zone: ILO",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Palestinians yearn for ‘a return to normal life’, says top Middle East peace envoy",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -397,7 +393,6 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -483,9 +478,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-10-03 13:11:17",
+ "finished_utc": "2026-10-03 17:19:24",
  "summary": {
-  "text_rejected_no_verified_rewrite": 12,
+  "text_rejected_no_verified_rewrite": 11,
   "video_rejected_enrich_failed_or_not_newsworthy": 84
  }
 }
