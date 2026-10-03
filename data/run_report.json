@@ -1,15 +1,19 @@
 {
  "items": [
   {
+   "title": "NASA Astronaut Christina Koch to Join NFL Fans in Philadelphia",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "Heading Home: NASA’s SpaceX Crew-12 Concludes Station Science Mission",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "NASA’s DAVINCI Probe Can Stand the Heat",
+   "title": "La NASA abre solicitudes para próxima promoción de directores de vuelo",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "NASA Model Wing Lights Up During First Pressure Sensitive Paint Tests",
+   "title": "NASA Opens Applications for Next Class of Flight Directors",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -46,10 +50,6 @@
   },
   {
    "title": "‘I have not lost my dreams’: Refugee education funding cuts threaten millions",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "UN Member States weigh latest Security Council veto, this time on Iran",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -493,7 +493,7 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-10-03 20:07:29",
+ "finished_utc": "2026-10-03 23:06:46",
  "summary": {
   "text_rejected_no_verified_rewrite": 14,
   "video_rejected_enrich_failed_or_not_newsworthy": 84
