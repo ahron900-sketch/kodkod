@@ -1,15 +1,11 @@
 {
  "items": [
   {
-   "title": "APOD: 2026 October 4 – Supernumerary Rainbows over New Jersey",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "NASA’s DAVINCI Probe Can Stand the Heat",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "NASA Model Wing Lights Up During First Pressure Sensitive Paint Tests",
+   "title": "EarthCARE’s view of volcanic plume boosts air safety",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -69,6 +65,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "אפס סבלנות לעבירות תנועה",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "רכב בפראות על קורקינט - זה מה שנתפס עליו",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -105,10 +105,6 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "גם בחג, השוטרים שם בשביל כולנו",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "Вас укусила собака или поцарапала кошка?",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -118,6 +114,10 @@
   },
   {
    "title": "Сукка, в которой живет радость, должна быть безопасной!",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "“’ואהבת לרעך כמוך’” | שאלנו את השחקן גולן אזולאי איזה חוק היית מחוקק #הכנסת #knesset #כנסת",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -146,6 +146,10 @@
   },
   {
    "title": "עוד לפני הריאליטי - הכנסת חילקה מיליון שקלים| סקרנים? ד״ר פוקסמן עם הסיפור המלא,צפו! #הכנסת #knesset",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "רה\"מ נתניהו בבסיס חיל הים באשדוד: \"האויבים שלנו רוצים לאיים על המרחב הימי שלנו - לא ניתן לזה לקרות\"",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -178,10 +182,6 @@
   },
   {
    "title": "PM Netanyahu on CBS:  \"A million Israelis have visited the UAE since the Abraham Accords\"",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "PM Netanyahu on CNN: \"They managed to prevent a 9/11 disaster\"",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -402,7 +402,7 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -488,9 +488,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-10-04 08:50:54",
+ "finished_utc": "2026-10-04 14:41:52",
  "summary": {
-  "text_rejected_no_verified_rewrite": 13,
-  "video_rejected_enrich_failed_or_not_newsworthy": 84
+  "text_rejected_no_verified_rewrite": 12,
+  "video_rejected_enrich_failed_or_not_newsworthy": 85
  }
 }
