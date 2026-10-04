@@ -1,7 +1,19 @@
 {
  "items": [
   {
+   "title": "Curiosity Blog, Sols 5022-5028: Cashing in at Cache Creek",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Mapping the Gaps in NASA’s Return to the Moon, featuring Richard Spolzino",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "NASA’s DAVINCI Probe Can Stand the Heat",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "‘He felt heard’: How a film brought a UN report to life in Xochimilco",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -35,26 +47,6 @@
   {
    "title": "Escalating fighting in Yemen deepens food security crisis",
    "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Gaza: WHO appeals for massive aid influx ahead of winter",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Nepal floods threaten jobs and livelihoods beyond disaster zone: ILO",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "ראש הממשלה בנימין נתניהו בשיחה עם הטייס ההודי מהטיסה מדובאי, קפטן סמית מאצ'הר",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "ראש הממשלה בנימין נתניהו: ״המפגע עבר הקצנה אסלאמיסטית. הוא בא לרסק את המטוס על נוסעיו.\"",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "ראש הממשלה בנימין נתניהו באירוע לימוד תורה לליל הושענא רבה בסימן ״גבורה״ בסוכת הכנסת",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "מה השתנה ברצועת עזה מאז 7 באוקטובר? ומה עוד נותר לעשות? | פודקאסט צה״ל",
@@ -165,7 +157,19 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "ראש הממשלה בנימין נתניהו בשיחה עם הטייס ההודי מהטיסה מדובאי, קפטן סמית מאצ'הר",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "ראש הממשלה בנימין נתניהו: ״המפגע עבר הקצנה אסלאמיסטית. הוא בא לרסק את המטוס על נוסעיו.\"",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "PM Netanyahu on Fox & Friends: \"This is Hollywood on steroids: ordinary civilians became superheroes",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "ראש הממשלה בנימין נתניהו באירוע לימוד תורה לליל הושענא רבה בסימן ״גבורה״ בסוכת הכנסת",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -397,6 +401,7 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -483,9 +488,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-10-04 18:25:00",
+ "finished_utc": "2026-10-04 21:48:25",
  "summary": {
-  "text_rejected_no_verified_rewrite": 11,
+  "text_rejected_no_verified_rewrite": 12,
   "video_rejected_enrich_failed_or_not_newsworthy": 85
  }
 }
