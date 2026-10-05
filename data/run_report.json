@@ -1,15 +1,15 @@
 {
  "items": [
   {
-   "title": "Curiosity Blog, Sols 5022-5028: Cashing in at Cache Creek",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Mapping the Gaps in NASA’s Return to the Moon, featuring Richard Spolzino",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "NASA’s DAVINCI Probe Can Stand the Heat",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Juice’s September 2026 Earth flyby: the movie",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Beyond the Moon: Space Week around the world",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -488,7 +488,7 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-10-04 21:48:25",
+ "finished_utc": "2026-10-05 00:31:24",
  "summary": {
   "text_rejected_no_verified_rewrite": 12,
   "video_rejected_enrich_failed_or_not_newsworthy": 85
