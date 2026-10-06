@@ -1,7 +1,35 @@
 {
  "items": [
   {
-   "title": "The Beaver Brown Waters of Rupert Bay",
+   "title": "NASA’s Webb Captures Commotion From Nebula’s Stellar Jets",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "APOD: 2026 October 6 – A Complete Auroral Oval from SMILE",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "European rover trains for Mars in the desert",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "‘Ebola takes the people children depend on’: UNICEF",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "When streets become pharmacies: Booming illicit markets in Central Africa",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "‘Nothing can justify these atrocities,’ says Guterres three years on from 7 October attacks",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "‘The clock on AI regulation is ticking’, warns UN rights chief",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "More than 184,000 displaced as fighting intensifies in Yemen",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -13,67 +41,11 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "UN upholds housing as a human right on World Habitat Day",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Sudan: Driver killed in aerial attack on aid trucks in South Kordofan",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "Beyond the Moon: Space Week around the world",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "‘He felt heard’: How a film brought a UN report to life in Xochimilco",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Rotting food waste emits 5 times more greenhouse gases than planes",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "המסע שהופך אותם ל׳גדולים במדים׳ | פודקאסט צה״ל",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "עוד לפני הריאליטי - הכנסת חילקה מיליון שקלים| סקרנים? ד״ר פוקסמן עם הסיפור המלא,צפו! #הכנסת #knesset",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "ראש הממשלה בנימין נתניהו בשיחה עם הטייס ההודי מהטיסה מדובאי, קפטן סמית מאצ'הר",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "ראש הממשלה בנימין נתניהו: ״המפגע עבר הקצנה אסלאמיסטית. הוא בא לרסק את המטוס על נוסעיו.\"",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "ראש הממשלה בנימין נתניהו באירוע לימוד תורה לליל הושענא רבה בסימן ״גבורה״ בסוכת הכנסת",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "פודמס – פרק 49: אירוע חסר תקדים – מס חברות גלובלי מינימלי",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "ההרכב החדש של ירושלים - רשת רכבות קלות אחת!",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "יש דברים שגם אוהד הפועל וגם אוהד בית\"ר מסכימים עליהם!",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "מה עשה לי את הבוקר? אלי אוחנה מספר על חובשי מד\"א שטיפלו באישה שנפצעה בבניית סוכה והשלימו את בנייתה",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "הסכנות שמחכות בצום - חובשת רפואת חירום במד\"א אסנת הררי מסבירה באולפן את המלצות מד\"א לצום יום כיפור",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "מקבלים את השנה החדשה-פראמדיק מד\"א סהר בראל מספר על השנה שחלפה ופוגש בהפתעה תאומים שהציל בלידת חירום",
+   "title": "בעטו בניידת משטרה והעלו לטיקטוק - כך זה נגמר",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -89,6 +61,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "המסע שהופך אותם ל׳גדולים במדים׳ | פודקאסט צה״ל",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "שפך פסולת ביוב לנחל - היס\"מ הגיע אליו הביתה",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -98,10 +74,6 @@
   },
   {
    "title": "רכב בפראות על קורקינט - זה מה שנתפס עליו",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "בעטו בניידת משטרה והעלו לטיקטוק - כך זה נגמר",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -173,6 +145,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "עוד לפני הריאליטי - הכנסת חילקה מיליון שקלים| סקרנים? ד״ר פוקסמן עם הסיפור המלא,צפו! #הכנסת #knesset",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "דברי רה\"מ נתניהו בטקס האזכרה הממלכתי לטבח ולגבורה בכ\"ב בתשרי - 7 באוקטובר",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -189,15 +165,23 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "ראש הממשלה בנימין נתניהו בשיחה עם הטייס ההודי מהטיסה מדובאי, קפטן סמית מאצ'הר",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "ראש הממשלה בנימין נתניהו: ״המפגע עבר הקצנה אסלאמיסטית. הוא בא לרסק את המטוס על נוסעיו.\"",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "PM Netanyahu on Fox & Friends: \"This is Hollywood on steroids: ordinary civilians became superheroes",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "רה\"מ נתניהו עם גיבורי הטיסה מדובאי: \"אני אומר לאזרחי ישראל ללמוד מכם, לפקוח עיניים ולהיות ערניים.\"",
+   "title": "ראש הממשלה בנימין נתניהו באירוע לימוד תורה לליל הושענא רבה בסימן ״גבורה״ בסוכת הכנסת",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "ראש הממשלה נתניהו במפגש עם גיבורי הטיסה מדובאי: \"כל העולם רואה את הגבורה הישראלית\"",
+   "title": "רה\"מ נתניהו עם גיבורי הטיסה מדובאי: \"אני אומר לאזרחי ישראל ללמוד מכם, לפקוח עיניים ולהיות ערניים.\"",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -257,6 +241,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "פודמס – פרק 49: אירוע חסר תקדים – מס חברות גלובלי מינימלי",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "סרטון 3- איך למלא טופס 62 א החדש? 62א החדש טופס 1262",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -301,11 +289,19 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "ההרכב החדש של ירושלים - רשת רכבות קלות אחת!",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "כל תחנה...",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "קו L3 - זה החיים!",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "יש דברים שגם אוהד הפועל וגם אוהד בית\"ר מסכימים עליהם!",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -333,6 +329,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "מה עשה לי את הבוקר? אלי אוחנה מספר על חובשי מד\"א שטיפלו באישה שנפצעה בבניית סוכה והשלימו את בנייתה",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "בקריאה הראשונה באמבולנס לזכר דור רידר - נולד תינוק בכניסה לקיבוץ בארי בסיוע אביו, צביקה רידר",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -346,6 +346,14 @@
   },
   {
    "title": "המלצות מד\"א לקראת צום יום הכיפורים - פראמדיק מד\"א מאיר ולדר",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "הסכנות שמחכות בצום - חובשת רפואת חירום במד\"א אסנת הררי מסבירה באולפן את המלצות מד\"א לצום יום כיפור",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "מקבלים את השנה החדשה-פראמדיק מד\"א סהר בראל מספר על השנה שחלפה ופוגש בהפתעה תאומים שהציל בלידת חירום",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -390,7 +398,9 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -478,9 +488,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-10-06 08:42:01",
+ "finished_utc": "2026-10-06 15:29:59",
  "summary": {
-  "text_rejected_no_verified_rewrite": 8,
-  "video_rejected_enrich_failed_or_not_newsworthy": 87
+  "text_rejected_no_verified_rewrite": 11,
+  "video_rejected_enrich_failed_or_not_newsworthy": 86
  }
 }
