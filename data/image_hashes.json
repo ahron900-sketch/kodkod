@@ -1,8 +1,4 @@
 {
-  "0000011100001110000111110011111100111111011111110011111100000000": {
-    "title": "APOD: 2026 October 4 – Supernumerary Rainbows over New Jersey",
-    "ts": 1791103749.3762949
-  },
   "1111111111011111110111001111100001110100000000010000000000000000": {
     "title": "EarthCARE’s view of volcanic plume boosts air safety",
     "ts": 1791124801.7711399
@@ -126,5 +122,13 @@
   "0000110000001110000111100001111000111111011111000111000000100010": {
     "title": "Arctic Sea Ice Shrinks to Its 2026 Minimum",
     "ts": 1791352842.6060338
+  },
+  "0000110000001100000001000000110000001100000001000000010000000100": {
+    "title": "Brake! Time for ESA’s Hera asteroid mission to go slow",
+    "ts": 1791379493.5572739
+  },
+  "1111000011110000111000001100010011100100111101001111110000111100": {
+    "title": "The Incredible Adventures of the Hera mission – The space detectives arrive",
+    "ts": 1791379497.3127644
   }
 }
