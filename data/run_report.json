@@ -1,11 +1,19 @@
 {
  "items": [
   {
-   "title": "Brake! Time for ESA’s Hera asteroid mission to go slow",
+   "title": "Artemis II Crew Moon Photo Annotations",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "The Incredible Adventures of the Hera mission – The space detectives arrive",
+   "title": "Mars’s oddest cloud may be even odder than we thought",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "ESA at IAC 2026 – Day 3",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Kenya races to trace all contacts after first Ebola death, WHO official says",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -49,6 +57,10 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
+   "title": "הפצוע שהשתקם והופך לקב״ן - המסע של מתן | צה״ל",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "מה השתנה ברצועת עזה מאז 7 באוקטובר? ומה עוד נותר לעשות? | פודקאסט צה״ל",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -62,6 +74,10 @@
   },
   {
    "title": "המסע שהופך אותם ל׳גדולים במדים׳ | פודקאסט צה״ל",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "מבצע נחוש ברחובות יפו",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -98,10 +114,6 @@
   },
   {
    "title": "ניסה להצית אופנוע והצית את עצמו",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "רכב סמוי נחשף בדיוק ברגע העבירה",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -329,6 +341,18 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "הקריאה הראשונה לאמבולנס על שמו של דור רידר ז\"ל, בנו של חובש בכיר במד\"א צבי רידר - לידה בבארי",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "חובש מד\"א רומי דר, החובש שהציל חיים - משדר מיוחד, 3 שנים ל-7.10",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "השיחות המצמררות למד\"א ב-7 באוקטובר. פסקול הזוועה: הקריאה לעזרה, האימה התושייה והתסכול",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "השיחה האחרונה של פראמדיקית מדא עמית מן זל נחשפת-הניסיון האחרון של הפראמדיקית שנרצחה ב-7.10 לקבל עזרה",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -354,18 +378,6 @@
   },
   {
    "title": "לאורך יום הכיפורים: צוותי מדא העניקו טיפול רפואי ל-3,322 בני אדם-נדב מצנר סגן דובר מד\"א מהמוקד הארצי",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "המלצות מד\"א לקראת צום יום הכיפורים - פראמדיק מד\"א מאיר ולדר",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "הסכנות שמחכות בצום - חובשת רפואת חירום במד\"א אסנת הררי מסבירה באולפן את המלצות מד\"א לצום יום כיפור",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "מקבלים את השנה החדשה-פראמדיק מד\"א סהר בראל מספר על השנה שחלפה ופוגש בהפתעה תאומים שהציל בלידת חירום",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -410,6 +422,9 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -498,9 +513,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-10-07 13:26:52",
+ "finished_utc": "2026-10-07 19:28:55",
  "summary": {
-  "text_rejected_no_verified_rewrite": 12,
-  "video_rejected_enrich_failed_or_not_newsworthy": 87
+  "text_rejected_no_verified_rewrite": 14,
+  "video_rejected_enrich_failed_or_not_newsworthy": 88
  }
 }
