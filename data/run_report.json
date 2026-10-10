@@ -1,27 +1,15 @@
 {
  "items": [
   {
-   "title": "ESA astronaut Sophie Adenot returns from her first mission to the International Space Station",
+   "title": "NASA Demonstrates Next-Generation Heat Shield Technologies",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "The Incredible Adventures of the Hera mission – The space detectives arrive",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "World News in Brief: ‘Horrific’ attack in Sudan, Israeli incursions in Syria intensify, most women and girls homeless in",
+   "title": "NASA Announces Bold Science Initiatives for America’s Golden Age Summit",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
    "title": "Global trade reaches record $35 trillion despite conflicts",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Livestreaming US execution would breach prohibition of torture, UN rights office warns",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Security Council LIVE: Cycle of escalating attacks on civilians in Ukraine ‘must end now’",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -34,14 +22,6 @@
   },
   {
    "title": "Security Council LIVE: Yemen has fallen back into full-scale war, warns UN envoy",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Former UN human rights chief Navi Pillay awarded Nobel Peace Prize",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "World News in Brief: Russian attacks continue in Ukraine, Gazans shelter in flood-prone areas, keeping sight of eye heal",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -74,6 +54,10 @@
   },
   {
    "title": "הרס״רים כמו שמעולם לא ראיתם | פודקאסט צה״ל",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "פשיטה מבצעית על מתחמים ברהט",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -110,10 +94,6 @@
   },
   {
    "title": "משילות בעיר רמלה",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "אכלה בזמן נהיגה - כך השוטר הגיב",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -419,11 +399,6 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -513,9 +488,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-10-10 13:45:00",
+ "finished_utc": "2026-10-10 18:05:43",
  "summary": {
-  "text_rejected_no_verified_rewrite": 14,
+  "text_rejected_no_verified_rewrite": 9,
   "video_rejected_enrich_failed_or_not_newsworthy": 88
  }
 }
