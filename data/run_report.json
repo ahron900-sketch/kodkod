@@ -1,12 +1,16 @@
 {
  "items": [
   {
-   "title": "εpsilon",
+   "title": "NASA Demonstrates Next-Generation Heat Shield Technologies",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Sentinel-3C returns its first views of Earth",
+   "title": "NASA Announces Bold Science Initiatives for America’s Golden Age Summit",
    "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "ראש הממשלה בנימין נתניהו: ״המפגע עבר הקצנה אסלאמיסטית. הוא בא לרסק את המטוס על נוסעיו.\"",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "\"יוני נהרג. עכשיו - אתה מפקד הנח\"ל\" | פודקאסט צה״ל",
@@ -150,10 +154,6 @@
   },
   {
    "title": "ראש הממשלה בנימין נתניהו בשיחה עם הטייס ההודי מהטיסה מדובאי, קפטן סמית מאצ'הר",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "ראש הממשלה בנימין נתניהו: ״המפגע עבר הקצנה אסלאמיסטית. הוא בא לרסק את המטוס על נוסעיו.\"",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -453,7 +453,7 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-10-11 18:22:44",
+ "finished_utc": "2026-10-11 22:21:54",
  "summary": {
   "text_rejected_no_verified_rewrite": 2,
   "video_rejected_enrich_failed_or_not_newsworthy": 88
