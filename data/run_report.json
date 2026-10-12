@@ -1,11 +1,35 @@
 {
  "items": [
   {
-   "title": "APOD: 2026 October 12 – Jupiter and the Moons",
+   "title": "Cosmic House of Mirrors",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Antarctic Sea Ice Grows to Its 2026 Maximum",
+   "title": "APOD: 2026 October 9 – Stickney Crater",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Floodwaters Overwhelm Thailand",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Welcome home, Sophie Adenot",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Earth from Space: Namibia’s biggest salt pan",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "UN aid operation underway in Nepal following fresh floods",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "‘Efficiency has limits’: UNHCR chief warns refugee protection is buckling under cuts",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Rise in poverty is ‘a wake-up call for the world’, UN development chief says",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -33,14 +57,6 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "UN chief ‘gravely concerned’ by renewed fighting in northern Ethiopia, warns against escalation",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "World News in Brief: ‘Horrific’ attack in Sudan, Israeli incursions in Syria intensify, most women and girls homeless in",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "Global trade reaches record $35 trillion despite conflicts",
    "outcome": "text_rejected_no_verified_rewrite"
   },
@@ -49,12 +65,16 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Amid heartache of Nepal flooding disaster, fear remains",
-   "outcome": "text_rejected_no_verified_rewrite"
+   "title": "סדרת האינפלציה חלק 3: למה דווקא 2%?",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "Security Council LIVE: Yemen has fallen back into full-scale war, warns UN envoy",
-   "outcome": "text_rejected_no_verified_rewrite"
+   "title": "סדרת האינפלציה חלק 2: האינפלציה פוגשת את הבנק המרכזי",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "סדרת האינפלציה חלק1: מה שרציתם לדעת ולא העזתם לשאול",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "\"יוני נהרג. עכשיו - אתה מפקד הנח\"ל\" | פודקאסט צה״ל",
@@ -117,6 +137,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "מגן שר הבריאות להתנדבות לשנת 2025/תשפ\"ו - 12/10/2026",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "Вас укусила собака или поцарапала кошка?",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -169,6 +193,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "ראש הממשלה נתניהו בבית החולים רמב\"ם בביקור פצועים מהאירוע הקשה בצפון",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "ראש הממשלה בנימין נתניהו נפגש עם סגן נשיא פרגוואי פדרו אליאנה",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -201,10 +229,6 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "ראש הממשלה בנימין נתניהו: ״המפגע עבר הקצנה אסלאמיסטית. הוא בא לרסק את המטוס על נוסעיו.\"",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "איך נולדת רפורמה שתשפיע על הכיס של כולנו? חובב אלסטר ממשרד האוצר חושף הצצה ראשונה למאחורי הקלעים",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -218,10 +242,6 @@
   },
   {
    "title": "למה 77% ממשקי הבית בישראל לא יכולים לקנות דירה? | גלית בן נאים, סגנית בכירה לכלכלן הראשי במשרד האוצר",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "סדרת האינפלציה חלק 3: למה דווקא 2%?",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -246,14 +266,6 @@
   },
   {
    "title": "איך מנהלים מידע כלכלי בעידן ה-AI",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "סדרת האינפלציה חלק 2: האינפלציה פוגשת את הבנק המרכזי",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "סדרת האינפלציה חלק1: מה שרציתם לדעת ולא העזתם לשאול",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -424,6 +436,9 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -513,9 +528,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-10-12 08:04:04",
+ "finished_utc": "2026-10-12 17:57:33",
  "summary": {
-  "text_rejected_no_verified_rewrite": 14,
-  "video_rejected_enrich_failed_or_not_newsworthy": 88
+  "text_rejected_no_verified_rewrite": 16,
+  "video_rejected_enrich_failed_or_not_newsworthy": 89
  }
 }
