@@ -1,23 +1,51 @@
 {
  "items": [
   {
-   "title": "NASA JPL Testing Readies Voyager Technologies Lander for Moon Mission",
+   "title": "Comparing Off-World Rover Driving Distances",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "NASA Science, Cargo Launch on 35th SpaceX Resupply Mission to Station",
+   "title": "NASA’s Record-Setting Perseverance Rover Team",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "APOD: 2026 October 10 – Lunar Farside",
+   "title": "Perseverance Navcam Image Marks Record Drive",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "ESA astronaut Sophie Adenot returns from her first mission to the International Space Station",
+   "title": "Transporter-18 SmallSats Encapsulation",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "The Incredible Adventures of the Hera mission – The space detectives arrive",
+   "title": "JOB OPPORTUNITIES: NASA OFFICE OF THE GENERAL COUNSEL",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Voyager Technologies’ Griffin-1 Completes Environmental Testing at NASA JPL",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "TB 26-08 Complex Modes in Lightly Damped Structural Systems: A Two-Mode Interaction Perspective",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "800 million young people face a future without jobs",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "World News in Brief: West African migrant crossings, Argentina takes UK to maritime tribunal, farming in Gaza, mental he",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "‘Need for UN has never been greater,’ UN chief says, proposing slimmer $3.3 billion budget for 2027",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Ukraine: Residents killed and dozens injured in attacks on Kharkiv and Kyiv",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Disasters cost $228 billion in housing losses every year",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -37,27 +65,7 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Sudan: Drought and war push Darfur and Kordofan towards famine",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "UN aid operation underway in Nepal following fresh floods",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "‘Efficiency has limits’: UNHCR chief warns refugee protection is buckling under cuts",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Rise in poverty is ‘a wake-up call for the world’, UN development chief says",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Djibouti shipwreck: Death toll rises to 139 as 84 remain missing",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "In the Mekong Delta, a push to grow food with saltwater",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -177,6 +185,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "ראש הממשלה נתניהו בקו התפר בשומרון: \"אנחנו ערוכים לכל תרחיש, כולל היפוך קנים\"",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "ראש הממשלה נתניהו בבית החולים רמב\"ם בביקור פצועים מהאירוע הקשה בצפון",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -206,10 +218,6 @@
   },
   {
    "title": "PM Netanyahu talks to Captain Smit Machchhar, of the flight from Dubai,",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "ראש הממשלה בנימין נתניהו בשיחה עם הטייס ההודי מהטיסה מדובאי, קפטן סמית מאצ'הר",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -437,6 +445,8 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -528,9 +538,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-10-13 14:53:04",
+ "finished_utc": "2026-10-13 20:33:43",
  "summary": {
-  "text_rejected_no_verified_rewrite": 15,
+  "text_rejected_no_verified_rewrite": 17,
   "video_rejected_enrich_failed_or_not_newsworthy": 90
  }
 }
