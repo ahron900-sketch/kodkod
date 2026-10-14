@@ -1,15 +1,43 @@
 {
  "items": [
   {
+   "title": "NASA to Host News Conference Previewing US Spacewalks 100, 101",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA Astronauts to Answer Questions from Florida Students",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA’s Space X CRS-35 Launch Jellyfish",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "NASA Develops Batteries to Power Humanity’s Return to Moon",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "εpsilon",
+   "title": "Haiti sanctions renewed: Starving the gangs of bullets",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Sentinel-3C returns its first views of Earth",
+   "title": "Colombia: UN independent experts call for Ecopetrol to provide reparations to victims of armed conflict",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "World News in Brief: Gaza braces for winter amid attacks, joint patrols in CAR, 90 cities commit to sustainable developm",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "DR Congo: Cholera cases spike amid fight against Ebola",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Health workers tackle taboos over drinking with new AI tool",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Security Council LIVE: Libya in the spotlight amid ‘encouraging progress’",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -29,31 +57,7 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "World News in Brief: West African migrant crossings, Argentina takes UK to maritime tribunal, farming in Gaza, mental he",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "‘Need for UN has never been greater,’ UN chief says, proposing slimmer $3.3 billion budget for 2027",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Ukraine: Residents killed and dozens injured in attacks on Kharkiv and Kyiv",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Disasters cost $228 billion in housing losses every year",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Global action to end violence against children is lagging behind risks: UN expert",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Security Council LIVE: Syria’s fragile transition – economic strain, Israeli incursions and progress towards elections",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "‘Efficiency has limits’: UNHCR chief warns refugee protection is buckling under cuts",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -173,6 +177,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "דברי ראש הממשלה בנימין נתניהו בטקס קבלת פנים במשרד החוץ לרגל חנוכת שגרירות קולומביה בירושלים",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "ראש הממשלה נתניהו בקו התפר בשומרון: \"אנחנו ערוכים לכל תרחיש, כולל היפוך קנים\"",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -202,10 +210,6 @@
   },
   {
    "title": "PM Netanyahu talks to Captain Smit Machchhar, of the flight from Dubai,",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "ראש הממשלה בנימין נתניהו בשיחה עם הטייס ההודי מהטיסה מדובאי, קפטן סמית מאצ'הר",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -432,6 +436,7 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -523,9 +528,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-10-14 18:57:13",
+ "finished_utc": "2026-10-14 22:07:57",
  "summary": {
-  "text_rejected_no_verified_rewrite": 14,
+  "text_rejected_no_verified_rewrite": 15,
   "video_rejected_enrich_failed_or_not_newsworthy": 90
  }
 }
