@@ -1,7 +1,19 @@
 {
  "items": [
   {
-   "title": "Hurricane Simon Lurks Off the Mexican Coast",
+   "title": "NASA to Discuss Artemis Acceleration, Status of Upcoming Moon Missions",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Solar Orbiter tracks origin of mysterious magnetic switchbacks",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Yemen: WFP warns of potential ‘humanitarian catastrophe’ as fighting blocks aid delivery",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "WHO calls for urgent health action across the Eastern Mediterranean",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -33,28 +45,12 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "General Assembly adopts pandemic declaration, but not by consensus",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Colombia peace deal must endure as insecurity grows, Security Council hears",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "Security Council LIVE: Syria’s fragile transition – economic strain, Israeli incursions and progress towards elections",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
    "title": "‘Efficiency has limits’: UNHCR chief warns refugee protection is buckling under cuts",
    "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "⁨ “יותר תשומת לב לילדי הפריפריה” | שאלנו את מאמן נבחרת ישראל בג’ודו לשעבר איזה חוק היית מחוקק #הכנסת",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "ראש הממשלה בנימין נתניהו בשיחה עם הטייס ההודי מהטיסה מדובאי, קפטן סמית מאצ'הר",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "\"יוני נהרג. עכשיו - אתה מפקד הנח\"ל\" | פודקאסט צה״ל",
@@ -133,6 +129,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "מהפתק בקלפי ועד לייצוג במליאת הכנסת | נציגי מועצת התלמידים והנוער הארצית מספרים על חשיבות ההצבעה",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "ידעתם שרגע לפני הבחירות הראשונות המדינה הייתה צריכה לספור את כל המצביעים? |ד״ר פוקסמן עם הסיפור המלא",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -198,6 +198,10 @@
   },
   {
    "title": "PM Netanyahu talks to Captain Smit Machchhar, of the flight from Dubai,",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "ראש הממשלה בנימין נתניהו בשיחה עם הטייס ההודי מהטיסה מדובאי, קפטן סמית מאצ'הר",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -422,6 +426,7 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -513,9 +518,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-10-14 09:25:02",
+ "finished_utc": "2026-10-14 14:38:33",
  "summary": {
-  "text_rejected_no_verified_rewrite": 12,
+  "text_rejected_no_verified_rewrite": 13,
   "video_rejected_enrich_failed_or_not_newsworthy": 90
  }
 }
