@@ -1,11 +1,51 @@
 {
  "items": [
   {
-   "title": "Rigorous Analysis Confirms NASA’s Artemis II Heat Shield Performance",
+   "title": "NASA Satellites Observe Historic 2026 El Niño",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "NASA’s Space X CRS-35 Launch Jellyfish",
+   "title": "Power Up: Roll Out Solar Arrays Boost Space Station Power Supply",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA to Conduct Low-Altitude Flights Over Texas Farmland",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA Welcomes All Ages, Experience Levels for Space Apps Challenge",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA Awards Enable Research, Technology to Build Future Workforce",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Welcome home, Sophie Adenot",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Earth from Space: Namibia’s biggest salt pan",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "World losing ground in ‘war on nature’ as progress on biodiversity targets lags",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "AI, green energy and economic transitions risk leaving vulnerable communities behind, UN warns",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Afghanistan faces record hunger levels amid rampant rights violations",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Ukraine: Critical health supplies destroyed in ongoing Russian attacks",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "WHO urges vigilance after Kenya confirms second Ebola case",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -25,15 +65,7 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "World News in Brief: Gaza braces for winter amid attacks, joint patrols in CAR, 90 cities commit to sustainable developm",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "DR Congo: Cholera cases spike amid fight against Ebola",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Health workers tackle taboos over drinking with new AI tool",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -47,26 +79,6 @@
   {
    "title": "WHO calls for urgent health action across the Eastern Mediterranean",
    "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "800 million young people face a future without jobs",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "‘Need for UN has never been greater,’ UN chief says, proposing slimmer $3.3 billion budget for 2027",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "סדרת האינפלציה פרק 4 - הגביע הקדוש של הבנקים המרכזיים",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "סדרת האינפלציה חלק 3: למה דווקא 2%?",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "סדרת האינפלציה חלק 2: האינפלציה פוגשת את הבנק המרכזי",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "מטיפולים בתנועה עם בן או בת הזוג או בכלל דרך כתיבה - עם היחידה לתגובות קרב 🎙️ | פודקאסט צה״ל",
@@ -237,6 +249,14 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "סדרת האינפלציה פרק 4 - הגביע הקדוש של הבנקים המרכזיים",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "סדרת האינפלציה חלק 3: למה דווקא 2%?",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "\"שאני אופיע על שטר? מה פתאום!\" - סיפורי השטרות והנשים שמופיעות על-פניהם",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -258,6 +278,10 @@
   },
   {
    "title": "איך מנהלים מידע כלכלי בעידן ה-AI",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "סדרת האינפלציה חלק 2: האינפלציה פוגשת את הבנק המרכזי",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -436,6 +460,12 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -528,9 +558,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-10-15 15:03:09",
+ "finished_utc": "2026-10-15 19:10:54",
  "summary": {
-  "text_rejected_no_verified_rewrite": 14,
+  "text_rejected_no_verified_rewrite": 20,
   "video_rejected_enrich_failed_or_not_newsworthy": 91
  }
 }
