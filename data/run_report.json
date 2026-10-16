@@ -1,7 +1,19 @@
 {
  "items": [
   {
-   "title": "Earth from Space: West Antarctica",
+   "title": "I Am Artemis: Allison Mjoen",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA’s Hubble Spies Spiral’s Edge",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Gaza: 340 children killed despite ceasefire agreement - UNICEF",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Guterres urges faster action and financing to stop biodiversity loss",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -33,27 +45,11 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "WHO urges faster action to end lead exposure which kills 3.5 million annually",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "Haiti sanctions renewed: Starving the gangs of bullets",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Colombia: UN independent experts call for Ecopetrol to provide reparations to victims of armed conflict",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "DR Congo: Cholera cases spike amid fight against Ebola",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Security Council LIVE: Libya in the spotlight amid ‘encouraging progress’",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Yemen: WFP warns of potential ‘humanitarian catastrophe’ as fighting blocks aid delivery",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -435,7 +431,6 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -528,9 +523,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-10-16 09:51:55",
+ "finished_utc": "2026-10-16 14:37:55",
  "summary": {
-  "text_rejected_no_verified_rewrite": 14,
+  "text_rejected_no_verified_rewrite": 13,
   "video_rejected_enrich_failed_or_not_newsworthy": 91
  }
 }
