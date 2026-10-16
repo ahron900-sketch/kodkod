@@ -1,7 +1,7 @@
 {
  "items": [
   {
-   "title": "Artemis II Heat Shield After Splashdown",
+   "title": "NASA Names Stephen Cash Marshall Space Flight Center Director",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -9,7 +9,7 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "ESA astronaut Sophie Adenot returns from her first mission to the International Space Station",
+   "title": "As disasters mount, next UN climate summit faces a test of trust",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -53,10 +53,6 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "מעצר גנב רכב סמוך למעבר חוצ\"ש",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "מטיפולים בתנועה עם בן או בת הזוג או בכלל דרך כתיבה - עם היחידה לתגובות קרב 🎙️ | פודקאסט צה״ל",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -86,6 +82,10 @@
   },
   {
    "title": "מה הדבר הראשון שאומרים למוקד 100?",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "מעצר גנב רכב סמוך למעבר חוצ\"ש",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -523,7 +523,7 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-10-16 18:25:35",
+ "finished_utc": "2026-10-16 21:34:02",
  "summary": {
   "text_rejected_no_verified_rewrite": 13,
   "video_rejected_enrich_failed_or_not_newsworthy": 91
