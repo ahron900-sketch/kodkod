@@ -1,11 +1,27 @@
 {
  "items": [
   {
+   "title": "Artemis II Heat Shield After Splashdown",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "I Am Artemis: Allison Mjoen",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "NASA’s Hubble Spies Spiral’s Edge",
+   "title": "ESA astronaut Sophie Adenot returns from her first mission to the International Space Station",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Ukraine: Civilian casualty rates among ‘deadliest’ in years, as energy attacks intensify",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "WHO scales up Ebola readiness in 22 countries across three continents",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Security Council LIVE: Sudan’s war spreads as drones and hunger take a deadly toll",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -33,24 +49,12 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Ukraine: Critical health supplies destroyed in ongoing Russian attacks",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "WHO urges vigilance after Kenya confirms second Ebola case",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Security Council LIVE: Deaths, demolitions spike in Gaza, West Bank",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "Haiti sanctions renewed: Starving the gangs of bullets",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "DR Congo: Cholera cases spike amid fight against Ebola",
-   "outcome": "text_rejected_no_verified_rewrite"
+   "title": "מעצר גנב רכב סמוך למעבר חוצ\"ש",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "מטיפולים בתנועה עם בן או בת הזוג או בכלל דרך כתיבה - עם היחידה לתגובות קרב 🎙️ | פודקאסט צה״ל",
@@ -82,10 +86,6 @@
   },
   {
    "title": "מה הדבר הראשון שאומרים למוקד 100?",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "מעצר גנב רכב סמוך למעבר חוצ\"ש",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -523,7 +523,7 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-10-16 14:37:55",
+ "finished_utc": "2026-10-16 18:25:35",
  "summary": {
   "text_rejected_no_verified_rewrite": 13,
   "video_rejected_enrich_failed_or_not_newsworthy": 91
