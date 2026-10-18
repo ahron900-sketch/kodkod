@@ -161,6 +161,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "רה\"מ נתניהו מציג את תפיסת הביטחון של ישראל",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "ראש הממשלה בנימין נתניהו ביקר במרחב המכשול החדש שמוקם בגבול המזרחי",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -190,10 +194,6 @@
   },
   {
    "title": "דברי רה\"מ נתניהו בטקס האזכרה הממלכתי לטבח ולגבורה בכ\"ב בתשרי - 7 באוקטובר",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "דברי רה\"מ נתניהו בטקס האזכרה הממלכתי לזכר חללי צה\"ל וכוחות הביטחון שנפלו ב\"מלחמת התקומה\"",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -341,6 +341,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "כתבת i24בצרפתית שני גידליה הצטרפה ליום במגן דוד אדום בקריית מד\"א ברמלה ובניידת טיפול נמרץ",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "גבורת הפראמדיק שיצא לחלץ פצועים תחת אש - מנהל אשכול אופקים ומועצה אזורית אשכול במד\"א דני שטרקמן",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -374,10 +378,6 @@
   },
   {
    "title": "בקריאה הראשונה באמבולנס לזכר דור רידר - נולד תינוק בכניסה לקיבוץ בארי בסיוע אביו, צביקה רידר",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "צוותי מד\"א טיפלו ב-3,322 בני אדם במהלך צום יום הכיפורים. 368 התעלפו, התייבשו וחשו ברע",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -513,7 +513,7 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-10-18 13:28:02",
+ "finished_utc": "2026-10-18 16:45:59",
  "summary": {
   "text_rejected_no_verified_rewrite": 12,
   "video_rejected_enrich_failed_or_not_newsworthy": 90
