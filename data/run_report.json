@@ -1,7 +1,19 @@
 {
  "items": [
   {
+   "title": "NASA Improves Shock, Vibration Analysis",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "Software",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Experimental Facilities",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA’s Simulated Mars Crew Marks One Year Inside Habitat",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -9,7 +21,23 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "ESA astronaut Sophie Adenot returns from her first mission to the International Space Station",
+   "title": "Martian Dawn",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "UN condemns deadly wave of drone strikes in war-torn Sudan",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Hunger is ‘an avoidable tragedy’ in a world of plenty: Türk",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Haiti: Elections on hold as gangs adapt to security crackdown, Security Council hears",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "‘Season of fear’: Escalating Israeli attacks on West Bank olive farmers, deadly strikes on Gaza",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -33,27 +61,11 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Flour sacks turned flood barriers: Gaza faces another winter without safe shelter",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "As disasters mount, next UN climate summit faces a test of trust",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Ukraine: Civilian casualty rates among ‘deadliest’ in years, as energy attacks intensify",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "WHO scales up Ebola readiness in 22 countries across three continents",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "Security Council LIVE: Sudan’s war spreads as drones and hunger take a deadly toll",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "AI, green energy and economic transitions risk leaving vulnerable communities behind, UN warns",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -436,6 +448,9 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -528,9 +543,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-10-19 20:08:49",
+ "finished_utc": "2026-10-19 23:45:06",
  "summary": {
-  "text_rejected_no_verified_rewrite": 14,
+  "text_rejected_no_verified_rewrite": 17,
   "video_rejected_enrich_failed_or_not_newsworthy": 91
  }
 }
