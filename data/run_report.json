@@ -1,11 +1,23 @@
 {
  "items": [
   {
+   "title": "NASA Provides Progress Update on Moon Base Rovers",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Webb Captures Stellar Jets",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA Welcomes Uzbekistan as Newest Artemis Accords Signatory",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "NASA Improves Shock, Vibration Analysis",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "New brain for Galileo",
+   "title": "Yemen war continues to force families from homes amid hunger and disease",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -42,10 +54,6 @@
   },
   {
    "title": "COP17: The world has a plan to save nature. Is it working?",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Flour sacks turned flood barriers: Gaza faces another winter without safe shelter",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -161,11 +169,11 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "ראש הממשלה נתניהו בחיל האוויר: \"יש לנו את המוכנות, הנחישות והיכולת להכות באויבינו ברגע שהדבר יידרש\"",
+   "title": "ראש הממשלה בנימין נתניהו בפתיחת שנת הלימודים האקדמית באוניברסיטת קריית שמונה - תל חי החדשה",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "רה\"מ נתניהו מציג את תפיסת הביטחון של ישראל",
+   "title": "ראש הממשלה נתניהו בחיל האוויר: \"יש לנו את המוכנות, הנחישות והיכולת להכות באויבינו ברגע שהדבר יידרש\"",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -428,6 +436,8 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -518,9 +528,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-10-20 13:03:13",
+ "finished_utc": "2026-10-20 18:00:57",
  "summary": {
-  "text_rejected_no_verified_rewrite": 14,
+  "text_rejected_no_verified_rewrite": 16,
   "video_rejected_enrich_failed_or_not_newsworthy": 89
  }
 }
