@@ -1,11 +1,31 @@
 {
  "items": [
   {
-   "title": "NASA’s CASALS Instrument Bridges Gaps in 3D Maps of Earth’s Surface",
+   "title": "NASA JPL Looks to Next 90 Years of Innovation, Exploration",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Webb Captures Stellar Jets",
+   "title": "NASA to Conduct NCAA Flyover, Engage Fans at University of Alabama",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Tracks Along the Longest Drive on Another World",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Science on the Space Station with NASA Astronaut Jessica Watkins",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Splashdown confirmed for Sophie Adenot",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Migrants paid up to $500 million in smuggling fees on European sea routes",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "UN agencies appeal for help to protect weakest from unprecedented El Niño",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -21,47 +41,27 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "AI on track to ‘crowd out’ human decision-making in warfare",
-   "outcome": "text_rejected_no_verified_rewrite"
+   "title": "על רקע דיון סוער והתנגדות חברי הכנסת החרדים, ועדת הכספים אישרה הטבות מס למאות עמותות",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "As Sudan war spills into Central African Republic, UN warns against early peacekeeper exit",
-   "outcome": "text_rejected_no_verified_rewrite"
+   "title": "״ישראל אינה מבצעת רצח עם - די עם השקר הנתעב הזה״|יו״ר הכנסת אוחנה בנאום במועצת אירופה#knesset #הכנסת",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "Bangladesh: UNICEF chief calls for an end to child marriage",
-   "outcome": "text_rejected_no_verified_rewrite"
+   "title": "מחיאות כפיים ליו\"ר הכנסת אוחנה במועצת אירופה: ישראל אינה מבצעת רצח עם - די עם השקר הנתעב הזה!",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "‘One step away from famine’: Inside Afghanistan’s hunger crisis",
-   "outcome": "text_rejected_no_verified_rewrite"
+   "title": "למה 77% ממשקי הבית בישראל לא יכולים לקנות דירה? | גלית בן נאים, סגנית בכירה לכלכלן הראשי במשרד האוצר",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "Yemen war continues to force families from homes amid hunger and disease",
-   "outcome": "text_rejected_no_verified_rewrite"
+   "title": "מהם תפקידי בנק ישראל? חלק שני",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "UN condemns deadly wave of drone strikes in war-torn Sudan",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Hunger is ‘an avoidable tragedy’ in a world of plenty: Türk",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "‘Season of fear’: Escalating Israeli attacks on West Bank olive farmers, deadly strikes on Gaza",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Guterres honours Indonesian troops who paid ‘ultimate sacrifice’",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Protecting Earth’s fragile biodiversity takes spotlight at Armenia talks",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "תולדות הכסף - תקן הזהב",
+   "title": "מהם תפקידי בנק ישראל? חלק ראשון",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -125,23 +125,11 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "על רקע דיון סוער והתנגדות חברי הכנסת החרדים, ועדת הכספים אישרה הטבות מס למאות עמותות",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "Elections for the 26th Knesset",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "״ישראל אינה מבצעת רצח עם - די עם השקר הנתעב הזה״|יו״ר הכנסת אוחנה בנאום במועצת אירופה#knesset #הכנסת",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "בשיאו של הנאום הניף אוחנה עותק של ספר זיכרון מיוחד לקורבנות השואה ובו מודפסת המילה Jew 6 מליון פעמים",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "מחיאות כפיים ליו\"ר הכנסת אוחנה במועצת אירופה: ישראל אינה מבצעת רצח עם - די עם השקר הנתעב הזה!",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -158,6 +146,10 @@
   },
   {
    "title": "הורדו דגלי הלאום לחצי התורן | ציון יום הזיכרון הלאומי לשבעה באוקטובר ומלחמת התקומה בכנסת #הכנסת",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "ראש הממשלה בנימין נתניהו בטקס סיום קורס קצינים בבה״ד 1",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -193,10 +185,6 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "דברי רה\"מ נתניהו בטקס האזכרה הממלכתי לטבח ולגבורה בכ\"ב בתשרי - 7 באוקטובר",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "איך נולדת רפורמה שתשפיע על הכיס של כולנו? חובב אלסטר ממשרד האוצר חושף הצצה ראשונה למאחורי הקלעים",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -206,10 +194,6 @@
   },
   {
    "title": "מההייטק למגזר הציבורי: המהלכים שרהב שלום רביבו מובילה בארץ ובעולם בסייבר ובפיננסים",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "למה 77% ממשקי הבית בישראל לא יכולים לקנות דירה? | גלית בן נאים, סגנית בכירה לכלכלן הראשי במשרד האוצר",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -229,11 +213,7 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "מהם תפקידי בנק ישראל? חלק שני",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "מהם תפקידי בנק ישראל? חלק ראשון",
+   "title": "תולדות הכסף - תקן הזהב",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -420,11 +400,6 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
-  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -513,9 +488,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-10-21 14:56:11",
+ "finished_utc": "2026-10-21 19:10:19",
  "summary": {
-  "text_rejected_no_verified_rewrite": 15,
+  "text_rejected_no_verified_rewrite": 10,
   "video_rejected_enrich_failed_or_not_newsworthy": 87
  }
 }
