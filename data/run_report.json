@@ -1,23 +1,23 @@
 {
  "items": [
   {
-   "title": "NASA JPL Looks to Next 90 Years of Innovation, Exploration",
+   "title": "NASA Conducts RS-25 Engine Test in Support of Future Artemis Missions",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "NASA to Conduct NCAA Flyover, Engage Fans at University of Alabama",
+   "title": "Welcome home, Sophie Adenot",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Tracks Along the Longest Drive on Another World",
+   "title": "Earth from Space: Namibia’s biggest salt pan",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Science on the Space Station with NASA Astronaut Jessica Watkins",
+   "title": "Fate unknown of many returned to DPR Korea from China: UN independent experts",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Splashdown confirmed for Sophie Adenot",
+   "title": "‘Ominous start’ to West Bank olive harvest amid settler attacks",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -39,30 +39,6 @@
   {
    "title": "Global warming will breach 1.5°C – but deep, fast cuts can still bring it back",
    "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "על רקע דיון סוער והתנגדות חברי הכנסת החרדים, ועדת הכספים אישרה הטבות מס למאות עמותות",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "״ישראל אינה מבצעת רצח עם - די עם השקר הנתעב הזה״|יו״ר הכנסת אוחנה בנאום במועצת אירופה#knesset #הכנסת",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "מחיאות כפיים ליו\"ר הכנסת אוחנה במועצת אירופה: ישראל אינה מבצעת רצח עם - די עם השקר הנתעב הזה!",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "למה 77% ממשקי הבית בישראל לא יכולים לקנות דירה? | גלית בן נאים, סגנית בכירה לכלכלן הראשי במשרד האוצר",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "מהם תפקידי בנק ישראל? חלק שני",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "מהם תפקידי בנק ישראל? חלק ראשון",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "מטיפולים בתנועה עם בן או בת הזוג או בכלל דרך כתיבה - עם היחידה לתגובות קרב 🎙️ | פודקאסט צה״ל",
@@ -125,11 +101,23 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "על רקע דיון סוער והתנגדות חברי הכנסת החרדים, ועדת הכספים אישרה הטבות מס למאות עמותות",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "Elections for the 26th Knesset",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "״ישראל אינה מבצעת רצח עם - די עם השקר הנתעב הזה״|יו״ר הכנסת אוחנה בנאום במועצת אירופה#knesset #הכנסת",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "בשיאו של הנאום הניף אוחנה עותק של ספר זיכרון מיוחד לקורבנות השואה ובו מודפסת המילה Jew 6 מליון פעמים",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "מחיאות כפיים ליו\"ר הכנסת אוחנה במועצת אירופה: ישראל אינה מבצעת רצח עם - די עם השקר הנתעב הזה!",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -197,6 +185,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "למה 77% ממשקי הבית בישראל לא יכולים לקנות דירה? | גלית בן נאים, סגנית בכירה לכלכלן הראשי במשרד האוצר",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "סדרת האינפלציה פרק 4 - הגביע הקדוש של הבנקים המרכזיים",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -210,6 +202,14 @@
   },
   {
    "title": "כך נקבעים השערים היציגים",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "מהם תפקידי בנק ישראל? חלק שני",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "מהם תפקידי בנק ישראל? חלק ראשון",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -488,7 +488,7 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-10-21 19:10:19",
+ "finished_utc": "2026-10-21 22:24:17",
  "summary": {
   "text_rejected_no_verified_rewrite": 10,
   "video_rejected_enrich_failed_or_not_newsworthy": 87
