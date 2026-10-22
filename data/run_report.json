@@ -1,11 +1,11 @@
 {
  "items": [
   {
-   "title": "NASA’s Hubble Charts Path for Roman with Gravitational Lenses",
+   "title": "Spiral’s Edge",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "350th ESA Council: Media information session",
+   "title": "ESA astronaut Sophie Adenot returns from her first mission to the International Space Station",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -37,27 +37,31 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "ראש הממשלה בנימין נתניהו בטקס סיום קורס קצינים בבה״ד 1",
+   "title": "WHO supports Nigeria after first Ebola case confirmed",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "הפצוע שהשתקם והופך לקב״ן - המסע של מתן | צה״ל",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "ראש הממשלה נתניהו בחיל האוויר: \"יש לנו את המוכנות, הנחישות והיכולת להכות באויבינו ברגע שהדבר יידרש\"",
+   "title": "על רקע דיון סוער והתנגדות חברי הכנסת החרדים, ועדת הכספים אישרה הטבות מס למאות עמותות",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "דברי ראש הממשלה בנימין נתניהו בטקס קבלת פנים במשרד החוץ לרגל חנוכת שגרירות קולומביה בירושלים",
+   "title": "מהפתק בקלפי ועד לייצוג במליאת הכנסת | נציגי מועצת התלמידים והנוער הארצית מספרים על חשיבות ההצבעה",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "ראש הממשלה נתניהו בקו התפר בשומרון: \"אנחנו ערוכים לכל תרחיש, כולל היפוך קנים\"",
+   "title": "פודמס – פרק 49: אירוע חסר תקדים – מס חברות גלובלי מינימלי",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "ראש הממשלה נתניהו בבית החולים רמב\"ם בביקור פצועים מהאירוע הקשה בצפון",
+   "title": "יש דברים שגם אוהד הפועל וגם אוהד בית\"ר מסכימים עליהם!",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "ראש הממשלה בנימין נתניהו נפגש עם סגן נשיא פרגוואי פדרו אליאנה",
+   "title": "מה עשה לי את הבוקר? אלי אוחנה מספר על חובשי מד\"א שטיפלו באישה שנפצעה בבניית סוכה והשלימו את בנייתה",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -70,10 +74,6 @@
   },
   {
    "title": "\"יוני נהרג. עכשיו - אתה מפקד הנח\"ל\" | פודקאסט צה״ל",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "הפצוע שהשתקם והופך לקב״ן - המסע של מתן | צה״ל",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -125,10 +125,6 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "על רקע דיון סוער והתנגדות חברי הכנסת החרדים, ועדת הכספים אישרה הטבות מס למאות עמותות",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "Elections for the 26th Knesset",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -145,10 +141,6 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "מהפתק בקלפי ועד לייצוג במליאת הכנסת | נציגי מועצת התלמידים והנוער הארצית מספרים על חשיבות ההצבעה",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "ידעתם שרגע לפני הבחירות הראשונות המדינה הייתה צריכה לספור את כל המצביעים? |ד״ר פוקסמן עם הסיפור המלא",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -158,6 +150,30 @@
   },
   {
    "title": "“Settler Violence” - The Narrative Against Israel Exposed",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "ראש הממשלה בנימין נתניהו בטקס סיום קורס קצינים בבה״ד 1",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "ראש הממשלה נתניהו בחיל האוויר: \"יש לנו את המוכנות, הנחישות והיכולת להכות באויבינו ברגע שהדבר יידרש\"",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "דברי ראש הממשלה בנימין נתניהו בטקס קבלת פנים במשרד החוץ לרגל חנוכת שגרירות קולומביה בירושלים",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "ראש הממשלה נתניהו בקו התפר בשומרון: \"אנחנו ערוכים לכל תרחיש, כולל היפוך קנים\"",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "ראש הממשלה נתניהו בבית החולים רמב\"ם בביקור פצועים מהאירוע הקשה בצפון",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "ראש הממשלה בנימין נתניהו נפגש עם סגן נשיא פרגוואי פדרו אליאנה",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -222,10 +238,6 @@
   },
   {
    "title": "لا تضغطوا قبل أن تتحققوا! 📱⚠️",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "פודמס – פרק 49: אירוע חסר תקדים – מס חברות גלובלי מינימלי",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -297,10 +309,6 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "יש דברים שגם אוהד הפועל וגם אוהד בית\"ר מסכימים עליהם!",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "דנית, תבואי גם מחר?",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -349,10 +357,6 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "מה עשה לי את הבוקר? אלי אוחנה מספר על חובשי מד\"א שטיפלו באישה שנפצעה בבניית סוכה והשלימו את בנייתה",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "בקריאה הראשונה באמבולנס לזכר דור רידר - נולד תינוק בכניסה לקיבוץ בארי בסיוע אביו, צביקה רידר",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -386,6 +390,7 @@
   }
  ],
  "ai_errors": [
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -483,9 +488,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-10-22 19:57:15",
+ "finished_utc": "2026-10-22 23:02:33",
  "summary": {
-  "text_rejected_no_verified_rewrite": 9,
+  "text_rejected_no_verified_rewrite": 10,
   "video_rejected_enrich_failed_or_not_newsworthy": 87
  }
 }
