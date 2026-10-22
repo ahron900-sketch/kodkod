@@ -1,7 +1,11 @@
 {
  "items": [
   {
-   "title": "Faster to Science: A Letter to the Science Community",
+   "title": "APOD: 2026 October 22 – The First Green Star, WD J1330+6435",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Fires Char New Guinea",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -31,10 +35,6 @@
   {
    "title": "Global warming will breach 1.5°C – but deep, fast cuts can still bring it back",
    "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "AI on track to ‘crowd out’ human decision-making in warfare",
-   "outcome": "text_rejected_no_verified_rewrite"
   }
  ],
  "ai_errors": [
@@ -48,7 +48,7 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-10-22 00:50:11",
+ "finished_utc": "2026-10-22 05:50:07",
  "summary": {
   "text_rejected_no_verified_rewrite": 9
  }
