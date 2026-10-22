@@ -1,11 +1,15 @@
 {
  "items": [
   {
-   "title": "ESA Open Days 2026",
+   "title": "ESA Council approves appointment of two new directors",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Stars brewing in a nebulous cauldron",
+   "title": "Euclid discovers new comet",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Earth from Space: West Antarctica",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -34,6 +38,10 @@
   },
   {
    "title": "Global warming will breach 1.5°C – but deep, fast cuts can still bring it back",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "AI on track to ‘crowd out’ human decision-making in warfare",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -395,6 +403,8 @@
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
+  "article_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
@@ -483,9 +493,9 @@
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n",
   "video_enrich: HTTP Error 404: Not Found | body: {\"error\":{\"message\":\"The model `qwen/qwen3.6-27b` does not exist or you do not have access to it.\",\"type\":\"invalid_request_error\",\"code\":\"model_not_found\"}}\n"
  ],
- "finished_utc": "2026-10-22 11:20:13",
+ "finished_utc": "2026-10-22 15:59:20",
  "summary": {
-  "text_rejected_no_verified_rewrite": 9,
+  "text_rejected_no_verified_rewrite": 11,
   "video_rejected_enrich_failed_or_not_newsworthy": 87
  }
 }
