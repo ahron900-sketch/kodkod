@@ -1,14 +1,6 @@
 {
  "items": [
   {
-   "title": "NASA, Virginia Launch Power Partnership for Energy Security",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Spiral’s Edge",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "Women ‘first to suffer’ under siege, first to step up as frontline responders in Sudan",
    "outcome": "text_rejected_no_verified_rewrite"
   },
@@ -54,12 +46,10 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-10-25 00:34:01",
+ "finished_utc": "2026-10-25 05:22:08",
  "summary": {
-  "text_rejected_no_verified_rewrite": 11
+  "text_rejected_no_verified_rewrite": 9
  }
 }
