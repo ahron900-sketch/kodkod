@@ -5,7 +5,11 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "ESA Open Days 2026",
+   "title": "ESA Council approves appointment of two new directors",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Euclid discovers new comet",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -146,10 +150,6 @@
   },
   {
    "title": "“Settler Violence” - The Narrative Against Israel Exposed",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "ראש הממשלה בנימין נתניהו בטקס סיום קורס קצינים בבה״ד 1",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -409,7 +409,7 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
@@ -498,9 +498,9 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-10-25 14:24:57",
+ "finished_utc": "2026-10-25 17:47:25",
  "summary": {
-  "text_rejected_no_verified_rewrite": 11,
-  "video_rejected_enrich_failed_or_not_newsworthy": 88
+  "text_rejected_no_verified_rewrite": 12,
+  "video_rejected_enrich_failed_or_not_newsworthy": 87
  }
 }
