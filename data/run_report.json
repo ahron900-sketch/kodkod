@@ -1,15 +1,7 @@
 {
  "items": [
   {
-   "title": "World News in Brief: Iran nuclear inspections, deadly church attack in Jordan, El Fasher – one year on",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Sudan: Drone strikes killed at least 306 people in three weeks",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "350th ESA Council: Media information session",
+   "title": "NASA, Virginia Launch Power Partnership for Energy Security",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -21,11 +13,19 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
+   "title": "World News in Brief: Iran nuclear inspections, deadly church attack in Jordan, El Fasher – one year on",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "Blood brothers: WHO chief joins ENHYPEN to celebrate drive success",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
    "title": "West Bank: Guterres alarmed as Israel imposes sweeping closures after deadly Hebron attack",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Sudan: Drone strikes killed at least 306 people in three weeks",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -488,7 +488,7 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-10-25 20:30:59",
+ "finished_utc": "2026-10-25 22:47:27",
  "summary": {
   "text_rejected_no_verified_rewrite": 10,
   "video_rejected_enrich_failed_or_not_newsworthy": 87
