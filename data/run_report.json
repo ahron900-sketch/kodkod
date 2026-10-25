@@ -1,11 +1,11 @@
 {
  "items": [
   {
-   "title": "APOD: 2026 October 25 – Dark Matter in a Simulated Universe",
+   "title": "NASA, Virginia Launch Power Partnership for Energy Security",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "NASA, Virginia Launch Power Partnership for Energy Security",
+   "title": "ESA Open Days 2026",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -498,7 +498,7 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-10-25 10:02:23",
+ "finished_utc": "2026-10-25 14:24:57",
  "summary": {
   "text_rejected_no_verified_rewrite": 11,
   "video_rejected_enrich_failed_or_not_newsworthy": 88
