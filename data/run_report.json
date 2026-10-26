@@ -1,19 +1,31 @@
 {
  "items": [
   {
-   "title": "NASA, Virginia Launch Power Partnership for Energy Security",
+   "title": "NASA Invites Media to Moon Landing Simulation Experience in California",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "APOD: 2026 October 23 – Andromeda in Southern Spring",
+   "title": "NASA’s X-59 Aircraft and Test Pilot",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Earth from Space: The pink city",
+   "title": "NASA, USDA Sign Agreement Advancing Earth Science, Agriculture",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Why do planes keep circling before landing? The UN has a plan to fix it",
+   "title": "Ukraine: Investigators find Russia committed war crimes by targeting civilians",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "In Egypt, Guterres warns against Iran-US escalation",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Ebola: UN officials condemn killing of nurse in DR Congo",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Why do planes keep circling before landing? UN has a plan to fix it",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -34,18 +46,6 @@
   },
   {
    "title": "West Bank: Guterres alarmed as Israel imposes sweeping closures after deadly Hebron attack",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Sudan: Drone strikes killed at least 306 people in three weeks",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Soil mapping aims to boost agricultural production in Kenya",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "‘Burden and loss’ builds in DR Congo, as Kenya strengthens Ebola containment",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -503,7 +503,7 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-10-26 13:18:08",
+ "finished_utc": "2026-10-26 19:31:27",
  "summary": {
   "text_rejected_no_verified_rewrite": 12,
   "video_rejected_enrich_failed_or_not_newsworthy": 88
