@@ -1,11 +1,11 @@
 {
  "items": [
   {
-   "title": "NASA’s Perseverance Offers Clues to Protect Crews From Mars Dust",
+   "title": "NASA Invites Media to Crew Completion of Yearlong Mars Simulation",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "ESA procures four new Galileo Second Generation satellites",
+   "title": "NASA’s Perseverance Offers Clues to Protect Crews From Mars Dust",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -13,7 +13,7 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Kenya: 20 Ebola contacts released from quarantine",
+   "title": "Ebola: 20 contacts released from quarantine in Kenya, amid vaccine ‘hope’ in DR Congo",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -47,22 +47,6 @@
   {
    "title": "Women ‘first to suffer’ under siege, first to step up as frontline responders in Sudan",
    "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "איך נולדת רפורמה שתשפיע על הכיס של כולנו? חובב אלסטר ממשרד האוצר חושף הצצה ראשונה למאחורי הקלעים",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "הקריאה הראשונה לאמבולנס על שמו של דור רידר ז\"ל, בנו של חובש בכיר במד\"א צבי רידר - לידה בבארי",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "חובש מד\"א רומי דר, החובש שהציל חיים - משדר מיוחד, 3 שנים ל-7.10",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "מה עשה לי את הבוקר? אלי אוחנה מספר על חובשי מד\"א שטיפלו באישה שנפצעה בבניית סוכה והשלימו את בנייתה",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "אלקנה בוחבוט והקצינה שליוותה את משפחתו בזמן השבי - ״היא הפכה לאחותי\" | פודקאסט צה״ל",
@@ -198,6 +182,10 @@
   },
   {
    "title": "PMO Spox Doron Spielman: \"Standing strong alongside America, we now see an entirely new reality\"",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "איך נולדת רפורמה שתשפיע על הכיס של כולנו? חובב אלסטר ממשרד האוצר חושף הצצה ראשונה למאחורי הקלעים",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -353,6 +341,14 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "הקריאה הראשונה לאמבולנס על שמו של דור רידר ז\"ל, בנו של חובש בכיר במד\"א צבי רידר - לידה בבארי",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "חובש מד\"א רומי דר, החובש שהציל חיים - משדר מיוחד, 3 שנים ל-7.10",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "השיחות המצמררות למד\"א ב-7 באוקטובר. פסקול הזוועה: הקריאה לעזרה, האימה התושייה והתסכול",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -366,6 +362,10 @@
   },
   {
    "title": "גם מי שמציל חיים עוצר לברכה - הסוכה שמגיעה עד לצוותי מד\"א במשמרת ומאפשרת להם לקיים את מצוות החג",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "מה עשה לי את הבוקר? אלי אוחנה מספר על חובשי מד\"א שטיפלו באישה שנפצעה בבניית סוכה והשלימו את בנייתה",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -503,7 +503,7 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-10-27 14:39:14",
+ "finished_utc": "2026-10-27 19:42:05",
  "summary": {
   "text_rejected_no_verified_rewrite": 12,
   "video_rejected_enrich_failed_or_not_newsworthy": 88
