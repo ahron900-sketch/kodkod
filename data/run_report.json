@@ -1,19 +1,23 @@
 {
  "items": [
   {
-   "title": "How a Johnson Mentor Shapes the Next Generation of NASA Talent",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "APOD: 2026 October 27 – Noctilucent Clouds over Sweden",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "A-81 Reaches South Georgia",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "NASA’s Perseverance Offers Clues to Protect Crews From Mars Dust",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "ESA procures four new Galileo Second Generation satellites",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Record carbon dioxide levels will impact us for centuries, says UN weather agency",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Kenya: 20 Ebola contacts released from quarantine",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "World News in Brief: Ethiopians flee to Kenya amidst renewed conflict, new head of UN’s food programme, UN mission in So",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -45,12 +49,20 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "UN marks 81 years of global cooperation",
-   "outcome": "text_rejected_no_verified_rewrite"
+   "title": "איך נולדת רפורמה שתשפיע על הכיס של כולנו? חובב אלסטר ממשרד האוצר חושף הצצה ראשונה למאחורי הקלעים",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "World News in Brief: Iran nuclear inspections, deadly church attack in Jordan, El Fasher – one year on",
-   "outcome": "text_rejected_no_verified_rewrite"
+   "title": "הקריאה הראשונה לאמבולנס על שמו של דור רידר ז\"ל, בנו של חובש בכיר במד\"א צבי רידר - לידה בבארי",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "חובש מד\"א רומי דר, החובש שהציל חיים - משדר מיוחד, 3 שנים ל-7.10",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "מה עשה לי את הבוקר? אלי אוחנה מספר על חובשי מד\"א שטיפלו באישה שנפצעה בבניית סוכה והשלימו את בנייתה",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "אלקנה בוחבוט והקצינה שליוותה את משפחתו בזמן השבי - ״היא הפכה לאחותי\" | פודקאסט צה״ל",
@@ -149,6 +161,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "ראש הממשלה נתניהו ורעייתו בקלפי בירושלים",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "They almost didn’t make it home alive.",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -182,14 +198,6 @@
   },
   {
    "title": "PMO Spox Doron Spielman: \"Standing strong alongside America, we now see an entirely new reality\"",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "Terrorism is Not a Game. Remember October 7th",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "איך נולדת רפורמה שתשפיע על הכיס של כולנו? חובב אלסטר ממשרד האוצר חושף הצצה ראשונה למאחורי הקלעים",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -345,14 +353,6 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "הקריאה הראשונה לאמבולנס על שמו של דור רידר ז\"ל, בנו של חובש בכיר במד\"א צבי רידר - לידה בבארי",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "חובש מד\"א רומי דר, החובש שהציל חיים - משדר מיוחד, 3 שנים ל-7.10",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "השיחות המצמררות למד\"א ב-7 באוקטובר. פסקול הזוועה: הקריאה לעזרה, האימה התושייה והתסכול",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -366,10 +366,6 @@
   },
   {
    "title": "גם מי שמציל חיים עוצר לברכה - הסוכה שמגיעה עד לצוותי מד\"א במשמרת ומאפשרת להם לקיים את מצוות החג",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "מה עשה לי את הבוקר? אלי אוחנה מספר על חובשי מד\"א שטיפלו באישה שנפצעה בבניית סוכה והשלימו את בנייתה",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -406,7 +402,6 @@
   }
  ],
  "ai_errors": [
-  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
@@ -508,9 +503,9 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-10-27 08:16:33",
+ "finished_utc": "2026-10-27 14:39:14",
  "summary": {
-  "text_rejected_no_verified_rewrite": 13,
+  "text_rejected_no_verified_rewrite": 12,
   "video_rejected_enrich_failed_or_not_newsworthy": 88
  }
 }
