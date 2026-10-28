@@ -1,19 +1,27 @@
 {
  "items": [
   {
-   "title": "Curiosity Blog, Sols 5043-5049: Preparing to Drill at ‘Nazca’",
+   "title": "Webb Sees Turbulent Star Nursery",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "APOD: 2026 October 28 – The Mutual Occultation of Ganymede and Io",
+   "title": "NASA Invites Media to Crew Completion of Yearlong Mars Simulation",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "The Land of the Standing-Up Rocks",
+   "title": "ESA Open Days 2026",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "NASA’s Perseverance Offers Clues to Protect Crews From Mars Dust",
+   "title": "DR Congo: WHO urges sustained efforts as Ebola cases top 10,000",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Record heat-related deaths in 2023, WHO-partnered report finds",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Ocean’s ability to absorb carbon is weakening as climate change intensifies, UN warns",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -45,28 +53,12 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "World News in Brief: Ethiopians flee to Kenya amidst renewed conflict, new head of UN’s food programme, UN mission in So",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "West Bank: Hebron crackdown displaces thousands, Türk warns of ethnic cleansing",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
    "title": "Ukraine: Investigators find Russia committed war crimes by targeting civilians",
    "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Women ‘first to suffer’ under siege, first to step up as frontline responders in Sudan",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "ילד נשכח ברכב, השוטרים הוקפצו והאירוע הסתיים בשלום",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "נמלט משוטר, ביצע תאונה ונעצר",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "אלקנה בוחבוט והקצינה שליוותה את משפחתו בזמן השבי - ״היא הפכה לאחותי\" | פודקאסט צה״ל",
@@ -89,11 +81,19 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "פשיטה על יעדים בפזורה הבדואית",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "חילוץ אישה שניסתה לקפוץ מהקומה ה-11",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "משטובות וליקויים מסוכנים | אכיפה בכבישי בנימין",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "ילד נשכח ברכב, השוטרים הוקפצו והאירוע הסתיים בשלום",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -105,11 +105,11 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "מה הדבר הראשון שאומרים למוקד 100?",
+   "title": "נמלט משוטר, ביצע תאונה ונעצר",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "מעצר גנב רכב סמוך למעבר חוצ\"ש",
+   "title": "מה הדבר הראשון שאומרים למוקד 100?",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -518,7 +518,7 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-10-28 08:54:20",
+ "finished_utc": "2026-10-28 15:48:06",
  "summary": {
   "text_rejected_no_verified_rewrite": 15,
   "video_rejected_enrich_failed_or_not_newsworthy": 88
