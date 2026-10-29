@@ -1,15 +1,43 @@
 {
  "items": [
   {
-   "title": "Contractor to Civil Servant: NASA Welcomes Jared Spiers",
+   "title": "NASA-funded Study Details One of Oldest Mars Meteorites Ever Found",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Webb Sees Turbulent Star Nursery",
+   "title": "NASA Names Troy Asher Armstrong Flight Research Center Director",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Earth from Space: The pink city",
+   "title": "NIH–NASA QuSAFE Challenge",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Send Your Name to Titan Aboard NASA’s Dragonfly Mission",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA’s ISAM State of Play: The Industry Standard for Space Servicing, Assembly, and Manufacturing",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA’s Hubble Marks Way for Roman Space Telescope",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Ghostly Cat’s Head Nebula Lurks Within Sight of NASA’s Hubble, Webb",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Russia drone strike on Ukrainian railway station kills 13",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Nature is making a comeback – now restoration funding must quadruple",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Security Council LIVE: Can new technology keep the world’s sea lanes safe?",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -41,16 +69,48 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "DR Congo: WHO urges sustained efforts as Ebola cases top 10,000",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "Record heat-related deaths in 2023, WHO-partnered report finds",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
    "title": "Ocean’s ability to absorb carbon is weakening as climate change intensifies, UN warns",
    "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "הפצוע שהשתקם והופך לקב״ן - המסע של מתן | צה״ל",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "משטובות וליקויים מסוכנים | אכיפה בכבישי בנימין",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "על רקע דיון סוער והתנגדות חברי הכנסת החרדים, ועדת הכספים אישרה הטבות מס למאות עמותות",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "מהפתק בקלפי ועד לייצוג במליאת הכנסת | נציגי מועצת התלמידים והנוער הארצית מספרים על חשיבות ההצבעה",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "פודמס – פרק 49: אירוע חסר תקדים – מס חברות גלובלי מינימלי",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "המטרה: יותר תלמידים שמסיימים עם \"בגרות-טק\"",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "יש דברים שגם אוהד הפועל וגם אוהד בית\"ר מסכימים עליהם!",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "מה עשה לי את הבוקר? אלי אוחנה מספר על חובשי מד\"א שטיפלו באישה שנפצעה בבניית סוכה והשלימו את בנייתה",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "ראיון בדופק גבוה עם המפקד שמכניס את כל צה״ל לכושר | פודקאסט צה״ל",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "אלקנה בוחבוט והקצינה שליוותה את משפחתו בזמן השבי - ״היא הפכה לאחותי\" | פודקאסט צה״ל",
@@ -65,23 +125,11 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "הפצוע שהשתקם והופך לקב״ן - המסע של מתן | צה״ל",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "מה השתנה ברצועת עזה מאז 7 באוקטובר? ומה עוד נותר לעשות? | פודקאסט צה״ל",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "פשיטה על יעדים בפזורה הבדואית",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "חילוץ אישה שניסתה לקפוץ מהקומה ה-11",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "משטובות וליקויים מסוכנים | אכיפה בכבישי בנימין",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -109,19 +157,11 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "מגן שר הבריאות להתנדבות לשנת 2025/תשפ\"ו - 12/10/2026",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "יו\"ר וועדת הכספים ח\"כ חנוך מילביצקי הודה לחברי הוועדה :\"הייתה לי הזכות לשבת בראשות הוועדה הזו\"",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "חשבתם שאתם יודעים איך הבית שלכם נראה מבפנים?הכנסת הבית של כולנו ובה מיוצגים כל גווני הציבור הישראלי",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "על רקע דיון סוער והתנגדות חברי הכנסת החרדים, ועדת הכספים אישרה הטבות מס למאות עמותות",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -138,10 +178,6 @@
   },
   {
    "title": "מחיאות כפיים ליו\"ר הכנסת אוחנה במועצת אירופה: ישראל אינה מבצעת רצח עם - די עם השקר הנתעב הזה!",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "מהפתק בקלפי ועד לייצוג במליאת הכנסת | נציגי מועצת התלמידים והנוער הארצית מספרים על חשיבות ההצבעה",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -249,19 +285,11 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "פודמס – פרק 49: אירוע חסר תקדים – מס חברות גלובלי מינימלי",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "סרטון 3- איך למלא טופס 62 א החדש? 62א החדש טופס 1262",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "סרטון 4- איך למלא נספח 1281? סרטון הסבר",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "המטרה: יותר תלמידים שמסיימים עם \"בגרות-טק\"",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -317,10 +345,6 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "יש דברים שגם אוהד הפועל וגם אוהד בית\"ר מסכימים עליהם!",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "דנית, תבואי גם מחר?",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -366,10 +390,6 @@
   },
   {
    "title": "גם מי שמציל חיים עוצר לברכה - הסוכה שמגיעה עד לצוותי מד\"א במשמרת ומאפשרת להם לקיים את מצוות החג",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "מה עשה לי את הבוקר? אלי אוחנה מספר על חובשי מד\"א שטיפלו באישה שנפצעה בבניית סוכה והשלימו את בנייתה",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -419,7 +439,12 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
@@ -508,9 +533,9 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-10-29 13:39:09",
+ "finished_utc": "2026-10-29 19:16:11",
  "summary": {
-  "text_rejected_no_verified_rewrite": 13,
-  "video_rejected_enrich_failed_or_not_newsworthy": 88
+  "text_rejected_no_verified_rewrite": 19,
+  "video_rejected_enrich_failed_or_not_newsworthy": 87
  }
 }
