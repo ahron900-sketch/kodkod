@@ -13,7 +13,11 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Halloween Aboard the International Space Station",
+   "title": "Map Showing Potential Origins of Martian Meteorite Teghaza 001",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Slice of Martian Meteorite Teghaza 001",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -22,10 +26,6 @@
   },
   {
    "title": "Send Your Name to Titan Aboard NASA’s Dragonfly Mission",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "εpsilon",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -53,6 +53,18 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
+   "title": "Higher Ground: How New York is raising a park to hold back the sea",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "UN human rights chief urges better protection of civilians in conflicts",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Backing for UN call to end Cuba embargo falls to 20-year low",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "Record heat-related deaths in 2023, WHO-partnered report finds",
    "outcome": "text_rejected_no_verified_rewrite"
   }
@@ -71,10 +83,13 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-10-29 23:21:30",
+ "finished_utc": "2026-10-30 02:48:56",
  "summary": {
-  "text_rejected_no_verified_rewrite": 14
+  "text_rejected_no_verified_rewrite": 17
  }
 }
