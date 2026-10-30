@@ -1,8 +1,4 @@
 {
-  "0001000000011100001111000011110000111100001111000011110000000000": {
-    "title": "ESA procures four new Galileo Second Generation satellites",
-    "ts": 1793111845.9270859
-  },
   "1111100011111100111111101100000110000001100000011100000110000001": {
     "title": "NASA Invites Media to Crew Completion of Yearlong Mars Simulation",
     "ts": 1793129987.7697282
@@ -130,5 +126,21 @@
   "1111111011111000110100001000011010000110110000001110000011100000": {
     "title": "Earth from Space: Champi’s eerie eye",
     "ts": 1793353333.7351906
+  },
+  "0000000000000000000000000000110011111111111111111111111111111111": {
+    "title": "NASA Explores Potential Commercial Servicing for Hubble Telescope",
+    "ts": 1793376937.2452655
+  },
+  "1111111011111110111111111111111110000000000000000000000000000000": {
+    "title": "November’s Night Sky Notes: Light-Day Away",
+    "ts": 1793376941.1039443
+  },
+  "0011111000111100000111001100100011011001111010010000110000000000": {
+    "title": "What happened this month at the European Space Agency? (October 2026)",
+    "ts": 1793376949.0634944
+  },
+  "0001000000011100001111000011110000111100001111000011110000000000": {
+    "title": "ESA procures four new Galileo Second Generation satellites",
+    "ts": 1793376952.8100502
   }
 }

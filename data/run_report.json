@@ -1,23 +1,31 @@
 {
  "items": [
   {
-   "title": "APOD: 2026 October 30 – Haunting the Cepheus Flare",
+   "title": "NASA Explores Potential Commercial Servicing for Hubble Telescope",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Vega Island Frozen in Fright",
+   "title": "November’s Night Sky Notes: Light-Day Away",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Envía tu nombre a Titán a bordo de la misión Dragonfly de la NASA",
+   "title": "NASA-funded Study Details One of Oldest Mars Meteorites Ever Found",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Send Your Name to Titan Aboard NASA’s Dragonfly Mission",
+   "title": "What happened this month at the European Space Agency? (October 2026)",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Earth from Space: Champi’s eerie eye",
+   "title": "ESA procures four new Galileo Second Generation satellites",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "UN rights office warns of deepening displacement ‘nightmare’ in Gaza",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Yemen war makes reaching assistance too dangerous for many",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -49,19 +57,7 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Higher Ground: How New York is raising a park to hold back the sea",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Civilians in Sudan’s El Obeid trapped between drones and incarceration",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "Ending conflict is ‘number one thing’ to reduce world hunger, new WFP chief says",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Record heat-related deaths in 2023, WHO-partnered report finds",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -429,7 +425,6 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
@@ -518,9 +513,9 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-10-30 09:43:54",
+ "finished_utc": "2026-10-30 16:17:27",
  "summary": {
-  "text_rejected_no_verified_rewrite": 16,
+  "text_rejected_no_verified_rewrite": 15,
   "video_rejected_enrich_failed_or_not_newsworthy": 87
  }
 }
