@@ -1,7 +1,7 @@
 {
  "items": [
   {
-   "title": "NASA’s James Webb Space Telescope Captures Eerie Cat’s Head",
+   "title": "DPR Korea: Isolation deepens even as the country changes, says UN rights official",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -9,19 +9,31 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
+   "title": "World News in Brief: 300,000 displaced in Lebanon, Türk ‘deeply concerned’ over Novaya Gazeta closure, $50 million refug",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Ukraine: Oleshky ceasefire offers ‘hope’ for civilians as attacks on aid vehicles continue",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "DR Congo: Hunger deepens for millions amid conflict, Ebola and climate shocks",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
+   "title": "UN rights office warns of deepening displacement ‘nightmare’ in Gaza",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Yemen war makes reaching assistance too dangerous for many",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Myanmar’s illicit economy fuels escalating violence, with civilians bearing the brunt",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "AI is changing the way we think. The question is whether we’ll notice in time",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "World News in Brief: 5 children killed in Sudan, Haiti hunger emergency, Yemen war update",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Russia drone strike on Ukrainian railway station kills 13",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -385,6 +397,9 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
@@ -473,9 +488,9 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-10-31 12:58:55",
+ "finished_utc": "2026-10-31 17:35:15",
  "summary": {
-  "text_rejected_no_verified_rewrite": 7,
+  "text_rejected_no_verified_rewrite": 10,
   "video_rejected_enrich_failed_or_not_newsworthy": 87
  }
 }
