@@ -1,6 +1,10 @@
 {
  "items": [
   {
+   "title": "APOD: 2026 November 1 – Colors of the Moon",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "NASA’s James Webb Space Telescope Captures Eerie Cat’s Head",
    "outcome": "text_rejected_no_verified_rewrite"
   },
@@ -41,32 +45,16 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
+   "title": "Myanmar’s illicit economy fuels escalating violence, with civilians bearing the brunt",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "AI is changing the way we think. The question is whether we’ll notice in time",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
    "title": "Security Council LIVE: Can new technology keep the world’s sea lanes safe?",
    "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "ראיון בדופק גבוה עם המפקד שמכניס את כל צה״ל לכושר | פודקאסט צה״ל",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "אלקנה בוחבוט והקצינה שליוותה את משפחתו בזמן השבי - ״היא הפכה לאחותי\" | פודקאסט צה״ל",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "מטיפולים בתנועה עם בן או בת הזוג או בכלל דרך כתיבה - עם היחידה לתגובות קרב 🎙️ | פודקאסט צה״ל",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "\"יוני נהרג. עכשיו - אתה מפקד הנח\"ל\" | פודקאסט צה״ל",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "הפצוע שהשתקם והופך לקב״ן - המסע של מתן | צה״ל",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   }
  ],
  "ai_errors": [
@@ -82,15 +70,11 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-10-31 23:48:02",
+ "finished_utc": "2026-11-01 04:52:05",
  "summary": {
-  "text_rejected_no_verified_rewrite": 12,
-  "video_rejected_enrich_failed_or_not_newsworthy": 5
+  "text_rejected_no_verified_rewrite": 14
  }
 }
