@@ -5,6 +5,14 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
+   "title": "COP17: Nations chart ‘Yerevan Pathway’ to speed up action for nature",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Western Sahara: UN ‘stands ready’ to keep supporting peace efforts as MINURSO mission ends",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "‘They deserve to know the truth’: UN rights chief demands probe into staffer’s death in Houthi custody",
    "outcome": "text_rejected_no_verified_rewrite"
   },
@@ -37,16 +45,16 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Yemen war makes reaching assistance too dangerous for many",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "AI is changing the way we think. The question is whether we’ll notice in time",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Security Council LIVE: Can new technology keep the world’s sea lanes safe?",
-   "outcome": "text_rejected_no_verified_rewrite"
+   "title": "מי לא מכיר את כרטיס \"פייטר\"? מאחורי הקלעים על הארנק שהשפיע על עשרות אלפי מילואימניקים | משרד האוצר",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "מה זה שמה בשמיים? תרגיל הרחפנים של 474🕹️ | צה״ל",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "ראיון בדופק גבוה עם המפקד שמכניס את כל צה״ל לכושר | פודקאסט צה״ל",
@@ -182,10 +190,6 @@
   },
   {
    "title": "איך נולדת רפורמה שתשפיע על הכיס של כולנו? חובב אלסטר ממשרד האוצר חושף הצצה ראשונה למאחורי הקלעים",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "מי לא מכיר את כרטיס \"פייטר\"? מאחורי הקלעים על הארנק שהשפיע על עשרות אלפי מילואימניקים | משרד האוצר",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -496,11 +500,12 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-01 11:44:42",
+ "finished_utc": "2026-11-01 17:16:47",
  "summary": {
   "text_rejected_no_verified_rewrite": 12,
-  "video_rejected_enrich_failed_or_not_newsworthy": 87
+  "video_rejected_enrich_failed_or_not_newsworthy": 88
  }
 }
