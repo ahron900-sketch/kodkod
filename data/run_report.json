@@ -1,15 +1,27 @@
 {
  "items": [
   {
+   "title": "Astronaut and Earth",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "TB 26-10 Printed Circuit Board Assembly Chip Resistor Body Cracking",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA Astronaut, STEM Creator Connect with Students for STEM Day",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "What’s Up: November 2026 Skywatching Tips from NASA",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "10 asteroid mysteries that Hera will explore",
+   "title": "Gender equality pays off for business – so why are companies pulling back?",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Air-raid alerts and attacks on schools: the devastating face of education in Ukraine",
+   "title": "Air raid alerts and attacks on schools: the devastating face of education in Ukraine",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -21,27 +33,7 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Ethiopia: Violence in the north is pushing health system to the brink, WHO chief warns",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Six in seven journalist murders go unpunished,  UNESCO reports",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "COP17: Nations chart ‘Yerevan Pathway’ to speed up action for nature",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "Western Sahara: UN ‘stands ready’ to keep supporting peace efforts as MINURSO mission ends",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "‘They deserve to know the truth’: UN rights chief demands probe into staffer’s death in Houthi custody",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Samarkand: A ‘living museum’ on the Silk Road grapples with a tourism boom",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -417,8 +409,6 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
@@ -508,9 +498,9 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-03 14:37:05",
+ "finished_utc": "2026-11-03 20:42:13",
  "summary": {
-  "text_rejected_no_verified_rewrite": 13,
+  "text_rejected_no_verified_rewrite": 11,
   "video_rejected_enrich_failed_or_not_newsworthy": 88
  }
 }
