@@ -1,15 +1,23 @@
 {
  "items": [
   {
-   "title": "APOD: 2026 November 5 – Enceladus in Silhouette",
+   "title": "Midwestern City Lights",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Cyprus: Island of Snakes, Cats, and Ophiolites",
+   "title": "NASA Astronauts to Answer Questions from Florida Students",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Hubble Reveals Cosmic Mystery",
+   "title": "Hubble Learns Galactic History From Stars",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Children at risk as war zone attacks on water and sanitation more than triple",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Two new Ebola vaccines to join DR Congo clinical trial",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -37,16 +45,12 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "‘The world is not ready’: Climate adaptation cash falls far short as warming heads past 1.5°C",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "‘This is not about politics. This is about people’: UN warns of impact of deadly drone strikes in Sudan",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "Married off at 14: In Yemen’s war, women and girls suffer ‘devastating consequences’",
    "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "איך מתכוננים למתקפת סייבר - מהנייד שלכם ועד למחשב הסודי? | פודקאסט צה״ל",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "מה זה שמה בשמיים? תרגיל הרחפנים של 474🕹️ | צה״ל",
@@ -261,6 +265,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "צמצום פערים בין מרכז לפריפריה ודגש מיוחד לשילוב נשים",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "המטרה: יותר תלמידים שמסיימים עם \"בגרות-טק\"",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -294,10 +302,6 @@
   },
   {
    "title": "מוכנים לכניסה שלכם?",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "אתכם בכל שלב♥️",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -506,11 +510,12 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-05 09:05:45",
+ "finished_utc": "2026-11-05 17:26:34",
  "summary": {
   "text_rejected_no_verified_rewrite": 12,
-  "video_rejected_enrich_failed_or_not_newsworthy": 89
+  "video_rejected_enrich_failed_or_not_newsworthy": 90
  }
 }
