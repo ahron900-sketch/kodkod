@@ -1,7 +1,15 @@
 {
  "items": [
   {
-   "title": "APOD: 2026 November 6 – A Farewell to Swift",
+   "title": "From a ship frozen into Arctic ice, a warning to world leaders: Trust the science",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Sudan’s suffering is plain for all to see say aid teams, as brutal war continues",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "‘No Escape’ for refugees on the frontlines of the climate crisis",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -29,19 +37,11 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Gunfire damages tents at Rafah displacement site in Gaza, as aid teams prepare for winter storms",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "Fuel price shock: Why developing economies are paying the most at the pump",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
    "title": "Syria’s undocumented children ‘pay the price’ of war and a law that shuts out mothers",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Married off at 14: In Yemen’s war, women and girls suffer ‘devastating consequences’",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -337,6 +337,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "מה גורם למתנדבי הנוער של מד\"א בני ה-15 להציל חיים",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "כתבת i24בצרפתית שני גידליה הצטרפה ליום במגן דוד אדום בקריית מד\"א ברמלה ובניידת טיפול נמרץ",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -370,10 +374,6 @@
   },
   {
    "title": "מה עשה לי את הבוקר? אלי אוחנה מספר על חובשי מד\"א שטיפלו באישה שנפצעה בבניית סוכה והשלימו את בנייתה",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "בקריאה הראשונה באמבולנס לזכר דור רידר - נולד תינוק בכניסה לקיבוץ בארי בסיוע אביו, צביקה רידר",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -508,7 +508,7 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-06 11:22:33",
+ "finished_utc": "2026-11-06 18:16:14",
  "summary": {
   "text_rejected_no_verified_rewrite": 11,
   "video_rejected_enrich_failed_or_not_newsworthy": 90
