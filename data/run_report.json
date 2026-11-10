@@ -1,7 +1,27 @@
 {
  "items": [
   {
-   "title": "CHAPEA Crew Leaves a Mark",
+   "title": "NASA Invites Media, Public to Join Voyager 1 One-Light Day Activities",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA Scientists Show How Gravitational Waves Can Reveal New Worlds",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Ebola: IOM urges wider surveillance beyond formal routes in DR Congo",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Nearly 64,000 flee Nigeria for Niger where a humanitarian crisis is deepening",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Egypt: Fact-checking site’s entire newsroom jailed as assault on press freedom widens",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "COP31: Energy transition takes centre stage as countries map path beyond fossil fuels",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -13,7 +33,7 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Sudan war: First suicide bombers, now long-range drone strikes are the norm",
+   "title": "Sudan war: First ‘suicide’ drone attacks, now long-range strikes are the norm",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -25,40 +45,12 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "World News in Brief: El Niño’s $11 trillion price tag, Mozambique and Yemen updates",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Children among the dead as heavy rains flood tents and shelters in Gaza",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "COP31 opens in Antalya: Can climate promises finally deliver results?",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Families who fled Ethiopia for Kenya’s Moyale need food, water and shelter",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
    "title": "Security Council LIVE: Strikes on Ukraine’s power grid, as peace talks loom",
    "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Afghanistan faces deepening humanitarian crisis amid sweeping rights restrictions",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "רחפני המשטרה נגד פורעי החוק בכבישים",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "העיניים בטלפון ולא בכביש = סכנה ⚠️",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "משטובות וליקויים מסוכנים | אכיפה בכבישי בנימין",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "איך מתכוננים למתקפת סייבר - מהנייד שלכם ועד למחשב הסודי? | פודקאסט צה״ל",
@@ -89,7 +81,15 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "רחפני המשטרה נגד פורעי החוק בכבישים",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "פתח באש לעבר בני משפחתו ונעצר",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "העיניים בטלפון ולא בכביש = סכנה ⚠️",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -109,6 +109,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "משטובות וליקויים מסוכנים | אכיפה בכבישי בנימין",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "ילד נשכח ברכב, השוטרים הוקפצו והאירוע הסתיים בשלום",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -118,6 +122,14 @@
   },
   {
    "title": "חג סגד שמח מעובדי משרד הבריאות",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "יו”ר הכנסת אוחנה: “הכנסת ה-26 טומנת בחובה הזדמנות גדולה. הזדמנות לאחדות” |ישיבת הפתיחה של הכנסת ה-26",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "טקס קבלת פנים לנשיא המדינה - ברחבת הכנסת | ישיבת הפתיחה של הכנסת ה־26",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -150,10 +162,6 @@
   },
   {
    "title": "על רקע דיון סוער והתנגדות חברי הכנסת החרדים, ועדת הכספים אישרה הטבות מס למאות עמותות",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "Elections for the 26th Knesset",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -430,6 +438,8 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
@@ -523,9 +533,9 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-10 16:11:55",
+ "finished_utc": "2026-11-10 21:50:24",
  "summary": {
-  "text_rejected_no_verified_rewrite": 12,
-  "video_rejected_enrich_failed_or_not_newsworthy": 92
+  "text_rejected_no_verified_rewrite": 13,
+  "video_rejected_enrich_failed_or_not_newsworthy": 93
  }
 }
