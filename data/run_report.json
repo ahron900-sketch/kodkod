@@ -1,15 +1,23 @@
 {
  "items": [
   {
-   "title": "Rubies on Mars?",
+   "title": "APOD: 2026 November 10 – Saturn Behind the Moon",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Newest Sample, Oldest Rock?",
+   "title": "Autumn Mornings Bring Valley Fog",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "NASA’s Chandra Finds Source of Star’s Mysterious Outbursts",
+   "title": "Curiosity Blog, Sols 5056-5062: Charging Back Up!",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Curiosity Blog, Sols 5050-5055: It’s Nazca, Our 49th Drill Hole",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA Advanced Mid-Power Electric Rocket Challenge",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -17,7 +25,7 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "MAX POWER: NASA’s Inaugural Aerospace Expo Ignites America’s Future",
+   "title": "At least 56 migrants die in weekend shipwrecks off Senegal and Greece",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -71,10 +79,12 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-10 00:35:24",
+ "finished_utc": "2026-11-10 07:47:20",
  "summary": {
-  "text_rejected_no_verified_rewrite": 14
+  "text_rejected_no_verified_rewrite": 16
  }
 }
