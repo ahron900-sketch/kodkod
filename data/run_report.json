@@ -1,14 +1,6 @@
 {
  "items": [
   {
-   "title": "APOD: 2026 November 11 – NGC 4449: Small Galaxy, Big Impact",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Water Surges Into Navajo Reservoir",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "World News in Brief: Ending cholera by 2030 ‘within reach’, Haiti displacement and hunger, US human rights review resche",
    "outcome": "text_rejected_no_verified_rewrite"
   },
@@ -55,6 +47,30 @@
   {
    "title": "Security Council LIVE: Strikes on Ukraine’s power grid, as peace talks loom",
    "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "\"יש הרבה חדשים בצד השני שאשמח להכיר\" | הכנסת ה-26 שאלנו את חברי הכנסת: את מי מהצד השני שמחתם לפגוש",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "\"מקום שמקרב אליו את כל קצוות עם ישראל\" | יום עיון לחברי הכנסת החדשים - הכנסת ה-26",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "⁨ יו״ר הכנסת אמיר אוחנה:׳זו זכות גדולה וחובה גדולה לייצג את אזרחי ישראל׳|יום עיון לחברי הכנסת החדשים",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "“שנהיה טובים אחד לשני ונהיה טובים לעם שלנו” | יום עיון לחברי הכנסת החדשים - הכנסת ה-26",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "ראש הממשלה נתניהו בחברון",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "פודמס – פרק 49: אירוע חסר תקדים – מס חברות גלובלי מינימלי",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "איך מתכוננים למתקפת סייבר - מהנייד שלכם ועד למחשב הסודי? | פודקאסט צה״ל",
@@ -129,6 +145,14 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "“המטרה: להרכיב את הוועדה הראשונה” | הוועדה המסדרת",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "יו\"ר הכנסת אוחנה: \"לחיי הכנסת ה-26. לחיי עם ישראל\" | ישיבת הפתיחה של הכנסת ה-26",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "יו”ר הכנסת אוחנה: “הכנסת ה-26 טומנת בחובה הזדמנות גדולה. הזדמנות לאחדות” |ישיבת הפתיחה של הכנסת ה-26",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -145,30 +169,6 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "\"מקום שמקרב אליו את כל קצוות עם ישראל\" | יום עיון לחברי הכנסת החדשים - הכנסת ה-26",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "⁨ יו״ר הכנסת אמיר אוחנה:׳זו זכות גדולה וחובה גדולה לייצג את אזרחי ישראל׳|יום עיון לחברי הכנסת החדשים",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "“שנהיה טובים אחד לשני ונהיה טובים לעם שלנו” | יום עיון לחברי הכנסת החדשים - הכנסת ה-26",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "יו\"ר וועדת הכספים ח\"כ חנוך מילביצקי הודה לחברי הוועדה :\"הייתה לי הזכות לשבת בראשות הוועדה הזו\"",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "חשבתם שאתם יודעים איך הבית שלכם נראה מבפנים?הכנסת הבית של כולנו ובה מיוצגים כל גווני הציבור הישראלי",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "על רקע דיון סוער והתנגדות חברי הכנסת החרדים, ועדת הכספים אישרה הטבות מס למאות עמותות",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "ברכת ראש הממשלה בנימין נתניהו לרגל חג הסיגד",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -182,10 +182,6 @@
   },
   {
    "title": "They almost didn’t make it home alive.",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "ראש הממשלה נתניהו בחברון",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -261,10 +257,6 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "סדרת האינפלציה חלק 2: האינפלציה פוגשת את הבנק המרכזי",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "🎙️ מה מדינות העולם יודעות על הנכסים שלכם? פרק 50 בפודמס!",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -274,10 +266,6 @@
   },
   {
    "title": "لا تضغطوا قبل أن تتحققوا! 📱⚠️",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "פודמס – פרק 49: אירוע חסר תקדים – מס חברות גלובלי מינימלי",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -442,9 +430,6 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
@@ -538,9 +523,9 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-11 08:28:00",
+ "finished_utc": "2026-11-11 16:30:52",
  "summary": {
-  "text_rejected_no_verified_rewrite": 14,
-  "video_rejected_enrich_failed_or_not_newsworthy": 93
+  "text_rejected_no_verified_rewrite": 12,
+  "video_rejected_enrich_failed_or_not_newsworthy": 92
  }
 }
