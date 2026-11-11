@@ -5,7 +5,7 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "NASA Scientists Show How Gravitational Waves Can Reveal New Worlds",
+   "title": "NASA to Welcome Expedition 74 Astronauts Home at Space Center Houston",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -53,6 +53,10 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
+   "title": "רחפני המשטרה נגד פורעי החוק בכבישים",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "איך מתכוננים למתקפת סייבר - מהנייד שלכם ועד למחשב הסודי? | פודקאסט צה״ל",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -78,10 +82,6 @@
   },
   {
    "title": "הפצוע שהשתקם והופך לקב״ן - המסע של מתן | צה״ל",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "רחפני המשטרה נגד פורעי החוק בכבישים",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -533,7 +533,7 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-10 21:50:24",
+ "finished_utc": "2026-11-11 01:45:42",
  "summary": {
   "text_rejected_no_verified_rewrite": 13,
   "video_rejected_enrich_failed_or_not_newsworthy": 93
