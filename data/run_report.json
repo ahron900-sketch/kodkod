@@ -1,6 +1,22 @@
 {
  "items": [
   {
+   "title": "Gaza winter aid: ‘No more delay’, Fletcher tells governments stalling on support",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "‘Make or bake time’: Guterres urges climate justice pact as leaders gather at COP31",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "From Japan to Rwanda, early warnings are saving lives – but millions remain unprotected",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Lebanon: After 48 years patrolling the Blue Line, UN peacekeepers prepare exit",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "World News in Brief: Ending cholera by 2030 ‘within reach’, Haiti displacement and hunger, US human rights review resche",
    "outcome": "text_rejected_no_verified_rewrite"
   },
@@ -25,52 +41,8 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "When deaths go uncounted: WHO flags dangerous blind spots in Africa’s health data",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Sudan war: First ‘suicide’ drone attacks, now long-range strikes are the norm",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Climate crisis could push 141 million more women into extreme poverty",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "At least 56 migrants die in weekend shipwrecks off Senegal and Greece",
    "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "COP31 opens in Antalya: Can climate promises finally deliver results?",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Security Council LIVE: Strikes on Ukraine’s power grid, as peace talks loom",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "\"יש הרבה חדשים בצד השני שאשמח להכיר\" | הכנסת ה-26 שאלנו את חברי הכנסת: את מי מהצד השני שמחתם לפגוש",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "\"מקום שמקרב אליו את כל קצוות עם ישראל\" | יום עיון לחברי הכנסת החדשים - הכנסת ה-26",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "⁨ יו״ר הכנסת אמיר אוחנה:׳זו זכות גדולה וחובה גדולה לייצג את אזרחי ישראל׳|יום עיון לחברי הכנסת החדשים",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "“שנהיה טובים אחד לשני ונהיה טובים לעם שלנו” | יום עיון לחברי הכנסת החדשים - הכנסת ה-26",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "ראש הממשלה נתניהו בחברון",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "פודמס – פרק 49: אירוע חסר תקדים – מס חברות גלובלי מינימלי",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "איך מתכוננים למתקפת סייבר - מהנייד שלכם ועד למחשב הסודי? | פודקאסט צה״ל",
@@ -145,6 +117,18 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "שר האוצר סמוטריץ’:“מי שלא שותפים איתנו באתוס הבסיסי של הציונות לא יכולים להיות שותפים של ישראל”",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "“לא להסכים כדי לא להסכים זה מיותר” מול “הם מנסים להסתיר” | דיון בהרכב הוועדה המסדרת במליאה",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "\"יש הרבה חדשים בצד השני שאשמח להכיר\" | הכנסת ה-26 שאלנו את חברי הכנסת: את מי מהצד השני שמחתם לפגוש",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "“המטרה: להרכיב את הוועדה הראשונה” | הוועדה המסדרת",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -169,6 +153,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "\"מקום שמקרב אליו את כל קצוות עם ישראל\" | יום עיון לחברי הכנסת החדשים - הכנסת ה-26",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "ברכת ראש הממשלה בנימין נתניהו לרגל חג הסיגד",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -182,6 +170,10 @@
   },
   {
    "title": "They almost didn’t make it home alive.",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "ראש הממשלה נתניהו בחברון",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -269,6 +261,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "פודמס – פרק 49: אירוע חסר תקדים – מס חברות גלובלי מינימלי",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "סרטון 3- איך למלא טופס 62 א החדש? 62א החדש טופס 1262",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -349,6 +345,18 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "פסטיבל מספרי סיפורים עם יוסי אלפי - מגן דוד אדום סיפורים מצילי חיים - חלק א'",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "חווה התקף בשידור חי בטיקטוק-בזכות הטיפול של חובש מד\"א במהלך השידור החי השתפר מצב המטופל והוא התאושש",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "חובש במוקד 101 של מד\"א יאיר וינמן הציל חיים דרך הטיקטוק",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "דקות מאסון: חובש מד\"א יוסי קסוטו הציל את חייו של תינוק שנחנק ממחק",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -374,18 +382,6 @@
   },
   {
    "title": "חובש מד\"א רומי דר, החובש שהציל חיים - משדר מיוחד, 3 שנים ל-7.10",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "השיחות המצמררות למד\"א ב-7 באוקטובר. פסקול הזוועה: הקריאה לעזרה, האימה התושייה והתסכול",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "השיחה האחרונה של פראמדיקית מדא עמית מן זל נחשפת-הניסיון האחרון של הפראמדיקית שנרצחה ב-7.10 לקבל עזרה",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "גיבורי מד\"א בשבעה באוקטובר",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -418,7 +414,6 @@
   }
  ],
  "ai_errors": [
-  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
@@ -523,9 +518,9 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-11 16:30:52",
+ "finished_utc": "2026-11-11 22:59:13",
  "summary": {
-  "text_rejected_no_verified_rewrite": 12,
+  "text_rejected_no_verified_rewrite": 11,
   "video_rejected_enrich_failed_or_not_newsworthy": 92
  }
 }
