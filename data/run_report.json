@@ -1,11 +1,27 @@
 {
  "items": [
   {
-   "title": "APOD: 2026 November 12 – Moon, Venus and Spica Meet",
+   "title": "Heart in the Sky at NASA Kennedy",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "NASA to Welcome Expedition 74 Astronauts Home at Space Center Houston",
+   "title": "NASA Ames Stars of the Month: November 2026",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA’s Hubble Offers Cosmic Sampler of Targets for Roman",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Through NASA’s Lens: Capturing Space Shuttle Endeavour’s Move to LA",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Kenya begins countdown towards end of Ebola after last patient discharged",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Haiti: More than 1,000 killed between July and September, UN report reveals",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -21,7 +37,7 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Lebanon: After 48 years patrolling the Blue Line, UN peacekeepers prepare exit",
+   "title": "Lebanon: Devastation awaits returnees as UN peacekeepers prepare exit",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -37,28 +53,8 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Egypt: Fact-checking site’s entire newsroom jailed as assault on press freedom widens",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "COP31: Energy transition takes centre stage as countries map path beyond fossil fuels",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "Security Council LIVE: South Sudan’s first elections loom amid rising violence",
    "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "At least 56 migrants die in weekend shipwrecks off Senegal and Greece",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "סדרת האינפלציה פרק 4 - הגביע הקדוש של הבנקים המרכזיים",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "סדרת האינפלציה חלק 3: למה דווקא 2%?",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "איך חיל האוויר שומר על הלוחמים כשהאויב מטרים בודדים מהם? | פודקאסט צה״ל",
@@ -205,10 +201,6 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "ראש הממשלה נתניהו בקו התפר בשומרון: \"אנחנו ערוכים לכל תרחיש, כולל היפוך קנים\"",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "\"לא משנה מה תהיה הקונסטלציה הפוליטית, פיתוח התשתיות ממשיך\" | אושרת דוד דקר סגנית החשבת הכללית באוצר",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -230,6 +222,14 @@
   },
   {
    "title": "בנקים וטובת הציבור - עם המפקח על הבנקים",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "סדרת האינפלציה פרק 4 - הגביע הקדוש של הבנקים המרכזיים",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "סדרת האינפלציה חלק 3: למה דווקא 2%?",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -353,6 +353,14 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "בזכות ערנותו של חובש במוקד מד\"א יאיר וינמן, אותר גבר שפרכס במהלך שיחת וידיאו וקיבל טיפול בתוך דקות",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "תיעוד דרמטי: התינוק החל להיחנק - חובש מד\"א יוסי קסוטו הגיב מהר והציל אותו",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "פסטיבל מספרי סיפורים עם יוסי אלפי - מגן דוד אדום סיפורים מצילי חיים - חלק א'",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -382,14 +390,6 @@
   },
   {
    "title": "גבורת הפראמדיק שיצא לחלץ פצועים תחת אש - מנהל אשכול אופקים ומועצה אזורית אשכול במד\"א דני שטרקמן",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "הקריאה הראשונה לאמבולנס על שמו של דור רידר ז\"ל, בנו של חובש בכיר במד\"א צבי רידר - לידה בבארי",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "חובש מד\"א רומי דר, החובש שהציל חיים - משדר מיוחד, 3 שנים ל-7.10",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -435,7 +435,7 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
@@ -528,9 +528,9 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-12 11:55:38",
+ "finished_utc": "2026-11-12 19:40:12",
  "summary": {
-  "text_rejected_no_verified_rewrite": 13,
-  "video_rejected_enrich_failed_or_not_newsworthy": 92
+  "text_rejected_no_verified_rewrite": 14,
+  "video_rejected_enrich_failed_or_not_newsworthy": 91
  }
 }
