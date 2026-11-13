@@ -1,11 +1,19 @@
 {
  "items": [
   {
-   "title": "I Am Artemis Katie Spicer",
+   "title": "APOD: 2026 November 13 – NGC 206 and the Star Clouds of Andromeda",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "A Global Rebound for Mangroves",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
    "title": "Heart in the Sky at NASA Kennedy",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Six killed in Israeli airstrike on Gaza’s Nasser Hospital",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -47,10 +55,6 @@
   {
    "title": "Nearly 64,000 flee Nigeria for Niger where a humanitarian crisis is deepening",
    "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Security Council LIVE: South Sudan’s first elections loom amid rising violence",
-   "outcome": "text_rejected_no_verified_rewrite"
   }
  ],
  "ai_errors": [
@@ -66,10 +70,11 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-13 00:43:31",
+ "finished_utc": "2026-11-13 07:22:51",
  "summary": {
-  "text_rejected_no_verified_rewrite": 13
+  "text_rejected_no_verified_rewrite": 14
  }
 }
