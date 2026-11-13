@@ -1,7 +1,27 @@
 {
  "items": [
   {
+   "title": "Outbursts from a Massive Star",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Gemini Astronaut Photos Inspired Early Earth Observation Program",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "Heart in the Sky at NASA Kennedy",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Security Council LIVE: Fragile Gulf calm tested as threats to Hormuz shipping mount",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "COP31: Climate finance falls short as calls grow for polluters to pay",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "‘Lives are at stake’: Humanitarians call for swift entry of winter supplies in Gaza",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -29,15 +49,7 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Kenya begins countdown towards end of Ebola after last patient discharged",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "Haiti: More than 1,000 killed between July and September, UN report reveals",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Gaza winter aid: ‘No more delay’, Fletcher tells governments stalling on support",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -46,10 +58,6 @@
   },
   {
    "title": "Lebanon: Devastation awaits returnees as UN peacekeepers prepare exit",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Nearly 64,000 flee Nigeria for Niger where a humanitarian crisis is deepening",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -431,6 +439,8 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
@@ -523,9 +533,9 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-13 15:38:03",
+ "finished_utc": "2026-11-13 21:41:09",
  "summary": {
-  "text_rejected_no_verified_rewrite": 13,
+  "text_rejected_no_verified_rewrite": 15,
   "video_rejected_enrich_failed_or_not_newsworthy": 91
  }
 }
