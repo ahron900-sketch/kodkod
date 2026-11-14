@@ -13,6 +13,10 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
+   "title": "When the rains fail: Preparing for drought in Central America",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "‘Here, you can eat until you’re full’: Oleshky evacuees savour first proper meals in years",
    "outcome": "text_rejected_no_verified_rewrite"
   },
@@ -42,10 +46,6 @@
   },
   {
    "title": "Aid is the ‘only hope’ for millions in Sudan, WFP chief warns, as funding cuts deepen hunger crisis",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "New platform aims to get money moving before disaster strikes",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -533,7 +533,7 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-14 15:23:21",
+ "finished_utc": "2026-11-14 20:02:50",
  "summary": {
   "text_rejected_no_verified_rewrite": 15,
   "video_rejected_enrich_failed_or_not_newsworthy": 91
