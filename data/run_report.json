@@ -1,11 +1,19 @@
 {
  "items": [
   {
-   "title": "APOD: 2026 November 16 – NGC 7129: Star Formation with Jets from Webb",
+   "title": "NASA Receives 16th Consecutive ‘Clean’ Financial Audit Opinion",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "The Last Ice on Puncak Jaya",
+   "title": "Sentinel-6B in Orbit Around Earth",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Thunderbirds in Formation",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Contractor to Civil Servant: NASA Welcomes Jim Mirandy",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -17,15 +25,27 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "APOD: 2026 November 13 – NGC 206 and the Star Clouds of Andromeda",
+   "title": "AI gets climate science right – until users push back",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "A Global Rebound for Mangroves",
+   "title": "Syria: Progress ‘real’ but fragile, as remnants of war wreck young lives",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Heart in the Sky at NASA Kennedy",
+   "title": "COP31 enters decisive week as climate talks face political test and AI initiatives gather pace",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Funding cuts raise risks of trafficking and exploitation for refugee children",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Guterres calls for a legally binding instrument for ‘killer robots'",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "At his final ASEAN Summit, Guterres upholds cooperation and action on Myanmar",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -41,14 +61,6 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "When the rains fail: Preparing for drought in Central America",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "‘Here, you can eat until you’re full’: Oleshky evacuees savour first proper meals in years",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "Security Council LIVE: Fragile Gulf calm tested as threats to Hormuz shipping mount",
    "outcome": "text_rejected_no_verified_rewrite"
   },
@@ -57,28 +69,16 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "‘Lives are at stake’: Humanitarians call for swift entry of winter supplies in Gaza",
-   "outcome": "text_rejected_no_verified_rewrite"
+   "title": "יועמ\"ש הכנסת, עו\"ד שגית אפיק התייחסה במהלך דיון בחירת יו\"ר לוועדת הכספים הזמנית,בתחום ניגוד העניינים",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "COP31: New initiative targets AI and reliable climate change information",
-   "outcome": "text_rejected_no_verified_rewrite"
+   "title": "יו\"ר ועדת הכספים הזמנית \"גאה להיות היו\"רית הראשונה של ועדת כספים. ועדת הכספים לא תהיה חותמת גומי.\"",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "DR Congo Ebola outbreak: Unrest fuelled by armed groups holds back response",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Six killed in Israeli airstrike on Gaza’s Nasser Hospital",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Aid is the ‘only hope’ for millions in Sudan, WFP chief warns, as funding cuts deepen hunger crisis",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "COP31: Cities rise up the climate agenda as leaders face demands for action",
-   "outcome": "text_rejected_no_verified_rewrite"
+   "title": "ח”כ לירן אבישר בן חורין נבחרה ליו\"ר ועדת הכספים הזמנית | ח\"כ דוד פטר: \"סזון פרלמנטרי\"",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "איך חיל האוויר שומר על הלוחמים כשהאויב מטרים בודדים מהם? | פודקאסט צה״ל",
@@ -106,6 +106,10 @@
   },
   {
    "title": "\"יוני נהרג. עכשיו - אתה מפקד הנח\"ל\" | פודקאסט צה״ל",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "נהגת נתפסה מתפללת וקוראת מהסידור בנהיגה",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -145,19 +149,15 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "כנס IPRED 2026 יוצא לדרך",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "יותר בריא - יותר קטניות: שמעון וקנין",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "חג סגד שמח מעובדי משרד הבריאות",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "יו\"ר ועדת הכספים הזמנית \"גאה להיות היו\"רית הראשונה של ועדת כספים. ועדת הכספים לא תהיה חותמת גומי.\"",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "ח”כ לירן אבישר בן חורין נבחרה ליו\"ר ועדת הכספים הזמנית | ח\"כ דוד פטר: \"סזון פרלמנטרי\"",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -189,10 +189,6 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "יו\"ר הכנסת אוחנה בישיבת הפתיחה של הכנסת ה-26: \"הכנסת ה-26 טומנת בחובה הזדמנות גדולה. הזדמנות לאחדות\"",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "ברכת ראש הממשלה בנימין נתניהו לרגל חג הסיגד",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -218,10 +214,6 @@
   },
   {
    "title": "ראש הממשלה נתניהו בחיל האוויר: \"יש לנו את המוכנות, הנחישות והיכולת להכות באויבינו ברגע שהדבר יידרש\"",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "דברי ראש הממשלה בנימין נתניהו בטקס קבלת פנים במשרד החוץ לרגל חנוכת שגרירות קולומביה בירושלים",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -467,9 +459,7 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
@@ -563,9 +553,9 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-16 10:58:49",
+ "finished_utc": "2026-11-16 20:54:12",
  "summary": {
-  "text_rejected_no_verified_rewrite": 20,
-  "video_rejected_enrich_failed_or_not_newsworthy": 92
+  "text_rejected_no_verified_rewrite": 17,
+  "video_rejected_enrich_failed_or_not_newsworthy": 93
  }
 }
