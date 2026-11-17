@@ -1,19 +1,15 @@
 {
  "items": [
   {
-   "title": "NASA Receives 16th Consecutive ‘Clean’ Financial Audit Opinion",
+   "title": "Perseverance Update: The Ghostly Rocks of ‘Idubi’ — Bright Remnants of Aqueous Systems from Long Ago",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Sentinel-6B in Orbit Around Earth",
+   "title": "A Collage Showing 49 Drill Holes Made by NASA’s Curiosity Mars Rover",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
    "title": "Thunderbirds in Formation",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Contractor to Civil Servant: NASA Welcomes Jim Mirandy",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -22,6 +18,18 @@
   },
   {
    "title": "Gemini Astronaut Photos Inspired Early Earth Observation Program",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "‘Peace begins in our hearts’: Children close Muscat forum with a message to the world",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "‘An unfulfilled plan helps no one’: Superbug plans have doubled, but few countries are delivering",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Lebanon leading the way in mental health support",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -53,32 +61,8 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Empowering faith and Indigenous leaders to combat hate",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Nadia Murad: ‘Day by day, I took my story back’",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "Security Council LIVE: Fragile Gulf calm tested as threats to Hormuz shipping mount",
    "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "COP31: Climate finance falls short as calls grow for polluters to pay",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "יועמ\"ש הכנסת, עו\"ד שגית אפיק התייחסה במהלך דיון בחירת יו\"ר לוועדת הכספים הזמנית,בתחום ניגוד העניינים",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "יו\"ר ועדת הכספים הזמנית \"גאה להיות היו\"רית הראשונה של ועדת כספים. ועדת הכספים לא תהיה חותמת גומי.\"",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "ח”כ לירן אבישר בן חורין נבחרה ליו\"ר ועדת הכספים הזמנית | ח\"כ דוד פטר: \"סזון פרלמנטרי\"",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "איך חיל האוויר שומר על הלוחמים כשהאויב מטרים בודדים מהם? | פודקאסט צה״ל",
@@ -158,6 +142,18 @@
   },
   {
    "title": "חג סגד שמח מעובדי משרד הבריאות",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "יועמ\"ש הכנסת, עו\"ד שגית אפיק התייחסה במהלך דיון בחירת יו\"ר לוועדת הכספים הזמנית,בתחום ניגוד העניינים",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "יו\"ר ועדת הכספים הזמנית \"גאה להיות היו\"רית הראשונה של ועדת כספים. ועדת הכספים לא תהיה חותמת גומי.\"",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "ח”כ לירן אבישר בן חורין נבחרה ליו\"ר ועדת הכספים הזמנית | ח\"כ דוד פטר: \"סזון פרלמנטרי\"",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -458,7 +454,6 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
@@ -553,9 +548,9 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-16 20:54:12",
+ "finished_utc": "2026-11-17 03:29:15",
  "summary": {
-  "text_rejected_no_verified_rewrite": 17,
+  "text_rejected_no_verified_rewrite": 16,
   "video_rejected_enrich_failed_or_not_newsworthy": 93
  }
 }
