@@ -1,15 +1,55 @@
 {
  "items": [
   {
-   "title": "APOD: 2026 November 17 – Milky Way versus Aurora",
+   "title": "BPS Digital AVATAR Challenge",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Tossing Fireworks from Cloud to Cloud",
+   "title": "New Album of Baby Star Sounds Shared by NASA’s Chandra",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Thunderbirds in Formation",
+   "title": "NASA to Cover 35th SpaceX Resupply Mission Space Station Departure",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NICER Status Updates",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA to Conduct Low-Altitude Flights Over Texas Farmland",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Curiosity Blog, Sols 5072-5076: The Return of the Polygons",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA Invites Media, Public to View Roman Telescope’s First Images",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Space Selfie",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "World News in Brief: Ebola cases double in DR Congo, chemical exposure starts before birth, Türk concern over EU-Rwanda ",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "COP31: The push to protect warming oceans reaches the negotiating table",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Haiti: ‘Atrocious abuses’ continue as UN warns anti-gang operations must priortise civilian protection",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "‘Hunger should not be a concern’: WFP steps in for families in Kenya who fled Ethiopia violence",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Winter rains deepen Gaza crisis amid restricted access and aid cuts",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -37,32 +77,12 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Funding cuts raise risks of trafficking and exploitation for refugee children",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Guterres calls for a legally binding instrument for ‘killer robots'",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "At his final ASEAN Summit, Guterres upholds cooperation and action on Myanmar",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
    "title": "First Person: Managing risk on Ukraine’s frontline",
    "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Security Council LIVE: Fragile Gulf calm tested as threats to Hormuz shipping mount",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "סדרת האינפלציה פרק 4 - הגביע הקדוש של הבנקים המרכזיים",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "סדרת האינפלציה חלק 3: למה דווקא 2%?",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "איך חיל האוויר שומר על הלוחמים כשהאויב מטרים בודדים מהם? | פודקאסט צה״ל",
@@ -86,10 +106,6 @@
   },
   {
    "title": "מטיפולים בתנועה עם בן או בת הזוג או בכלל דרך כתיבה - עם היחידה לתגובות קרב 🎙️ | פודקאסט צה״ל",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "\"יוני נהרג. עכשיו - אתה מפקד הנח\"ל\" | פודקאסט צה״ל",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -185,6 +201,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "🔔 EUROPE, WAKE UP! 🔔",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "ברכת ראש הממשלה בנימין נתניהו לרגל חג הסיגד",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -209,10 +229,6 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "ראש הממשלה נתניהו בחיל האוויר: \"יש לנו את המוכנות, הנחישות והיכולת להכות באויבינו ברגע שהדבר יידרש\"",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "\"לא משנה מה תהיה הקונסטלציה הפוליטית, פיתוח התשתיות ממשיך\" | אושרת דוד דקר סגנית החשבת הכללית באוצר",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -234,6 +250,14 @@
   },
   {
    "title": "בנקים וטובת הציבור - עם המפקח על הבנקים",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "סדרת האינפלציה פרק 4 - הגביע הקדוש של הבנקים המרכזיים",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "סדרת האינפלציה חלק 3: למה דווקא 2%?",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -444,7 +468,13 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
@@ -538,9 +568,9 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-17 12:21:50",
+ "finished_utc": "2026-11-17 21:15:35",
  "summary": {
-  "text_rejected_no_verified_rewrite": 14,
-  "video_rejected_enrich_failed_or_not_newsworthy": 93
+  "text_rejected_no_verified_rewrite": 21,
+  "video_rejected_enrich_failed_or_not_newsworthy": 92
  }
 }
