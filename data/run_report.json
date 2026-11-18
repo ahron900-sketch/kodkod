@@ -1,35 +1,15 @@
 {
  "items": [
   {
-   "title": "BPS Digital AVATAR Challenge",
+   "title": "NASA Launches Nuclear Power Systems Student Contest",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "New Album of Baby Star Sounds Shared by NASA’s Chandra",
+   "title": "NASA Space Apps Challenge Breaks Global Hackathon Records",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "NASA to Cover 35th SpaceX Resupply Mission Space Station Departure",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "NICER Status Updates",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "NASA to Conduct Low-Altitude Flights Over Texas Farmland",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Curiosity Blog, Sols 5072-5076: The Return of the Polygons",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "NASA Invites Media, Public to View Roman Telescope’s First Images",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Space Selfie",
+   "title": "Ukraine: Civilian casualties in 2026 already far exceed previous years’ tolls",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -65,10 +45,6 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "AI gets climate science right – until users push back",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "Syria: Progress ‘real’ but fragile, as remnants of war wreck young lives",
    "outcome": "text_rejected_no_verified_rewrite"
   },
@@ -78,10 +54,6 @@
   },
   {
    "title": "At his final ASEAN Summit, Guterres upholds cooperation and action on Myanmar",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "First Person: Managing risk on Ukraine’s frontline",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -161,6 +133,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "יו\"ר הכנסת הנכנס, מתן כהנא: \"מקבל על עצמי את תפקיד יו\"ר הכנסת בחרדת קודש\"",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "יועמ\"ש הכנסת, עו\"ד שגית אפיק התייחסה במהלך דיון בחירת יו\"ר לוועדת הכספים הזמנית,בתחום ניגוד העניינים",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -194,10 +170,6 @@
   },
   {
    "title": "יו”ר הכנסת אוחנה: “הכנסת ה-26 טומנת בחובה הזדמנות גדולה. הזדמנות לאחדות” |ישיבת הפתיחה של הכנסת ה-26",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "טקס קבלת פנים לנשיא המדינה - ברחבת הכנסת | ישיבת הפתיחה של הכנסת ה־26",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -468,13 +440,6 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
@@ -568,9 +533,9 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-17 21:15:35",
+ "finished_utc": "2026-11-18 02:57:48",
  "summary": {
-  "text_rejected_no_verified_rewrite": 21,
+  "text_rejected_no_verified_rewrite": 14,
   "video_rejected_enrich_failed_or_not_newsworthy": 92
  }
 }
