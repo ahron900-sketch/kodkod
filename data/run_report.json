@@ -1,11 +1,11 @@
 {
  "items": [
   {
-   "title": "NASA Launches Nuclear Power Systems Student Contest",
+   "title": "APOD: 2026 November 18 – An M-class Solar Flare",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "NASA Space Apps Challenge Breaks Global Hackathon Records",
+   "title": "Sierra Snow Season Spins Up",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -81,6 +81,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "גנב טרקטורון מחצר בית פרטי בנתיבות ונתפס",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "נהגת נתפסה מתפללת וקוראת מהסידור בנהיגה",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -117,10 +121,6 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "ילד נשכח ברכב, השוטרים הוקפצו והאירוע הסתיים בשלום",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "כנס IPRED 2026 יוצא לדרך",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -130,6 +130,14 @@
   },
   {
    "title": "חג סגד שמח מעובדי משרד הבריאות",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "יו\"ר הכנסת הנכנס כהנא: \"הכנסת היא ביתם של כלל אזרחי ישראל - אהיה יושב הראש של כולם\"",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "יו\"ר הכנסת היוצא אמיר אוחנה:מעולם,גם כשטילים עפו מעלינו–הלב הזה של הדמוקרטיה הישראלית לא הפסיק לפעום",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -162,14 +170,6 @@
   },
   {
    "title": "“המטרה: להרכיב את הוועדה הראשונה” | הוועדה המסדרת",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "יו\"ר הכנסת אוחנה: \"לחיי הכנסת ה-26. לחיי עם ישראל\" | ישיבת הפתיחה של הכנסת ה-26",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "יו”ר הכנסת אוחנה: “הכנסת ה-26 טומנת בחובה הזדמנות גדולה. הזדמנות לאחדות” |ישיבת הפתיחה של הכנסת ה-26",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -221,6 +221,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "על הבנקים והפיקוח - מהי הוגנות עבור הלקוח",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "בנקים וטובת הציבור - עם המפקח על הבנקים",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -250,10 +254,6 @@
   },
   {
    "title": "תולדות הכסף - תקן הזהב",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "איך מנהלים מידע כלכלי בעידן ה-AI",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -533,7 +533,7 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-18 02:57:48",
+ "finished_utc": "2026-11-18 11:20:21",
  "summary": {
   "text_rejected_no_verified_rewrite": 14,
   "video_rejected_enrich_failed_or_not_newsworthy": 92
