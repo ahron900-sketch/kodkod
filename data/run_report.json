@@ -1,11 +1,35 @@
 {
  "items": [
   {
-   "title": "APOD: 2026 November 18 – An M-class Solar Flare",
+   "title": "MAF EAP – Holidays – How to manage the BAH HUMBUG that tries to sneak in",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Sierra Snow Season Spins Up",
+   "title": "NASA Announces Mid-Power Electric Rocket Challenge for US Companies",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Empire State Building Goes Gold for Voyager",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "What Is the Moon Base?",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Thank You for Doing NASA Science!",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA Data Clinches First-of-Its-Kind Stellar Merger",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Patients running out of options as antibiotics stop working against common infections",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Dozens more children killed in Yemen amid escalating hostilities",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -37,10 +61,6 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "‘An unfulfilled plan helps no one’: Superbug plans have doubled, but few countries are delivering",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "Lebanon leading the way in mental health support",
    "outcome": "text_rejected_no_verified_rewrite"
   },
@@ -50,10 +70,6 @@
   },
   {
    "title": "COP31 enters decisive week as climate talks face political test and AI initiatives gather pace",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "At his final ASEAN Summit, Guterres upholds cooperation and action on Myanmar",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -133,6 +149,14 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "\"עצירת הרפורמות הדורסניות שהיו פה בכנסת הקודמת\" | הוועדה המסדרת",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "רגע, הממשלה עוד לא הוקמה - אז מי מוודא שהדברים ממשיכים לעבוד? | הוועדות הזמניות בכנסת #knesset#הכנסת",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "יו\"ר הכנסת הנכנס כהנא: \"הכנסת היא ביתם של כלל אזרחי ישראל - אהיה יושב הראש של כולם\"",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -162,14 +186,6 @@
   },
   {
    "title": "“לא להסכים כדי לא להסכים זה מיותר” מול “הם מנסים להסתיר” | דיון בהרכב הוועדה המסדרת במליאה",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "\"יש הרבה חדשים בצד השני שאשמח להכיר\" | הכנסת ה-26 שאלנו את חברי הכנסת: את מי מהצד השני שמחתם לפגוש",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "“המטרה: להרכיב את הוועדה הראשונה” | הוועדה המסדרת",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -440,6 +456,10 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
@@ -533,9 +553,9 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-18 11:20:21",
+ "finished_utc": "2026-11-18 19:31:44",
  "summary": {
-  "text_rejected_no_verified_rewrite": 14,
+  "text_rejected_no_verified_rewrite": 18,
   "video_rejected_enrich_failed_or_not_newsworthy": 92
  }
 }
