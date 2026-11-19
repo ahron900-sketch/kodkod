@@ -1,7 +1,7 @@
 {
  "items": [
   {
-   "title": "NASA Sets Coverage for Northrop Grumman CRS-25 Launch, Prelaunch",
+   "title": "APOD: 2026 November 19 – The Horsehead and Flame Nebulas",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -46,6 +46,10 @@
   },
   {
    "title": "Winter rains deepen Gaza crisis amid restricted access and aid cuts",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "‘Peace begins in our hearts’: Children close Muscat forum with a message to the world",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -130,10 +134,6 @@
   },
   {
    "title": "יותר בריא - יותר קטניות: שמעון וקנין",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "חג סגד שמח מעובדי משרד הבריאות",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -445,7 +445,7 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
@@ -538,9 +538,9 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-19 01:27:43",
+ "finished_utc": "2026-11-19 09:15:41",
  "summary": {
-  "text_rejected_no_verified_rewrite": 15,
-  "video_rejected_enrich_failed_or_not_newsworthy": 92
+  "text_rejected_no_verified_rewrite": 16,
+  "video_rejected_enrich_failed_or_not_newsworthy": 91
  }
 }
