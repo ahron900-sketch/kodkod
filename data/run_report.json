@@ -1,7 +1,15 @@
 {
  "items": [
   {
-   "title": "APOD: 2026 November 19 – The Horsehead and Flame Nebulas",
+   "title": "NASA Science Data Powers New Method to Discover Hard-to-Find Pulsars",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA Conducts Latest RS-25 Engine Test in Support of Future Artemis Missions",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA’s Voyager 1 Makes History Reaching One Light-Day From Earth",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -10,6 +18,14 @@
   },
   {
    "title": "Empire State Building Goes Gold for Voyager",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "No government approval needed to form or join a group, UN rights committee says",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "World’s top court finds Myanmar guilty of genocide against Rohingya",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -41,28 +57,32 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "‘Hunger should not be a concern’: WFP steps in for families in Kenya who fled Ethiopia violence",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Winter rains deepen Gaza crisis amid restricted access and aid cuts",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "‘Peace begins in our hearts’: Children close Muscat forum with a message to the world",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "Lebanon leading the way in mental health support",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Syria: Progress ‘real’ but fragile, as remnants of war wreck young lives",
-   "outcome": "text_rejected_no_verified_rewrite"
+   "title": "על הבנקים והפיקוח - מהי הוגנות עבור הלקוח",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "COP31 enters decisive week as climate talks face political test and AI initiatives gather pace",
-   "outcome": "text_rejected_no_verified_rewrite"
+   "title": "בנקים וטובת הציבור - עם המפקח על הבנקים",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "סדרת האינפלציה פרק 4 - הגביע הקדוש של הבנקים המרכזיים",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "מהם תפקידי בנק ישראל? חלק שני",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "מהם תפקידי בנק ישראל? חלק ראשון",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "ת\"שמעו איך הן נותנות את הלב - איך זה להיות מש\"קית ת\"ש? | פודקאסט צה״ל",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "איך חיל האוויר שומר על הלוחמים כשהאויב מטרים בודדים מהם? | פודקאסט צה״ל",
@@ -85,7 +105,7 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "מטיפולים בתנועה עם בן או בת הזוג או בכלל דרך כתיבה - עם היחידה לתגובות קרב 🎙️ | פודקאסט צה״ל",
+   "title": "שב\"חים מאחורי דופן כפולה ברכב מסחרי",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -125,15 +145,11 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "משטובות וליקויים מסוכנים | אכיפה בכבישי בנימין",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "כנס IPRED 2026 יוצא לדרך",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "יותר בריא - יותר קטניות: שמעון וקנין",
+   "title": "הצצה ללשכה ולחדרים שמקבלים הח\"כים החדשים 👀 | הכנסת ה-26",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -170,10 +186,6 @@
   },
   {
    "title": "שר האוצר סמוטריץ’:“מי שלא שותפים איתנו באתוס הבסיסי של הציונות לא יכולים להיות שותפים של ישראל”",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "“לא להסכים כדי לא להסכים זה מיותר” מול “הם מנסים להסתיר” | דיון בהרכב הוועדה המסדרת במליאה",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -225,18 +237,6 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "על הבנקים והפיקוח - מהי הוגנות עבור הלקוח",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "בנקים וטובת הציבור - עם המפקח על הבנקים",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "סדרת האינפלציה פרק 4 - הגביע הקדוש של הבנקים המרכזיים",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "סדרת האינפלציה חלק 3: למה דווקא 2%?",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -246,14 +246,6 @@
   },
   {
    "title": "כך נקבעים השערים היציגים",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "מהם תפקידי בנק ישראל? חלק שני",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "מהם תפקידי בנק ישראל? חלק ראשון",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -445,8 +437,6 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
@@ -538,9 +528,9 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-19 09:15:41",
+ "finished_utc": "2026-11-19 18:23:16",
  "summary": {
-  "text_rejected_no_verified_rewrite": 16,
-  "video_rejected_enrich_failed_or_not_newsworthy": 91
+  "text_rejected_no_verified_rewrite": 15,
+  "video_rejected_enrich_failed_or_not_newsworthy": 90
  }
 }
