@@ -1,7 +1,11 @@
 {
  "items": [
   {
-   "title": "NASA Science Data Powers New Method to Discover Hard-to-Find Pulsars",
+   "title": "Challenge: Public Input on Life and the World in 2075",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Lake Pelku",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -17,7 +21,7 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Empire State Building Goes Gold for Voyager",
+   "title": "COP31: Ambition goes missing as fossil fuel language drops from draft deal",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -53,32 +57,8 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Haiti: ‘Atrocious abuses’ continue as UN warns anti-gang operations must priortise civilian protection",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "Lebanon leading the way in mental health support",
    "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "על הבנקים והפיקוח - מהי הוגנות עבור הלקוח",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "בנקים וטובת הציבור - עם המפקח על הבנקים",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "סדרת האינפלציה פרק 4 - הגביע הקדוש של הבנקים המרכזיים",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "מהם תפקידי בנק ישראל? חלק שני",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "מהם תפקידי בנק ישראל? חלק ראשון",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "ת\"שמעו איך הן נותנות את הלב - איך זה להיות מש\"קית ת\"ש? | פודקאסט צה״ל",
@@ -237,6 +217,18 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "על הבנקים והפיקוח - מהי הוגנות עבור הלקוח",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "בנקים וטובת הציבור - עם המפקח על הבנקים",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "סדרת האינפלציה פרק 4 - הגביע הקדוש של הבנקים המרכזיים",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "סדרת האינפלציה חלק 3: למה דווקא 2%?",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -246,6 +238,14 @@
   },
   {
    "title": "כך נקבעים השערים היציגים",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "מהם תפקידי בנק ישראל? חלק שני",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "מהם תפקידי בנק ישראל? חלק ראשון",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -528,7 +528,7 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-19 18:23:16",
+ "finished_utc": "2026-11-20 00:49:32",
  "summary": {
   "text_rejected_no_verified_rewrite": 15,
   "video_rejected_enrich_failed_or_not_newsworthy": 90
