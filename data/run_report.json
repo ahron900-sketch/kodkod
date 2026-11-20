@@ -1,23 +1,15 @@
 {
  "items": [
   {
-   "title": "Challenge: Public Input on Life and the World in 2075",
+   "title": "APOD: 2026 November 20 – V-G-R",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Lake Pelku",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "NASA Conducts Latest RS-25 Engine Test in Support of Future Artemis Missions",
+   "title": "The Stormy Southwest Pacific",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
    "title": "NASA’s Voyager 1 Makes History Reaching One Light-Day From Earth",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "MAF EAP – Holidays – How to manage the BAH HUMBUG that tries to sneak in",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -62,6 +54,10 @@
   },
   {
    "title": "ת\"שמעו איך הן נותנות את הלב - איך זה להיות מש\"קית ת\"ש? | פודקאסט צה״ל",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "שר האוצר סמוטריץ’:“מי שלא שותפים איתנו באתוס הבסיסי של הציונות לא יכולים להיות שותפים של ישראל”",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -162,10 +158,6 @@
   },
   {
    "title": "ח”כ לירן אבישר בן חורין נבחרה ליו\"ר ועדת הכספים הזמנית | ח\"כ דוד פטר: \"סזון פרלמנטרי\"",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "שר האוצר סמוטריץ’:“מי שלא שותפים איתנו באתוס הבסיסי של הציונות לא יכולים להיות שותפים של ישראל”",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -435,8 +427,6 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
@@ -528,9 +518,9 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-20 00:49:32",
+ "finished_utc": "2026-11-20 08:10:40",
  "summary": {
-  "text_rejected_no_verified_rewrite": 15,
+  "text_rejected_no_verified_rewrite": 13,
   "video_rejected_enrich_failed_or_not_newsworthy": 90
  }
 }

@@ -1,12 +1,4 @@
 {
-  "0000100000000000000000110001111100011111001000110111001100110111": {
-    "title": "Perseverance Update: The Ghostly Rocks of ‘Idubi’ — Bright Remnants of Aqueous Systems from Long Ago",
-    "ts": 1794886021.1961079
-  },
-  "1111111011001100100111100111111111110011110010000000100000000000": {
-    "title": "A Collage Showing 49 Drill Holes Made by NASA’s Curiosity Mars Rover",
-    "ts": 1794886025.0871089
-  },
   "0001111000000111000000110000001111111111111111110000000000000000": {
     "title": "APOD: 2026 November 17 – Milky Way versus Aurora",
     "ts": 1794918000.7871554
@@ -102,5 +94,13 @@
   "1111111011011111111111110111111000111111001110000000000000000000": {
     "title": "NASA Conducts Latest RS-25 Engine Test in Support of Future Artemis Missions",
     "ts": 1795135650.8621185
+  },
+  "0111000001111010011111100111111001111110000001100100000001000000": {
+    "title": "APOD: 2026 November 20 – V-G-R",
+    "ts": 1795162129.2725487
+  },
+  "0000000000001110001110110011111100111111000111110001111100011111": {
+    "title": "The Stormy Southwest Pacific",
+    "ts": 1795162132.821342
   }
 }
