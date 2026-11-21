@@ -1,11 +1,11 @@
 {
  "items": [
   {
-   "title": "NASA Honor Awards Ceremony Recognizes Employees at Stennis Space Center",
+   "title": "APOD: 2026 November 21 – Voyager’s Neptune",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "NASA Conducts Latest RS-25 Engine Test in Support of Future Artemis Missions",
+   "title": "NASA’s Curiosity Mars Rover Collects Samples",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -55,10 +55,6 @@
   {
    "title": "COP31 deadlock persists as countries launch new ‘climate reality check’",
    "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "כתבת i24בצרפתית שני גידליה הצטרפה ליום במגן דוד אדום בקריית מד\"א ברמלה ובניידת טיפול נמרץ",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "ת\"שמעו איך הן נותנות את הלב - איך זה להיות מש\"קית ת\"ש? | פודקאסט צה״ל",
@@ -389,6 +385,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "כתבת i24בצרפתית שני גידליה הצטרפה ליום במגן דוד אדום בקריית מד\"א ברמלה ובניידת טיפול נמרץ",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "מצדיעים ללוחמים על ארבע",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -523,7 +523,7 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-21 04:00:30",
+ "finished_utc": "2026-11-21 12:29:02",
  "summary": {
   "text_rejected_no_verified_rewrite": 14,
   "video_rejected_enrich_failed_or_not_newsworthy": 90
