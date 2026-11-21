@@ -1,11 +1,11 @@
 {
  "items": [
   {
-   "title": "APOD: 2026 November 21 – Voyager’s Neptune",
+   "title": "NASA’s Curiosity Mars Rover Collects Samples",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "NASA’s Curiosity Mars Rover Collects Samples",
+   "title": "Bridgetown AI summit to tackle safety as risks outpace capacity to respond",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -25,7 +25,7 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "COP31: Countries demand stronger climate deal as talks in Antalya reach final day",
+   "title": "COP31: Countries demand stronger climate deal amid deadlock in Antalya",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -34,14 +34,6 @@
   },
   {
    "title": "Battle to control GPS and radio signals raises civilian safety concerns",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Peacekeeping: With 500 paternity and child support claims unresolved, UN scales up accountability",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "‘Losing the battle’: AI hands predators new ways to target children",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -430,8 +422,6 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
@@ -523,9 +513,9 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-21 12:29:02",
+ "finished_utc": "2026-11-21 19:42:31",
  "summary": {
-  "text_rejected_no_verified_rewrite": 14,
+  "text_rejected_no_verified_rewrite": 12,
   "video_rejected_enrich_failed_or_not_newsworthy": 90
  }
 }
