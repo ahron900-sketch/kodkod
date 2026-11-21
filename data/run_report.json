@@ -1,15 +1,11 @@
 {
  "items": [
   {
-   "title": "Curiosity Spots Drifting Twilight Clouds",
+   "title": "NASA Honor Awards Ceremony Recognizes Employees at Stennis Space Center",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "New NASA Seed Funding Primes Small Businesses for Innovation",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "NASA’s Curiosity Mars Rover Collects Samples",
+   "title": "NASA Conducts Latest RS-25 Engine Test in Support of Future Artemis Missions",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -59,6 +55,10 @@
   {
    "title": "COP31 deadlock persists as countries launch new ‘climate reality check’",
    "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "כתבת i24בצרפתית שני גידליה הצטרפה ליום במגן דוד אדום בקריית מד\"א ברמלה ובניידת טיפול נמרץ",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "ת\"שמעו איך הן נותנות את הלב - איך זה להיות מש\"קית ת\"ש? | פודקאסט צה״ל",
@@ -389,10 +389,6 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "כתבת i24בצרפתית שני גידליה הצטרפה ליום במגן דוד אדום בקריית מד\"א ברמלה ובניידת טיפול נמרץ",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "מצדיעים ללוחמים על ארבע",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -422,7 +418,6 @@
   }
  ],
  "ai_errors": [
-  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
@@ -528,9 +523,9 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-20 23:02:47",
+ "finished_utc": "2026-11-21 04:00:30",
  "summary": {
-  "text_rejected_no_verified_rewrite": 15,
+  "text_rejected_no_verified_rewrite": 14,
   "video_rejected_enrich_failed_or_not_newsworthy": 90
  }
 }
