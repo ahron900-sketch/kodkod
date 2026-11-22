@@ -1,7 +1,15 @@
 {
  "items": [
   {
+   "title": "APOD: 2026 November 22 – Swirls and Colors on Jupiter from Juno",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "NASA’s Curiosity Mars Rover Collects Samples",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "‘We escaped with only our lives’: Fighting to give birth in war-torn Yemen",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -45,8 +53,8 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "COP31 deadlock persists as countries launch new ‘climate reality check’",
-   "outcome": "text_rejected_no_verified_rewrite"
+   "title": "יו\"ר הכנסת היוצא אמיר אוחנה:מעולם,גם כשטילים עפו מעלינו–הלב הזה של הדמוקרטיה הישראלית לא הפסיק לפעום",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "ת\"שמעו איך הן נותנות את הלב - איך זה להיות מש\"קית ת\"ש? | פודקאסט צה״ל",
@@ -130,10 +138,6 @@
   },
   {
    "title": "יו\"ר הכנסת הנכנס כהנא: \"הכנסת היא ביתם של כלל אזרחי ישראל - אהיה יושב הראש של כולם\"",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "יו\"ר הכנסת היוצא אמיר אוחנה:מעולם,גם כשטילים עפו מעלינו–הלב הזה של הדמוקרטיה הישראלית לא הפסיק לפעום",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -422,6 +426,7 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
@@ -513,9 +518,9 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-21 23:57:56",
+ "finished_utc": "2026-11-22 05:50:42",
  "summary": {
-  "text_rejected_no_verified_rewrite": 12,
+  "text_rejected_no_verified_rewrite": 13,
   "video_rejected_enrich_failed_or_not_newsworthy": 90
  }
 }
