@@ -1,10 +1,6 @@
 {
  "items": [
   {
-   "title": "APOD: 2026 November 22 – Swirls and Colors on Jupiter from Juno",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "NASA’s Curiosity Mars Rover Collects Samples",
    "outcome": "text_rejected_no_verified_rewrite"
   },
@@ -53,7 +49,7 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "יו\"ר הכנסת היוצא אמיר אוחנה:מעולם,גם כשטילים עפו מעלינו–הלב הזה של הדמוקרטיה הישראלית לא הפסיק לפעום",
+   "title": "לפני שנה וחצי הוא הציל את חייו בשדה הקרב. ועכשיו הם נפגשים לראשונה מאז ❤️ | צה״ל",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -78,6 +74,10 @@
   },
   {
    "title": "אלקנה בוחבוט והקצינה שליוותה את משפחתו בזמן השבי - ״היא הפכה לאחותי\" | פודקאסט צה״ל",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "ניסו להסתתר מהשוטרים - עד שהגיע הרחפן",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -117,7 +117,7 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "חילוץ אישה שניסתה לקפוץ מהקומה ה-11",
+   "title": "כשילדים נהנים מהמשחק - הם גם לומדים ומתפתחים",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -138,6 +138,10 @@
   },
   {
    "title": "יו\"ר הכנסת הנכנס כהנא: \"הכנסת היא ביתם של כלל אזרחי ישראל - אהיה יושב הראש של כולם\"",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "יו\"ר הכנסת היוצא אמיר אוחנה:מעולם,גם כשטילים עפו מעלינו–הלב הזה של הדמוקרטיה הישראלית לא הפסיק לפעום",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -426,7 +430,8 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
@@ -518,9 +523,9 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-22 05:50:42",
+ "finished_utc": "2026-11-22 14:14:25",
  "summary": {
-  "text_rejected_no_verified_rewrite": 13,
-  "video_rejected_enrich_failed_or_not_newsworthy": 90
+  "text_rejected_no_verified_rewrite": 12,
+  "video_rejected_enrich_failed_or_not_newsworthy": 92
  }
 }
