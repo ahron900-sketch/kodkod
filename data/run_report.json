@@ -1,7 +1,19 @@
 {
  "items": [
   {
+   "title": "65 Years of Human Spaceflight at NASA Johnson",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "NASA’s Curiosity Mars Rover Collects Samples",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "‘I had a better life in Iran’: Afghan women forced home struggle to rebuild",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "COP31 ends without climate pact as UN chief warns there is ‘no ambiguity in the science’",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -33,19 +45,11 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Afghanistan restrictions prevent pregnant women from seeking medical help",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "Battle to control GPS and radio signals raises civilian safety concerns",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
    "title": "COP31: Ambition goes missing as fossil fuel language drops from draft deal",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "World’s top court finds Myanmar guilty of genocide against Rohingya",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -349,6 +353,14 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "מתנדבי נוער מד\"א דיאנה בוניאק ודולב כהן שהצילו את חייו של נהג ההסעות משחזרים את האירוע",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "השיעור הכי חשוב בתיכון: שישה תלמידים הצילו את נהג ההסעות. מתנדבי נוער מד\"א שביצעו את ההחייאה משחזרים",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "פסטיבל מספרי סיפורים עם יוסי אלפי - מגן דוד אדום סיפורים מצילי חיים - חלק ב'",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -381,14 +393,6 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "מה גורם למתנדבי הנוער של מד\"א בני ה-15 להציל חיים",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "כתבת i24בצרפתית שני גידליה הצטרפה ליום במגן דוד אדום בקריית מד\"א ברמלה ובניידת טיפול נמרץ",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "מצדיעים ללוחמים על ארבע",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -418,6 +422,7 @@
   }
  ],
  "ai_errors": [
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
@@ -523,9 +528,9 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-22 14:14:25",
+ "finished_utc": "2026-11-22 20:46:09",
  "summary": {
-  "text_rejected_no_verified_rewrite": 12,
+  "text_rejected_no_verified_rewrite": 13,
   "video_rejected_enrich_failed_or_not_newsworthy": 92
  }
 }
