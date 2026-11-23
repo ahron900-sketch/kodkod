@@ -1,6 +1,14 @@
 {
  "items": [
   {
+   "title": "APOD: 2026 November 23 – The Emergence of Dark Nebula Lynds 1251",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Laser Focus at the Top of the World",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "65 Years of Human Spaceflight at NASA Johnson",
    "outcome": "text_rejected_no_verified_rewrite"
   },
@@ -9,7 +17,7 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Challenge: Public Input on Life and the World in 2075",
+   "title": "APOD: 2026 November 20 – V-G-R",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -55,6 +63,10 @@
   {
    "title": "COP31: Ambition goes missing as fossil fuel language drops from draft deal",
    "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "שירותי תחבורה מכל מקום, מתי שנוח לכם",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "לפני שנה וחצי הוא הציל את חייו בשדה הקרב. ועכשיו הם נפגשים לראשונה מאז ❤️ | צה״ל",
@@ -122,6 +134,10 @@
   },
   {
    "title": "פשיטה על יעדים בפזורה הבדואית",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "טקס חילופי מנכ\"ל 22.11.2026",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -321,10 +337,6 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "שירותי תחבורה מכל מקום, מתי שנוח לכם",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "ההרכב החדש של ירושלים - רשת רכבות קלות אחת!",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -440,6 +452,9 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
@@ -533,9 +548,9 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-23 01:10:52",
+ "finished_utc": "2026-11-23 09:08:30",
  "summary": {
-  "text_rejected_no_verified_rewrite": 14,
-  "video_rejected_enrich_failed_or_not_newsworthy": 92
+  "text_rejected_no_verified_rewrite": 16,
+  "video_rejected_enrich_failed_or_not_newsworthy": 93
  }
 }
