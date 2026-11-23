@@ -1,11 +1,15 @@
 {
  "items": [
   {
-   "title": "APOD: 2026 November 23 – The Emergence of Dark Nebula Lynds 1251",
+   "title": "NASA Awards Contract for NOAA’s Near Earth Orbit Network Program",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Laser Focus at the Top of the World",
+   "title": "Studying Cancer Cells in Microgravity",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA’s Webb Shows How Supernova Dust Chronicles Star Evolution",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -13,11 +17,23 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "NASA’s Curiosity Mars Rover Collects Samples",
+   "title": "UN chief urges talks on global AI safety framework, warns of historic shift in power",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "APOD: 2026 November 20 – V-G-R",
+   "title": "Security Council LIVE: Winter attacks on Ukraine's power grid and Black Sea shipping threaten lives and global food supp",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Heavy fighting in Ituri traps DR Congo Ebola responders: WHO",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Libya: UN mission urges probe into Benghazi port attacks",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Guterres laments COP31 outcome, urges climate justice from Barbados",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -41,32 +57,12 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "West Bank: Record settler attacks mar olive harvest as UN urges Israel to protect farmers",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "Shattered playgrounds and freezing classrooms: Inside Ukraine’s deadliest year for children",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "WFP plans to assist 91 million in 2027 as hunger crisis deepens",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
    "title": "COP31: Countries demand stronger climate deal amid deadlock in Antalya",
    "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Battle to control GPS and radio signals raises civilian safety concerns",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "COP31: Ambition goes missing as fossil fuel language drops from draft deal",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "שירותי תחבורה מכל מקום, מתי שנוח לכם",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "לפני שנה וחצי הוא הציל את חייו בשדה הקרב. ועכשיו הם נפגשים לראשונה מאז ❤️ | צה״ל",
@@ -94,6 +90,10 @@
   },
   {
    "title": "אלקנה בוחבוט והקצינה שליוותה את משפחתו בזמן השבי - ״היא הפכה לאחותי\" | פודקאסט צה״ל",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "הבלשים עשו תרגיל לשודד הסדרתי",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -133,10 +133,6 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "פשיטה על יעדים בפזורה הבדואית",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "טקס חילופי מנכ\"ל 22.11.2026",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -146,6 +142,14 @@
   },
   {
    "title": "כנס IPRED 2026 יוצא לדרך",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "ח\"כ פטר:\"המשמעות של שינוי הרכב הוועדה לבחירת שופטים הוא ש-10 שופטים ייבחרו בקולותיהם של תומכי טרור\"",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "מהומה בדיון על בחירת יו\"ר הוועדה | יובל אורבך, אלמנתו של ישי: \"לשם מה בעלי נהרג?\"",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -178,14 +182,6 @@
   },
   {
    "title": "יו\"ר ועדת הכספים הזמנית \"גאה להיות היו\"רית הראשונה של ועדת כספים. ועדת הכספים לא תהיה חותמת גומי.\"",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "ח”כ לירן אבישר בן חורין נבחרה ליו\"ר ועדת הכספים הזמנית | ח\"כ דוד פטר: \"סזון פרלמנטרי\"",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "שר האוצר סמוטריץ’:“מי שלא שותפים איתנו באתוס הבסיסי של הציונות לא יכולים להיות שותפים של ישראל”",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -297,6 +293,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "אייל לוי והחברים  - עוד דקה | לוקחים אחריות - מונעים אלימות!",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "גם אני נפלתי",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -333,7 +333,7 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "פתיחת שנת הלימודים תשפ\"ז",
+   "title": "שירותי תחבורה מכל מקום, מתי שנוח לכם",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -548,7 +548,7 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-23 09:08:30",
+ "finished_utc": "2026-11-23 21:28:20",
  "summary": {
   "text_rejected_no_verified_rewrite": 16,
   "video_rejected_enrich_failed_or_not_newsworthy": 93
