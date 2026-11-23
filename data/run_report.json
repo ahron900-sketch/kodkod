@@ -9,6 +9,10 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
+   "title": "Challenge: Public Input on Life and the World in 2075",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "‘I had a better life in Iran’: Afghan women forced home struggle to rebuild",
    "outcome": "text_rejected_no_verified_rewrite"
   },
@@ -435,6 +439,7 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
@@ -528,9 +533,9 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-22 20:46:09",
+ "finished_utc": "2026-11-23 01:10:52",
  "summary": {
-  "text_rejected_no_verified_rewrite": 13,
+  "text_rejected_no_verified_rewrite": 14,
   "video_rejected_enrich_failed_or_not_newsworthy": 92
  }
 }
