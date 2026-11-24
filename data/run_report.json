@@ -1,19 +1,11 @@
 {
  "items": [
   {
-   "title": "NASA Awards Contract for NOAA’s Near Earth Orbit Network Program",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Studying Cancer Cells in Microgravity",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "NASA’s Webb Shows How Supernova Dust Chronicles Star Evolution",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "65 Years of Human Spaceflight at NASA Johnson",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Gaza war has undone 77 years of human development, UN warns",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -58,10 +50,6 @@
   },
   {
    "title": "Shattered playgrounds and freezing classrooms: Inside Ukraine’s deadliest year for children",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "COP31: Countries demand stronger climate deal amid deadlock in Antalya",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -451,9 +439,6 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
@@ -548,9 +533,9 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-23 21:28:20",
+ "finished_utc": "2026-11-24 05:28:46",
  "summary": {
-  "text_rejected_no_verified_rewrite": 16,
+  "text_rejected_no_verified_rewrite": 13,
   "video_rejected_enrich_failed_or_not_newsworthy": 93
  }
 }
