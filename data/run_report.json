@@ -1,7 +1,27 @@
 {
  "items": [
   {
-   "title": "65 Years of Human Spaceflight at NASA Johnson",
+   "title": "NASA Hubble’s New View of NGC 4394 Raises the Bar",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "APOD: 2026 November 24 – Galaxies Battle in the NGC 7771 Group",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Security Council LIVE: Can conflict resolution keep pace as AI and drones reshape war?",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "DR Congo: Concern for trapped Ebola workers as violence against women and girls deepens",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Colombia: Guterres urges renewed commitment to landmark peace deal",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Five women killed every hour by partners or family members",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -25,10 +45,6 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Guterres laments COP31 outcome, urges climate justice from Barbados",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "‘I had a better life in Iran’: Afghan women forced home struggle to rebuild",
    "outcome": "text_rejected_no_verified_rewrite"
   },
@@ -37,20 +53,12 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "‘We escaped with only our lives’: Fighting to give birth in war-torn Yemen",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "Bridgetown AI summit to tackle safety as risks outpace capacity to respond",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "‘You will not be alone’: General Assembly President tells Rohingya refugees after genocide ruling",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Shattered playgrounds and freezing classrooms: Inside Ukraine’s deadliest year for children",
-   "outcome": "text_rejected_no_verified_rewrite"
+   "title": "מי לא מכיר את כרטיס \"פייטר\"? מאחורי הקלעים על הארנק שהשפיע על עשרות אלפי מילואימניקים | משרד האוצר",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "לפני שנה וחצי הוא הציל את חייו בשדה הקרב. ועכשיו הם נפגשים לראשונה מאז ❤️ | צה״ל",
@@ -117,10 +125,6 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "מסר חשוב לכל אדם שעולה על ההגה",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "טקס חילופי מנכ\"ל 22.11.2026",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -129,7 +133,19 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "כנס IPRED 2026 יוצא לדרך",
+   "title": "\"שיטור טוב דורש שותפות בין הציבור למשטרה\" | הוועדה המיוחדת למיגור הפשיעה והאלימות בחברה הערבית",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "“יש גורמים מסוימים באירופה המחפשים דרכים לפגוע בנו” | יו”ר הכנסת לפרלמנטרים אירופאים",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "'הבריונות מתרחשת שוב - הפעם כלפי האח הקטן' | נאומים בני דקה במליאה",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "\"אם מישהו נחשד במעילה בכספי הבנק, היו ממנים אותו להיות מנהל הבנק?\" | דיון בהצעת חוק - יסוד: השפיטה",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -154,22 +170,6 @@
   },
   {
    "title": "יו\"ר הכנסת הנכנס כהנא: \"הכנסת היא ביתם של כלל אזרחי ישראל - אהיה יושב הראש של כולם\"",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "יו\"ר הכנסת היוצא אמיר אוחנה:מעולם,גם כשטילים עפו מעלינו–הלב הזה של הדמוקרטיה הישראלית לא הפסיק לפעום",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "יו\"ר הכנסת הנכנס, מתן כהנא: \"מקבל על עצמי את תפקיד יו\"ר הכנסת בחרדת קודש\"",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "יועמ\"ש הכנסת, עו\"ד שגית אפיק התייחסה במהלך דיון בחירת יו\"ר לוועדת הכספים הזמנית,בתחום ניגוד העניינים",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "יו\"ר ועדת הכספים הזמנית \"גאה להיות היו\"רית הראשונה של ועדת כספים. ועדת הכספים לא תהיה חותמת גומי.\"",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -209,15 +209,15 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "מי לא מכיר את כרטיס \"פייטר\"? מאחורי הקלעים על הארנק שהשפיע על עשרות אלפי מילואימניקים | משרד האוצר",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "מההייטק למגזר הציבורי: המהלכים שרהב שלום רביבו מובילה בארץ ובעולם בסייבר ובפיננסים",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "למה 77% ממשקי הבית בישראל לא יכולים לקנות דירה? | גלית בן נאים, סגנית בכירה לכלכלן הראשי במשרד האוצר",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "כך ייראה שקל דיגיטלי",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -250,10 +250,6 @@
   },
   {
    "title": "מהם תפקידי בנק ישראל? חלק ראשון",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "תולדות הכסף - תקן הזהב",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -439,8 +435,7 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
@@ -533,9 +528,9 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-24 05:28:46",
+ "finished_utc": "2026-11-24 16:14:18",
  "summary": {
-  "text_rejected_no_verified_rewrite": 13,
-  "video_rejected_enrich_failed_or_not_newsworthy": 93
+  "text_rejected_no_verified_rewrite": 14,
+  "video_rejected_enrich_failed_or_not_newsworthy": 91
  }
 }
