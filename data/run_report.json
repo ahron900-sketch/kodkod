@@ -1,15 +1,23 @@
 {
  "items": [
   {
-   "title": "Amateur Astronomer? Be a Kilonova Catcher!",
+   "title": "APOD: 2026 November 25 – SPHEREx Seeing Through Dust",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "AGU Hyperwall Schedule",
+   "title": "NASA+ Content Coming to Big Screen at Greenbelt, Maryland Cinema",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "NASA’s Titan-Bound Dragonfly Rotorcraft Gets Its Eyes",
+   "title": "Teams Lock in Mission Architecture for NASA’s SR-1 Freedom",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA’s Northrop Grumman CRS-25 Mission Overview",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Webb Reveals New Details in Supernova Remnant",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -133,6 +141,18 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "\"הכל פייק. בסוף תהיה ממשלת אחדות וכל החוקים האלו ילכו\"|הוועדה המיוחדת לדיון בהצעת חוק היועמ\"ש לממשלה",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "סערה בוועדה המיוחדת לביטול חוק השידורים: יו\"ר הוועדה ח\"כ בן ארי הוציאה מהאולם את שר התקשורת ח\"כ קרעי",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "'חי באוהל כדי לצעוק ולזעוק לממשלת אחדות' | מפגש חברי פרלמנט מאירופה בכנסת",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "\"שיטור טוב דורש שותפות בין הציבור למשטרה\" | הוועדה המיוחדת למיגור הפשיעה והאלימות בחברה הערבית",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -161,15 +181,7 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "\"עצירת הרפורמות הדורסניות שהיו פה בכנסת הקודמת\" | הוועדה המסדרת",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "רגע, הממשלה עוד לא הוקמה - אז מי מוודא שהדברים ממשיכים לעבוד? | הוועדות הזמניות בכנסת #knesset#הכנסת",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "יו\"ר הכנסת הנכנס כהנא: \"הכנסת היא ביתם של כלל אזרחי ישראל - אהיה יושב הראש של כולם\"",
+   "title": "How Hamas stole the winter - the new strategy",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -194,10 +206,6 @@
   },
   {
    "title": "ראש הממשלה נתניהו בחברון",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "“Settler Violence” - The Narrative Against Israel Exposed",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -441,6 +449,8 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
@@ -533,9 +543,9 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-25 00:49:23",
+ "finished_utc": "2026-11-25 09:39:29",
  "summary": {
-  "text_rejected_no_verified_rewrite": 15,
+  "text_rejected_no_verified_rewrite": 17,
   "video_rejected_enrich_failed_or_not_newsworthy": 91
  }
 }
