@@ -1,23 +1,43 @@
 {
  "items": [
   {
-   "title": "APOD: 2026 November 25 – SPHEREx Seeing Through Dust",
+   "title": "NASA Enhances Supplier Program, Announces Mentor-Protégé Agreement",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "NASA+ Content Coming to Big Screen at Greenbelt, Maryland Cinema",
+   "title": "NASA Eyes Crop Candidates for Future Menus",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Teams Lock in Mission Architecture for NASA’s SR-1 Freedom",
+   "title": "Childhood, Career Come Full Circle for Budget Analyst at NASA Goddard",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "NASA’s Northrop Grumman CRS-25 Mission Overview",
+   "title": "Eye of the Sahara",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Webb Reveals New Details in Supernova Remnant",
+   "title": "NASA’s Hubble Views Ocean of Stars in Groundwork for Roman",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Governments and experts gather in Nairobi to tackle the global housing crisis",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Gaza’s widows raise their families alone: ‘We do our duties twice over, but where are our rights?’",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Gisèle Pelicot’s son: ‘Not being violent is the bare minimum’",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Somalia: Famine risk decreases in Baidoa – but millions still going hungry",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Yemen war: Emergency aid chief calls for access to war-hit communities",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -45,10 +65,6 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Five women killed every hour by partners or family members",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "Gaza war has undone 77 years of human development, UN warns",
    "outcome": "text_rejected_no_verified_rewrite"
   },
@@ -58,14 +74,6 @@
   },
   {
    "title": "Security Council LIVE: Winter attacks on Ukraine's power grid and Black Sea shipping threaten lives and global food supp",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "‘I had a better life in Iran’: Afghan women forced home struggle to rebuild",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "COP31 ends without climate pact as UN chief warns there is ‘no ambiguity in the science’",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -90,10 +98,6 @@
   },
   {
    "title": "ראיון בדופק גבוה עם המפקד שמכניס את כל צה״ל לכושר | פודקאסט צה״ל",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "אלקנה בוחבוט והקצינה שליוותה את משפחתו בזמן השבי - ״היא הפכה לאחותי\" | פודקאסט צה״ל",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -141,6 +145,14 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "“הכלכלה הישראלית לא תוכל לממן את צרכי הביטחון” | ועדת הכספים הזמנית",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "⁨ ⁨ “להשמיע את קולה של דינה ושל נשים רבות אחרות שנפגעו” | יום המאבק הבינלאומי למניעת אלימות נגד נשים",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "\"הכל פייק. בסוף תהיה ממשלת אחדות וכל החוקים האלו ילכו\"|הוועדה המיוחדת לדיון בהצעת חוק היועמ\"ש לממשלה",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -170,14 +182,6 @@
   },
   {
    "title": "ח\"כ פטר:\"המשמעות של שינוי הרכב הוועדה לבחירת שופטים הוא ש-10 שופטים ייבחרו בקולותיהם של תומכי טרור\"",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "מהומה בדיון על בחירת יו\"ר הוועדה | יובל אורבך, אלמנתו של ישי: \"לשם מה בעלי נהרג?\"",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "הצצה ללשכה ולחדרים שמקבלים הח\"כים החדשים 👀 | הכנסת ה-26",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -451,7 +455,8 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
@@ -543,9 +548,9 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-25 09:39:29",
+ "finished_utc": "2026-11-25 19:38:17",
  "summary": {
-  "text_rejected_no_verified_rewrite": 17,
-  "video_rejected_enrich_failed_or_not_newsworthy": 91
+  "text_rejected_no_verified_rewrite": 19,
+  "video_rejected_enrich_failed_or_not_newsworthy": 90
  }
 }
