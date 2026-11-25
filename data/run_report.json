@@ -1,11 +1,27 @@
 {
  "items": [
   {
-   "title": "NASA Hubble’s New View of NGC 4394 Raises the Bar",
+   "title": "Amateur Astronomer? Be a Kilonova Catcher!",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "APOD: 2026 November 24 – Galaxies Battle in the NGC 7771 Group",
+   "title": "AGU Hyperwall Schedule",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "NASA’s Titan-Bound Dragonfly Rotorcraft Gets Its Eyes",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "World News in Brief: Vaccine crisis in Yemen, aid for Ukraine, another UNRWA staffer killed",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Decades of gains against AIDS could unravel as HIV funding dries up",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "‘Far too much failure’: UN deputy chief’s final call to end violence against women",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -37,28 +53,12 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Heavy fighting in Ituri traps DR Congo Ebola responders: WHO",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Libya: UN mission urges probe into Benghazi port attacks",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "‘I had a better life in Iran’: Afghan women forced home struggle to rebuild",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
    "title": "COP31 ends without climate pact as UN chief warns there is ‘no ambiguity in the science’",
    "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "Bridgetown AI summit to tackle safety as risks outpace capacity to respond",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "מי לא מכיר את כרטיס \"פייטר\"? מאחורי הקלעים על הארנק שהשפיע על עשרות אלפי מילואימניקים | משרד האוצר",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "לפני שנה וחצי הוא הציל את חייו בשדה הקרב. ועכשיו הם נפגשים לראשונה מאז ❤️ | צה״ל",
@@ -206,6 +206,10 @@
   },
   {
    "title": "איך נולדת רפורמה שתשפיע על הכיס של כולנו? חובב אלסטר ממשרד האוצר חושף הצצה ראשונה למאחורי הקלעים",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "מי לא מכיר את כרטיס \"פייטר\"? מאחורי הקלעים על הארנק שהשפיע על עשרות אלפי מילואימניקים | משרד האוצר",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -436,6 +440,7 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
@@ -528,9 +533,9 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-24 16:14:18",
+ "finished_utc": "2026-11-25 00:49:23",
  "summary": {
-  "text_rejected_no_verified_rewrite": 14,
+  "text_rejected_no_verified_rewrite": 15,
   "video_rejected_enrich_failed_or_not_newsworthy": 91
  }
 }
