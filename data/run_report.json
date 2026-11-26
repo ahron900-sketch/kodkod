@@ -1,11 +1,11 @@
 {
  "items": [
   {
-   "title": "NASA Enhances Supplier Program, Announces Mentor-Protégé Agreement",
+   "title": "APOD: 2026 November 26 – Eye in the Sky: The Milky Way over Lençóis",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Eye of the Sahara",
+   "title": "Seeking Refuge on Resolution Island",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -61,6 +61,10 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
+   "title": "האדם שעוזר לנכי צה״ל לחזור לשירות צבאי | פודקאסט צה״ל",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "לפני שנה וחצי הוא הציל את חייו בשדה הקרב. ועכשיו הם נפגשים לראשונה מאז ❤️ | צה״ל",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -82,6 +86,10 @@
   },
   {
    "title": "ראיון בדופק גבוה עם המפקד שמכניס את כל צה״ל לכושר | פודקאסט צה״ל",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "שב\"חים ניסו להסתנן ונעצרו ברגע האחרון",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -117,15 +125,15 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "הרחפן מצא את החשוד - השוטרים הגיעו מיד",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
    "title": "טקס חילופי מנכ\"ל 22.11.2026",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "כשילדים נהנים מהמשחק - הם גם לומדים ומתפתחים",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "“עד היום דיברתי על אחריות של אחרים, מהיום האחריות מוטלת גם עליי” | נאומי בכורה במליאת הכנסת",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -162,10 +170,6 @@
   },
   {
    "title": "\"אם מישהו נחשד במעילה בכספי הבנק, היו ממנים אותו להיות מנהל הבנק?\" | דיון בהצעת חוק - יסוד: השפיטה",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "ח\"כ פטר:\"המשמעות של שינוי הרכב הוועדה לבחירת שופטים הוא ש-10 שופטים ייבחרו בקולותיהם של תומכי טרור\"",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -526,11 +530,12 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
+  "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-26 02:30:10",
+ "finished_utc": "2026-11-26 11:26:00",
  "summary": {
   "text_rejected_no_verified_rewrite": 15,
-  "video_rejected_enrich_failed_or_not_newsworthy": 90
+  "video_rejected_enrich_failed_or_not_newsworthy": 91
  }
 }
