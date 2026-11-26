@@ -1,11 +1,23 @@
 {
  "items": [
   {
-   "title": "APOD: 2026 November 26 – Eye in the Sky: The Milky Way over Lençóis",
+   "title": "NASA Enhances Supplier Program, Announces Mentor-Protégé Agreement",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Seeking Refuge on Resolution Island",
+   "title": "Eye of the Sahara",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "‘Come right now’: How a crisis centre in Samarkand helps women escape violence",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Maritime trade stagnates amid geopolitical uncertainty",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "DR Congo: Peacekepers step up civilian protection amid fighting in Ituri",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -33,15 +45,7 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "World News in Brief: Vaccine crisis in Yemen, aid for Ukraine, another UNRWA staffer killed",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "Decades of gains against AIDS could unravel as HIV funding dries up",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "‘Far too much failure’: UN deputy chief’s final call to end violence against women",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -53,12 +57,8 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Gaza war has undone 77 years of human development, UN warns",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "UN chief urges talks on global AI safety framework, warns of historic shift in power",
-   "outcome": "text_rejected_no_verified_rewrite"
+   "title": "סרטון 3- איך למלא טופס 62 א החדש? 62א החדש טופס 1262",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
    "title": "האדם שעוזר לנכי צה״ל לחזור לשירות צבאי | פודקאסט צה״ל",
@@ -133,6 +133,10 @@
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
+   "title": "“התפקיד שלי הוא לא לייצג מחנה אלא לבנות קשרים” | נאומי בכורה במליאת הכנסת",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
    "title": "“עד היום דיברתי על אחריות של אחרים, מהיום האחריות מוטלת גם עליי” | נאומי בכורה במליאת הכנסת",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
@@ -166,10 +170,6 @@
   },
   {
    "title": "'הבריונות מתרחשת שוב - הפעם כלפי האח הקטן' | נאומים בני דקה במליאה",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "\"אם מישהו נחשד במעילה בכספי הבנק, היו ממנים אותו להיות מנהל הבנק?\" | דיון בהצעת חוק - יסוד: השפיטה",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -274,10 +274,6 @@
   },
   {
    "title": "פודמס – פרק 49: אירוע חסר תקדים – מס חברות גלובלי מינימלי",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "סרטון 3- איך למלא טופס 62 א החדש? 62א החדש טופס 1262",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -440,7 +436,6 @@
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
-  "article_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
@@ -533,9 +528,9 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-26 11:26:00",
+ "finished_utc": "2026-11-26 20:26:27",
  "summary": {
-  "text_rejected_no_verified_rewrite": 15,
+  "text_rejected_no_verified_rewrite": 14,
   "video_rejected_enrich_failed_or_not_newsworthy": 91
  }
 }
