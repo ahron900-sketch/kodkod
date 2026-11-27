@@ -1,11 +1,23 @@
 {
  "items": [
   {
+   "title": "APOD: 2026 November 27 – The Moon Watchers",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Shivelyuch Socked In",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
    "title": "NASA Enhances Supplier Program, Announces Mentor-Protégé Agreement",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
    "title": "Eye of the Sahara",
+   "outcome": "text_rejected_no_verified_rewrite"
+  },
+  {
+   "title": "Putting survivors at the centre of gender-based violence services",
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
@@ -41,14 +53,6 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Yemen war: Emergency aid chief calls for access to war-hit communities",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
-   "title": "World News in Brief: Vaccine crisis in Yemen, aid for Ukraine, another UNRWA staffer killed",
-   "outcome": "text_rejected_no_verified_rewrite"
-  },
-  {
    "title": "Decades of gains against AIDS could unravel as HIV funding dries up",
    "outcome": "text_rejected_no_verified_rewrite"
   },
@@ -57,11 +61,11 @@
    "outcome": "text_rejected_no_verified_rewrite"
   },
   {
-   "title": "Colombia: Guterres urges renewed commitment to landmark peace deal",
-   "outcome": "text_rejected_no_verified_rewrite"
+   "title": "“הכלכלה הישראלית לא תוכל לממן את צרכי הביטחון” | ועדת הכספים הזמנית",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
-   "title": "סרטון 3- איך למלא טופס 62 א החדש? 62א החדש טופס 1262",
+   "title": "להיות שם | צה״ל",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -86,10 +90,6 @@
   },
   {
    "title": "מה זה שמה בשמיים? תרגיל הרחפנים של 474🕹️ | צה״ל",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "ראיון בדופק גבוה עם המפקד שמכניס את כל צה״ל לכושר | פודקאסט צה״ל",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -142,10 +142,6 @@
   },
   {
    "title": "“עד היום דיברתי על אחריות של אחרים, מהיום האחריות מוטלת גם עליי” | נאומי בכורה במליאת הכנסת",
-   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
-  },
-  {
-   "title": "“הכלכלה הישראלית לא תוכל לממן את צרכי הביטחון” | ועדת הכספים הזמנית",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -278,6 +274,10 @@
   },
   {
    "title": "פודמס – פרק 49: אירוע חסר תקדים – מס חברות גלובלי מינימלי",
+   "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
+  },
+  {
+   "title": "סרטון 3- איך למלא טופס 62 א החדש? 62א החדש טופס 1262",
    "outcome": "video_rejected_enrich_failed_or_not_newsworthy"
   },
   {
@@ -533,7 +533,7 @@
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n",
   "video_enrich: HTTP Error 401: Unauthorized | body: {\"error\":{\"message\":\"Invalid API Key\",\"type\":\"invalid_request_error\",\"code\":\"expired_api_key\"}}\n"
  ],
- "finished_utc": "2026-11-27 03:07:18",
+ "finished_utc": "2026-11-27 12:23:40",
  "summary": {
   "text_rejected_no_verified_rewrite": 15,
   "video_rejected_enrich_failed_or_not_newsworthy": 91
